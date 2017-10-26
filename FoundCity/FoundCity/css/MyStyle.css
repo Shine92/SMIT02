@@ -163,3 +163,98 @@
 /*********************************************************************************/
 /* Yako Style                                                                   */
 /*********************************************************************************/
+
+#findAnimalList img {
+	max-width: 100%;
+	height: auto;
+	margin: 0 0 10px 0;
+}
+
+
+/* Thirds */
+div.thirds {
+	padding-bottom: 50px;
+}
+
+div.one-third {
+	/*width: 30%;*/
+    width: 22%;
+	float: left;
+	/*margin-right: 5%;*/
+    margin-right: 4%;
+}
+
+div.one-third-last {
+	margin: 0;
+}
+
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { *zoom: 1; }
+
+@media screen and (max-width: 1000px) {
+
+    div.one-third {
+        width: 30%;
+        float: left;
+		margin-right: 5%;
+    }
+
+    div.test3{
+		        
+		width: 30%;
+		float: left;
+		margin-right: 5%;
+	}
+		    
+    div.test3last {
+        margin: 0;
+    }
+   
+}
+
+@media screen and (max-width: 900px) {
+
+    div.one-third {
+        width: 47.5%;
+        float: left;
+		margin-right: 5%;
+    }
+
+    div.odd {
+		        
+		width: 47.5%;
+		float: left;
+		margin-right: 5%;
+	}
+		    
+    div.even {
+        margin: 0;
+    }
+
+	/*div.nav ul li {
+		width: 25%;
+		border-bottom: 1px solid #bababa;
+	}*/
+
+}
+
+
+@media screen and (max-width: 500px) {
+	
+	div.mobile-collapse {
+		width: 100%;
+		float: none;
+		margin-right: 0;
+	}
+	
+	/*.hide-mobile {
+		display: none;
+	}*/
+
+	/*div.nav ul li {
+		width: 50%;
+		font-size: 85%;
+	}*/
+
+}
