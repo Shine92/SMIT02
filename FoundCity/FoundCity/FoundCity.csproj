@@ -148,6 +148,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\a0.jpg" />
+    <Content Include="images\Radar_Home.png" />
     <Content Include="images\p1.jpg" />
     <Content Include="images\p2.jpg" />
     <Content Include="images\p3.jpg" />
@@ -158,6 +159,7 @@
     <Content Include="js\Default.js" />
     <Content Include="js\mycookie.js" />
     <Content Include="js\MyJavascript.js" />
+    <Content Include="js\Radar.js" />
     <Content Include="Models\NewPetModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>NewPetModel.edmx</DependentUpon>

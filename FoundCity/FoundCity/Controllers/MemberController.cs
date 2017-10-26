@@ -62,8 +62,7 @@ namespace FoundCity.Controllers {
             //newMember.UserStatus = true;
 
             /*取得驗證碼*/
-            //newMember.AuthCode = mailService.GetValidateCode();
-            newMember.AuthCode = "ABCDEFG123";
+            newMember.AuthCode = mailService.GetValidateCode();
             /*預設為一般使用者*/
             newMember.IsAdmin = false;
             /*預設帳號狀態為啟用*/
@@ -71,23 +70,23 @@ namespace FoundCity.Controllers {
             /*呼叫註冊功能*/
             memberService.Register(newMember);
             ///*取得寫好的驗證信範本內容*/
-            //string tempMail = System.IO.File.ReadAllText("~/View/Shared/RegisterEmailTemplate.html");
-            ///*宣告Email驗證用的Url*/
-            //UriBuilder ValidateUrl = new UriBuilder(Request.Url) {
-            //    Path = Url.Action("EmailValidate", "Member"
-            //            , new {
-            //                UserName = newMember.Account
-            //                ,
-            //                AuthCode = newMember.AuthCode
-            //            })
-            //};
+            string tempMail = System.IO.File.ReadAllText( Server.MapPath("~/Views/Shared/RegisterEmailTemplate.html"));
+            /*宣告Email驗證用的Url*/
+            UriBuilder ValidateUrl = new UriBuilder(Request.Url) {
+                Path = Url.Action("EmailValidate", "Member"
+                        , new {
+                            UserName = newMember.Account
+                            ,
+                            AuthCode = newMember.AuthCode
+                        })
+            };
 
-            ///*把註冊資料填入驗證信範本*/
-            //string MailBody = mailService.GetRegisterMailBody(tempMail, newMember.Account, ValidateUrl.ToString().Replace("%3F", "?"));
-            ///*寄出驗證信*/
-            //mailService.SendRegisterMail(MailBody, newMember.Account);
-            ///*儲存註冊訊息*/
-            //TempData["RegisterState"] = "註冊成功,請去收信驗證Email";
+            /*把註冊資料填入驗證信範本*/
+            string MailBody = mailService.GetRegisterMailBody(tempMail, newMember.Account, ValidateUrl.ToString().Replace("%3F", "?"));
+            /*寄出驗證信*/
+            mailService.SendRegisterMail(MailBody, newMember.Account);
+            /*儲存註冊訊息*/
+            TempData["RegisterState"] = "註冊成功,請去收信驗證Email";
             return Content("註冊成功！");
         }
         #endregion
