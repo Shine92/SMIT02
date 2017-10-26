@@ -193,6 +193,7 @@
     <Compile Include="Controllers\FindPetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\PetController.cs" />
     <Compile Include="Controllers\RadarController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -247,7 +248,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\FindPet.cshtml" />
     <Content Include="Views\Member\Index.cshtml" />
     <Content Include="Views\Member\Basic.cshtml" />
     <Content Include="Views\Member\Modify.cshtml" />
@@ -255,6 +255,7 @@
     <Content Include="Views\Member\Register.cshtml" />
     <Content Include="Views\Member\Forget.cshtml" />
     <Content Include="Views\Radar\Index.cshtml" />
+    <Content Include="Views\Pet\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
