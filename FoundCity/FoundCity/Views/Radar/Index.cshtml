@@ -1,7 +1,54 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@*---------------------------------------------------------------------------------------------------------------------------------------------*@
 
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIPxo-7dK6bdUUEiJ6ERWknbOgcRF8eMs&libraries=places"></script>
+<script type="text/javascript" src="http://code.google.com/apis/gears/gears_init.js"></script>
+<script src="~/js/Radar.js"></script>
+
+@*---------------------------------------------------------------------------------------------------------------------------------------------*@
+
+<div class="rBody">
+
+    <div id="rSidebar" class="sidebar">
+        <div class="list-group rRadar_font">
+            <span href="#" class="list-group-item active">寵物機構</span>
+            <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 醫院 </a>
+            <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 商店 </a>
+            <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 旅館 </a>
+
+            <span href="#" class="list-group-item active">站內資料</span>
+            <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 尋寵啟示 </a>
+            <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 拾獲通報 </a>
+            <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 認養資訊 </a>
+        </div>
+    </div>
+
+    <div id="rMap_Body">
+
+        <div id="rMap-Canvas"></div>
+
+        <div id="rMap_Features" class="btn-group btn-group-justified">
+            <a class="btn btn-success rRadar_font" onclick="rADD"> 加大範圍 </a>
+            <a class="btn btn-warning rRadar_font" onclick="rLower"> 減小範圍 </a>
+            <a class="btn btn-danger rRadar_font" onclick="rRE"> 重新搜尋 </a>
+        </div>
+
+    </div>
+
+    <div id="rResult">
+
+        <div class="rOaerror rWarning rRadar_font"> 目前範圍公尺是 <strong> 50 </strong> 公尺 </div>
+
+        <div id="rResult_Table">
+
+        </div>
+
+    </div>
+
+    <div style="clear:both;"></div>
+
+
+</div>
