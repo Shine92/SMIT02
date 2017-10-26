@@ -152,6 +152,7 @@
     <Content Include="images\pic04.jpg" />
     <Content Include="images\pic05.jpg" />
     <Content Include="js\Default.js" />
+    <Content Include="js\mycookie.js" />
     <Content Include="js\MyJavascript.js" />
     <Content Include="Models\NewPetModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
