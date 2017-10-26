@@ -1,26 +1,25 @@
 ﻿/*********************************************************************************/
 /* Simon Style                                                                   */
 /*********************************************************************************/
-#decoration{
-    margin:3px 0 0 16px;
-    height:4px;
-    width:595px;
+#decoration {
+    margin: 3px 0 0 16px;
+    height: 4px;
+    width: 595px;
     background-color: #8c8c8c;
 }
 
-.section_items{
-    margin:10px 3px 0 0;
+.section_items {
+    margin: 10px 3px 0 0;
 }
 
-.panel{
+.panel {
     border-radius: 0px;
 }
 
-.panel-body{
-    
+.panel-body {
 }
 
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
     color: #eee;
     cursor: default;
     background-color: #777;
@@ -28,7 +27,7 @@
     border-bottom-color: transparent;
 }
 
-#memberTab .nav-tabs>li>a{
+#memberTab .nav-tabs > li > a {
     margin-right: 2px;
     line-height: 1.42857143;
     border: 1px solid transparent;
@@ -37,71 +36,76 @@
     background-color: #555;
 }
 
-#memberTab .nav-tabs>li>a:hover{
-    background-color: #7b7b7b;
-}
+    #memberTab .nav-tabs > li > a:hover {
+        background-color: #7b7b7b;
+    }
 
-#memberTab .tab-content{
+#memberTab .tab-content {
     padding: 10px 0;
-    width:100%;
-    height:auto;
+    width: 100%;
+    height: auto;
 }
 
-.section_memberItems{
-    background-color:white;
-    width:100%;
-    height:auto;
-    padding:15px;
+.section_memberItems {
+    background-color: white;
+    width: 100%;
+    height: auto;
+    padding: 15px;
 }
 
-.member_profile{
-    width:600px;
-    height:auto;
-    background-color:#eee;
-    margin:auto;
-    border:1px solid black;
-     padding: 15px;
+.member_profile {
+    width: 600px;
+    height: auto;
+    background-color: #eee;
+    margin: auto;
+    border: 1px solid black;
+    padding: 15px;
 }
-.panel-footer{
+
+.panel-footer {
     font-size: x-large;
 }
 
-.form-control{
+.form-control {
     border-radius: 0px;
 }
-.btn{
+
+.btn {
     border-radius: 0px;
 }
-.required{
+
+.required {
     background-color: #a94442;
     height: 32px;
     color: white;
     padding: 5px 0px 0px 9px;
     font-size: 16px;
-
 }
-.member_decoration{
+
+.member_decoration {
     margin: 3px 0 22px 16px;
     height: 1px;
     width: 100%;
     background-color: #8c8c8c;
 }
 
-.container .member_Login{
-    width:500px;
-    height:auto;
-    background-color:#eee;
-    margin:auto;
-    border:1px solid black;
-     padding: 30px 0 0 0;
+.container .member_Login {
+    width: 500px;
+    height: auto;
+    background-color: #eee;
+    margin: auto;
+    border: 1px solid black;
+    padding: 30px 0 0 0;
 }
-.memberLogin_decoration{
+
+.memberLogin_decoration {
     height: 1px;
     width: 100%;
     background-color: #8c8c8c;
-     margin: 50px 0 0 0;
+    margin: 50px 0 0 0;
 }
-.member_LoginPage{
+
+.member_LoginPage {
     position: relative;
     overflow: hidden;
     padding: 5em 0em 5em 0em;
@@ -109,55 +113,60 @@
     background: #e6e6e6;
 }
 
-.container .member_Register{
-    width:600px;
-    height:auto;
-    background-color:#eee;
-    margin:auto;
-    border:1px solid black;
+.container .member_Register {
+    width: 600px;
+    height: auto;
+    background-color: #eee;
+    margin: auto;
+    border: 1px solid black;
     padding: 30px 0px 0px 20px;
 }
-.memberRegister_decoration{
+
+.memberRegister_decoration {
     height: 1px;
     width: 100%;
     background-color: #8c8c8c;
     margin: 0px 0px 10px -11px;
 }
 
-.member_ForgetPage{
+.member_ForgetPage {
     position: relative;
     overflow: hidden;
     padding: 5em 0em 5em 0em;
     height: auto;
     background: #e6e6e6;
 }
-.container .member_forget{
-    width:600px;
-    height:auto;
-    background-color:#eee;
-    margin:auto;
-    border:1px solid black;
+
+.container .member_forget {
+    width: 600px;
+    height: auto;
+    background-color: #eee;
+    margin: auto;
+    border: 1px solid black;
     padding: 30px 0px 0px 20px;
 }
-.memberForget_decoration{
+
+.memberForget_decoration {
     height: 1px;
     width: 100%;
     background-color: #8c8c8c;
     margin: 0px 0px 10px -11px;
 }
 
-.forgetTitle h1{
-    margin:0 0 10px 0;
+.forgetTitle h1 {
+    margin: 0 0 10px 0;
 }
 
-#info p{
-    color:red;
+#info p {
+    color: red;
 }
 
 
 /*********************************************************************************/
 /* Rey Style                                                                   */
 /*********************************************************************************/
+
+/*--- 雷達搜尋 -----------------------------------------------------------------------*/
 
 .rBody {
     background-color: #e6e6e6;
@@ -168,8 +177,6 @@
     text-align: center;
     font-weight: bold;
 }
-
-/*--------------------------------------------------------------------------------*/
 
 #rMap_Body {
     float: left;
@@ -187,8 +194,6 @@
     margin-top: 10px;
 }
 
-/*--------------------------------------------------------------------------------*/
-
 #rSidebar {
     float: left;
     width: 12%;
@@ -196,95 +201,100 @@
     margin-left: 10px;
 }
 
-/*--------------------------------------------------------------------------------*/
-
 #rResult {
     float: left;
     width: 30%;
-    margin-top:10px;
-    margin-left:10px;
-    margin-right:10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-#rResult_Range{
-
+#rResult_Range {
 }
 
-#rResult_Table{
-    height:150px;
-    overflow:scroll;
-    margin-top:10px;
-    
+#rResult_Table {
+    height: 150px;
+    overflow: scroll;
+    margin-top: 10px;
 }
 
-/*--------------------------------------------------------------------------------*/s
-
-.oaerror {
-  background-color: #FFFFFF; /* Default background */
-  padding: 18px;
-  font-size: 17px;
+.rOaerror {
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #eee;
+    border-left-width: 5px;
 }
 
-.warning {
-  border-left-color: #f0ad4e;
-  background-color: rgba(240, 173, 78, 0.1);
+.rWarning {
+    border-left-color: #f0ad4e;
+    background-color: rgba(240, 173, 78, 0.1);
 }
 
-.warning strong {
-  color: #d9534f;
-}
+    .rWarning strong {
+        color: #d9534f;
+        font-size: 25px;
+    }
+
+/*------------------------------------------------------------------------------*/
 
 /*********************************************************************************/
 /* Yako Style                                                                   */
 /*********************************************************************************/
 
 #findAnimalList img {
-	max-width: 100%;
-	height: auto;
-	margin: 0 0 10px 0;
+    max-width: 100%;
+    height: auto;
+    margin: 0 0 10px 0;
 }
 
 
 /* Thirds */
 div.thirds {
-	padding-bottom: 50px;
+    padding-bottom: 50px;
 }
 
 div.one-third {
-	/*width: 30%;*/
+    /*width: 30%;*/
     width: 22%;
-	float: left;
-	/*margin-right: 5%;*/
+    float: left;
+    /*margin-right: 5%;*/
     margin-right: 4%;
 }
 
 div.one-third-last {
-	margin: 0;
+    margin: 0;
 }
 
-.clearfix:before, .clearfix:after { content: ""; display: table; }
-.clearfix:after { clear: both; }
-.clearfix { *zoom: 1; }
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
 
 @media screen and (max-width: 1000px) {
 
     div.one-third {
         width: 30%;
         float: left;
-		margin-right: 5%;
+        margin-right: 5%;
     }
 
-    div.test3{
-		        
-		width: 30%;
-		float: left;
-		margin-right: 5%;
-	}
-		    
+    div.test3 {
+        width: 30%;
+        float: left;
+        margin-right: 5%;
+    }
+
     div.test3last {
         margin: 0;
     }
-   
 }
 
 @media screen and (max-width: 900px) {
@@ -292,21 +302,20 @@ div.one-third-last {
     div.one-third {
         width: 47.5%;
         float: left;
-		margin-right: 5%;
+        margin-right: 5%;
     }
 
     div.odd {
-		        
-		width: 47.5%;
-		float: left;
-		margin-right: 5%;
-	}
-		    
+        width: 47.5%;
+        float: left;
+        margin-right: 5%;
+    }
+
     div.even {
         margin: 0;
     }
 
-	/*div.nav ul li {
+    /*div.nav ul li {
 		width: 25%;
 		border-bottom: 1px solid #bababa;
 	}*/
@@ -315,18 +324,18 @@ div.one-third-last {
 
 
 @media screen and (max-width: 500px) {
-	
-	div.mobile-collapse {
-		width: 100%;
-		float: none;
-		margin-right: 0;
-	}
-	
-	/*.hide-mobile {
+
+    div.mobile-collapse {
+        width: 100%;
+        float: none;
+        margin-right: 0;
+    }
+
+    /*.hide-mobile {
 		display: none;
 	}*/
 
-	/*div.nav ul li {
+    /*div.nav ul li {
 		width: 50%;
 		font-size: 85%;
 	}*/
