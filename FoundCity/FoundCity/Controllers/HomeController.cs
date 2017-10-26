@@ -13,5 +13,13 @@ namespace FoundCity.Controllers
         {
             return View();
         }
+
+        public ActionResult FindPet() {
+            //var query = from o in db.FindPets
+            //            select o;
+            //List<FindPet> viewData = query.ToList();
+            //return View(viewData);
+            return View();
+        }
     }
 }
