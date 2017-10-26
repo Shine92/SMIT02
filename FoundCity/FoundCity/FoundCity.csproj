@@ -183,6 +183,7 @@
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
+    <Content Include="Views\Shared\RegisterEmailTemplate.html" />
     <Content Include="Web.config" />
     <Content Include="Views\Shared\_LayoutIndex.cshtml" />
   </ItemGroup>
@@ -191,9 +192,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\FindPetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\RadarController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CMailService.cs" />
+    <Compile Include="Models\CMemberService.cs" />
     <Compile Include="Models\FindMom.cs">
       <DependentUpon>NewPetModel.tt</DependentUpon>
     </Compile>
@@ -243,6 +248,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\FindPet.cshtml" />
+    <Content Include="Views\Member\Index.cshtml" />
+    <Content Include="Views\Member\Basic.cshtml" />
+    <Content Include="Views\Member\Modify.cshtml" />
+    <Content Include="Views\Member\Login.cshtml" />
+    <Content Include="Views\Member\Register.cshtml" />
+    <Content Include="Views\Member\Forget.cshtml" />
+    <Content Include="Views\Radar\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
