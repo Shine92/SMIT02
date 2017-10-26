@@ -1,0 +1,498 @@
+﻿@using FoundCity.Models;
+@model FindPet
+@{
+    ViewBag.Title = "YCreateFindPet";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+
+@*行事曆.accordion*@
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+
+@*cookies*@
+<script type="text/javascript" src="~/js/mycookie.js"></script>
+
+@*...................main..........................*@
+
+
+<div class="container">
+    <div><button type="button" id="addFindPetButton" class="btn btn-default">新增</button></div><br />
+    <div class="row" id="findPetList">
+
+        @*<div class="col-sm-3">
+                <img src="~/image/p1.jpg" class="img-thumbnail" alt="Cinque Terre" width="720" height="472">
+
+                <br />2017-11-10<br />
+                台北市內湖區舊宗路<br /><br />
+            </div>*@
+
+    </div>
+    @*test*@
+    @*<span class="pull-right"><button class="btn btn-info btn-xs editItem"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;<button class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span>*@
+    <form method="post" action="" enctype="multipart/form-data">
+        <div id="accordion">
+            <h4>@((Request.Cookies["findPetBtn"].Value == "-1") ? "新增" : "修改")</h4>
+            <div>
+                <p>
+                    @*<span class="pull-right"><img src='../image/p1.jpg' id='petphoto' class='img-thumbnail petphoto' alt='cinque terre' width='360' height='540'></span>*@
+                    @*<div class="col-sm-9">test</div>*@
+                    <div class="col-sm-2 pull-right">
+                        <img id='petphoto' class='img-thumbnail petphoto' alt='' width='120' height='180'>
+                        @*<h3>*@
+                        @*<label for="petPhotoTextBox">
+                                <span class="glyphicon glyphicon-eye-close"></span>
+                                上傳圖片
+                            </label>
+
+                            <input type="text"
+                                   id="petPhotoTextBox"
+                                   class="form-control"
+                                   placeholder="請輸入檔名" />*@
+                        @*</h3>*@
+                    </div>
+
+                    @*<div class="col-sm-3"></div>*@
+
+                    <div class="col-sm-5">
+                        <h3>
+                            <label for="petPhotoTextBox">
+                                <span class="glyphicon glyphicon-eye-close"></span>
+                                上傳圖片
+                            </label>
+
+                            <label id="petPhotoLabel">
+                                上傳圖片
+                            </label>
+
+                            <input type="hidden"
+                                   id="petPhotoTextBox"
+                                   class="form-control"
+                                   @*value="@TempData["PetPhoto"]"*@
+                                   placeholder="請輸入檔名" />
+                            <input type="file" id="PetPhoto" name="PetPhoto" class="form-control" />
+
+                        </h3>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <h3>
+
+                            <label for="SpeciesTextBox">
+                                <span class="glyphicon glyphicon-time"></span>
+                                物種:
+                            </label><br>
+
+                            <input type="radio" name="Species" value="狗" checked> 狗
+                            <input type="radio" name="Species" value="貓"> 貓
+                            <input type="radio" name="Species" value="其他"> 其他
+
+                        </h3>
+                    </div>
+
+                    @*<div class="col-sm-2"></div>*@
+
+                    <div class="col-sm-5">
+                        <h3>
+
+                            <label for="SizeTextBox">
+                                <span class="glyphicon glyphicon-time"></span>
+                                體型:
+                            </label><br>
+
+                            <input type="radio" name="Size" value="小型" checked> 小型
+                            <input type="radio" name="Size" value="中型"> 中型
+                            <input type="radio" name="Size" value="大型"> 大型
+
+                        </h3>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <h3>
+
+                            <label for="AgeTextBox">
+                                <span class="glyphicon glyphicon-time"></span>
+                                年紀:
+                            </label><br>
+
+                            <input type="radio" name="Age" value="成年" checked> 成年
+                            <input type="radio" name="Age" value="幼年"> 幼年
+
+                        </h3>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <h3>
+
+                            <label for="SexTextBox">
+                                <span class="glyphicon glyphicon-time"></span>
+                                性別:
+                            </label><br>
+
+                            <input type="radio" name="Sex" value="公" checked> 公
+                            <input type="radio" name="Sex" value="母"> 母
+
+                        </h3>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <h3>
+
+                            <label for="HairColorTextBox">
+                                <span class="glyphicon glyphicon-time"></span>
+                                毛色:
+                            </label><br>
+
+                            <select class="form-control" id="HairColor" name="HairColor">
+                                <option value="白色">白色</option>
+                                <option value="黑色">黑色</option>
+                                <option value="棕色">棕色</option>
+                                <option value="黃色">黃色</option>
+                                <option value="虎斑">虎斑</option>
+                                <option value="其他">其他</option>
+                            </select>
+
+                        </h3>
+                    </div>
+
+
+
+                    <div class="col-sm-5">
+                        <h3>
+                            <label for="lostDateTextBox">
+                                <span class="glyphicon glyphicon-time"></span>
+                                走失日期
+                            </label>
+
+                            <input type="text"
+                                   id="lostDateTextBox"
+                                   class="form-control"
+                                   placeholder="yyyy-mm-dd 例如: 2017-05-20" />
+                        </h3>
+                    </div>
+                    <div class="col-sm-5">
+                        <h3>
+                            <label for="lostPlaceTextBox">
+                                <span class="glyphicon glyphicon-bullhorn"></span>
+                                走失地點
+                            </label>
+                            <input type="text"
+                                   id="lostPlaceTextBox"
+                                   class="form-control"
+                                   placeholder="走失地點" />
+                        </h3>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <h3>
+                            <label for="CharacteristicTextBox">
+                                <span class="glyphicon glyphicon-bullhorn"></span>
+                                備註
+                            </label>
+                            <input type="text"
+                                   id="Characteristic"
+                                   class="form-control"
+                                   placeholder="備註" />
+                        </h3>
+                    </div>
+                    <div class="col-sm-5"></div>
+                    @*<div class="pull-right col-sm-9"></div>*@
+                    <div class="pull-right col-sm-3">
+                        <button type="submit"
+                                id="okButton"
+                                class="btn btn-success">
+                            <span class="glyphicon glyphicon-ok"></span> 確定
+                        </button>
+                        <button type="button"
+                                id="cancelButton"
+                                class="btn btn-default"
+                                data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove"></span> 取消
+                        </button>
+
+                        @*<a href="MemberFindPet" class="btn btn-default" role="button"><span class="glyphicon glyphicon-remove"></span>取消</a>*@
+                    </div>
+                </p>
+            </div>
+
+            @*<h4>section 1</h4>
+                <div>
+                    <p>
+                        <span class="pull-right"><img src='../image/p1.jpg' id='petphoto' class='img-thumbnail petphoto' alt='cinque terre' width='360' height='540'></span>
+
+                        <div><h3>1</h3></div>
+                        <div><h3>1</h3></div>
+                        <div><h3>1</h3></div>
+
+                    </p>
+                </div>*@
+
+        </div>
+    </form>
+</div>
+
+<div id="debug"></div>
+<div data-role="content">
+    <table id="resultTable" data-role="table" data-mode="columntoggle" class="table-stroke"></table>
+</div>
+
+<script>
+        $("#lostDateTextBox").datepicker({ dateFormat: "yy-mm-dd" });
+                $(function () {
+                    loadAndRefreshUI();
+                    //$("#debug").text("OK");
+                    $("#accordion").accordion({ header: "h4" });
+
+                    $('input[type="file"]').change(function (e) {
+                        var fileName = e.target.files[0].name;
+                        $("#petPhotoTextBox").val(fileName);
+                        $("#petPhotoLabel").text(fileName);
+                        //alert('The file "' + fileName + '" has been selected.');
+                        //預覽
+                        readURL(this);
+
+                    });
+
+                    alert(getCookie("findPetBtn"));
+                })
+
+
+                //預覽
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#petphoto').attr('src', e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+
+                    }
+                }
+
+                //$("#imgInp").change(function () {
+                //    readURL(this);
+                //});
+
+                function refreshNewsUI() {
+                    //$("#accordion").empty();
+                }
+
+                function loadAndRefreshUI() {
+
+                    //$("#accordion").empty();
+                    //var temp = getCookie("findPetBtn");
+
+                    $.ajax({
+                        type: "get",
+                        url: '/api/FindPets/' + getCookie("findPetBtn"),
+                        //url: '/api/FindPets/' + temp,
+                        dataType: "json",
+                        success: function (data) {
+                            debug = data;
+
+                            $("#petphoto").attr('src', '../images/' + data.PetPhoto);
+                            //alert(data.LostDate);
+
+
+                            $('input[name=Sex][value="' + data.Sex + '"]').prop('checked', true);
+                            //改
+                            $('#HairColor option[value="' + data.HairColor + '"]').prop('selected', true);
+                            //$("#HairColor option:selected").text();
+
+                            $("#petPhotoLabel").text(data.PetPhoto);
+                            $("#petPhotoTextBox").val(data.PetPhoto);
+                            $("#lostDateTextBox").val(data.LostDate);
+                            $("#lostPlaceTextBox").val(data.LostPlace);
+
+
+                            //$.each(data, function (index, obj) {
+                            //var sRows = "";
+
+                            //var sImage = "<p><span class='pull-right'><img src='../image/" + data.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='300' height='480'></span></p>"
+                            //var sbutton = '<span class="pull-right"><button class="btn btn-info btn-xs editItem"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;<button class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span>'
+
+                            //sRows = "<h4>[" + data.LostDate + "]" + data.LostPlace + "</h4>"
+                            //          + "<div><p>" + sImage
+                            //          + "<div><h3>obj.Creator:(找memberId)" + data.LostDate + "</h3></div>"
+                            //          + "<div><h3>obj.Species:(貓/狗/其他)" + data.LostPlace + "</h3></div>"
+                            //          + "<div><h3>obj.Variety:(手動新增)" + data.LostDate + "</h3></div>"
+                            //          + "<div><h3>obj.Characteristic1:(大型/中型/小型)" + data.LostPlace + "</h3></div>"
+                            //          + "<div><h3>obj.Characteristic2:(成年/幼年)" + data.LostDate + "</h3></div>"
+                            //          + "<div><h3>obj.Characteristic3:()" + data.LostPlace + "</h3></div>"
+                            //          + "<div><h3>obj.CreateDate:(yyyy:mm:dd)" + data.LostPlace + "</h3></div>"
+                            //          + "<div><h3>obj.LostDate:(yyyy:mm:dd)" + data.LostDate + "</h3></div>"
+                            //          + "<div><h3>obj.LostPlace:" + data.LostPlace + "</h3></div>"
+                            //          + "</p>" + sbutton + "</div>";
+                            //    $("#accordion").append(sRows).accordion('destroy').accordion();
+
+                            //})
+
+
+                            //$(".editItem").on("click", function (e) {
+                            //    //var iIndex = $(this).parent().parent().index();
+
+                            //    var iIndex = ($(this).closest("div").index() - 1) / 2;
+                            //    currentIndex = iIndex;
+                            //    //alert(iIndex);
+
+                            //    var sRows = "<img src='../image/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='100%' height='80%'>"
+
+                            //    $("#showImg").empty();
+                            //    $("#showImg").append(sRows)
+                            //    $("#petPhotoTextBox").val(debug[iIndex].PetPhoto);
+                            //    $("#lostDateTextBox").val(debug[iIndex].LostDate);
+                            //    $("#lostPlaceTextBox").val(debug[iIndex].LostPlace);
+                            //    $("#findPetModal").modal({ backdrop: "static" });
+                            //})
+                        },
+                        error: function () {
+                            //alert("error");
+                        }
+                    });
+
+                }
+
+                //編輯
+                //$(".editItem").click(function () {
+                //    // var iIndex = $(this).parent().parent().index();
+                //    alert("test");
+                //    //var iIndex = $(this).closest("img").index();
+                //    //currentIndex = iIndex;
+                //    //$("#petPhotoTextBox").val(findPetList[iIndex].PetPhoto);
+                //    //$("#lostDateTextBox").val(findPetList[iIndex].LostDate);
+                //    //$("#lostPlaceTextBox").val(findPetList[iIndex].LostPlace);
+
+                //    $("#findPetModal").modal({ backdrop: "static" });
+
+                //})
+
+                //新增
+                $("#addFindPetButton").click(function () {
+                    currentIndex = -1;
+                    $("#petphoto").empty();
+                    $("#showImg").empty();
+                    $("#petPhotoTextBox").val("");
+
+                    //$("#speciesTextBox").val("");
+                    //$("#varietyTextBox").val("");
+                    //$("#characteristicTextBox").val("");
+                    //$("#createDateTextBox").val("");
+                    $("#lostDateTextBox").val("");
+                    $("#lostPlaceTextBox").val("");
+                    //$("#contactManTextBox").val("");
+                    //$("#contactTelTextBox").val("");
+                    //$("#contactEmailTextBox").val("");
+
+                    //$("#findPetModal").modal({ backdrop: "static" });
+                })
+
+                $("#cancelButton").click(function () {
+                    window.location.href = 'MemberFindPet';
+                })
+
+                //確認(編輯/新增)
+
+                $("#okButton").click(function () {
+
+                    if (getCookie("findPetBtn") >= 0) { // edit
+                    //    //newsList[currentIndex].title = $("#titleTextBox").val();
+                    //    //newsList[currentIndex].ymd = $("#ymdTextBox").val();
+                    //    //refreshNewsUI();
+
+
+                        var updateData = {
+                            PetID: getCookie("findPetBtn"),
+                            //PetPhoto: getCookie("uploadImg"),
+                            PetPhoto: $("#petPhotoTextBox").val(),
+                            CreatorId: getCookie("uid"),
+                            //Species: $("#speciesTextBox").val(),
+                            //Variety: $("#varietyTextBox").val(),
+                            //Characteristic: $("#characteristicTextBox").val(),
+                            //CreateDate: $("#createDateTextBox").val(),
+                            LostDate: $("#lostDateTextBox").val(),
+
+
+
+                            //改
+                            //LostPlace: $('input[name=Sex]:checked').val(),
+                            //LostPlace: $("#HairColor option:selected").text(),
+                            LostPlace: $("#lostPlaceTextBox").val(),
+
+
+                            //ContactMan: $("#contactManTextBox").val(),
+                            //ContactTel: $("#contactTelTextBox").val(),
+                            //ContactEmail: $("#contactEmailTextBox").val()
+                        };
+
+                    //    alert(debug[currentIndex].PetID);
+                        alert(JSON.stringify(updateData));
+                    //    //alert(data);
+
+                        $.ajax({
+                            url: '/api/FindPets/' + getCookie("findPetBtn"),
+                            type: 'PUT',
+                            data: JSON.stringify(updateData),
+                            //dataType:'JSON',
+                            //data: updateData,
+                            contentType: "application/json;charset=utf-8",
+
+                            success: function () {
+                                //loadAndRefreshUI();
+                                alert("edit Done");
+                                window.location.href = 'MemberFindPet';
+                            },
+                            error: function (response) {
+                                document.write(response.responseText);
+                            }
+                        });
+
+                    //    //$("#findPetModal").modal("hide");
+                    //    //showToast("Information", "Edit Index = " + currentIndex);
+
+                    }
+
+                    else {
+                        // new
+                        //alert("new");
+                        var newItem = {
+                            PetPhoto: $("#petPhotoTextBox").val(),
+                            CreatorId: getCookie("uid"),
+                            //Species: $("#speciesTextBox").val(),
+                            //Variety: $("#varietyTextBox").val(),
+                            //Characteristic: $("#characteristicTextBox").val(),
+                            //CreateDate: $("#createDateTextBox").val(),
+                            LostDate: $("#lostDateTextBox").val(),
+                            LostPlace: $("#lostPlaceTextBox").val(),
+                            //ContactMan: $("#contactManTextBox").val(),
+                            //ContactTel: $("#contactTelTextBox").val(),
+                            //ContactEmail: $("#contactEmailTextBox").val()
+
+                        };
+                        //alert($("#petPhotoTextBox").val());
+
+                        $.ajax({
+                            url: '/api/FindPets',
+                            type: 'POST',
+                            data: JSON.stringify(newItem),
+                            contentType: "application/json;charset=utf-8",
+                            success: function (data) {
+                                //refreshNewsUI()
+                                alert("new");
+                                window.location.href = 'MemberFindPet';
+                                //$("#petPhotoTextBox").val("")
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+
+
+                        //newsList.push(newItem);
+                        //showToast("Information", "New Form Closed");
+                    }
+                })
+
+
+</script>
+

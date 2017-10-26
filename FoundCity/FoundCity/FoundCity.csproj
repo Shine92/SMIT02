@@ -195,6 +195,7 @@
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\PetController.cs" />
     <Compile Include="Controllers\RadarController.cs" />
+    <Compile Include="Controllers\YMemberFindPetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -256,6 +257,8 @@
     <Content Include="Views\Member\Forget.cshtml" />
     <Content Include="Views\Radar\Index.cshtml" />
     <Content Include="Views\Pet\Index.cshtml" />
+    <Content Include="Views\Pet\MemberFindPet.cshtml" />
+    <Content Include="Views\Pet\YCreateFindPet.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
