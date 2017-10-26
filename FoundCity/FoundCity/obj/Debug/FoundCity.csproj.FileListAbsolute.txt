@@ -133,3 +133,4 @@ D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.Web
 D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csprojResolveAssemblyReference.cache
 D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.dll
 D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.pdb
+D:\Github\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csprojResolveAssemblyReference.cache

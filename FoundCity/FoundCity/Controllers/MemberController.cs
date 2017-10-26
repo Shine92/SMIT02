@@ -50,6 +50,16 @@ namespace FoundCity.Controllers {
                 return View(newMember);
             }
 
+            /*測試資料*/
+            //newMember.UserFirstName = "黃";
+            //newMember.UserLastName = "宏隆";
+            //newMember.UserGender = "1";
+            //newMember.Account = "a15274@gmail.com";
+            //newMember.Password = "a123b123";
+            //newMember.Telephone = "0911234567";
+            //newMember.AuthCode = "ABCDEFG123";
+            //newMember.IsAdmin = false;
+            //newMember.UserStatus = true;
 
             /*取得驗證碼*/
             //newMember.AuthCode = mailService.GetValidateCode();
