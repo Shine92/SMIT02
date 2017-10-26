@@ -12,8 +12,8 @@ namespace FoundCity.Models {
 
         #region 註冊會員
         public void Register(Member newMember) {
-            ///*密碼加密 1026 10:13測試*/
-            //newMember.Password = HasPassword(newMember.Password);
+            /*密碼加密 1026 10:13測試*/
+            newMember.Password = HasPassword(newMember.Password);
             /*新增資料到資料庫實體*/
             db.Members.Add(newMember);
             /*儲存資料庫變更*/
