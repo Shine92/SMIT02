@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>寵物Found城市</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/css/Default.css" />
+    <script src="~/js/Default.js"></script>
+    <link rel="stylesheet" href="~/css/MyStyle.css" />
+    <script src="~/js/MyJavascript.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <div id="logo">
+                    <h1><a href="/Home/Index">動物Found城市</a></h1>
+                    <p>動物協尋平台</p>
+                </div>
+                <div id="banner"></div>
+            </div>
+        </div>
+        <div id="menu-wrapper">
+            <div id="menu" class="container-full">
+                <ul>
+                    <li class="current_page_item"><a href="#">首頁</a></li>
+                    <li><a href="#">尋寵啟示</a></li>
+                    <li><a href="#">拾獲通報</a></li>
+                    <li><a href="#">認養資訊</a></li>
+                    <li><a href="#">雷達搜尋</a></li>
+                    <li class="item_right"><a href="#about">會員登出</a></li>
+                    <li class="item_right"><a href="/Member/Login">會員登入</a></li>
+                    <li class="item_right"><a href="/Member/Index">會員中心</a></li>
+                </ul>
+            </div>
+            <!-- end #menu -->
+        </div>
+        @RenderBody()
+        <div id="copyright" class="container-full">
+            <p><a href="http://fotogrph.com/">關於我們 | </a><a href="http://templated.co" rel="nofollow">免責聲明 | </a><a href="http://templated.co" rel="nofollow">聯絡我們</a></p>
+        </div>
+
+    </div>
+</body>
+</html>

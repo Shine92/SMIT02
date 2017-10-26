@@ -1,0 +1,20 @@
+/*刪除資料表*/
+DROP TABLE Members
+
+/*建立資料表*/
+create table Members(
+	Id int primary key identity not null,
+	UserFirstName nvarchar(10) not null,
+	UserLastName nvarchar(10) not null,
+	UserGender char(1) not null,
+	Account varchar(50) not null,
+	Password varchar(40) not null,
+	Telephone char(10) not null,
+	AuthCode nchar (10) not null,
+	IsAdmin bit not null,
+	UserStatus bit not null
+)
+
+/*建立資料*/
+insert into Members values('黃','紹銘',1,'msn8971@gmail.com','P@ssword','0910351421','ABCDEFG101',1,1)
+insert into Members values('洪','家瑄',0,'hu1008@gmail.com','P@ssword','0910351151','ABCDEFG102',0,0)
