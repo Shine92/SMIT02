@@ -159,6 +159,80 @@
 /* Rey Style                                                                   */
 /*********************************************************************************/
 
+.rBody {
+    background-color: #e6e6e6;
+}
+
+.rRadar_font {
+    font-family: Microsoft JhengHei;
+    text-align: center;
+    font-weight: bold;
+}
+
+/*--------------------------------------------------------------------------------*/
+
+#rMap_Body {
+    float: left;
+    width: 55%;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+#rMap-Canvas {
+    height: 460px;
+}
+
+#rMap_Features {
+    margin-top: 10px;
+}
+
+/*--------------------------------------------------------------------------------*/
+
+#rSidebar {
+    float: left;
+    width: 12%;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/*--------------------------------------------------------------------------------*/
+
+#rResult {
+    float: left;
+    width: 30%;
+    margin-top:10px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+#rResult_Range{
+
+}
+
+#rResult_Table{
+    height:150px;
+    overflow:scroll;
+    margin-top:10px;
+    
+}
+
+/*--------------------------------------------------------------------------------*/s
+
+.oaerror {
+  background-color: #FFFFFF; /* Default background */
+  padding: 18px;
+  font-size: 17px;
+}
+
+.warning {
+  border-left-color: #f0ad4e;
+  background-color: rgba(240, 173, 78, 0.1);
+}
+
+.warning strong {
+  color: #d9534f;
+}
 
 /*********************************************************************************/
 /* Yako Style                                                                   */

@@ -203,8 +203,6 @@ D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.Web
 D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csprojResolveAssemblyReference.cache
 D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.dll
 D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.pdb
-<<<<<<< HEAD
 D:\Github\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csprojResolveAssemblyReference.cache
-=======
 >>>>>>> e2e1e1576c0788da7d8b3f7e68e3b769408f6083
 >>>>>>> f3b724c7a6ce34eef60d4b4249c5290b2f02943b

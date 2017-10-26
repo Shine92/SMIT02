@@ -158,6 +158,7 @@
     <Content Include="js\Default.js" />
     <Content Include="js\mycookie.js" />
     <Content Include="js\MyJavascript.js" />
+    <Content Include="js\Radar.js" />
     <Content Include="Models\NewPetModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>NewPetModel.edmx</DependentUpon>
