@@ -6,13 +6,12 @@ using System.Web.Mvc;
 
 namespace FoundCity.Controllers
 {
-    public class HomeController : Controller
+    public class PetController : Controller
     {
-        // GET: Home
+        // GET: Pet
         public ActionResult Index()
         {
             return View();
         }
-
     }
 }
