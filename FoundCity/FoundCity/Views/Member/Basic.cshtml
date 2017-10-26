@@ -1,0 +1,72 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+
+<div id="page">
+    <div id="memberTab" class="container">
+        <ul class="nav nav-tabs">
+            <li><a href="#basic">基本資料</a></li>
+            <li><a href="#modify">變更密碼</a></li>
+            <li><a href="#menu2">尋寵啟示</a></li>
+            <li><a href="#menu3">拾獲通報</a></li>
+            <li><a href="#menu3">我的關注</a></li>
+            <li><a href="#menu3">個人消息</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="basic" class="tab-pane fade in section_memberItems">
+                <div id="" class="member_profile">
+                    <form class="form-horizontal" action="">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="FisrName">姓:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="FisrName" placeholder="" name="FisrName">
+                            </div>
+                            <div class="col-sm-1 required">
+                                必填
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="FisrName">名:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="LastName" placeholder="" name="LastName">
+                            </div>
+                            <div class="col-sm-1 required">
+                                必填
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="">性別:</label>
+                            <div class="col-sm-7">
+                                <label class="radio-inline"><input type="radio" name="optradio">男性</label>
+                                <label class="radio-inline"><input type="radio" name="optradio">女性</label>
+                                <label class="radio-inline"><input type="radio" name="optradio">保留</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="Telephone">連絡電話:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="Telephone" placeholder="" name="Telephone">
+                            </div>
+                            <div class="col-sm-1 required">
+                                必填
+                            </div>
+                        </div>
+                        <div id="info" class="col-sm-7 col-lg-offset-3">
+                            <p>格式不符！</p>
+                        </div>
+                        <div class="member_decoration"></div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-9 col-sm-3">
+                                <button type="submit" class="btn btn-default">取消</button>
+                                <button type="submit" class="btn btn-default">儲存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
