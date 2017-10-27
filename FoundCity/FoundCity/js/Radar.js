@@ -1,24 +1,40 @@
-﻿var rLat = 0;
-var rLng = 0;
-var rZoom = 18;
+﻿var rZoom = 18;
 var rDistance = 50;
 var rMap;
-var rMarkers = [];
+var rMKs = [];
+var rAddress;
+
+window.onload = initLoad;
+
+function initLoad() {
+    //rDetect();
+    //rScrollRule();
+    initDistance();
+}
 
 function btnClean() {
     $('.btn').button();
 }
 
-window.onload = rDetect;
-
-$('.scrollable').
-    bind('mousewheel DOMMouseScroll', function (e) {
-        var delta = e.wheelDelta || -e.detail;
-        this.scrollTop += (delta < 0 ? 1 : -1) * 30;
-        e.preventDefault();
-    });
-
 //----------------------------------------------------------------------------------------------
+
+function rScrollRule() {
+    $('#rResult_Table').bind('mousewheel DOMMouseScroll', function (e) {
+        var scrollTo = null;
+
+        if (e.type == 'mousewheel') {
+            scrollTo = (e.originalEvent.wheelDelta * -1);
+        }
+        else if (e.type == 'DOMMouseScroll') {
+            scrollTo = 40 * e.originalEvent.detail;
+        }
+
+        if (scrollTo) {
+            e.preventDefault();
+            $(this).scrollTop(scrollTo + $(this).scrollTop());
+        }
+    });
+}
 
 function rDetect() {
     // 瀏覽器支援 HTML5 定位方法
@@ -30,10 +46,10 @@ function rDetect() {
         function (error) {
             switch (error.code) {
                 case error.PERMISSION_DENIED: // 拒絕
-                    rFailDetect('定位失敗');
+                    rFailDetect('定位失敗1');
                     break;
                 default:
-                    rFailDetect('定位失敗');
+                    rFailDetect('定位失敗2');
                     break;
             }
         });
@@ -45,10 +61,10 @@ function rDetect() {
                 var geo = google.gears.factory.create('beta.geolocation');
                 geo.getCurrentPosition(successCallback, errorCallback, { enableHighAccuracy: true, gearsRequestAddress: true });
             } catch (e) {
-                rFailDetect('定位失敗');
+                rFailDetect('定位失敗3');
             }
         } else {
-            rFailDetect('定位失敗');
+            rFailDetect('定位失敗4');
         }
     }
 }
@@ -57,51 +73,51 @@ function rFailDetect(msg) {
     alert(msg);
     var rC = confirm("是否手動輸入地址");
     if (rC) {
-        rUserAddress();
+        initAddress();
     } else {
 
     }
 }
 
-function rUserAddress() {
+function initAddress() {
     var rP = prompt("請輸入地址");
     if (rP != null && rP.trim.length != 0) {
-        rInitLatLng(rP);
+        initLatlng(rP);
     } else {
         if (confirm("將使用預設位置：台中市南屯區公益路二段51號")) {
-            rInitLatLng("台中市南屯區公益路二段51號");
+            initLatlng("台中市南屯區公益路二段51號");
         } else {
-            rUserAddress();
+            initAddress();
         }
     }
 }
 
-function rInitLatLng(userAddress) {
+function initLatlng(userAddress) {
 
     var geocoder = new google.maps.Geocoder();
 
     geocoder.geocode({ 'address': userAddress }, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-            rLat = results[0].geometry.location.lat();
-            rLng = results[0].geometry.location.lng();
-            rInitMAP();
+            var rLat = results[0].geometry.location.lat();
+            var rLng = results[0].geometry.location.lng();
+            var myLatlng = new google.maps.LatLng(rLat, rLng);
+            initMAP(myLatlng);
+            rAddress = userAddress;
         }
         else {
             if (prompt("搜尋失敗,請在試一次", userAddress)) {
                 rConversionLatLng(userAddress);
             }
             else {
-                rUserAddress();
+                initAddress();
             }
         }
     });
 }
 
-function rInitMAP() {
+function initMAP(myLatlng) {
 
     var mapDiv = document.getElementById("rMap-Canvas");
-
-    var myLatlng = new google.maps.LatLng(rLat, rLng);
 
     var mapProp = {
         center: myLatlng,
@@ -190,17 +206,7 @@ function rInitMAP() {
         ]
     };
 
-    rMap = new google.maps.Map(mapDiv, mapProp);
-
-    var marker = new google.maps.Marker({
-        position: myLatlng,
-        animation: google.maps.Animation.BOUNCE,
-        icon: "../images/Radar_Home.png",
-    });
-
-    rMarkers.push(marker);
-
-    marker.setMap(rMap);
+    var map = new google.maps.Map(mapDiv, mapProp);
 
     var mRange = new google.maps.Circle({
         center: myLatlng,
@@ -211,20 +217,100 @@ function rInitMAP() {
         fillColor: "#33FF33",
         fillOpacity: 0.2
     });
+    mRange.setMap(map);
 
-    mRange.setMap(rMap);
-
-    var infowindow = new google.maps.InfoWindow();
-
-    var service = new google.maps.places.PlacesService(rMap);
-
-    service.nearbySearch({
-        location: myLatlng,
-        radius: rDistance,
-        type: ['food']
-    }, callback);
+    intiMarker(map, myLatlng);
+    initDistance(map, myLatlng)
 
 }
+
+function intiMarker(myMap, myLatlng) {
+    var mainMK = new google.maps.Marker({
+        position: myLatlng,
+        animation: google.maps.Animation.BOUNCE,
+        icon: "../images/Radar_Home.png",
+    });
+    rMKs.push(mainMK);
+    mainMK.setMap(myMap);
+}
+
+function initRange(myMap, myLatlng) {
+
+    var service = new google.maps.places.PlacesService(myMap);
+
+    var request = {
+        location: myLatlng,
+        rankBy: google.maps.places.RankBy.DISTANCE,
+        type: ['veterinary_care']
+    };
+
+    service.nearbySearch(request, function (data, status) {
+        switch (status) {
+            case google.maps.places.PlacesServiceStatus.OK:
+                var placeID = new Array();
+                $.each(data, function (index, vul) {
+                    placeID[index] = vul.place_id;
+                });
+                var aryRow = new Array();
+                initDetailed(myMap, placeID, aryRow, 0, data.length);
+                break;
+            default:
+
+                break;
+        }
+    });
+
+}
+
+function initDetailed(myMap, data, aryRow, num, maxNum) {
+    if (num < maxNum) {
+        var service = new google.maps.places.PlacesService(myMap);
+        service.getDetails({
+            placeId: data[num]
+        }, function (place, status) {
+            switch (status) {
+                case google.maps.places.PlacesServiceStatus.OK:
+                    aryRow[num]["name"] = place.name;
+                    aryRow[num]["tel"] = place.formatted_phone_number;
+                    aryRow[num]["address"] = place.formatted_address;
+                    aryRow[num]["rating"] = place.rating;
+                    break;
+                default:
+                    break;
+            }
+        });
+    } else {
+    }
+}
+
+function initDistance() {
+    var start = "台中市南屯區公益路二段51號";
+    var end = "台中市南屯區大墩路671號";
+    var request = {
+        origin: start,
+        destination: end,
+        travelMode: 'DRIVING',
+    };
+    //宣告
+    var directionsService = new google.maps.DirectionsService();
+    directionsService.route(request, function (response, status) {
+        var strTmp = "";
+        if (status == google.maps.DirectionsStatus.OK) {
+            var route = response.routes[0];
+            for (var i = 0; i < route.legs.length; i++) {
+                var routeSegment = i + 1;
+                strTmp += route.legs[i].distance.text;
+            }
+            //取得距離(正整數，公尺)
+            var dist = parseInt(parseFloat(strTmp) * 1000).toString();
+            alert(strTmp);
+            alert(parseFloat(strTmp));
+            alert(parseInt(parseFloat(strTmp)));
+            alert(dist);
+        }
+    });
+}
+
 
 //----------------------------------------------------------------------------------------------
 

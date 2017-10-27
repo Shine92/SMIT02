@@ -8,13 +8,15 @@
 <script type="text/javascript" src="http://code.google.com/apis/gears/gears_init.js"></script>
 <script src="~/js/Radar.js"></script>
 
+<link rel="stylesheet" href="~/css/forRadar.css" />
+
 @*---------------------------------------------------------------------------------------------------------------------------------------------*@
 
 <div class="rBody">
 
     <div id="rSidebar" class="sidebar">
         <div class="list-group rRadar_font">
-            <span href="#" class="list-group-item active">寵物機構</span>
+            <span href="#" class="list-group-item active">動物機構</span>
             <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 醫院 </a>
             <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 商店 </a>
             <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 旅館 </a>
@@ -30,41 +32,36 @@
 
         <div id="rMap-Canvas"></div>
 
+        <div class="rOaerror rWarning rRadar_font"> 目前搜索的範圍是 <strong id="rRange"> 0 </strong> 公尺 </div>
+
         <div id="rMap_Features" class="btn-group btn-group-justified">
             <a class="btn btn-success" onclick="rADD"><span> 加大範圍 </span></a>
             <a class="btn btn-warning" onclick="rLower"><span> 縮小範圍 </span></a>
             <a class="btn btn-danger" onclick="rRE"><span> 重新搜尋 </span></a>
         </div>
 
-        <div class="rOaerror rWarning rRadar_font"> 目前搜索的範圍是 <strong id="rRange"> 0 </strong> 公尺 </div>
+       
 
     </div>
 
     <div id="rResult">
 
-        
-
         <div id="rResult_Table">
-            <ul class="nav nav-pills nav-stacked ">
-                <li><a href="#tab_a" data-toggle="pill">Pill A</a></li>
-                <li><a href="#tab_b" data-toggle="pill">Pill B</a></li>
-                <li><a href="#tab_c" data-toggle="pill">Pill C</a></li>
-                <li><a href="#tab_d" data-toggle="pill">Pill D</a></li>
-                <li><a href="#tab_E" data-toggle="pill">Pill E</a></li>
-                <li><a href="#tab_F" data-toggle="pill">Pill F</a></li>
-                <li><a href="#tab_G" data-toggle="pill">Pill G</a></li>
-                <li><a href="#tab_H" data-toggle="pill">Pill H</a></li>
-                <li><a href="#tab_I" data-toggle="pill">Pill I</a></li>
-                <li><a href="#tab_J" data-toggle="pill">Pill J</a></li>
-                <li><a href="#tab_K" data-toggle="pill">Pill K</a></li>
-                <li><a href="#tab_F" data-toggle="pill">Pill F</a></li>
-                <li><a href="#tab_G" data-toggle="pill">Pill G</a></li>
-                <li><a href="#tab_H" data-toggle="pill">Pill H</a></li>
-                <li><a href="#tab_I" data-toggle="pill">Pill I</a></li>
-                <li><a href="#tab_J" data-toggle="pill">Pill J</a></li>
-                <li><a href="#tab_K" data-toggle="pill">Pill K</a></li>
+            <ul id="rResult_Content" class="nav nav-pills nav-stacked timeline-centered">
+                <li>
+                    <article class="timeline-entry">
+                        <div class="timeline-entry-inner">
+                            <div class="timeline-icon bg-success">
+                                <i class="entypo-feather"></i>
+                            </div>
+                            <div class="timeline-label">
+                                <h2><a href="#">Art Ramadani</a> </h2>
+                                <p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>
+                            </div>
+                        </div>
+                    </article>
+                </li>
             </ul>
-
         </div>
 
     </div>
