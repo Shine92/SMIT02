@@ -1,7 +1,8 @@
 ﻿
 @{
     ViewBag.Title = "MemberFindPet";
-    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+    //Layout = "~/Views/Shared/_LayoutMember.cshtml";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
 }
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css">
@@ -79,20 +80,20 @@
     </div>
 </div>
 <!-- /對話盒 end (Detail/刪除)-->
-
 @*...................main..........................*@
 
 
 <div class="container">
-    <div><button type="button" id="addFindPetButton" class="btn btn-default">新增</button></div><br />
+    <br />
+    <div><button type="button" id="addFindPetButton" class="btn btn-default">新增</button></div>
     <div class="row" id="findPetList">
 
 
     </div>
-    
+
 
     <div id="accordion">
-        
+
 
     </div>
 </div>
@@ -112,7 +113,7 @@
                 }
 
                 function loadAndRefreshUI() {
-                    
+
                     $("#accordion").empty();
 
                     $.ajax({
@@ -153,13 +154,13 @@
                                     $("#accordion").append(sRows).accordion('destroy').accordion();
 
                             })
-      
+
 
                             $(".deleteItem").on("click", function (e) {
-                                //var iIndex = $(this).parent().parent().index();
+                                var iIndex = ($(this).parent().parent().index() - 1) / 2;
 
-                                var iIndex = ($(this).closest("div").index() - 1) / 2;
-                                
+                                //var iIndex = ($(this).closest("div").index() - 1) / 2;
+
                                 tempIndex = iIndex;
                                 //alert(iIndex);
 
@@ -174,12 +175,12 @@
                             })
 
                             $(".editItem").on("click", function (e) {
-                                //var iIndex = $(this).parent().parent().index();
-                                //alert("editItem_click");
-                                var iIndex = ($(this).closest("div").index() - 1) / 2;
-                                
+                                var iIndex = ($(this).parent().parent().index() - 1) / 2;
+
+                                //var iIndex = ($(this).closest("div").index() - 1) / 2;
+
                                 currentIndex = debug[iIndex].PetId;
-                                //alert(currentIndex);  
+                                //alert(currentIndex);
                                 setCookie("findPetBtn", currentIndex, 1);
                                 window.location.href = 'YCreateFindPet';
                                 //alert(getCookie("findPetBtn"));
@@ -201,20 +202,6 @@
 
                 }
 
-                //編輯
-                //$(".editItem").click(function () {
-                //    // var iIndex = $(this).parent().parent().index();
-                //    alert("test");
-                //    //var iIndex = $(this).closest("img").index();
-                //    //currentIndex = iIndex;
-                //    //$("#petPhotoTextBox").val(findPetList[iIndex].PetPhoto);
-                //    //$("#lostDateTextBox").val(findPetList[iIndex].LostDate);
-                //    //$("#lostPlaceTextBox").val(findPetList[iIndex].LostPlace);
-
-                //    $("#findPetModal").modal({ backdrop: "static" });
-
-                //})
-
                 //新增
                 $("#addFindPetButton").click(function () {
                     currentIndex = -1;
@@ -224,89 +211,6 @@
 
                     //$("#showImg").empty();
 
-                })
-
-                //確認(編輯/新增)
-                $("#okButton").click(function () {
-
-                    if (currentIndex >= 0) { // edit
-                        //newsList[currentIndex].title = $("#titleTextBox").val();
-                        //newsList[currentIndex].ymd = $("#ymdTextBox").val();
-                        //refreshNewsUI();
-
-
-                        var updateData = {
-                            PetPhoto: $("#petPhotoTextBox").val(),
-                            //Species: $("#speciesTextBox").val(),
-                            //Variety: $("#varietyTextBox").val(),
-                            //Characteristic: $("#characteristicTextBox").val(),
-                            //CreateDate: $("#createDateTextBox").val(),
-                            LostDate: $("#lostDateTextBox").val(),
-                            LostPlace: $("#lostPlaceTextBox").val(),
-                            //ContactMan: $("#contactManTextBox").val(),
-                            //ContactTel: $("#contactTelTextBox").val(),
-                            //ContactEmail: $("#contactEmailTextBox").val()
-                        };
-
-                        alert(debug[currentIndex].PetId);
-                        alert(JSON.stringify(updateData));
-                        //alert(data);
-
-                        $.ajax({
-                            url: '/api/FindPets/' + debug[currentIndex].PetId,
-                            type: 'PUT',
-                            data: JSON.stringify(updateData),
-                            //dataType:'JSON',
-                            //data: updateData,
-                            contentType: "application/json;charset=utf-8",
-
-                            success: function () {
-                                loadAndRefreshUI();
-                                alert("edit Done");
-                            },
-                            error: function (response) {
-                                document.write(response.responseText);
-                            }
-                        });
-
-                        $("#findPetModal").modal("hide");
-                        //showToast("Information", "Edit Index = " + currentIndex);
-
-                    }
-
-                    else {  // new
-                        //alert("new");
-                        var newItem = {
-                            PetPhoto: $("#petPhotoTextBox").val(),
-                            //Species: $("#speciesTextBox").val(),
-                            //Variety: $("#varietyTextBox").val(),
-                            //Characteristic: $("#characteristicTextBox").val(),
-                            //CreateDate: $("#createDateTextBox").val(),
-                            LostDate: $("#lostDateTextBox").val(),
-                            LostPlace: $("#lostPlaceTextBox").val(),
-                            //ContactMan: $("#contactManTextBox").val(),
-                            //ContactTel: $("#contactTelTextBox").val(),
-                            //ContactEmail: $("#contactEmailTextBox").val()
-
-                        };
-                        alert($("#petPhotoTextBox").val());
-                        $("#findPetModal").modal("hide");
-
-                        $.ajax({
-                            url: '/api/FindPets',
-                            type: 'POST',
-                            data: JSON.stringify(newItem),
-                            contentType: "application/json;charset=utf-8",
-                            success: function (data) {
-                                loadAndRefreshUI();
-                                alert("new");
-                            },
-                            error: function () {
-                                alert("error");
-                            }
-                        });
-
-                    }
                 })
 
                 //確認刪除

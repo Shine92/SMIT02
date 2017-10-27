@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>寵物Found城市</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/css/Default.css" />
+    <script src="~/js/Default.js"></script>
+    <link rel="stylesheet" href="~/css/MyStyle.css" />
+    <script src="~/js/MyJavascript.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <div id="logo">
+                    <h1><a href="/Home/Index">動物Found城市</a></h1>
+                    <p>動物協尋平台</p>
+                </div>
+                <div id="banner"></div>
+            </div>
+        </div>
+        <div id="menu-wrapper">
+            <div id="menu" class="container-full">
+                <ul>
+                    <li class="current_page_item"><a href="#">首頁</a></li>
+                    <li><a href="/Pet/Index">尋寵啟示</a></li>
+                    <li><a href="#">拾獲通報</a></li>
+                    <li><a href="#">認養資訊</a></li>
+                    <li><a href="#">雷達搜尋</a></li>
+                    <li class="item_right"><a href="#about">會員登出</a></li>
+                    <li class="item_right"><a href="/Member/Login">會員登入</a></li>
+                    <li class="item_right"><a href="/Member/Index">會員中心</a></li>
+                </ul>
+            </div>
+            <!-- end #menu -->
+        </div>
+
+        @*.................................................................*@
+
+        <div id="page">
+            <div id="memberTab" class="container">
+                <ul class="nav nav-tabs">
+                    <li><a href="#basic">基本資料</a></li>
+                    <li><a href="#modify">變更密碼</a></li>
+                    <li><a href="/Pet/MemberFindPet">尋寵啟示</a></li>
+                    <li><a href="#menu3">拾獲通報</a></li>
+                    <li><a href="#menu3">我的關注</a></li>
+                    <li><a href="#menu3">個人消息</a></li>
+                </ul>
+
+                @*<div class="tab-content">
+                        <div id="basic" class="tab-pane fade in section_memberItems">
+                            <div id="" class="member_profile">
+                                <form class="form-horizontal" action="">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3" for="FisrName">姓:</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control" id="FisrName" placeholder="" name="FisrName">
+                                        </div>
+                                        <div class="col-sm-1 required">
+                                            必填
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3" for="FisrName">名:</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control" id="LastName" placeholder="" name="LastName">
+                                        </div>
+                                        <div class="col-sm-1 required">
+                                            必填
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-7 col-sm-offset-3">
+                                            <label class="radio-inline"><input type="radio" name="optradio">男性</label>
+                                            <label class="radio-inline"><input type="radio" name="optradio">女性</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3" for="Telephone">連絡電話:</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control" id="Telephone" placeholder="" name="Telephone">
+                                        </div>
+                                        <div class="col-sm-1 required">
+                                            必填
+                                        </div>
+                                    </div>
+                                    <div class="member_decoration"></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-9 col-sm-3">
+                                            <button type="submit" class="btn btn-default">取消</button>
+                                            <button type="submit" class="btn btn-default">儲存</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>*@
+            </div>
+            @RenderBody()
+        </div>
+
+        @*...................................................................*@
+
+        <div id="copyright" class="container-full">
+            <p><a href="http://fotogrph.com/">關於我們 | </a><a href="http://templated.co" rel="nofollow">免責聲明 | </a><a href="http://templated.co" rel="nofollow">聯絡我們</a></p>
+        </div>
+
+    </div>
+</body>
+</html>
