@@ -11,7 +11,7 @@ namespace FoundCity.Models {
         private string sendMailPassword = "FoundPet02";
         private string sendMail = "foundcity2017@gmail.com";
 
-        #region 產生驗證碼
+        #region 產生驗證碼 OK
         public string GetValidateCode() {
             string[] Code = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
             string ValidateCode = string.Empty;
@@ -22,22 +22,22 @@ namespace FoundCity.Models {
             return ValidateCode;
         }
         #endregion
-        #region 將註冊資料填入驗證信
+        #region 將註冊資料填入驗證信 OK
         public string GetRegisterMailBody(string tempString, string UserName, string ValidateUrl) {
             /*註冊資料填入*/
-            tempString = tempString.Replace("{{Account}}", UserName);
+            tempString = tempString.Replace("{{UserName}}", UserName);
             tempString = tempString.Replace("{{ValidateUrl}}", ValidateUrl);
             return tempString;
         }
         #endregion
-        #region 寄驗證信的方法
+        #region 寄驗證信的方法 OK
         public void SendRegisterMail(string MailBody, string ToMail) {
             /*建立寄信用Smtp物件*/
             SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
             /*Gmail使用的Port*/
             smtpServer.Port = 587;
             /*驗證寄件者資料*/
-            smtpServer.Credentials = new System.Net.NetworkCredential("foundcity2017@gmail.com", "FoundPet02");
+            smtpServer.Credentials = new System.Net.NetworkCredential(sendMailAccount, sendMailPassword);
             /*開啟SSL*/
             smtpServer.EnableSsl = true;
             /*宣告信件內容物件*/

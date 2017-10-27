@@ -262,6 +262,7 @@
     <Content Include="Views\Pet\MemberFindPet.cshtml" />
     <Content Include="Views\Pet\YCreateFindPet.cshtml" />
     <Content Include="Views\Shared\_LayoutMember.cshtml" />
+    <Content Include="Views\Member\EmailValidate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
