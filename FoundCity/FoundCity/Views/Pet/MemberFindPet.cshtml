@@ -157,9 +157,9 @@
 
 
                             $(".deleteItem").on("click", function (e) {
-                                //var iIndex = $(this).parent().parent().index();
+                                var iIndex = ($(this).parent().parent().index() - 1) / 2;
 
-                                var iIndex = ($(this).closest("div").index() - 1) / 2;
+                                //var iIndex = ($(this).closest("div").index() - 1) / 2;
 
                                 tempIndex = iIndex;
                                 //alert(iIndex);
@@ -175,9 +175,9 @@
                             })
 
                             $(".editItem").on("click", function (e) {
-                                //var iIndex = $(this).parent().parent().index();
-                                //alert("editItem_click");
-                                var iIndex = ($(this).closest("div").index() - 1) / 2;
+                                var iIndex = ($(this).parent().parent().index() - 1) / 2;
+
+                                //var iIndex = ($(this).closest("div").index() - 1) / 2;
 
                                 currentIndex = debug[iIndex].PetId;
                                 //alert(currentIndex);

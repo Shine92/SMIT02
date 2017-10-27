@@ -148,7 +148,7 @@
                                 毛色:
                             </label>
 
-                            <select class="" id="hairColor" name="HairColor">
+                            <select class="" id="hairColorTextBox" name="HairColor">
                                 <option value="白色">白色</option>
                                 <option value="黑色">黑色</option>
                                 <option value="棕色">棕色</option>
@@ -167,7 +167,7 @@
                                 備註
                             </label>
                             <input type="text"
-                                   id="characteristic"
+                                   id="characteristicTextBox"
                                    class="form-control"
                                    placeholder="備註" />
                         </h3>
@@ -229,8 +229,8 @@
                                 聯絡人性別:
                             </label>
 
-                            <input type="radio" name="ContactSex" value="男性" checked> 男性
-                            <input type="radio" name="ContactSex" value="女性"> 女性
+                            <input type="radio" name="ContactSex" value="男" checked> 男
+                            <input type="radio" name="ContactSex" value="女"> 女
 
                         </h3>
                         @*</div>*@
@@ -251,13 +251,13 @@
 
                         @*<div class="col-sm-5">*@
                         <h3>
-                            <label for="contactManTextBox">
+                            <label for="contactTelTextBox">
                                 <span class="glyphicon glyphicon-time"></span>
                                 聯絡人電話
                             </label>
 
                             <input type="text"
-                                   id="contactManTextBox"
+                                   id="contactTelTextBox"
                                    class="form-control"
                                    placeholder="xx-xxxxxxx 例如: 04-1234567" />
                         </h3>
@@ -382,59 +382,21 @@
                             debug = data;
 
                             $("#petphoto").attr('src', '../images/' + data.PetPhoto);
-                            //alert(data.LostDate);
-
-
-                            $('input[name=Sex][value="' + data.Sex + '"]').prop('checked', true);
-                            //改
-                            $('#hairColor option[value="' + data.HairColor + '"]').prop('selected', true);
-                            //$("#hairColor option:selected").text();
-
                             $("#petPhotoLabel").text(data.PetPhoto);
                             $("#petPhotoTextBox").val(data.PetPhoto);
+
+                            $('input[name=Species][value="' + data.Species + '"]').prop('checked', true);
+                            $('input[name=Size][value="' + data.Size + '"]').prop('checked', true);
+                            $('input[name=Age][value="' + data.Age + '"]').prop('checked', true);
+                            $('input[name=Sex][value="' + data.Sex + '"]').prop('checked', true);
+                            $('#hairColorTextBox option[value="' + data.HairColor + '"]').prop('selected', true);
+                            $("#characteristicTextBox").val(data.Characteristic);
+
                             $("#lostDateTextBox").val(data.LostDate);
                             $("#lostPlaceTextBox").val(data.LostPlace);
-
-
-                            //$.each(data, function (index, obj) {
-                            //var sRows = "";
-
-                            //var sImage = "<p><span class='pull-right'><img src='../image/" + data.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='300' height='480'></span></p>"
-                            //var sbutton = '<span class="pull-right"><button class="btn btn-info btn-xs editItem"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;<button class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span>'
-
-                            //sRows = "<h4>[" + data.LostDate + "]" + data.LostPlace + "</h4>"
-                            //          + "<div><p>" + sImage
-                            //          + "<div><h3>obj.Creator:(找memberId)" + data.LostDate + "</h3></div>"
-                            //          + "<div><h3>obj.Species:(貓/狗/其他)" + data.LostPlace + "</h3></div>"
-                            //          + "<div><h3>obj.Variety:(手動新增)" + data.LostDate + "</h3></div>"
-                            //          + "<div><h3>obj.Characteristic1:(大型/中型/小型)" + data.LostPlace + "</h3></div>"
-                            //          + "<div><h3>obj.Characteristic2:(成年/幼年)" + data.LostDate + "</h3></div>"
-                            //          + "<div><h3>obj.Characteristic3:()" + data.LostPlace + "</h3></div>"
-                            //          + "<div><h3>obj.CreateDate:(yyyy:mm:dd)" + data.LostPlace + "</h3></div>"
-                            //          + "<div><h3>obj.LostDate:(yyyy:mm:dd)" + data.LostDate + "</h3></div>"
-                            //          + "<div><h3>obj.LostPlace:" + data.LostPlace + "</h3></div>"
-                            //          + "</p>" + sbutton + "</div>";
-                            //    $("#accordion").append(sRows).accordion('destroy').accordion();
-
-                            //})
-
-
-                            //$(".editItem").on("click", function (e) {
-                            //    //var iIndex = $(this).parent().parent().index();
-
-                            //    var iIndex = ($(this).closest("div").index() - 1) / 2;
-                            //    currentIndex = iIndex;
-                            //    //alert(iIndex);
-
-                            //    var sRows = "<img src='../image/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='100%' height='80%'>"
-
-                            //    $("#showImg").empty();
-                            //    $("#showImg").append(sRows)
-                            //    $("#petPhotoTextBox").val(debug[iIndex].PetPhoto);
-                            //    $("#lostDateTextBox").val(debug[iIndex].LostDate);
-                            //    $("#lostPlaceTextBox").val(debug[iIndex].LostPlace);
-                            //    $("#findPetModal").modal({ backdrop: "static" });
-                            //})
+                            $('input[name=ContactSex][value="' + data.ContactSex + '"]').prop('checked', true);
+                            $("#contactManTextBox").val(data.ContactMan);
+                            $("#contactTelTextBox").val(data.ContactTel);
                         },
                         error: function () {
                             //alert("error");
@@ -466,19 +428,16 @@
 
                     $("#petphoto").empty();
                     $("#showImg").empty();
+                    $("#petphoto").attr('src', '');
                     $("#petPhotoTextBox").val("");
 
-                    //$("#speciesTextBox").val("");
-                    //$("#varietyTextBox").val("");
-                    //$("#characteristicTextBox").val("");
-                    //$("#createDateTextBox").val("");
+                    $("#characteristicTextBox").val("");
+
                     $("#lostDateTextBox").val("");
                     $("#lostPlaceTextBox").val("");
-                    //$("#contactManTextBox").val("");
-                    //$("#contactTelTextBox").val("");
-                    //$("#contactEmailTextBox").val("");
+                    $("#contactManTextBox").val("");
+                    $("#contactTelTextBox").val("");
 
-                    //$("#findPetModal").modal({ backdrop: "static" });
                 })
 
                 $("#cancelButton").click(function () {
@@ -496,27 +455,28 @@
 
 
                         var updateData = {
-                            PetID: getCookie("findPetBtn"),
-                            //PetPhoto: getCookie("uploadImg"),
+
+                            PetId: getCookie("findPetBtn"),
+
                             PetPhoto: $("#petPhotoTextBox").val(),
                             CreatorId: getCookie("uid"),
-                            //Species: $("#speciesTextBox").val(),
-                            //Variety: $("#varietyTextBox").val(),
-                            //Characteristic: $("#characteristicTextBox").val(),
-                            //CreateDate: $("#createDateTextBox").val(),
+                            Species: $('input[name=Species]:checked').val(),
+                            Size: $('input[name=Size]:checked').val(),
+                            Age: $('input[name=Age]:checked').val(),
+                            HairColor: $("#hairColorTextBox option:selected").text(),
+                            Sex: $('input[name=Sex]:checked').val(),
+                            Characteristic: $("#characteristicTextBox").val(),
+
+
                             LostDate: $("#lostDateTextBox").val(),
-
-
-
-                            //改
-                            //LostPlace: $('input[name=Sex]:checked').val(),
-                            //LostPlace: $("#hairColor option:selected").text(),
                             LostPlace: $("#lostPlaceTextBox").val(),
+                            ContactSex: $('input[name=ContactSex]:checked').val(),
+                            ContactMan: $("#contactManTextBox").val(),
+                            ContactTel: $("#contactTelTextBox").val(),
 
-
-                            //ContactMan: $("#contactManTextBox").val(),
-                            //ContactTel: $("#contactTelTextBox").val(),
-                            //ContactEmail: $("#contactEmailTextBox").val()
+                            CreateDate: debug.CreateDate,
+                            PlaceId: debug.PlaceId,
+                            State: 1
                         };
 
                     //    alert(debug[currentIndex].PetID);
@@ -550,17 +510,27 @@
                         // new
                         //alert("new");
                         var newItem = {
+
                             PetPhoto: $("#petPhotoTextBox").val(),
                             CreatorId: getCookie("uid"),
-                            //Species: $("#speciesTextBox").val(),
-                            //Variety: $("#varietyTextBox").val(),
-                            //Characteristic: $("#characteristicTextBox").val(),
-                            //CreateDate: $("#createDateTextBox").val(),
+                            Species: $('input[name=Species]:checked').val(),
+                            Size: $('input[name=Size]:checked').val(),
+                            Age: $('input[name=Age]:checked').val(),
+                            HairColor: $("#hairColorTextBox option:selected").text(),
+                            Sex: $('input[name=Sex]:checked').val(),
+                            Characteristic: $("#characteristicTextBox").val(),
+
+
                             LostDate: $("#lostDateTextBox").val(),
                             LostPlace: $("#lostPlaceTextBox").val(),
-                            //ContactMan: $("#contactManTextBox").val(),
-                            //ContactTel: $("#contactTelTextBox").val(),
-                            //ContactEmail: $("#contactEmailTextBox").val()
+                            ContactSex: $('input[name=ContactSex]:checked').val(),
+                            ContactMan: $("#contactManTextBox").val(),
+                            ContactTel: $("#contactTelTextBox").val(),
+
+                            //先亂設
+                            CreateDate: "2017-11-11",
+                            PlaceId: 1,
+                            State: 1
 
                         };
                         //alert($("#petPhotoTextBox").val());
