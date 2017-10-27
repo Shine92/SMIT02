@@ -1,3 +1,6 @@
+/*清空資料表資料*/
+TRUNCATE TABLE Members
+
 /*刪除資料表*/
 DROP TABLE Members
 

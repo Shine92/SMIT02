@@ -80,9 +80,11 @@ namespace FoundCity.Controllers {
                             AuthCode = newMember.AuthCode
                         })
             };
+            /*使用者名稱*/
 
+            string MailUserName = string.Format("{0} {1}",newMember.UserFirstName,newMember.UserLastName);
             /*把註冊資料填入驗證信範本*/
-            string MailBody = mailService.GetRegisterMailBody(tempMail, newMember.Account, ValidateUrl.ToString().Replace("%3F", "?"));
+            string MailBody = mailService.GetRegisterMailBody(tempMail, MailUserName, ValidateUrl.ToString().Replace("%3F", "?"));
             /*寄出驗證信*/
             mailService.SendRegisterMail(MailBody, newMember.Account);
             /*儲存註冊訊息*/
@@ -92,6 +94,12 @@ namespace FoundCity.Controllers {
         #endregion
         #region 忘記密碼
         public ActionResult Forget() {
+            return View();
+        }
+        #endregion
+        #region 接收驗證信連結傳進來的
+        public ActionResult EmailValidate(string UserName,string AuthCode) {
+           TempData["EmailValidate"] = memberService.EmailVlidate(UserName, AuthCode);
             return View();
         }
         #endregion

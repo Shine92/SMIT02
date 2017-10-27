@@ -10,7 +10,7 @@ namespace FoundCity.Models {
 
         NewPetEntities db = new NewPetEntities();
 
-        #region 註冊會員
+        #region 註冊會員 OK
         public void Register(Member newMember) {
             /*密碼加密 1026 10:13測試*/
             newMember.Password = HasPassword(newMember.Password);
@@ -20,7 +20,7 @@ namespace FoundCity.Models {
             db.SaveChanges();
         }
         #endregion
-        #region 密碼加密 SHA1
+        #region 密碼加密 SHA1 OK
         public string HasPassword(string password) {
             /*定義SHA1的Hash物件*/
             SHA1 sha1 = new SHA1CryptoServiceProvider();
@@ -43,18 +43,34 @@ namespace FoundCity.Models {
             return result;
         }
         #endregion
-        #region 信箱驗證
+        #region 信箱驗證 OK
         public string EmailVlidate(string Account, string AuthCode) {
-            /*取得該筆帳號資料*/
-            Member VlidateMember = db.Members.Find(Account);
+
+            /*宣告變數存放會員驗證碼*/
+            string VlidateAuthCode = string.Empty;
+
+            /*取得該筆帳號*/
+            var query = from o in db.Members
+                       where o.Account == Account
+                       select o;
+            /*取得會員驗證碼*/
+            foreach (var item in query) {
+                VlidateAuthCode = item.AuthCode;
+            }
+            //Member VlidateMember = db.Members.Find(Account);
+            /*錯誤 1027 14:00*/
+            //db.Entry(Member).State == System.Data.Entity.EntityState.Modified;
             /*驗證後的回傳訊息*/
             string VlidateStr = string.Empty;
             /*判斷該筆帳號有無驗證碼*/
-            if (VlidateMember.AuthCode != null) {
+            if (VlidateAuthCode != null) {
                 /*判斷驗證碼正確*/
-                if (VlidateMember.AuthCode == AuthCode) {
+                if (VlidateAuthCode == AuthCode) {
                     /*將資料庫中的驗證碼設為空*/
-                    VlidateMember.AuthCode = string.Empty;
+                    foreach(var item in query) {
+                        item.AuthCode = string.Empty;
+                    }
+                    /*存回資料庫*/
                     db.SaveChanges();
                     VlidateStr = "帳號信箱驗證成功,現在可以登入了！";
                 } else {
