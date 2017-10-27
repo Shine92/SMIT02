@@ -261,6 +261,7 @@
     <Content Include="Views\Pet\Index.cshtml" />
     <Content Include="Views\Pet\MemberFindPet.cshtml" />
     <Content Include="Views\Pet\YCreateFindPet.cshtml" />
+    <Content Include="Views\Shared\_LayoutMember.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

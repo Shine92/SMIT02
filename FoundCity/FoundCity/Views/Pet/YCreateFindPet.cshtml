@@ -2,7 +2,8 @@
 @model FindPet
 @{
     ViewBag.Title = "YCreateFindPet";
-    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+    //Layout = "~/Views/Shared/_LayoutMember.cshtml";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
 }
 
 @*行事曆.accordion*@
@@ -16,7 +17,9 @@
 
 
 <div class="container">
-    <div><button type="button" id="addFindPetButton" class="btn btn-default">新增</button></div><br />
+    <br />
+    <div><button type="button" id="addFindPetButton" class="btn btn-default">新增</button></div>
+
     <div class="row" id="findPetList">
 
         @*<div class="col-sm-3">
@@ -38,29 +41,9 @@
                     @*<div class="col-sm-9">test</div>*@
                     <div class="col-sm-2 pull-right">
                         <img id='petphoto' class='img-thumbnail petphoto' alt='' width='120' height='180'>
-                        @*<h3>*@
-                        @*<label for="petPhotoTextBox">
-                                <span class="glyphicon glyphicon-eye-close"></span>
-                                上傳圖片
-                            </label>
-
-                            <input type="text"
-                                   id="petPhotoTextBox"
-                                   class="form-control"
-                                   placeholder="請輸入檔名" />*@
-                        @*</h3>*@
-                    </div>
-
-                    @*<div class="col-sm-3"></div>*@
-
-                    <div class="col-sm-5">
                         <h3>
                             <label for="petPhotoTextBox">
-                                <span class="glyphicon glyphicon-eye-close"></span>
-                                上傳圖片
-                            </label>
-
-                            <label id="petPhotoLabel">
+                                @*<span class="glyphicon glyphicon-eye-close"></span>*@
                                 上傳圖片
                             </label>
 
@@ -70,79 +53,102 @@
                                    @*value="@TempData["PetPhoto"]"*@
                                    placeholder="請輸入檔名" />
                             <input type="file" id="PetPhoto" name="PetPhoto" class="form-control" />
-
                         </h3>
                     </div>
 
+                    @*<div class="col-sm-3"></div>*@
+
+                    @*<div class="col-sm-5">
+                            <h3>
+                                <label for="petPhotoTextBox">
+                                    <span class="glyphicon glyphicon-eye-close"></span>
+                                    上傳圖片
+                                </label>
+
+                                <label id="petPhotoLabel">
+                                    上傳圖片
+                                </label>
+
+                                <input type="hidden"
+                                       id="petPhotoTextBox"
+                                       class="form-control"
+                                       placeholder="請輸入檔名" />
+                                <input type="file" id="PetPhoto" name="PetPhoto" class="form-control" />
+
+                            </h3>
+                        </div>*@
+
                     <div class="col-sm-5">
+                        @*<div class="col-sm-5">*@
                         <h3>
 
-                            <label for="SpeciesTextBox">
+                            <label for="speciesTextBox">
                                 <span class="glyphicon glyphicon-time"></span>
                                 物種:
-                            </label><br>
+                            </label>
 
                             <input type="radio" name="Species" value="狗" checked> 狗
                             <input type="radio" name="Species" value="貓"> 貓
                             <input type="radio" name="Species" value="其他"> 其他
 
                         </h3>
-                    </div>
+                        @*</div>*@
 
-                    @*<div class="col-sm-2"></div>*@
+                        @*<div class="col-sm-2"></div>*@
 
-                    <div class="col-sm-5">
+                        @*<div class="col-sm-5">*@
                         <h3>
 
-                            <label for="SizeTextBox">
+                            <label for="sizeTextBox">
                                 <span class="glyphicon glyphicon-time"></span>
                                 體型:
-                            </label><br>
+                            </label>
 
                             <input type="radio" name="Size" value="小型" checked> 小型
                             <input type="radio" name="Size" value="中型"> 中型
                             <input type="radio" name="Size" value="大型"> 大型
 
                         </h3>
-                    </div>
+                        @*</div>*@
 
-                    <div class="col-sm-3">
+                        @*<div class="col-sm-5">*@
                         <h3>
 
-                            <label for="AgeTextBox">
+                            <label for="sexTextBox">
+                                <span class="glyphicon glyphicon-time"></span>
+                                性別:
+                            </label>
+
+                            <input type="radio" name="Sex" value="公" checked> 公
+                            <input type="radio" name="Sex" value="母"> 母
+                            <input type="radio" name="Sex" value="未知"> 未知
+
+                        </h3>
+                        @*</div>*@
+
+                        @*<div class="col-sm-5">*@
+                        <h3>
+
+                            <label for="ageTextBox">
                                 <span class="glyphicon glyphicon-time"></span>
                                 年紀:
-                            </label><br>
+                            </label>
 
                             <input type="radio" name="Age" value="成年" checked> 成年
                             <input type="radio" name="Age" value="幼年"> 幼年
 
                         </h3>
-                    </div>
+                        @*</div>*@
 
-                    <div class="col-sm-2">
+                        @*<div class="col-sm-5">*@
                         <h3>
 
-                            <label for="SexTextBox">
-                                <span class="glyphicon glyphicon-time"></span>
-                                性別:
-                            </label><br>
-
-                            <input type="radio" name="Sex" value="公" checked> 公
-                            <input type="radio" name="Sex" value="母"> 母
-
-                        </h3>
-                    </div>
-
-                    <div class="col-sm-5">
-                        <h3>
-
-                            <label for="HairColorTextBox">
+                            <label for="hairColorTextBox">
                                 <span class="glyphicon glyphicon-time"></span>
                                 毛色:
-                            </label><br>
+                            </label>
 
-                            <select class="form-control" id="HairColor" name="HairColor">
+                            <select class="" id="hairColor" name="HairColor">
                                 <option value="白色">白色</option>
                                 <option value="黑色">黑色</option>
                                 <option value="棕色">棕色</option>
@@ -152,11 +158,25 @@
                             </select>
 
                         </h3>
+                        @*</div>*@
+
+                        @*<div class="col-sm-5">*@
+                        <h3>
+                            <label for="characteristicTextBox">
+                                <span class="glyphicon glyphicon-bullhorn"></span>
+                                備註
+                            </label>
+                            <input type="text"
+                                   id="characteristic"
+                                   class="form-control"
+                                   placeholder="備註" />
+                        </h3>
+                        @*</div>*@
+
                     </div>
-
-
-
                     <div class="col-sm-5">
+
+                        @*<div class="col-sm-5">*@
                         <h3>
                             <label for="lostDateTextBox">
                                 <span class="glyphicon glyphicon-time"></span>
@@ -168,35 +188,88 @@
                                    class="form-control"
                                    placeholder="yyyy-mm-dd 例如: 2017-05-20" />
                         </h3>
-                    </div>
-                    <div class="col-sm-5">
+                        @*</div>*@
+
+                        @*<div class="col-sm-5">*@
                         <h3>
                             <label for="lostPlaceTextBox">
                                 <span class="glyphicon glyphicon-bullhorn"></span>
                                 走失地點
-                            </label>
+                            </label><br>
+                            <select class="" id="lostPlace1" name="LostPlace1">
+                                <option value="台北市">台北市</option>
+                                <option value="台中市">台中市</option>
+                                <option value="彰化縣">彰化縣</option>
+                                <option value="台南市">台南市</option>
+                                <option value="高雄市">高雄市</option>
+                                <option value="其他">其他</option>
+                            </select>
+                            <select class="" id="lostPlace2" name="LostPlace2">
+                                <option value="city1">city1</option>
+                                <option value="city2">city2</option>
+                                <option value="city3">city3</option>
+                            </select>
+                            <select class="" id="lostPlace3" name="LostPlace3">
+                                <option value="road1">road1</option>
+                                <option value="road2">road2</option>
+                                <option value="road3">road3</option>
+                            </select>
                             <input type="text"
                                    id="lostPlaceTextBox"
                                    class="form-control"
                                    placeholder="走失地點" />
                         </h3>
+                        @*</div>*@
+
+                        @*<div class="col-sm-5">*@
+                        <h3>
+
+                            <label for="contactSexTextBox">
+                                <span class="glyphicon glyphicon-time"></span>
+                                聯絡人性別:
+                            </label>
+
+                            <input type="radio" name="ContactSex" value="男性" checked> 男性
+                            <input type="radio" name="ContactSex" value="女性"> 女性
+
+                        </h3>
+                        @*</div>*@
+
+                        @*<div class="col-sm-5">*@
+                        <h3>
+                            <label for="contactManTextBox">
+                                <span class="glyphicon glyphicon-time"></span>
+                                聯絡人
+                            </label>
+
+                            <input type="text"
+                                   id="contactManTextBox"
+                                   class="form-control"
+                                   placeholder="聯絡人" />
+                        </h3>
+                        @*</div>*@
+
+                        @*<div class="col-sm-5">*@
+                        <h3>
+                            <label for="contactManTextBox">
+                                <span class="glyphicon glyphicon-time"></span>
+                                聯絡人電話
+                            </label>
+
+                            <input type="text"
+                                   id="contactManTextBox"
+                                   class="form-control"
+                                   placeholder="xx-xxxxxxx 例如: 04-1234567" />
+                        </h3>
+                        @*</div>*@
+
                     </div>
 
-                    <div class="col-sm-5">
-                        <h3>
-                            <label for="CharacteristicTextBox">
-                                <span class="glyphicon glyphicon-bullhorn"></span>
-                                備註
-                            </label>
-                            <input type="text"
-                                   id="Characteristic"
-                                   class="form-control"
-                                   placeholder="備註" />
-                        </h3>
-                    </div>
-                    <div class="col-sm-5"></div>
+
+
+                    @*<div class="col-sm-5"></div>*@
                     @*<div class="pull-right col-sm-9"></div>*@
-                    <div class="pull-right col-sm-3">
+                    <div class="pull-right col-sm-2">
                         <button type="submit"
                                 id="okButton"
                                 class="btn btn-success">
@@ -238,6 +311,8 @@
 <script>
         $("#lostDateTextBox").datepicker({ dateFormat: "yy-mm-dd" });
                 $(function () {
+                    //comMemberBtn("新", '');
+                    //comMemberBtn("新增");
                     loadAndRefreshUI();
                     //$("#debug").text("OK");
                     $("#accordion").accordion({ header: "h4" });
@@ -254,6 +329,21 @@
 
                     alert(getCookie("findPetBtn"));
                 })
+
+                //組合memeber專區 button, 在LayoutMember的 ul 有加 id="memberTab_ul
+                //function comMemberBtn(btn, btn_url) {
+                //    var $li = $("<li id='addFindPetButton'></li>");
+                //    $li.addClass("pull-right");
+                //    $li.append('<a href='+btn_url+'>'+btn+'</a>');
+                //    $li.appendTo("#memberTab_ul");
+                //}
+                //function comMemberBtn(btn) {
+                //    var $li = $("<li></li>");
+                //    $li.addClass("pull-right");
+                //    $li.append('<a>' + btn + '</a>');
+                //    $li.appendTo("#memberTab_ul");
+                //}
+
 
 
                 //預覽
@@ -297,8 +387,8 @@
 
                             $('input[name=Sex][value="' + data.Sex + '"]').prop('checked', true);
                             //改
-                            $('#HairColor option[value="' + data.HairColor + '"]').prop('selected', true);
-                            //$("#HairColor option:selected").text();
+                            $('#hairColor option[value="' + data.HairColor + '"]').prop('selected', true);
+                            //$("#hairColor option:selected").text();
 
                             $("#petPhotoLabel").text(data.PetPhoto);
                             $("#petPhotoTextBox").val(data.PetPhoto);
@@ -369,7 +459,11 @@
 
                 //新增
                 $("#addFindPetButton").click(function () {
+
                     currentIndex = -1;
+                    setCookie("findPetBtn", currentIndex, 1);
+                    alert(currentIndex);
+
                     $("#petphoto").empty();
                     $("#showImg").empty();
                     $("#petPhotoTextBox").val("");
@@ -416,7 +510,7 @@
 
                             //改
                             //LostPlace: $('input[name=Sex]:checked').val(),
-                            //LostPlace: $("#HairColor option:selected").text(),
+                            //LostPlace: $("#hairColor option:selected").text(),
                             LostPlace: $("#lostPlaceTextBox").val(),
 
 
