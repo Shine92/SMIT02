@@ -10,6 +10,7 @@ function initLoad() {
     //rDetect();
     //rScrollRule();
     initDistance();
+    //btnClean();
 }
 
 function btnClean() {
@@ -274,6 +275,7 @@ function initDetailed(myMap, data, aryRow, num, maxNum) {
                     aryRow[num]["tel"] = place.formatted_phone_number;
                     aryRow[num]["address"] = place.formatted_address;
                     aryRow[num]["rating"] = place.rating;
+                    aryRow[num]["dist"] = "";
                     break;
                 default:
                     break;
@@ -314,14 +316,14 @@ function initDistance() {
 
 //----------------------------------------------------------------------------------------------
 
-function rADD() {
-    btnClean();
-}
+//function rADD() {
+//    btnClean();
+//}
 
-function rLower() {
-    btnClean();
-}
+//function rLower() {
+//    btnClean();
+//}
 
-function rRE() {
-    btnClean();
-}
+//function rRE() {
+//    btnClean();
+//}

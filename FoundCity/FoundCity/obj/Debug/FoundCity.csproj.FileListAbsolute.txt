@@ -1,205 +1,69 @@
-<<<<<<< HEAD
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\ApplicationInsights.config
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\csc.exe
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CodeAnalysis.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CSharp.Core.targets
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.VisualBasic.Core.targets
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\System.Collections.Immutable.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\System.Reflection.Metadata.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\vbc.exe
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\VBCSCompiler.exe
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\VBCSCompiler.exe.config
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\FoundCity.dll.config
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\FoundCity.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\FoundCity.pdb
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\EntityFramework.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\EntityFramework.SqlServer.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.Agent.Intercept.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.DependencyCollector.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.PerfCounterCollector.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.ServerTelemetryChannel.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.Web.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.WindowsServer.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.ApplicationInsights.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.Web.Infrastructure.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Newtonsoft.Json.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Net.Http.Formatting.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Helpers.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.WebHost.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Mvc.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Razor.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Deployment.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Razor.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\EntityFramework.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\EntityFramework.SqlServer.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.DependencyCollector.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.ServerTelemetryChannel.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.Web.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.WindowsServer.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.ApplicationInsights.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Razor.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Deployment.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Razor.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Helpers.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Mvc.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Newtonsoft.Json.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Net.Http.Formatting.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.WebHost.xml
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\EntityFramework.resources.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Razor.resources.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Webpages.resources.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Webpages.Deployment.resources.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Webpages.Razor.resources.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Helpers.resources.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Mvc.resources.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Net.Http.Formatting.resources.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.resources.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.WebHost.resources.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.dll
-D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.pdb
-=======
-D:\SMIT02\FoundCity\FoundCity\bin\ApplicationInsights.config
-D:\SMIT02\FoundCity\FoundCity\bin\roslyn\csc.exe
-D:\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-D:\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-D:\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CodeAnalysis.dll
-D:\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-D:\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CSharp.Core.targets
-D:\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.VisualBasic.Core.targets
-D:\SMIT02\FoundCity\FoundCity\bin\roslyn\System.Collections.Immutable.dll
-D:\SMIT02\FoundCity\FoundCity\bin\roslyn\System.Reflection.Metadata.dll
-D:\SMIT02\FoundCity\FoundCity\bin\roslyn\vbc.exe
-D:\SMIT02\FoundCity\FoundCity\bin\roslyn\VBCSCompiler.exe
-D:\SMIT02\FoundCity\FoundCity\bin\roslyn\VBCSCompiler.exe.config
-D:\SMIT02\FoundCity\FoundCity\bin\FoundCity.dll.config
-D:\SMIT02\FoundCity\FoundCity\bin\FoundCity.dll
-D:\SMIT02\FoundCity\FoundCity\bin\FoundCity.pdb
-D:\SMIT02\FoundCity\FoundCity\bin\EntityFramework.dll
-D:\SMIT02\FoundCity\FoundCity\bin\EntityFramework.SqlServer.dll
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.Agent.Intercept.dll
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.DependencyCollector.dll
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.PerfCounterCollector.dll
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.ServerTelemetryChannel.dll
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.Web.dll
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.WindowsServer.dll
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.ApplicationInsights.dll
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.Web.Infrastructure.dll
-D:\SMIT02\FoundCity\FoundCity\bin\Newtonsoft.Json.dll
-D:\SMIT02\FoundCity\FoundCity\bin\System.Net.Http.Formatting.dll
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Helpers.dll
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.dll
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.WebHost.dll
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Mvc.dll
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Razor.dll
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Deployment.dll
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.dll
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Razor.dll
-D:\SMIT02\FoundCity\FoundCity\bin\EntityFramework.xml
-D:\SMIT02\FoundCity\FoundCity\bin\EntityFramework.SqlServer.xml
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.DependencyCollector.xml
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.ServerTelemetryChannel.xml
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.Web.xml
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.WindowsServer.xml
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.ApplicationInsights.xml
-D:\SMIT02\FoundCity\FoundCity\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Razor.xml
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.xml
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Deployment.xml
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Razor.xml
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Helpers.xml
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Mvc.xml
-D:\SMIT02\FoundCity\FoundCity\bin\Newtonsoft.Json.xml
-D:\SMIT02\FoundCity\FoundCity\bin\System.Net.Http.Formatting.xml
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.xml
-D:\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.WebHost.xml
-D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\EntityFramework.resources.dll
-D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Razor.resources.dll
-D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Webpages.resources.dll
-D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Webpages.Deployment.resources.dll
-D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Webpages.Razor.resources.dll
-D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Helpers.resources.dll
-D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Mvc.resources.dll
-D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Net.Http.Formatting.resources.dll
-D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.resources.dll
-D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.WebHost.resources.dll
-D:\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.dll
-D:\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.pdb
-D:\Github\SMIT02\FoundCity\FoundCity\bin\ApplicationInsights.config
-D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\csc.exe
-D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CodeAnalysis.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CSharp.Core.targets
-D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.VisualBasic.Core.targets
-D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\System.Collections.Immutable.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\System.Reflection.Metadata.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\vbc.exe
-D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\VBCSCompiler.exe
-D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\VBCSCompiler.exe.config
-D:\Github\SMIT02\FoundCity\FoundCity\bin\FoundCity.dll.config
-D:\Github\SMIT02\FoundCity\FoundCity\bin\FoundCity.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\FoundCity.pdb
-D:\Github\SMIT02\FoundCity\FoundCity\bin\EntityFramework.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\EntityFramework.SqlServer.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.Agent.Intercept.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.DependencyCollector.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.PerfCounterCollector.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.ServerTelemetryChannel.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.Web.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.WindowsServer.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.ApplicationInsights.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.Web.Infrastructure.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Newtonsoft.Json.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Net.Http.Formatting.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Helpers.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.WebHost.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Mvc.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Razor.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Deployment.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Razor.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\EntityFramework.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\EntityFramework.SqlServer.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.DependencyCollector.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.ServerTelemetryChannel.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.Web.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.WindowsServer.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.ApplicationInsights.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Razor.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Deployment.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Razor.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Helpers.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Mvc.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\Newtonsoft.Json.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Net.Http.Formatting.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.WebHost.xml
-D:\Github\SMIT02\FoundCity\FoundCity\bin\zh-Hant\EntityFramework.resources.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Razor.resources.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Webpages.resources.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Webpages.Deployment.resources.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Webpages.Razor.resources.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Helpers.resources.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Mvc.resources.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Net.Http.Formatting.resources.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.resources.dll
-D:\Github\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.WebHost.resources.dll
-D:\Github\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.dll
-D:\Github\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.pdb
-D:\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csprojResolveAssemblyReference.cache
->>>>>>> f8e40ad20d3e2af9a668acbc9ab750c3ae864cd8
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\ApplicationInsights.config
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\csc.exe
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\System.Collections.Immutable.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\System.Reflection.Metadata.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\vbc.exe
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\VBCSCompiler.exe
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\VBCSCompiler.exe.config
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\FoundCity.dll.config
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\FoundCity.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\FoundCity.pdb
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\EntityFramework.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\EntityFramework.SqlServer.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.Agent.Intercept.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.DependencyCollector.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.Web.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.WindowsServer.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.ApplicationInsights.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.Web.Infrastructure.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Newtonsoft.Json.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Net.Http.Formatting.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Helpers.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.WebHost.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Mvc.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Razor.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Deployment.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Razor.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\EntityFramework.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\EntityFramework.SqlServer.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.DependencyCollector.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.Web.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.AI.WindowsServer.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.ApplicationInsights.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Razor.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Deployment.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Webpages.Razor.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Helpers.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Mvc.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\Newtonsoft.Json.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Net.Http.Formatting.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\System.Web.Http.WebHost.xml
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\EntityFramework.resources.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Razor.resources.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Webpages.resources.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Webpages.Deployment.resources.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Webpages.Razor.resources.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Helpers.resources.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Mvc.resources.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Net.Http.Formatting.resources.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.resources.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.WebHost.resources.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csprojResolveAssemblyReference.cache
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csproj.CoreCompileInputs.cache
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.dll
+E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.pdb
