@@ -16,6 +16,45 @@ namespace FoundCity.Controllers
     {
         private NewPetEntities db = new NewPetEntities();
 
+        //http://localhost:51664/api/FindPets?species=貓&size=中型&sex=母&hairColor=白色&age=成年
+        public List<FindPet> GetFindPets(string species, string size, string sex, string age, string hairColor) {
+            //List<FindPet> products = new List<FindPet>();
+
+            var query = from o in db.FindPets
+                        orderby o.PetId descending
+                        //where o.Species == species && (o.Size == size && (o.Sex == sex && (o.Age == age && o.HairColor == hairColor)))
+                        where ((species == "all") ? true : o.Species == species)
+                        && ((size == "all") ? true : o.Size == size)
+                        && ((sex == "all") ? true : o.Sex == sex)
+                        && ((age == "all") ? (true) : (o.Age == age))
+                        && ((hairColor == "all") ? (true) : (o.HairColor == hairColor))
+                        select o;
+
+            var viewData = query.ToList();
+            return viewData;
+
+            //hint: sql寫法
+            //var sql = "select* from user where 1 = 1";
+            //var s = "(o.Species == species)";
+
+            //var query = from o in db.FindPets
+            //            orderby o.PetId descending
+            //            where ((species == "all")? true : o.Species == species) 
+            //            && ((size == "all") ? true : o.Size == size)
+            //            && ((sex == "all") ? true : o.Sex == sex) 
+            //            && ((age == "all") ? true : o.Age == age) 
+            //            && ((hairColor == "all") ? true : o.HairColor == hairColor)
+            //            select o;
+
+            //var viewData = query.ToList();
+            //return viewData;
+        }
+
+        // GET: api/FindPets
+        //public IQueryable<FindPet> GetFindPets()
+        //{
+        //    return db.FindPets;
+        //}
         public List<FindPet> GetFindPets() {
             var query = from o in db.FindPets
                         orderby o.PetId descending
@@ -24,12 +63,6 @@ namespace FoundCity.Controllers
             var viewData = query.ToList();
             return viewData;
         }
-
-        // GET: api/FindPets
-        //public IQueryable<FindPet> GetFindPets()
-        //{
-        //    return db.FindPets;
-        //}
 
         // GET: api/FindPets/5
         [ResponseType(typeof(FindPet))]
@@ -43,6 +76,16 @@ namespace FoundCity.Controllers
 
             return Ok(findPet);
         }
+        //public FindPet Get(int id)
+        //{
+        //    //List<FindPet> products = new List<FindPet>();
+        //    var query = from o in db.FindPets
+        //                orderby o.PetId descending
+        //                select o;
+
+        //    var viewData = query.ToList();
+        //    return viewData.Find(p => p.PetId == id);
+        //}
 
         // PUT: api/FindPets/5
         [ResponseType(typeof(void))]
