@@ -28,7 +28,6 @@ namespace FoundCity.Models
         public virtual DbSet<FindMom> FindMoms { get; set; }
         public virtual DbSet<FindPet> FindPets { get; set; }
         public virtual DbSet<Member> Members { get; set; }
-        public virtual DbSet<rAddress> rAddresses { get; set; }
         public virtual DbSet<Street> Streets { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }

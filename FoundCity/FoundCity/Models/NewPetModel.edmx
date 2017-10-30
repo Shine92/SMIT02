@@ -64,14 +64,6 @@
           <Property Name="IsAdmin" Type="bit" Nullable="false" />
           <Property Name="UserStatus" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="rAddress">
-          <Key>
-            <PropertyRef Name="rID" />
-          </Key>
-          <Property Name="rID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="rCounty" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="rArea" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="Street">
           <Key>
             <PropertyRef Name="id" />
@@ -96,7 +88,6 @@
           <EntitySet Name="FindMom" EntityType="Self.FindMom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FindPet" EntityType="Self.FindPet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="rAddress" EntityType="Self.rAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Street" EntityType="Self.Street" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -163,14 +154,6 @@
           <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
           <Property Name="UserStatus" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="rAddress">
-          <Key>
-            <PropertyRef Name="rID" />
-          </Key>
-          <Property Name="rID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="rCounty" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="rArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="Street">
           <Key>
             <PropertyRef Name="id" />
@@ -195,7 +178,6 @@
           <EntitySet Name="FindMoms" EntityType="Self.FindMom" />
           <EntitySet Name="FindPets" EntityType="Self.FindPet" />
           <EntitySet Name="Members" EntityType="Self.Member" />
-          <EntitySet Name="rAddresses" EntityType="Self.rAddress" />
           <EntitySet Name="Streets" EntityType="Self.Street" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
         </EntityContainer>
@@ -264,15 +246,6 @@
                 <ScalarProperty Name="AuthCode" ColumnName="AuthCode" />
                 <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
                 <ScalarProperty Name="UserStatus" ColumnName="UserStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="rAddresses">
-            <EntityTypeMapping TypeName="NewPetModel.rAddress">
-              <MappingFragment StoreEntitySet="rAddress">
-                <ScalarProperty Name="rID" ColumnName="rID" />
-                <ScalarProperty Name="rCounty" ColumnName="rCounty" />
-                <ScalarProperty Name="rArea" ColumnName="rArea" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
