@@ -1,4 +1,5 @@
-﻿@using FoundCity.Models;
+﻿@*post . put function無執行(error)*@
+@using FoundCity.Models;
 @model FindPet
 @{
     ViewBag.Title = "YCreateFindPet";
@@ -339,7 +340,7 @@
 <script>
         $("#lostDateTextBox").datepicker({ dateFormat: "yy-mm-dd" });
                 $(function () {
-
+                    alert(mydate());
                     //mydate();
                     //comMemberBtn("新", '');
                     //comMemberBtn("新增");
@@ -532,13 +533,14 @@
                             //data: updateData,
                             contentType: "application/json;charset=utf-8",
 
+                            //function無執行(error)
                             success: function () {
                                 //loadAndRefreshUI();
-                                alert("edit Done");
+                                //alert("edit Done");
                                 window.location.href = 'MemberFindPet';
                             },
                             error: function (response) {
-                                document.write(response.responseText);
+                                //document.write(response.responseText);
                             }
                         });
 
@@ -570,26 +572,28 @@
 
                             //先亂設
 
-                            CreateDate: "2017-11-11",
+                            CreateDate: mydate(),
                             PlaceId: 1,
                             State: 1
 
                         };
                         //alert($("#petPhotoTextBox").val());
-
+                        debugger;
                         $.ajax({
                             url: '/api/FindPets',
                             type: 'POST',
                             data: JSON.stringify(newItem),
                             contentType: "application/json;charset=utf-8",
+                            
+                            //function無執行(error)
                             success: function (data) {
                                 //refreshNewsUI()
                                 //console.log("new1");
-                                alert("new");
-                                //window.location.href = 'MemberFindPet';
+                                //alert("success new");
+                                window.location.href = 'MemberFindPet';
                             },
                             error: function () {
-                                alert("error");
+                                //alert("error error");
                                 //console.log("error");
                             }
                         });

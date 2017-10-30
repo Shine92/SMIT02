@@ -28,9 +28,11 @@ namespace FoundCity.Controllers
             try {
                 string UploadedPathFileName = Server.MapPath("~/images") + "\\" + file1.FileName;
                 file1.SaveAs(UploadedPathFileName);
-                return View();
+                return RedirectToAction("MemberFindPet", "Pet");
+
                 //測試先導原頁
-                //return RedirectToAction("MemberFindPet", "Pet");
+                //return View();
+
             } catch (System.IO.DirectoryNotFoundException) {
                 return View();
             }
