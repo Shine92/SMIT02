@@ -63,15 +63,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="rAddresses">
-      <EntityTypeMapping TypeName="NewPetModel.rAddress">
-        <MappingFragment StoreEntitySet="rAddress">
-          <ScalarProperty Name="rID" ColumnName="rID" />
-          <ScalarProperty Name="rCounty" ColumnName="rCounty" />
-          <ScalarProperty Name="rArea" ColumnName="rArea" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Streets">
       <EntityTypeMapping TypeName="NewPetModel.Street">
         <MappingFragment StoreEntitySet="Street">

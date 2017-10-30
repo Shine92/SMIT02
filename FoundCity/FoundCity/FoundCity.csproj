@@ -198,6 +198,7 @@
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\PetController.cs" />
     <Compile Include="Controllers\RadarController.cs" />
+    <Compile Include="Controllers\StreetController.cs" />
     <Compile Include="Controllers\YMemberFindPetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -228,12 +229,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NewPetModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\rAddress.cs">
-      <DependentUpon>NewPetModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Street.cs">
       <DependentUpon>NewPetModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StreetModel.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>NewPetModel.tt</DependentUpon>
     </Compile>
@@ -274,6 +273,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Address\" />
+    <Folder Include="Views\Street\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

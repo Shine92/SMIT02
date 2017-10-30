@@ -59,14 +59,6 @@
     <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
     <Property Name="UserStatus" Type="Boolean" Nullable="false" />
   </EntityType>
-  <EntityType Name="rAddress">
-    <Key>
-      <PropertyRef Name="rID" />
-    </Key>
-    <Property Name="rID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="rCounty" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="rArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-  </EntityType>
   <EntityType Name="Street">
     <Key>
       <PropertyRef Name="id" />
@@ -91,7 +83,6 @@
     <EntitySet Name="FindMoms" EntityType="Self.FindMom" />
     <EntitySet Name="FindPets" EntityType="Self.FindPet" />
     <EntitySet Name="Members" EntityType="Self.Member" />
-    <EntitySet Name="rAddresses" EntityType="Self.rAddress" />
     <EntitySet Name="Streets" EntityType="Self.Street" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
   </EntityContainer>
