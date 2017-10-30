@@ -36,7 +36,7 @@ namespace FoundCity.Controllers {
             //if (User.Identity.IsAuthenticated) {
             //    return RedirectToAction("Index","Home");
             //}
-            return View();
+            return View(MemberData);
         }
 
         [HttpPost]
@@ -89,7 +89,7 @@ namespace FoundCity.Controllers {
             mailService.SendRegisterMail(MailBody, newMember.Account);
             /*儲存註冊訊息*/
             TempData["RegisterState"] = "註冊成功,請去收信驗證Email";
-            return Content("註冊成功！");
+            return View("RegisterResult",MemberData);
         }
         #endregion
         #region 忘記密碼
@@ -100,6 +100,11 @@ namespace FoundCity.Controllers {
         #region 接收驗證信連結傳進來的
         public ActionResult EmailValidate(string UserName,string AuthCode) {
            TempData["EmailValidate"] = memberService.EmailVlidate(UserName, AuthCode);
+            return View();
+        }
+        #endregion
+        #region 註冊成功
+        public ActionResult RegisterResult() {
             return View();
         }
         #endregion
