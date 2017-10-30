@@ -339,6 +339,8 @@
 <script>
         $("#lostDateTextBox").datepicker({ dateFormat: "yy-mm-dd" });
                 $(function () {
+
+                    //mydate();
                     //comMemberBtn("新", '');
                     //comMemberBtn("新增");
                     loadAndRefreshUI();
@@ -358,6 +360,13 @@
                     //第幾個PetId
                     //alert(getCookie("findPetBtn"));
                 })
+
+                function mydate() {
+                    var today = new Date();
+                    //var todayformat = today.toISOString().substring(0, 10);
+                    var todayformat = today.toISOString().slice(0, 10);
+                    return todayformat;
+                }
 
                 //組合memeber專區 button, 在LayoutMember的 ul 有加 id="memberTab_ul
                 //function comMemberBtn(btn, btn_url) {
@@ -560,6 +569,7 @@
                             ContactTel: $("#contactTelTextBox").val(),
 
                             //先亂設
+
                             CreateDate: "2017-11-11",
                             PlaceId: 1,
                             State: 1
@@ -574,18 +584,16 @@
                             contentType: "application/json;charset=utf-8",
                             success: function (data) {
                                 //refreshNewsUI()
+                                //console.log("new1");
                                 alert("new");
-                                window.location.href = 'MemberFindPet';
-                                //$("#petPhotoTextBox").val("")
+                                //window.location.href = 'MemberFindPet';
                             },
                             error: function () {
                                 alert("error");
+                                //console.log("error");
                             }
                         });
 
-
-                        //newsList.push(newItem);
-                        //showToast("Information", "New Form Closed");
                     }
                 })
 
