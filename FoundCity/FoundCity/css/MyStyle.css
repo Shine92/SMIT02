@@ -111,6 +111,7 @@
     padding: 5em 0em 5em 0em;
     height: auto;
     background: #e6e6e6;
+    height:650px;
 }
 
 .container .member_Register {
@@ -161,7 +162,24 @@
     color: red;
 }
 
+.container .member_RegisterResult {
+    width: 600px;
+    height: auto;
+    margin: auto;
+    border: 0px solid black;
+    padding: 0px 0px 0px 0px;
+}
 
+.member_RegisterResultPage{
+    position: relative;
+    overflow: hidden;
+    padding: 5em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+    height: 630px;
+}
+
+/*loading效果 10/30 尚未使用*/
 .glyphicon-refresh-animate {
     -animation: spin .7s infinite linear;
     -webkit-animation: spin2 .7s infinite linear;
@@ -176,6 +194,7 @@
     from { transform: scale(1) rotate(0deg);}
     to { transform: scale(1) rotate(360deg);}
 }
+
 
 
 /*********************************************************************************/

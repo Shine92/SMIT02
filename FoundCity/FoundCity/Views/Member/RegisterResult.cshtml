@@ -1,18 +1,17 @@
-﻿@using FoundCity.Models;
-@model Member
-@{
+﻿@{
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 }
 
-<div id="" class="member_ForgetPage">
+<div id="" class="member_RegisterResultPage">
     <div class="container">
-        <div class="member_forget">
-            <div class="col-sm-12 forgetTitle">
-                <h1>註冊訊息</h1>
-            </div>
-            <div class="col-sm-12">
-                <p>註冊成功,請去收信驗證Email</p>
-                <p>@TempData["RegisterState"]</p>
+        <div class="member_RegisterResult">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">訊息</div>
+                        <div class="panel-body">@TempData["RegisterState"]</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
