@@ -10,11 +10,8 @@ window.onload = initLoad;
 function initLoad() {
     //rDetect();
     //rScrollRule();
-<<<<<<< HEAD
-    initDistance();
+    //initDistance();
     //btnClean();
-=======
->>>>>>> f171976ddbc8f7150cbbb669e1d0e0fa4b36c94c
 }
 
 function btnClean() {
@@ -276,13 +273,6 @@ function initDetail(data, num, maxNum) {
         }, function (place, status) {
             switch (status) {
                 case google.maps.places.PlacesServiceStatus.OK:
-<<<<<<< HEAD
-                    aryRow[num]["name"] = place.name;
-                    aryRow[num]["tel"] = place.formatted_phone_number;
-                    aryRow[num]["address"] = place.formatted_address;
-                    aryRow[num]["rating"] = place.rating;
-                    aryRow[num]["dist"] = "";
-=======
 
                     var isNow = ((place["opening_hours"]) != null ? ((place["opening_hours"]["open_now"]) ? "1" : "0") : "2");
 
@@ -294,7 +284,6 @@ function initDetail(data, num, maxNum) {
                         now: isNow
                     };
                     initDetail(data, num + 1, maxNum);
->>>>>>> f171976ddbc8f7150cbbb669e1d0e0fa4b36c94c
                     break;
                 default:
                     alert(num);
@@ -343,19 +332,6 @@ function initDistance(myMap, data, aryRow, num, maxNum) {
 
 //----------------------------------------------------------------------------------------------
 
-<<<<<<< HEAD
-//function rADD() {
-//    btnClean();
-//}
-
-//function rLower() {
-//    btnClean();
-//}
-
-//function rRE() {
-//    btnClean();
-//}
-=======
 function rADD() {
     //btnClean();
     $.ajax({
@@ -374,9 +350,36 @@ function rADD() {
 
 function rLower() {
     //btnClean();
+    $.ajax({
+        url: "/Street/Area",
+        type: "POST",
+        data: {
+            city:"台中市"
+        },
+        success: function (data) {
+            alert(JSON.stringify(data));
+        },
+        error: function (error) {
+            document.write(error.responseText);
+        }
+
+    });
 }
 
 function rRE() {
     //btnClean();
+    $.ajax({
+        url: "/Street/Road",
+        type: "POST",
+        data: {
+            code: "100"
+        },
+        success: function (data) {
+            alert(JSON.stringify(data));
+        },
+        error: function (error) {
+            document.write(error.responseText);
+        }
+
+    });
 }
->>>>>>> f171976ddbc8f7150cbbb669e1d0e0fa4b36c94c
