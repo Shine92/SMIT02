@@ -1,11 +1,16 @@
-﻿
+﻿@*搜尋缺地圖*@
 @{
     ViewBag.Title = "FindPet";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 }
 
 <script src="~/js/mycookie.js"></script>
 <link rel="stylesheet" href="~/css/MyStyle.css">
-
+<style type="text/css">
+    .selection_hidden {
+        display: none;
+    }
+</style>
 <div id="page">
     <div id="memberTab" class="container">
         <ul class="nav nav-tabs">
@@ -83,7 +88,7 @@
     <!-- /對話盒 end (Detail)-->
     @*.......................main.........................*@
 
-
+    @*<div class="selection" id="test" >TEST</div>*@
     <div class="container">
         <div>
             @*<button type="button" id="addFindPetButton" class="btn btn-default">新增</button>
@@ -91,21 +96,170 @@
                 <a href="" id="picks" class="btn btn-default btn-sm" role="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>*@
         </div><br />
 
-        <div class="row" id="findPetList">
+        <div id="selection">
+            <div class="col-sm-5">
+
+                <h3>
+
+                    <label for="speciesTextBox">
+                        <span class="glyphicon glyphicon-record"></span>
+                        物種:
+                    </label>
+
+                    <input type="radio" name="Species" value="all" checked> 全部
+                    <input type="radio" name="Species" value="狗"> 狗
+                    <input type="radio" name="Species" value="貓"> 貓
+                    <input type="radio" name="Species" value="其他"> 其他
+
+                </h3>
+
+                <h3>
+
+                    <label for="sizeTextBox">
+                        <span class="glyphicon glyphicon-record"></span>
+                        體型:
+                    </label>
+
+                    <input type="radio" name="Size" value="all" checked> 全部
+                    <input type="radio" name="Size" value="小型"> 小型
+                    <input type="radio" name="Size" value="中型"> 中型
+                    <input type="radio" name="Size" value="大型"> 大型
+
+                </h3>
+
+                <h3>
+
+                    <label for="sexTextBox">
+                        <span class="glyphicon glyphicon-record"></span>
+                        性別:
+                    </label>
+
+                    <input type="radio" name="Sex" value="all" checked> 全部
+                    <input type="radio" name="Sex" value="公"> 公
+                    <input type="radio" name="Sex" value="母"> 母
+                    <input type="radio" name="Sex" value="未知"> 未知
+
+                </h3>
+
+                <h3>
+
+                    <label for="ageTextBox">
+                        <span class="glyphicon glyphicon-record"></span>
+                        年紀:
+                    </label>
+
+                    <input type="radio" name="Age" value="all" checked> 全部
+                    <input type="radio" name="Age" value="成年"> 成年
+                    <input type="radio" name="Age" value="幼年"> 幼年
+
+                </h3>
+
+                <h3>
+
+                    <label for="hairColorTextBox">
+                        <span class="glyphicon glyphicon-record"></span>
+                        毛色:
+                    </label>
+
+                    <select class="" id="hairColorTextBox" name="HairColor">
+                        <option value="all">全部</option>
+                        <option value="白色">白色</option>
+                        <option value="黑色">黑色</option>
+                        <option value="棕色">棕色</option>
+                        <option value="黃色">黃色</option>
+                        <option value="虎斑">虎斑</option>
+                        <option value="其他">其他</option>
+                    </select>
+
+                </h3>
 
 
+            </div>
+            <div class="col-sm-5">
+
+                @*<h3>
+                        <label for="lostDateTextBox">
+                            <span class="glyphicon glyphicon-time"></span>
+                            走失日期
+                        </label>
+
+                        <input type="text"
+                               id="lostDateTextBox"
+                               class="form-control"
+                               placeholder="yyyy-mm-dd " />
+                    </h3>*@
+
+                <h3>
+                    <label for="lostPlaceTextBox">
+                        <span class="glyphicon glyphicon-map-marker"></span>
+                        走失地點
+                    </label><br>
+                    <select class="" id="lostPlace1" name="LostPlace1">
+                        <option value="all1">全部</option>
+                        <option value="台北市">台北市</option>
+                        <option value="台中市">台中市</option>
+                        <option value="彰化縣">彰化縣</option>
+                        <option value="台南市">台南市</option>
+                        <option value="高雄市">高雄市</option>
+                        <option value="其他">其他</option>
+                    </select>
+                    <select class="" id="lostPlace2" name="LostPlace2">
+                        <option value="all2">全部</option>
+                        <option value="city1">city1</option>
+                        <option value="city2">city2</option>
+                        <option value="city3">city3</option>
+                    </select>
+                    @*<select class="" id="lostPlace3" name="LostPlace3">
+                            <option value="road1">road1</option>
+                            <option value="road2">road2</option>
+                            <option value="road3">road3</option>
+                        </select>*@
+                    <input type="hidden"
+                           id="lostPlaceTextBoxS"
+                           class="form-control"
+                           placeholder="走失地點" />
+                </h3>
+
+            </div>
+
+
+            @*<div class="col-sm-2"></div>*@
+
+
+            <div class="col-sm-2">
+                <button type="submit"
+                        id="okButtonS"
+                        class="btn btn-success">
+                    開始搜尋
+                </button>
+                <button type="button"
+                        id="cancelButtonS"
+                        class="btn btn-default"
+                        data-dismiss="modal">
+                    取消
+                </button>
+
+                @*<a href="MemberFindPet" class="btn btn-default" role="button"><span class="glyphicon glyphicon-remove"></span>取消</a>*@
+            </div>
         </div>
+
+        @*<div class="row" id="findPetList">
+
+
+            </div>*@
 
         <div class="thirds clearfix" id="findAnimalList">
 
 
         </div>
 
+
         @*test*@
         @*<span class="pull-right"><button class="btn btn-info btn-xs editItem"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;<button class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span>*@
 
     </div>
     <div id="debug"></div>
+
 </div>
 <script>
                 $(function () {
@@ -114,6 +268,15 @@
 
                     //$("#debug").text("OK");
                     setCookie("uid", 3, 1);
+
+                    $("#picks").click(function () {
+                        $('#selection').removeClass('selection_hidden');
+                    })
+
+                    $("#cancelButtonS").click(function () {
+                        $('#selection').addClass('selection_hidden');
+                        loadAndRefreshUI();
+                    })
 
                 })
 
@@ -137,7 +300,9 @@
                     //    }
                     //    $("#resultTable").html(sRows);
                     //});
-                    $("#findPetList").empty();
+                    //$("#findPetList").empty();
+
+                    $("#findAnimalList").empty();
 
                     $.ajax({
                         type: "get",
@@ -152,8 +317,8 @@
                                 count += 1;
                                 //alert(obj.LostDate)
                                 //var newsText1 = obj.LostDate + "\r\n [" + obj.LostPlace + "]";
-                                var tRows1 = "<h2>&nbsp;" + obj.LostDate + "</h2>";
-                                var tRows2 = "<p>&nbsp;" + obj.LostPlace + "</p>";
+                                var tRows1 = "<h3>&nbsp;" + obj.LostDate + "</h3>";
+                                var tRows2 = "<p>&nbsp;[" + obj.LostPlace + "]</p>";
                                 //var sRows = "<img src='../image/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='100%' height='80%'>"
                                 var sRows = "<img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre'>"
 
@@ -236,6 +401,84 @@
                 }
 
 
+                //搜尋確認BUTTON
+                $("#okButtonS").click(function () {
+                    //$("#findPetList").empty();
+                    $("#findAnimalList").empty();
+                    //alert($("#hairColorTextBox option:selected").val());
+                    $.ajax({
+                        type: "get",
+                        url: '/api/FindPets?'
+                            + 'species=' + $('input[name=Species]:checked').val()
+                            + '&size=' + $('input[name=Size]:checked').val()
+                            + '&sex=' + $('input[name=Sex]:checked').val()
+                            + '&hairColor=' + $("#hairColorTextBox option:selected").val()
+                            + '&age=' + $('input[name=Age]:checked').val(),
+                        dataType: "json",
+                        success: function (data) {
+                            debug = data;
+                            //alert(data);
+                            var count = 0;
+
+                            $.each(data, function (index, obj) {
+                                count += 1;
+                                //alert(obj.LostDate)
+                                //var newsText1 = obj.LostDate + "\r\n [" + obj.LostPlace + "]";
+                                var tRows1 = "<h3>&nbsp;" + obj.LostDate + "</h3>";
+                                var tRows2 = "<p>&nbsp;[" + obj.LostPlace + "]</p>";
+                                //var sRows = "<img src='../image/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='100%' height='80%'>"
+                                var sRows = "<img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre'>"
+
+                                var $div = $("<div></div>")
+                                            //.text(newsText1)
+                                            .addClass((count % 4 == 0) ? "one-third-last" : "")
+                                            .addClass((count % 3 == 0) ? "test3last" : "test3")
+                                            .addClass((count % 2 == 0) ? "one-third even mobile-collapse" : "one-third odd mobile-collapse");
+
+                                //alert(sRows);
+                                //$div.prepend('<span class="pull-right"><button class="btn btn-info btn-xs editItem"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;<button class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span>');
+
+                                $div.append(sRows);
+                                $div.append(tRows1);
+                                //$div.append("<div></div>");
+                                $div.append(tRows2);
+                                //$div.append("<div>&nbsp;</div>");
+                                $div.appendTo("#findAnimalList");
+                                //$("#debug").append($div);
+                                //$("#debug").html(sRows);
+                                //alert(count);
+
+                            })
+
+                            $(".petPhoto").on("click", function (e) {
+                                //var iIndex = $(this).parent().parent().index();
+
+                                var iIndex = $(this).closest("div").index();
+                                tempIndex = -1;
+
+                                //alert(iIndex);
+                                var sRows = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='100%' height='80%'>"
+
+                                $("#showImg2").empty();
+                                $("#showImg2").append(sRows)
+
+                                //$("#petPhotoTextBox2").empty();
+                                //$("#petPhotoTextBox2").append(debug[iIndex].PetPhoto);
+                                $("#petPhotoTextBox2").text(debug[iIndex].PetPhoto);
+                                $("#lostDateTextBox2").text(debug[iIndex].LostDate);
+                                $("#lostPlaceTextBox2").text(debug[iIndex].LostPlace);
+                                $("#findPetModal2").modal({ backdrop: "static" });
+                            })
+
+
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+
+                })
+
 
                 //新增
                 $("#addFindPetButton").click(function () {
@@ -302,4 +545,3 @@
                 })
 
 </script>
-

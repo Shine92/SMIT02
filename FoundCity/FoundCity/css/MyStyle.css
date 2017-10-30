@@ -268,6 +268,12 @@
 /* Yako Style                                                                   */
 /*********************************************************************************/
 
+.file_hidden {
+    visibility: hidden
+}
+
+/*...pet index.......*/
+
 #findAnimalList img {
     max-width: 100%;
     height: auto;
