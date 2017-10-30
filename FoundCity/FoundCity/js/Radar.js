@@ -2,6 +2,7 @@
 var rDistance = 50;
 var rMap;
 var rMKs = [];
+var aryRow = {};
 var rAddress;
 
 window.onload = initLoad;
@@ -9,7 +10,6 @@ window.onload = initLoad;
 function initLoad() {
     //rDetect();
     //rScrollRule();
-    initDistance();
 }
 
 function btnClean() {
@@ -208,6 +208,8 @@ function initMAP(myLatlng) {
 
     var map = new google.maps.Map(mapDiv, mapProp);
 
+    rMap = map;
+
     var mRange = new google.maps.Circle({
         center: myLatlng,
         radius: rDistance,
@@ -220,8 +222,7 @@ function initMAP(myLatlng) {
     mRange.setMap(map);
 
     intiMarker(map, myLatlng);
-    initDistance(map, myLatlng)
-
+    initRange(map, myLatlng);
 }
 
 function intiMarker(myMap, myLatlng) {
@@ -251,62 +252,77 @@ function initRange(myMap, myLatlng) {
                 $.each(data, function (index, vul) {
                     placeID[index] = vul.place_id;
                 });
-                var aryRow = new Array();
-                initDetailed(myMap, placeID, aryRow, 0, data.length);
+                initDetail(placeID, 0, data.length);
+                //$("#rResult_Table").text(JSON.stringify(placeID));
                 break;
             default:
-
                 break;
         }
     });
 
 }
 
-function initDetailed(myMap, data, aryRow, num, maxNum) {
+function initDetail(data, num, maxNum) {
+    $("#rResult_Table").text(data);
     if (num < maxNum) {
-        var service = new google.maps.places.PlacesService(myMap);
+        var service = new google.maps.places.PlacesService(rMap);
         service.getDetails({
             placeId: data[num]
         }, function (place, status) {
             switch (status) {
                 case google.maps.places.PlacesServiceStatus.OK:
-                    aryRow[num]["name"] = place.name;
-                    aryRow[num]["tel"] = place.formatted_phone_number;
-                    aryRow[num]["address"] = place.formatted_address;
-                    aryRow[num]["rating"] = place.rating;
+
+                    var isNow = ((place["opening_hours"]) != null ? ((place["opening_hours"]["open_now"]) ? "1" : "0") : "2");
+
+                    aryRow[num] = {
+                        name: place.name,
+                        tel: place.formatted_phone_number,
+                        address: place.formatted_address,
+                        rating: place.rating,
+                        now: isNow
+                    };
+                    initDetail(data, num + 1, maxNum);
                     break;
                 default:
+                    alert(num);
+                    $("#rResult_Table").text(JSON.stringify(aryRow));
+                    initDetail(data, num, maxNum);
                     break;
             }
         });
     } else {
+        alert("END");
+        $("#rResult_Table").text(JSON.stringify(aryRow));
     }
 }
 
-function initDistance() {
-    var start = "台中市南屯區公益路二段51號";
-    var end = "台中市南屯區大墩路671號";
+function initDistance(myMap, data, aryRow, num, maxNum) {
+    var start = rAddress;
+    var end = aryRow[num]["address"];
     var request = {
         origin: start,
         destination: end,
-        travelMode: 'DRIVING',
+        travelMode: 'WALKING',
     };
     //宣告
     var directionsService = new google.maps.DirectionsService();
     directionsService.route(request, function (response, status) {
-        var strTmp = "";
-        if (status == google.maps.DirectionsStatus.OK) {
-            var route = response.routes[0];
-            for (var i = 0; i < route.legs.length; i++) {
-                var routeSegment = i + 1;
-                strTmp += route.legs[i].distance.text;
-            }
-            //取得距離(正整數，公尺)
-            var dist = parseInt(parseFloat(strTmp) * 1000).toString();
-            alert(strTmp);
-            alert(parseFloat(strTmp));
-            alert(parseInt(parseFloat(strTmp)));
-            alert(dist);
+        switch (status) {
+            case google.maps.DirectionsStatus.OK:
+                var dist = response.routes[0].legs[0].distance.value;
+                aryRow[num] = {
+                    name: aryRow[num]["name"],
+                    tel: aryRow[num]["tel"],
+                    address: aryRow[num]["address"],
+                    rating: aryRow[num]["rating"],
+                    now: aryRow[num]["now"],
+                    dist : dist
+                };
+                initDetailed(myMap, data, aryRow, num+1, maxNum);
+                break
+            default:
+                initDistance(myMap, data, aryRow, num, maxNum);
+                break;
         }
     });
 }
@@ -315,13 +331,25 @@ function initDistance() {
 //----------------------------------------------------------------------------------------------
 
 function rADD() {
-    btnClean();
+    //btnClean();
+    $.ajax({
+        url: "/Street/County",
+        type: "Get",
+        success: function (data) {
+            alert("OK");
+            $("#rResult_Table").text(JSON.stringify(data));
+        },
+        error: function (error) {
+            document.write(error.responseText);
+        }
+    });
+
 }
 
 function rLower() {
-    btnClean();
+    //btnClean();
 }
 
 function rRE() {
-    btnClean();
+    //btnClean();
 }
