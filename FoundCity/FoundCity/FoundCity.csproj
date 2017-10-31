@@ -237,6 +237,7 @@
       <DependentUpon>NewPetModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\MemberLoginViewModelcs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -254,7 +255,6 @@
     <Content Include="Views\Member\Index.cshtml" />
     <Content Include="Views\Member\Basic.cshtml" />
     <Content Include="Views\Member\Modify.cshtml" />
-    <Content Include="Views\Member\Login.cshtml" />
     <Content Include="Views\Member\Register.cshtml" />
     <Content Include="Views\Member\Forget.cshtml" />
     <Content Include="Views\Radar\Index.cshtml" />
@@ -264,6 +264,7 @@
     <Content Include="Views\Shared\_LayoutMember.cshtml" />
     <Content Include="Views\Member\EmailValidate.cshtml" />
     <Content Include="Views\Member\RegisterResult.cshtml" />
+    <Content Include="Views\Member\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

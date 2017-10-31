@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FoundCity.Models;
+using FoundCity.ViewModels;
+using System.Web.Security;
+
 namespace FoundCity.Controllers {
     public class MemberController : Controller {
         Member MemberData = new Member();
@@ -27,13 +30,51 @@ namespace FoundCity.Controllers {
         #endregion
         #region 會員登入
         public ActionResult Login() {
-            return View();
+            /*判斷使用者是否已經登入*/
+            if(User.Identity.IsAuthenticated){
+                return Content("已經登入");
+            } else {
+                return View();
+            }
         }
 
-        [HttpPost]
-        public ActionResult Login(FormCollection frm) {
 
-            return View();
+
+        [HttpPost]
+        public ActionResult Login(MemberLoginViewModelcs loginMember) {
+
+            /*simon 1031 17:03 暫時註解*/
+            //if (Request["Remember"].Equals("true")) {
+            //    return Content("true");
+            //}
+            /*驗證帳號密碼*/
+            string ValidateStr = memberService.LoginCheck(loginMember.Account, loginMember.Password);
+
+            /*判斷是否有錯誤訊息*/
+            if (string.IsNullOrEmpty(ValidateStr)) {
+                /*取得登入角色*/
+                string roleDate = memberService.GetRole(loginMember.Account);
+                /*新增一個登入用Ticket*/
+                /*參考網址:toyo0103.blogspot.tw/2013/09/cformsauthentication.html*/
+                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, loginMember.UserName, DateTime.Now, DateTime.Now.AddMinutes(30), false, FormsAuthentication.FormsCookiePath);
+                /*資料加密*/
+                string enTicket = FormsAuthentication.Encrypt(ticket);
+                /*資料存入Cookies*/
+                Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName,enTicket));
+                //return RedirectToAction("Index","Home");
+                return Content("登入成功");
+            }else {
+                ModelState.AddModelError("", ValidateStr);
+                return View(loginMember);
+            }
+        }
+        #endregion
+        #region 會員登出
+        /*設定Action需登入才能使用*/
+        [Authorize]
+        public ActionResult Logout() {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Member");
         }
         #endregion
         #region 會員註冊

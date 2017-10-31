@@ -130,6 +130,14 @@ $(document).ready(function () {
             return true;
         };
     });
+    /*LoginBtn*/
+    $("#LoginBtn").click(function () {
+       // if ($("#LoginRemeber").is(':checked')) {
+       //     $("#LoginRemeber").attr("value", "true");
+       // } else if($("#LoginRemeber").not(':checked')) {
+
+       //}
+    });
 });
 
 /*********************************************************************************/

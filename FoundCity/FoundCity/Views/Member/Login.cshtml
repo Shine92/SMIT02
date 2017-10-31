@@ -1,12 +1,14 @@
-﻿
+﻿@model FoundCity.ViewModels.MemberLoginViewModelcs
+
 @{
+    ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 }
 
 <div id="" class="member_LoginPage">
     <div class="container">
         <div class="member_Login">
-            <form class="form-horizontal" action="">
+            <form class="form-horizontal" action="" method="post">
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="UserAccount">帳號:</label>
                     <div class="col-sm-7">
@@ -16,7 +18,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3" for="UserPassword">密碼:</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="UserPassword" placeholder="" name="Password">
+                        <input type="password" class="form-control" id="UserPassword" placeholder="" name="Password">
                     </div>
                 </div>
                 <div id="info" class="col-sm-7 col-lg-offset-3">
@@ -25,12 +27,12 @@
                 <div class="memberLogin_decoration"></div>
                 <div class="form-group">
                     <div class="col-sm-7 col-sm-offset-2">
-                        <label class="checkbox-inline"><input type="checkbox" value="">記住我</label>
+                        <label class="checkbox-inline"><input type="checkbox" id="LoginRemeber" name="Remember" value="false">記住我</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-8 col-sm-offset-2">
-                        <button type="submit" class="btn btn-success btn-block">登入</button>
+                        <button type="submit" id="LoginBtn" class="btn btn-success btn-block">登入</button>
                     </div>
                 </div>
                 <div class="form-group">
@@ -43,5 +45,4 @@
         </div>
     </div>
 </div>
-
 

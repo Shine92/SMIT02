@@ -9,7 +9,7 @@ namespace FoundCity.Models {
     public class CMemberService {
 
         NewPetEntities db = new NewPetEntities();
-
+        Member member = new Member();
         #region 註冊會員 OK
         public void Register(Member newMember) {
             /*密碼加密 1026 10:13測試*/
@@ -51,8 +51,8 @@ namespace FoundCity.Models {
 
             /*取得該筆帳號*/
             var query = from o in db.Members
-                       where o.Account == Account
-                       select o;
+                        where o.Account == Account
+                        select o;
             /*取得會員驗證碼*/
             foreach (var item in query) {
                 VlidateAuthCode = item.AuthCode;
@@ -67,7 +67,7 @@ namespace FoundCity.Models {
                 /*判斷驗證碼正確*/
                 if (VlidateAuthCode == AuthCode) {
                     /*將資料庫中的驗證碼設為空*/
-                    foreach(var item in query) {
+                    foreach (var item in query) {
                         item.AuthCode = string.Empty;
                     }
                     /*存回資料庫*/
@@ -80,6 +80,64 @@ namespace FoundCity.Models {
                 VlidateStr = "傳送資料錯誤,請重新確認或再次註冊！";
             }
             return VlidateStr;
+        }
+        #endregion
+        #region 登入確認
+        public string LoginCheck(string Account, string Password) {
+            /*取得傳入帳號的會員資料*/
+            Member findMember = (from o in db.Members
+                                 where o.Account.Equals(Account)
+                                 select o).Single();
+
+            /*判斷是否有此會員*/
+            if (findMember != null) {
+                /*判斷是否有經過驗證,有經驗證的驗證碼欄位會清空*/
+                if (string.IsNullOrWhiteSpace(findMember.AuthCode)) {
+                    /*密碼確認*/
+                    if (CheckPassword(findMember,Password)) {
+                        /*密碼確認成功回傳空字串*/
+                        return string.Empty;
+                    }else {
+                        return "密碼輸入錯誤！";
+                    }
+                }else {
+                    return "此帳號尚未經過Email驗證,請至您註冊的信箱完成驗證！";
+                }
+            } else {
+                return "無此會員帳號！";
+            }
+        }
+        #endregion
+        #region 密碼確認
+        /*傳入Member.Password 和使用者輸入的Password*/
+        public bool CheckPassword(Member CheckMember, string Password) {
+            /*比對是否與資料庫的密碼與Has過的密碼是否一樣*/
+            bool Result = CheckMember.Password.Equals(HasPassword(Password));
+            return Result;
+        }
+        #endregion
+        #region 取得使用者身份
+        public string GetRole(string Account) {
+            /*角色預設為空字串*/
+            string Role = string.Empty;
+            /*建立查詢語法*/
+            var query = from o in db.Members
+                        where o.Account.Equals(Account)
+                        select new {
+                            o.IsAdmin
+                        };
+            /*得到查詢結果*/
+            foreach (var obj in query) {
+                bool result = obj.IsAdmin;
+                if (result) {
+                    /*IsAdmin == 1 /true*/
+                    Role = "Admin";
+                } else {
+                    /*IsAdmin == 0 / false*/
+                    Role = "User";
+                }
+            }
+            return Role;
         }
         #endregion
     }
