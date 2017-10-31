@@ -1,5 +1,4 @@
 <<<<<<< HEAD
-<<<<<<< HEAD
 D:\Github\SMIT02\FoundCity\FoundCity\bin\ApplicationInsights.config
 D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\csc.exe
 D:\Github\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -206,7 +205,6 @@ C:\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.WebHost.resourc
 C:\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csprojResolveAssemblyReference.cache
 C:\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.dll
 C:\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.pdb
-=======
 E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\ApplicationInsights.config
 E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\csc.exe
 E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll

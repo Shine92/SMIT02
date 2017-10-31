@@ -25,7 +25,9 @@ namespace FoundCity.Models
         public string Characteristic { get; set; }
         public string CreateDate { get; set; }
         public string LostDate { get; set; }
-        public string LostPlace { get; set; }
+        public string LostPlace1 { get; set; }
+        public string LostPlace2 { get; set; }
+        public string LostPlace3 { get; set; }
         public Nullable<int> PlaceId { get; set; }
         public int State { get; set; }
         public string ContactMan { get; set; }

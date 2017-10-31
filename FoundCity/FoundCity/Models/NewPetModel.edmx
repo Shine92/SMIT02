@@ -20,7 +20,9 @@
           <Property Name="Characteristic" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="FindDate" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="FindPlace" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FindPlace1" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FindPlace2" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FindPlace3" Type="nvarchar" MaxLength="20" />
           <Property Name="PlaceId" Type="int" />
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="ContactMan" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -42,7 +44,9 @@
           <Property Name="Characteristic" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="LostDate" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="LostPlace" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LostPlace1" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LostPlace2" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LostPlace3" Type="nvarchar" MaxLength="20" />
           <Property Name="PlaceId" Type="int" />
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="ContactMan" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -95,50 +99,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NewPetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="FindMom">
-          <Key>
-            <PropertyRef Name="PetId" />
-          </Key>
-          <Property Name="PetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CreatorId" Type="Int32" Nullable="false" />
-          <Property Name="PetPhoto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Species" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Age" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="HairColor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Characteristic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FindDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FindPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PlaceId" Type="Int32" />
-          <Property Name="State" Type="Int32" Nullable="false" />
-          <Property Name="ContactMan" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContactSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContactTel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="FindPet">
-          <Key>
-            <PropertyRef Name="PetId" />
-          </Key>
-          <Property Name="PetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CreatorId" Type="Int32" Nullable="false" />
-          <Property Name="PetPhoto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Species" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Age" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="HairColor" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Characteristic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LostDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LostPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PlaceId" Type="Int32" />
-          <Property Name="State" Type="Int32" Nullable="false" />
-          <Property Name="ContactMan" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContactSex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContactTel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="Id" />
@@ -175,64 +135,66 @@
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityContainer Name="NewPetEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="FindMoms" EntityType="Self.FindMom" />
-          <EntitySet Name="FindPets" EntityType="Self.FindPet" />
           <EntitySet Name="Members" EntityType="Self.Member" />
           <EntitySet Name="Streets" EntityType="Self.Street" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="FindMoms" EntityType="NewPetModel.FindMom" />
+          <EntitySet Name="FindPets" EntityType="NewPetModel.FindPet" />
         </EntityContainer>
+        <EntityType Name="FindMom">
+          <Key>
+            <PropertyRef Name="PetId" />
+          </Key>
+          <Property Name="PetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatorId" Type="Int32" Nullable="false" />
+          <Property Name="PetPhoto" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Species" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="HairColor" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Characteristic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FindDate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FindPlace1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FindPlace2" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FindPlace3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PlaceId" Type="Int32" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="ContactMan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ContactSex" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ContactTel" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FindPet">
+          <Key>
+            <PropertyRef Name="PetId" />
+          </Key>
+          <Property Name="PetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatorId" Type="Int32" Nullable="false" />
+          <Property Name="PetPhoto" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Species" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="HairColor" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Characteristic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LostDate" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LostPlace1" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LostPlace2" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LostPlace3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PlaceId" Type="Int32" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="ContactMan" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ContactSex" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ContactTel" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="NewPetModelStoreContainer" CdmEntityContainer="NewPetEntities">
-          <EntitySetMapping Name="FindMoms">
-            <EntityTypeMapping TypeName="NewPetModel.FindMom">
-              <MappingFragment StoreEntitySet="FindMom">
-                <ScalarProperty Name="PetId" ColumnName="PetId" />
-                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
-                <ScalarProperty Name="PetPhoto" ColumnName="PetPhoto" />
-                <ScalarProperty Name="Species" ColumnName="Species" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="HairColor" ColumnName="HairColor" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="Characteristic" ColumnName="Characteristic" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="FindDate" ColumnName="FindDate" />
-                <ScalarProperty Name="FindPlace" ColumnName="FindPlace" />
-                <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="ContactMan" ColumnName="ContactMan" />
-                <ScalarProperty Name="ContactSex" ColumnName="ContactSex" />
-                <ScalarProperty Name="ContactTel" ColumnName="ContactTel" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FindPets">
-            <EntityTypeMapping TypeName="NewPetModel.FindPet">
-              <MappingFragment StoreEntitySet="FindPet">
-                <ScalarProperty Name="PetId" ColumnName="PetId" />
-                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
-                <ScalarProperty Name="PetPhoto" ColumnName="PetPhoto" />
-                <ScalarProperty Name="Species" ColumnName="Species" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="HairColor" ColumnName="HairColor" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="Characteristic" ColumnName="Characteristic" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="LostDate" ColumnName="LostDate" />
-                <ScalarProperty Name="LostPlace" ColumnName="LostPlace" />
-                <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="ContactMan" ColumnName="ContactMan" />
-                <ScalarProperty Name="ContactSex" ColumnName="ContactSex" />
-                <ScalarProperty Name="ContactTel" ColumnName="ContactTel" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="NewPetModel.Member">
               <MappingFragment StoreEntitySet="Members">
@@ -268,6 +230,56 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FindMoms">
+            <EntityTypeMapping TypeName="NewPetModel.FindMom">
+              <MappingFragment StoreEntitySet="FindMom">
+                <ScalarProperty Name="ContactTel" ColumnName="ContactTel" />
+                <ScalarProperty Name="ContactSex" ColumnName="ContactSex" />
+                <ScalarProperty Name="ContactMan" ColumnName="ContactMan" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+                <ScalarProperty Name="FindPlace3" ColumnName="FindPlace3" />
+                <ScalarProperty Name="FindPlace2" ColumnName="FindPlace2" />
+                <ScalarProperty Name="FindPlace1" ColumnName="FindPlace1" />
+                <ScalarProperty Name="FindDate" ColumnName="FindDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Characteristic" ColumnName="Characteristic" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="HairColor" ColumnName="HairColor" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Species" ColumnName="Species" />
+                <ScalarProperty Name="PetPhoto" ColumnName="PetPhoto" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FindPets">
+            <EntityTypeMapping TypeName="NewPetModel.FindPet">
+              <MappingFragment StoreEntitySet="FindPet">
+                <ScalarProperty Name="ContactTel" ColumnName="ContactTel" />
+                <ScalarProperty Name="ContactSex" ColumnName="ContactSex" />
+                <ScalarProperty Name="ContactMan" ColumnName="ContactMan" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+                <ScalarProperty Name="LostPlace3" ColumnName="LostPlace3" />
+                <ScalarProperty Name="LostPlace2" ColumnName="LostPlace2" />
+                <ScalarProperty Name="LostPlace1" ColumnName="LostPlace1" />
+                <ScalarProperty Name="LostDate" ColumnName="LostDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Characteristic" ColumnName="Characteristic" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="HairColor" ColumnName="HairColor" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Species" ColumnName="Species" />
+                <ScalarProperty Name="PetPhoto" ColumnName="PetPhoto" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
