@@ -10,6 +10,8 @@ window.onload = initLoad;
 function initLoad() {
     //rDetect();
     //rScrollRule();
+    //initDistance();
+    //btnClean();
 }
 
 function btnClean() {
@@ -348,8 +350,36 @@ function rADD() {
 
 function rLower() {
     //btnClean();
+    $.ajax({
+        url: "/Street/Area",
+        type: "POST",
+        data: {
+            city:"台中市"
+        },
+        success: function (data) {
+            alert(JSON.stringify(data));
+        },
+        error: function (error) {
+            document.write(error.responseText);
+        }
+
+    });
 }
 
 function rRE() {
     //btnClean();
+    $.ajax({
+        url: "/Street/Road",
+        type: "POST",
+        data: {
+            code: "100"
+        },
+        success: function (data) {
+            alert(JSON.stringify(data));
+        },
+        error: function (error) {
+            document.write(error.responseText);
+        }
+
+    });
 }

@@ -130,10 +130,6 @@ $(document).ready(function () {
             return true;
         };
     });
-
-    $("#RegisterBtn").click(function () {
-        $("#RegisterBtn").repreplaceWith("<button type='submit' id='RegisterBtn' class='btn btn-success btn-block' disabled><span class='glyphicon glyphicon-refresh glyphicon-refresh-animate'></span>Loading...</button>");
-    });
 });
 
 /*********************************************************************************/

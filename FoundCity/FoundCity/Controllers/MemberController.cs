@@ -29,6 +29,12 @@ namespace FoundCity.Controllers {
         public ActionResult Login() {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Login(FormCollection frm) {
+
+            return View();
+        }
         #endregion
         #region 會員註冊
         public ActionResult Register() {
@@ -88,8 +94,8 @@ namespace FoundCity.Controllers {
             /*寄出驗證信*/
             mailService.SendRegisterMail(MailBody, newMember.Account);
             /*儲存註冊訊息*/
-            TempData["RegisterState"] = "註冊成功,請去收信驗證Email";
-            return View("RegisterResult",MemberData);
+            TempData["RegisterState"] = "註冊成功！請至您註冊的電子信箱啟用帳號。";
+            return RedirectToAction("RegisterResult", "Member");
         }
         #endregion
         #region 忘記密碼
