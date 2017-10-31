@@ -15,7 +15,9 @@
     <Property Name="Characteristic" Type="nvarchar" MaxLength="50" />
     <Property Name="CreateDate" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="FindDate" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="FindPlace" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FindPlace1" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="FindPlace2" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="FindPlace3" Type="nvarchar" MaxLength="20" />
     <Property Name="PlaceId" Type="int" />
     <Property Name="State" Type="int" Nullable="false" />
     <Property Name="ContactMan" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -37,7 +39,9 @@
     <Property Name="Characteristic" Type="nvarchar" MaxLength="50" />
     <Property Name="CreateDate" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="LostDate" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="LostPlace" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LostPlace1" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="LostPlace2" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="LostPlace3" Type="nvarchar" MaxLength="20" />
     <Property Name="PlaceId" Type="int" />
     <Property Name="State" Type="int" Nullable="false" />
     <Property Name="ContactMan" Type="nvarchar" MaxLength="20" Nullable="false" />

@@ -66,11 +66,9 @@ namespace FoundCity.Controllers
 
         // GET: api/FindPets/5
         [ResponseType(typeof(FindPet))]
-        public IHttpActionResult GetFindPet(int id)
-        {
+        public IHttpActionResult GetFindPet(int id) {
             FindPet findPet = db.FindPets.Find(id);
-            if (findPet == null)
-            {
+            if (findPet == null) {
                 return NotFound();
             }
 

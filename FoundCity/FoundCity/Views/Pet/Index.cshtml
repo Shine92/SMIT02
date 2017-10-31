@@ -209,11 +209,11 @@
                         <option value="city2">city2</option>
                         <option value="city3">city3</option>
                     </select>
-                    @*<select class="" id="lostPlace3" name="LostPlace3">
-                            <option value="road1">road1</option>
-                            <option value="road2">road2</option>
-                            <option value="road3">road3</option>
-                        </select>*@
+                    <select class="" id="lostPlace3" name="LostPlace3">
+                        <option value="road1">road1</option>
+                        <option value="road2">road2</option>
+                        <option value="road3">road3</option>
+                    </select>
                     <input type="hidden"
                            id="lostPlaceTextBoxS"
                            class="form-control"
@@ -318,7 +318,7 @@
                                 //alert(obj.LostDate)
                                 //var newsText1 = obj.LostDate + "\r\n [" + obj.LostPlace + "]";
                                 var tRows1 = "<h3>&nbsp;" + obj.LostDate + "</h3>";
-                                var tRows2 = "<p>&nbsp;[" + obj.LostPlace + "]</p>";
+                                var tRows2 = "<p>&nbsp;[" + obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3 + "]</p>";
                                 //var sRows = "<img src='../image/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='100%' height='80%'>"
                                 var sRows = "<img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre'>"
 
@@ -387,7 +387,7 @@
                                 //$("#petPhotoTextBox2").append(debug[iIndex].PetPhoto);
                                 $("#petPhotoTextBox2").text(debug[iIndex].PetPhoto);
                                 $("#lostDateTextBox2").text(debug[iIndex].LostDate);
-                                $("#lostPlaceTextBox2").text(debug[iIndex].LostPlace);
+                                $("#lostPlaceTextBox2").text(debug[iIndex].LostPlace1 + debug[iIndex].LostPlace2 + debug[iIndex].LostPlace3);
                                 $("#findPetModal2").modal({ backdrop: "static" });
                             })
 
@@ -425,7 +425,7 @@
                                 //alert(obj.LostDate)
                                 //var newsText1 = obj.LostDate + "\r\n [" + obj.LostPlace + "]";
                                 var tRows1 = "<h3>&nbsp;" + obj.LostDate + "</h3>";
-                                var tRows2 = "<p>&nbsp;[" + obj.LostPlace + "]</p>";
+                                var tRows2 = "<p>&nbsp;[" + obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3 +"]</p>";
                                 //var sRows = "<img src='../image/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='100%' height='80%'>"
                                 var sRows = "<img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre'>"
 
@@ -466,7 +466,7 @@
                                 //$("#petPhotoTextBox2").append(debug[iIndex].PetPhoto);
                                 $("#petPhotoTextBox2").text(debug[iIndex].PetPhoto);
                                 $("#lostDateTextBox2").text(debug[iIndex].LostDate);
-                                $("#lostPlaceTextBox2").text(debug[iIndex].LostPlace);
+                                $("#lostPlaceTextBox2").text(debug[iIndex].LostPlace1 + debug[iIndex].LostPlace2 + debug[iIndex].LostPlace3);
                                 $("#findPetModal2").modal({ backdrop: "static" });
                             })
 
@@ -485,7 +485,8 @@
                     currentIndex = -1;
                     setCookie("findPetBtn", currentIndex, 1);
                     window.location.href = 'YCreateFindPet';
-                    $("#showImg").empty();
+                    //$("#showImg").empty();
+
                     //$("#petPhotoTextBox").val("");
                     ////$("#speciesTextBox").val("");
                     ////$("#varietyTextBox").val("");
@@ -500,41 +501,41 @@
                     //$("#findPetModal").modal({ backdrop: "static" });
                 })
 
-                //確認(新增)
-                $("#okButton").click(function () {
+                ////確認(新增)
+                //$("#okButton").click(function () {
 
-                        // new
-                        //alert("new");
-                        var newItem = {
-                            PetPhoto: $("#petPhotoTextBox").val(),
-                            //Species: $("#speciesTextBox").val(),
-                            //Variety: $("#varietyTextBox").val(),
-                            //Characteristic: $("#characteristicTextBox").val(),
-                            //CreateDate: $("#createDateTextBox").val(),
-                            LostDate: $("#lostDateTextBox").val(),
-                            LostPlace: $("#lostPlaceTextBox").val(),
-                            //ContactMan: $("#contactManTextBox").val(),
-                            //ContactTel: $("#contactTelTextBox").val(),
-                            //ContactEmail: $("#contactEmailTextBox").val()
+                //        // new
+                //        //alert("new");
+                //        var newItem = {
+                //            PetPhoto: $("#petPhotoTextBox").val(),
+                //            //Species: $("#speciesTextBox").val(),
+                //            //Variety: $("#varietyTextBox").val(),
+                //            //Characteristic: $("#characteristicTextBox").val(),
+                //            //CreateDate: $("#createDateTextBox").val(),
+                //            LostDate: $("#lostDateTextBox").val(),
+                //            LostPlace: $("#lostPlaceTextBox").val(),
+                //            //ContactMan: $("#contactManTextBox").val(),
+                //            //ContactTel: $("#contactTelTextBox").val(),
+                //            //ContactEmail: $("#contactEmailTextBox").val()
 
-                        };
-                        alert($("#petPhotoTextBox").val());
-                        $("#findPetModal").modal("hide");
+                //        };
+                //        alert($("#petPhotoTextBox").val());
+                //        $("#findPetModal").modal("hide");
 
-                        $.ajax({
-                            url: '/api/FindPets',
-                            type: 'POST',
-                            data: JSON.stringify(newItem),
-                            contentType: "application/json;charset=utf-8",
-                            success: function (data) {
-                                loadAndRefreshUI();
-                                alert("new");
-                            },
-                            error: function () {
-                                alert("error");
-                            }
-                        });
-                })
+                //        $.ajax({
+                //            url: '/api/FindPets',
+                //            type: 'POST',
+                //            data: JSON.stringify(newItem),
+                //            contentType: "application/json;charset=utf-8",
+                //            success: function (data) {
+                //                loadAndRefreshUI();
+                //                alert("new");
+                //            },
+                //            error: function () {
+                //                alert("error");
+                //            }
+                //        });
+                //})
 
 
                 $("#okButton2").click(function () {

@@ -1,15 +1,15 @@
-﻿var rZoom = 18;
+﻿var rZoom = 15;
 var rDistance = 50;
-var rMap;
-var rMKs = [];
-var aryRow = {};
+var rMarkers = [];
 var rAddress;
+var rMap;
+var rLatling;
 
 window.onload = initLoad;
 
 function initLoad() {
-    //rDetect();
-    //rScrollRule();
+    rDetect();
+    rScrollRule();
     //initDistance();
     //btnClean();
 }
@@ -211,6 +211,7 @@ function initMAP(myLatlng) {
     var map = new google.maps.Map(mapDiv, mapProp);
 
     rMap = map;
+    rLatling = myLatlng;
 
     var mRange = new google.maps.Circle({
         center: myLatlng,
@@ -233,7 +234,7 @@ function intiMarker(myMap, myLatlng) {
         animation: google.maps.Animation.BOUNCE,
         icon: "../images/Radar_Home.png",
     });
-    rMKs.push(mainMK);
+    rMarkers.push(mainMK);
     mainMK.setMap(myMap);
 }
 
@@ -254,8 +255,8 @@ function initRange(myMap, myLatlng) {
                 $.each(data, function (index, vul) {
                     placeID[index] = vul.place_id;
                 });
-                initDetail(placeID, 0, data.length);
-                //$("#rResult_Table").text(JSON.stringify(placeID));
+                var aryRow = {};
+                Schedule(myMap, aryRow, placeID, 0, data.length);
                 break;
             default:
                 break;
@@ -264,73 +265,154 @@ function initRange(myMap, myLatlng) {
 
 }
 
-function initDetail(data, num, maxNum) {
-    $("#rResult_Table").text(data);
-    if (num < maxNum) {
-        var service = new google.maps.places.PlacesService(rMap);
-        service.getDetails({
-            placeId: data[num]
-        }, function (place, status) {
-            switch (status) {
-                case google.maps.places.PlacesServiceStatus.OK:
 
-                    var isNow = ((place["opening_hours"]) != null ? ((place["opening_hours"]["open_now"]) ? "1" : "0") : "2");
+function Schedule(myMap, aryRow, data, num, maxNum) {
 
-                    aryRow[num] = {
-                        name: place.name,
-                        tel: place.formatted_phone_number,
-                        address: place.formatted_address,
-                        rating: place.rating,
-                        now: isNow
-                    };
-                    initDetail(data, num + 1, maxNum);
-                    break;
-                default:
-                    alert(num);
-                    $("#rResult_Table").text(JSON.stringify(aryRow));
-                    initDetail(data, num, maxNum);
-                    break;
-            }
-        });
-    } else {
-        alert("END");
-        $("#rResult_Table").text(JSON.stringify(aryRow));
-    }
-}
+    $("#rResult_Table").hide();
+    $("#myProgress").show();
 
-function initDistance(myMap, data, aryRow, num, maxNum) {
-    var start = rAddress;
-    var end = aryRow[num]["address"];
-    var request = {
-        origin: start,
-        destination: end,
-        travelMode: 'WALKING',
-    };
-    //宣告
+    var service = new google.maps.places.PlacesService(myMap);
     var directionsService = new google.maps.DirectionsService();
-    directionsService.route(request, function (response, status) {
-        switch (status) {
-            case google.maps.DirectionsStatus.OK:
-                var dist = response.routes[0].legs[0].distance.value;
-                aryRow[num] = {
-                    name: aryRow[num]["name"],
-                    tel: aryRow[num]["tel"],
-                    address: aryRow[num]["address"],
-                    rating: aryRow[num]["rating"],
-                    now: aryRow[num]["now"],
-                    dist : dist
-                };
-                initDetailed(myMap, data, aryRow, num+1, maxNum);
-                break
-            default:
-                initDistance(myMap, data, aryRow, num, maxNum);
-                break;
+
+    var elem = document.getElementById("myBar");
+    var sWidth = 100 / maxNum;
+
+    var myDetail = setInterval(initDetail, 100);
+
+    function initDetail() {
+        if (num < maxNum) {
+            service.getDetails({
+                placeId: data[num]
+            }, function (place, status) {
+                switch (status) {
+                    case google.maps.places.PlacesServiceStatus.OK:
+
+                        var isNow = ((place["opening_hours"]) != null ? ((place["opening_hours"]["open_now"]) ? "1" : "0") : "2");
+
+                        directionsService.route({
+                            origin: rAddress,
+                            destination: place.formatted_address,
+                            travelMode: 'WALKING',
+                        }, function (response, status) {
+                            switch (status) {
+                                case google.maps.DirectionsStatus.OK:
+                                    var dist = response.routes[0].legs[0].distance.value;
+                                    aryRow[num] = {
+                                        name: place.name,
+                                        tel: place.formatted_phone_number,
+                                        address: place.formatted_address,
+                                        rating: place.rating,
+                                        now: isNow,
+                                        lat: place.geometry.location.lat(),
+                                        lng: place.geometry.location.lng(),
+                                        dist: dist
+                                    };
+                                    num++;
+                                    elem.style.width = sWidth * num + '%';
+                                    break
+                            }
+                        });
+                        break;
+
+                    default:
+
+                        break;
+                }
+            });
+        } else {
+            clearInterval(myDetail);
+            $.each(aryRow, function (index, vul) {
+                rResultView(vul);
+            });
+            rEnd();
+            $("#rResult_Table").show();
+            $("#myProgress").hide();
         }
-    });
+    }
+
 }
 
+function rResultView(aryRow) {
+
+    var statusIconColor;
+    var statusText;
+    var statusTitleColor;
+
+    switch (aryRow["now"]) {
+        case "0":
+            statusIconColor = "bg-danger";
+            statusText = "休息中";
+            statusTitleColor = "panel-danger";
+            break
+        case "1":
+            statusIconColor = "bg-success";
+            statusText = "營業中";
+            statusTitleColor = "panel-success";
+            break
+        case "2":
+            statusIconColor = "bg-warning";
+            statusText = "店家未提供營業時間";
+            statusTitleColor = "panel-warning";
+            break;
+    }
+
+    $('#rResult_Content').append(
+        $('<li>').append(
+            $('<article>').addClass('timeline-entry').append(
+                $('<div>').addClass('timeline-entry-inner').append(
+                    $('<div>').addClass('timeline-icon ' + statusIconColor).append(
+                            $('<i>').addClass('entypo-feather')),
+                            $('<div>').addClass('timeline-label').on("click", function (e) {
+
+                                setMapOnAll(null);
+
+                                var markerA = new google.maps.Marker({
+                                    position: rLatling,
+                                    icon: '../images/Radar_Home.png'
+                                });
+                                rMarkers.push(markerA);
+                                markerA.setMap(rMap);
+
+                                var markerB = new google.maps.Marker({
+                                    position: new google.maps.LatLng(aryRow["lat"], aryRow["lng"]),
+                                    animation: google.maps.Animation.BOUNCE
+                                });
+
+                                rMarkers.push(markerB);
+                                markerB.setMap(rMap);
+
+                            }).append(
+                                $('<article>').addClass(statusTitleColor).append(
+                                     $('<div>').addClass('panel-heading').append(
+                                         $('<a>').addClass('rResult_Content_Title').html(aryRow["name"] + "<br>")),
+                                      $('<div>').addClass('panel-body').append(
+                                         $('<font>').addClass('rResult_Content_Text').html("營業狀態：" + statusText + "<br>")),
+                                      $('<div>').addClass('panel-footer').append(
+                                        $('<font>').addClass('rResult_Content_Text').html("電話：" + ((aryRow["tel"] != null) ? aryRow["tel"] : "店家未提供電話") + "<br>")),
+                                      $('<div>').addClass('panel-body').append(
+                                         $('<font>').addClass('rResult_Content_Text').html("地址：" + aryRow["address"] + "<br>"))
+                            ))))));
+}
 
 //----------------------------------------------------------------------------------------------
+
+function rEnd() {
+    $('#rResult_Content').append(
+        $('<article>').addClass('timeline-entry begin').append(
+            $('<div>').addClass('timeline-entry-inner').append(
+                $('<div>').addClass('timeline-icon').css('-webkit-transform', 'rotate(-90deg)').css('-moz-transform', 'rotate(-90deg)').append(
+                    $('<i>').addClass('entypo-flight')
+                )
+            )
+        )
+    );
+}
+
+function setMapOnAll(map) {
+    for (var i = 0; i < rMarkers.length; i++) {
+        rMarkers[i].setMap(map);
+    }
+}
 
 function rADD() {
     //btnClean();
@@ -354,7 +436,7 @@ function rLower() {
         url: "/Street/Area",
         type: "POST",
         data: {
-            city:"台中市"
+            city: "台中市"
         },
         success: function (data) {
             alert(JSON.stringify(data));
