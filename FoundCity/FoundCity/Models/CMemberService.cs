@@ -125,10 +125,10 @@ namespace FoundCity.Models {
             return Result;
         }
         #endregion
-        #region 取得使用者身份
+        #region 取得使用者身份 OK
         public string GetRole(string Account) {
             /*角色預設為空字串*/
-            string Role = string.Empty;
+            string Role = "User";
             /*建立查詢語法*/
             var query = from o in db.Members
                         where o.Account.Equals(Account)
@@ -140,13 +140,28 @@ namespace FoundCity.Models {
                 bool result = obj.IsAdmin;
                 if (result) {
                     /*IsAdmin == 1 /true*/
-                    Role = "Admin";
-                } else {
-                    /*IsAdmin == 0 / false*/
-                    Role = "User";
+                    Role += ",Admin";
                 }
             }
             return Role;
+        }
+        #endregion
+        #region 變更密碼
+        public string ChangePassword(string UserName,string Password,string NewPassword) {
+            /*找出登入者資料*/
+            Member findMember = (from o in db.Members
+                        where o.Account.Equals(UserName)
+                        select o).Single();
+            /*檢查使用者的舊密碼是否與資料庫密碼吻合*/
+            if (CheckPassword(findMember, Password)) {
+                /*若吻合就將密碼變更為新密碼,並且加密*/
+                findMember.Password = HasPassword(NewPassword);
+                /*儲存資料庫變更*/
+                db.SaveChanges();
+                return "密碼修改成功！";
+            } else {
+                return "舊密碼輸入錯誤！";
+            }
         }
         #endregion
     }

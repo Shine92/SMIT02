@@ -9,12 +9,13 @@ using System.Web.Security;
 
 namespace FoundCity.Controllers {
     public class MemberController : Controller {
-        MemberLoginViewModelcs LoginData = new MemberLoginViewModelcs();
+        MemberLoginViewModel LoginData = new MemberLoginViewModel();
         Member MemberData = new Member();
         CMemberService memberService = new CMemberService();
         CMailService mailService = new CMailService();
         #region 會員中心首頁
         // GET: Member
+        [Authorize]
         public ActionResult Index() {
             return View();
         }
@@ -42,7 +43,7 @@ namespace FoundCity.Controllers {
 
 
         [HttpPost]
-        public ActionResult Login(MemberLoginViewModelcs loginMember) {
+        public ActionResult Login(MemberLoginViewModel loginMember) {
 
             /*驗證帳號密碼*/
             string ValidateStr = memberService.LoginCheck(loginMember.Account, loginMember.Password);
@@ -52,7 +53,7 @@ namespace FoundCity.Controllers {
                 /*取得登入角色*/
                 string roleDate = memberService.GetRole(loginMember.Account);
 
-                /*simon 1031 17:03 暫時註解*/
+                /*判斷是否選擇記住我*/
                 if (Request["LoginRemeberResult"].Equals("true")) {
                     /*新增一個登入用Ticket*/
                     /*參考網址:toyo0103.blogspot.tw/2013/09/cformsauthentication.html*/
@@ -164,6 +165,23 @@ namespace FoundCity.Controllers {
         #endregion
         #region 註冊成功
         public ActionResult RegisterResult() {
+            return View();
+        }
+        #endregion
+        #region 變更密碼
+        /*[Authorize] 只有登入才能瀏覽的頁面*/
+        [Authorize]
+        public ActionResult ChangePassword() {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult ChangePassword(MemberChangePasswordViewModel ChangeData) {
+            if (ModelState.IsValid) {
+                /*傳回變更密碼的狀態*/
+                Session["ChangeState"] = memberService.ChangePassword(User.Identity.Name, ChangeData.Password, ChangeData.NewPassword);
+            }
             return View();
         }
         #endregion
