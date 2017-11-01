@@ -14,9 +14,5 @@ namespace FoundCity.ViewModels {
             set;
             get;
         }
-        public string UserName {
-            set { }
-            get{ return string.Format("{0}{1}", member.UserFirstName, member.UserLastName); }
-        }
     }
 }
