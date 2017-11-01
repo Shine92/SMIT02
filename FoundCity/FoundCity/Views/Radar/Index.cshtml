@@ -14,33 +14,58 @@
 
 <div class="rBody">
 
-    <div id="rSidebar" class="sidebar">
-        <div class="list-group rRadar_font">
-            <span href="#" class="list-group-item active">動物機構</span>
-            <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 醫院 </a>
-            <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 商店 </a>
-            <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 旅館 </a>
+    @*<div id="rSidebar" class="sidebar">
+            <div class="list-group rRadar_font">
+                <span href="#" class="list-group-item active">動物機構</span>
+                <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 醫院 </a>
+                <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 商店 </a>
+                <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 旅館 </a>
 
-            <span href="#" class="list-group-item active">站內資料</span>
-            <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 尋寵啟示 </a>
-            <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 拾獲通報 </a>
-            <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 認養資訊 </a>
-        </div>
+                <span href="#" class="list-group-item active">站內資料</span>
+                <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 尋寵啟示 </a>
+                <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 拾獲通報 </a>
+                <a href="#" class="list-group-item"><i class="fa fa-comment-o"></i> 認養資訊 </a>
+            </div>
+        </div>*@
+
+    <div id="rSidebar">
+        <h5>
+            <small><b>動物機構</b></small>
+        </h5>
+        <ul class="sidebar-nav nav">
+            <li onclick="rHospital()"><a>醫院</a></li>
+            <li><a>商店</a></li>
+            <li><a>旅館</a></li>
+        </ul>
+
+        <div class="title_line"></div>
+
+        <h5>
+            <small><b>站內資料</b></small>
+        </h5>
+        <ul class="sidebar-nav nav">
+            <li><a>尋寵啟示</a></li>
+            <li><a>拾獲通報</a></li>
+            <li><a>認養資訊</a></li>
+        </ul>
+
+        <div class="title_line"></div>
     </div>
+
+    <div id="line"></div>
+
 
     <div id="rMap_Body">
 
         <div id="rMap-Canvas"></div>
 
-        <div class="rOaerror rWarning rRadar_font"> 目前搜索的範圍是 <strong id="rRange"> 0 </strong> 公尺 </div>
+        <div class="rOaerror rWarning rRadar_font"> 這間店離您有 <strong id="rRange"> 0 </strong> 公尺 </div>
 
-        <div id="rMap_Features" class="btn-group btn-group-justified">
+        @*<div id="rMap_Features" class="btn-group btn-group-justified">
             <a class="btn btn-success" onclick="rADD()"><span> 加大範圍 </span></a>
             <a class="btn btn-warning" onclick="rLower()"><span> 縮小範圍 </span></a>
             <a class="btn btn-danger" onclick="rRE()"><span> 重新搜尋 </span></a>
-        </div>
-
-
+        </div>*@
 
     </div>
 
@@ -50,8 +75,11 @@
             <ul id="rResult_Content" class="nav nav-pills nav-stacked timeline-centered"></ul>
         </div>
 
-        <div id="myProgress">
-            <div id="myBar"></div>
+        <div id="rScheduleBar">
+            <p class="rRadar_font"> 搜尋中，請稍後。(  <span id="rRatio"> 0</span>% ) </p>
+            <div id="myProgress">
+                <div id="myBar"></div>
+            </div>
         </div>
 
     </div>

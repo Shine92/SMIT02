@@ -1,22 +1,14 @@
-﻿var rZoom = 15;
-var rDistance = 50;
+﻿var rZoom = 18;
 var rMarkers = [];
 var rAddress;
 var rMap;
-var rLatling;
+var rLatlng;
 
-window.onload = initLoad;
+var searchType;
 
-function initLoad() {
-    rDetect();
+$(document).read(function () {
     rScrollRule();
-    //initDistance();
-    //btnClean();
-}
-
-function btnClean() {
-    $('.btn').button();
-}
+});
 
 //----------------------------------------------------------------------------------------------
 
@@ -211,18 +203,7 @@ function initMAP(myLatlng) {
     var map = new google.maps.Map(mapDiv, mapProp);
 
     rMap = map;
-    rLatling = myLatlng;
-
-    var mRange = new google.maps.Circle({
-        center: myLatlng,
-        radius: rDistance,
-        strokeColor: "#33FF33",
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: "#33FF33",
-        fillOpacity: 0.2
-    });
-    mRange.setMap(map);
+    rLatlng = myLatlng;
 
     intiMarker(map, myLatlng);
     initRange(map, myLatlng);
@@ -245,7 +226,7 @@ function initRange(myMap, myLatlng) {
     var request = {
         location: myLatlng,
         rankBy: google.maps.places.RankBy.DISTANCE,
-        type: ['veterinary_care']
+        type: [searchType]
     };
 
     service.nearbySearch(request, function (data, status) {
@@ -255,7 +236,7 @@ function initRange(myMap, myLatlng) {
                 $.each(data, function (index, vul) {
                     placeID[index] = vul.place_id;
                 });
-                var aryRow = {};
+                var aryRow = [];
                 Schedule(myMap, aryRow, placeID, 0, data.length);
                 break;
             default:
@@ -265,11 +246,10 @@ function initRange(myMap, myLatlng) {
 
 }
 
-
 function Schedule(myMap, aryRow, data, num, maxNum) {
 
     $("#rResult_Table").hide();
-    $("#myProgress").show();
+    $("#rScheduleBar").show();
 
     var service = new google.maps.places.PlacesService(myMap);
     var directionsService = new google.maps.DirectionsService();
@@ -309,6 +289,7 @@ function Schedule(myMap, aryRow, data, num, maxNum) {
                                     };
                                     num++;
                                     elem.style.width = sWidth * num + '%';
+                                    $("#rRatio").html(sWidth * num);
                                     break
                             }
                         });
@@ -325,8 +306,9 @@ function Schedule(myMap, aryRow, data, num, maxNum) {
                 rResultView(vul);
             });
             rEnd();
+            viewMap(aryRow);
             $("#rResult_Table").show();
-            $("#myProgress").hide();
+            $("#rScheduleBar").hide();
         }
     }
 
@@ -367,7 +349,7 @@ function rResultView(aryRow) {
                                 setMapOnAll(null);
 
                                 var markerA = new google.maps.Marker({
-                                    position: rLatling,
+                                    position: rLatlng,
                                     icon: '../images/Radar_Home.png'
                                 });
                                 rMarkers.push(markerA);
@@ -381,17 +363,46 @@ function rResultView(aryRow) {
                                 rMarkers.push(markerB);
                                 markerB.setMap(rMap);
 
+                                $("#rRange").html(aryRow["dist"]);
+
                             }).append(
                                 $('<article>').addClass(statusTitleColor).append(
                                      $('<div>').addClass('panel-heading').append(
                                          $('<a>').addClass('rResult_Content_Title').html(aryRow["name"] + "<br>")),
                                       $('<div>').addClass('panel-body').append(
-                                         $('<font>').addClass('rResult_Content_Text').html("營業狀態：" + statusText + "<br>")),
+                                         $('<font>').addClass('rResult_Content_Text').html(statusText + "<br>")),
                                       $('<div>').addClass('panel-footer').append(
                                         $('<font>').addClass('rResult_Content_Text').html("電話：" + ((aryRow["tel"] != null) ? aryRow["tel"] : "店家未提供電話") + "<br>")),
                                       $('<div>').addClass('panel-body').append(
                                          $('<font>').addClass('rResult_Content_Text').html("地址：" + aryRow["address"] + "<br>"))
                             ))))));
+}
+
+function viewMap(aryRow){
+    var bounds = new google.maps.LatLngBounds();
+
+    bounds.extend(rLatlng);
+
+    $.each(aryRow, function (index, vul) {
+        bounds.extend(new google.maps.LatLng(vul["lat"], vul["lng"]));
+    });
+    rMap.setCenter(bounds.getCenter());
+    rMap.fitBounds(bounds);
+
+    viewRange(aryRow[aryRow.length - 1].dist);
+}
+
+function viewRange(Dist) {
+    var mRange = new google.maps.Circle({
+        center: rLatlng,
+        radius: Dist,
+        strokeColor: "#33FF33",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#33FF33",
+        fillOpacity: 0.2
+    });
+    mRange.setMap(rMap);
 }
 
 //----------------------------------------------------------------------------------------------
@@ -414,54 +425,28 @@ function setMapOnAll(map) {
     }
 }
 
-function rADD() {
-    //btnClean();
-    $.ajax({
-        url: "/Street/County",
-        type: "Get",
-        success: function (data) {
-            alert("OK");
-            $("#rResult_Table").text(JSON.stringify(data));
-        },
-        error: function (error) {
-            document.write(error.responseText);
-        }
-    });
+function rHospital() {
+    searchType = "veterinary_care";
+    rDetect();
+}
+
+function rStore() {
 
 }
 
-function rLower() {
-    //btnClean();
-    $.ajax({
-        url: "/Street/Area",
-        type: "POST",
-        data: {
-            city: "台中市"
-        },
-        success: function (data) {
-            alert(JSON.stringify(data));
-        },
-        error: function (error) {
-            document.write(error.responseText);
-        }
+function rHostel() {
 
-    });
 }
 
-function rRE() {
-    //btnClean();
-    $.ajax({
-        url: "/Street/Road",
-        type: "POST",
-        data: {
-            code: "100"
-        },
-        success: function (data) {
-            alert(JSON.stringify(data));
-        },
-        error: function (error) {
-            document.write(error.responseText);
-        }
+function rFind() {
 
-    });
 }
+
+function rPick() {
+
+}
+
+function rClaim() {
+
+}
+

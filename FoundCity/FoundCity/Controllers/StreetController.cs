@@ -8,43 +8,24 @@ using FoundCity.Models;
 namespace FoundCity.Controllers {
     public class StreetController : Controller {
 
-        StreetModel sModel = new StreetModel();
-
-        NewPetEntities db = new NewPetEntities();
+        StreetModel streetModel = new StreetModel();
 
         [HttpGet]
         public ActionResult County() {
-
-            var query1 = (from o in db.Streets
-                          select new { o.mailcode,o.city })
-                        .Distinct()
-                        .ToList();
-
-            var query2 =
-                query1.GroupBy(x => x.city)
-                .Select(x => x.First())
-                .OrderBy(x => x.mailcode)
-                .ToList();
-
-            var query3 = query2.Select(b => b.city).ToList();
-
-            return Json(query3,JsonRequestBehavior.AllowGet);
+            var result = streetModel.County();
+            return Json(result , JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public ActionResult Area(string city) {
-            var query = (from o in db.Streets
-                         where o.city == city
-                         select new { o.mailcode,o.country }).Distinct();
-            return Json(query.ToList());
+            var result = streetModel.Area(city);
+            return Json(result);
         }
 
         [HttpPost]
         public ActionResult Road(string code) {
-            var query = from o in db.Streets
-                        where o.mailcode == code
-                        select new { o.id,o.road };
-            return Json(query.ToList());
+            var result = streetModel.Road(code);
+            return Json(result);
         }
 
     }

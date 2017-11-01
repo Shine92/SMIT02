@@ -225,7 +225,7 @@
 
 #rMap_Body {
     float: left;
-    width: 55%;
+    width: 50%;
     margin-top: 10px;
     margin-left: 10px;
     margin-bottom: 10px;
@@ -248,14 +248,61 @@
 
 #rSidebar {
     float: left;
-    width: 8%;
-    margin-top: 10px;
-    margin-left: 10px;
+    height: 760px;
+    width: 11%;
+}
+
+    #rSidebar h5 {
+        padding-left: 13px;
+        padding-top: 20px;
+        font-size: 18px;
+        font-family: Microsoft JhengHei;
+        font-weight: bold;
+    }
+
+    #rSidebar .title_line {
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 2px;
+        width: 85%;
+        background-color: white;
+    }
+
+    #rSidebar ul li {
+        line-height: 25px;
+        font-family: Microsoft JhengHei;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+        #rSidebar ul li a {
+            color: black;
+            display: block;
+        }
+
+            #rSidebar ul li a img {
+                width: 20px;
+                height: auto;
+            }
+
+    #rSidebar li a:hover,
+    #rSidebar li.active {
+        color: #fff;
+        background: #242f3e;
+        text-decoration: none;
+    }
+
+#line {
+    float: left;
+    height: 760px;
+    width: 2px;
+    background-color: white;
 }
 
 #rResult {
     float: left;
-    width: 34.6%;
+    width: 35%;
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
@@ -278,7 +325,7 @@
 }
 
 #rResult_Table {
-    height: 740px;
+    height: 750px;
     margin-top: 10px;
     margin-bottom: 20px;
     overflow: scroll;
@@ -304,12 +351,20 @@
         font-size: 25px;
     }
 
+#rScheduleBar {
+    margin-top: 25%;
+    display: none;
+}
+
+    #rScheduleBar .rRadar_font {
+        font-size: 25px;
+    }
+
 #myProgress {
     width: 100%;
     height: 30px;
     position: relative;
     background-color: #ddd;
-    display: none;
 }
 
 #myBar {
@@ -319,7 +374,11 @@
     position: absolute;
 }
 
-
+#rRatio {
+    font-family: Microsoft JhengHei;
+    text-align: center;
+    font-weight: bold;
+}
 
 /*------------------------------------------------------------------------------*/
 
