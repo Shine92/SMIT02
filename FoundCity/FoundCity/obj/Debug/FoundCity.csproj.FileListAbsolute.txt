@@ -63,5 +63,6 @@ D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Mvc.resources.dll
 D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Net.Http.Formatting.resources.dll
 D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.resources.dll
 D:\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.WebHost.resources.dll
+D:\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csprojResolveAssemblyReference.cache
 D:\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.dll
 D:\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.pdb

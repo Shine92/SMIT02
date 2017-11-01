@@ -82,33 +82,42 @@ namespace FoundCity.Models {
             return VlidateStr;
         }
         #endregion
-        #region 登入確認
+        #region 登入確認 OK
         public string LoginCheck(string Account, string Password) {
             /*取得傳入帳號的會員資料*/
-            Member findMember = (from o in db.Members
-                                 where o.Account.Equals(Account)
-                                 select o).Single();
+            try {
+                Member findMember = (from o in db.Members
+                                     where o.Account.Equals(Account)
+                                     select o).Single();
 
-            /*判斷是否有此會員*/
-            if (findMember != null) {
-                /*判斷是否有經過驗證,有經驗證的驗證碼欄位會清空*/
-                if (string.IsNullOrWhiteSpace(findMember.AuthCode)) {
-                    /*密碼確認*/
-                    if (CheckPassword(findMember,Password)) {
-                        /*密碼確認成功回傳空字串*/
-                        return string.Empty;
-                    }else {
-                        return "密碼輸入錯誤！";
+                /*判斷是否有此會員*/
+                if (findMember != null) {
+                    /*判斷是否有經過驗證,有經驗證的驗證碼欄位會清空*/
+                    if (string.IsNullOrWhiteSpace(findMember.AuthCode)) {
+                        /*密碼確認*/
+                        if (CheckPassword(findMember, Password)) {
+                            /*密碼確認成功回傳空字串*/
+                            return string.Empty;
+                        } else {
+                            return "密碼輸入錯誤！";
+                        }
+                    } else {
+                        return "此帳號尚未經過Email驗證,請至您註冊的信箱完成啟用！";
                     }
-                }else {
-                    return "此帳號尚未經過Email驗證,請至您註冊的信箱完成驗證！";
+                } else {
+                    /*simon 11/01 14:32 還沒使用到 應該是catch已執行*/
+                    return "無此會員帳號3";
                 }
-            } else {
+            } catch(ArgumentNullException) {
+                /*僅輸入帳號 無法執行該query時的例外拋出*/
+                return "請輸入您的密碼！";
+            } catch(InvalidOperationException) {
+                /*查詢不到該筆會員帳號時的例外拋出*/
                 return "無此會員帳號！";
             }
         }
         #endregion
-        #region 密碼確認
+        #region 密碼確認 OK
         /*傳入Member.Password 和使用者輸入的Password*/
         public bool CheckPassword(Member CheckMember, string Password) {
             /*比對是否與資料庫的密碼與Has過的密碼是否一樣*/
