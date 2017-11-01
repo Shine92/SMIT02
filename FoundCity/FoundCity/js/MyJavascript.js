@@ -5,8 +5,8 @@
 var cheackResult = 0;
 
 $(document).ready(function () {
-    /*驗證帳號*/
-    $("input[name='Account']").blur(function () {
+    /*驗證帳號 後代選擇器*/
+    $("#RegisterAccountCol input[name='Account']").blur(function () {
         /*宣告格式*/
         var checkEmailRegex = new RegExp("\\w+([.-]\\w+)*@\\w+([.-]\\w+)+", "gi");
         /*欄位資料*/
@@ -18,7 +18,7 @@ $(document).ready(function () {
         /*格式不符時 cheackResult為1*/
         if (!result) {
             cheackResult = 1;
-            $("input[name='Account']").select();
+            $("#RegisterAccountCol input[name='Account']").select();
             $("#info #infoMsg").text("電子信箱格式不符");
             console.log("cheackResult:" + cheackResult);
         }
@@ -76,13 +76,13 @@ $(document).ready(function () {
             console.log("cheackResult:" + cheackResult);
         }
     });
-    /*驗證密碼格式*/
-    $("input[name='Password']").blur(function () {
+    /*驗證密碼格式 後代選擇器*/
+    $("#RegisterPasswordCol input[name='Password']").blur(function () {
         var checkUserPwd = new RegExp("^(?=.*\\w)(?=.*[a-z])(?=.*[A-Z]).{6,12}$");
         var data = $.trim($("#UserPwd").val());
         var result = checkUserPwd.test(data);
         if (!result) {
-            $("input[name='Password']").select();
+            $("#RegisterPasswordCol input[name='Password']").select();
             $("#info #infoMsg").text("密碼輸入格式不符");
             console.log("result:" + result);
         } else {
@@ -132,11 +132,23 @@ $(document).ready(function () {
     });
     /*LoginBtn*/
     $("#LoginBtn").click(function () {
-       // if ($("#LoginRemeber").is(':checked')) {
-       //     $("#LoginRemeber").attr("value", "true");
-       // } else if($("#LoginRemeber").not(':checked')) {
+        var loginAccount = $.trim($("#LoginAccount").val());
+        var loginPassword = $.trim($("#LoginPassword").val());
+        if(loginAccount == null || loginAccount == ""){
+            alert("登入錯誤:請輸入帳號");
+            return false;
+        }else if (loginPassword == null || loginPassword == ""){
+            alert("登入錯誤:請輸入密碼");
+            return false;
+        } else {
+            return true;
+        }
 
-       //}
+        if ($("#LoginRemeber").is(':checked')) {
+            $("#LoginRemeberResult").attr("value", "true");
+        } else if($("#LoginRemeber").not(':checked')) {
+            $("#LoginRemeberResult").attr("value", "false");
+       }
     });
 });
 

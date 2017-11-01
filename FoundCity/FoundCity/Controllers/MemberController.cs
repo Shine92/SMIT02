@@ -9,6 +9,7 @@ using System.Web.Security;
 
 namespace FoundCity.Controllers {
     public class MemberController : Controller {
+        MemberLoginViewModelcs LoginData = new MemberLoginViewModelcs();
         Member MemberData = new Member();
         CMemberService memberService = new CMemberService();
         CMailService mailService = new CMailService();
@@ -32,9 +33,9 @@ namespace FoundCity.Controllers {
         public ActionResult Login() {
             /*判斷使用者是否已經登入*/
             if(User.Identity.IsAuthenticated){
-                return Content("已經登入");
+                return RedirectToAction("Index","Home");
             } else {
-                return View();
+                return View(LoginData);
             }
         }
 
@@ -43,10 +44,6 @@ namespace FoundCity.Controllers {
         [HttpPost]
         public ActionResult Login(MemberLoginViewModelcs loginMember) {
 
-            /*simon 1031 17:03 暫時註解*/
-            //if (Request["Remember"].Equals("true")) {
-            //    return Content("true");
-            //}
             /*驗證帳號密碼*/
             string ValidateStr = memberService.LoginCheck(loginMember.Account, loginMember.Password);
 
@@ -54,17 +51,32 @@ namespace FoundCity.Controllers {
             if (string.IsNullOrEmpty(ValidateStr)) {
                 /*取得登入角色*/
                 string roleDate = memberService.GetRole(loginMember.Account);
-                /*新增一個登入用Ticket*/
-                /*參考網址:toyo0103.blogspot.tw/2013/09/cformsauthentication.html*/
-                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, loginMember.UserName, DateTime.Now, DateTime.Now.AddMinutes(30), false, FormsAuthentication.FormsCookiePath);
-                /*資料加密*/
-                string enTicket = FormsAuthentication.Encrypt(ticket);
-                /*資料存入Cookies*/
-                Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName,enTicket));
+
+                /*simon 1031 17:03 暫時註解*/
+                if (Request["LoginRemeberResult"].Equals("true")) {
+                    /*新增一個登入用Ticket*/
+                    /*參考網址:toyo0103.blogspot.tw/2013/09/cformsauthentication.html*/
+                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, loginMember.Account, DateTime.Now, DateTime.Now.AddDays(3), true,roleDate, FormsAuthentication.FormsCookiePath);
+                    /*資料加密*/
+                    string enTicket = FormsAuthentication.Encrypt(ticket);
+                    /*資料存入Cookies*/
+                    Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, enTicket));
+                    /*註1:使用下面程式才能保留cookie,否則瀏覽器關閉後即登出 註2:使用下面程式需變更web.config => defaultUrl路徑,否則導回Index.aspx*/
+                    FormsAuthentication.SetAuthCookie(loginMember.Account, true);
+                } else {
+                    /*新增一個登入用Ticket*/
+                    /*參考網址:toyo0103.blogspot.tw/2013/09/cformsauthentication.html*/
+                    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, loginMember.Account, DateTime.Now, DateTime.Now.AddMinutes(30), false,roleDate, FormsAuthentication.FormsCookiePath);
+                    /*資料加密*/
+                    string enTicket = FormsAuthentication.Encrypt(ticket);
+                    /*資料存入Cookies*/
+                    /*瀏覽器關閉後即登出*/
+                    Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, enTicket));
+                }
+                return Content("登入成功!" + FormsAuthentication.FormsCookieName);
                 //return RedirectToAction("Index","Home");
-                return Content("登入成功");
             }else {
-                ModelState.AddModelError("", ValidateStr);
+                ModelState.AddModelError("LoginError", ValidateStr);
                 return View(loginMember);
             }
         }
