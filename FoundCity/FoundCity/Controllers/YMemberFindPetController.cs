@@ -13,24 +13,13 @@ namespace FoundCity.Controllers
     public class YMemberFindPetController : ApiController
     {
         private NewPetEntities db = new NewPetEntities();
+        CMemberService memberService = new CMemberService();
 
         public List<FindPet> GetYMemberFindPet() {
+            //CookieHeaderValue cookie = Request.Headers.GetCookies("uid").FirstOrDefault();
 
-            CookieHeaderValue cookie = Request.Headers.GetCookies("uid").FirstOrDefault();
-
-            //if (cookie == null)
-            //{
-            //    var query = from o in db.FindPets
-            //                orderby o.PetId descending
-            //                select o;
-
-            //    var viewData = query.ToList();
-            //    return viewData;
-            //}
-            //else
-            //{
             //CreatorId
-            int uid = Convert.ToInt32(cookie["uid"].Value);
+            int uid = Convert.ToInt32(memberService.GetMemberId(User.Identity.Name));
             var query = from o in db.FindPets
                         where o.CreatorId == uid
                         orderby o.PetId descending
@@ -38,8 +27,20 @@ namespace FoundCity.Controllers
 
             var viewData = query.ToList();
             return viewData;
-            //}
-            //}
+
+            
+            
+            //CookieHeaderValue cookie = Request.Headers.GetCookies("uid").FirstOrDefault();
+
+            ////CreatorId
+            //int uid = Convert.ToInt32(cookie["uid"].Value);
+            //var query = from o in db.FindPets
+            //            where o.CreatorId == uid
+            //            orderby o.PetId descending
+            //            select o;
+
+            //var viewData = query.ToList();
+            //return viewData;
 
         }
     }

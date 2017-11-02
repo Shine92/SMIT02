@@ -30,18 +30,6 @@
     <br />
     <div><button type="button" id="addFindPetButton" class="btn btn-default">新增</button></div>
 
-    <div class="row" id="findPetList">
-
-        @*<div class="col-sm-3">
-                <img src="~/image/p1.jpg" class="img-thumbnail" alt="Cinque Terre" width="720" height="472">
-
-                <br />2017-11-10<br />
-                台北市內湖區舊宗路<br /><br />
-            </div>*@
-
-    </div>
-    @*test*@
-    @*<span class="pull-right"><button class="btn btn-info btn-xs editItem"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;<button class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span>*@
     <form method="post" action="" enctype="multipart/form-data">
         <div id="accordion">
             <h4 id="acc_header">@((Request.Cookies["findPetBtn"].Value == "-1") ? "新增" : "修改")</h4>
@@ -62,7 +50,6 @@
                                    class="form-control"
                                    @*value="@TempData["PetPhoto"]"*@
                                    placeholder="請輸入檔名" />
-
                         </h3>
                     </div>
 
@@ -79,7 +66,6 @@
                             <input type="radio" name="Species" value="貓"> 貓
                             <input type="radio" name="Species" value="其他"> 其他
                         </h3>
-
                         <h3>
                             <label for="sizeTextBox">
                                 <span class="glyphicon glyphicon-record"></span>
@@ -90,7 +76,6 @@
                             <input type="radio" name="Size" value="中型"> 中型
                             <input type="radio" name="Size" value="大型"> 大型
                         </h3>
-
                         <h3>
                             <label for="sexTextBox">
                                 <span class="glyphicon glyphicon-record"></span>
@@ -101,7 +86,6 @@
                             <input type="radio" name="Sex" value="母"> 母
                             <input type="radio" name="Sex" value="未知"> 未知
                         </h3>
-
                         <h3>
                             <label for="ageTextBox">
                                 <span class="glyphicon glyphicon-record"></span>
@@ -111,7 +95,6 @@
                             <input type="radio" name="Age" value="成年" checked> 成年
                             <input type="radio" name="Age" value="幼年"> 幼年
                         </h3>
-
                         <h3>
                             <label for="hairColorTextBox">
                                 <span class="glyphicon glyphicon-record"></span>
@@ -128,7 +111,6 @@
                             </select>
                         </h3>
                     </div>
-
                     <div class="col-sm-5">
                         <h3>
                             <label for="lostDateTextBox">
@@ -141,7 +123,6 @@
                                    class="form-control"
                                    placeholder="yyyy-mm-dd " />
                         </h3>
-
                         <h3>
                             <label for="lostPlaceTextBox">
                                 <span class="glyphicon glyphicon-map-marker"></span>
@@ -172,7 +153,6 @@
                                 聯絡人
                             </label>
                         </h3>
-
                         <div style="margin-left:30%;">
                             <h3>
                                 <input type="text"
@@ -180,7 +160,6 @@
                                        class="form-control"
                                        placeholder="聯絡人" />
                             </h3>
-
                             <h3>
                                 <label for="contactSexTextBox">
                                     @*<span class="glyphicon glyphicon-time"></span>*@
@@ -190,7 +169,6 @@
                                 <input type="radio" name="ContactSex" value="男" checked> 男
                                 <input type="radio" name="ContactSex" value="女"> 女
                             </h3>
-
                             <h3>
                                 <label for="contactTelTextBox">
                                     @*<span class="glyphicon glyphicon-time"></span>*@
@@ -204,7 +182,6 @@
                             </h3>
                         </div>
                     </div>
-
                     <div class="col-sm-5">
                         <h3>
                             <label for="characteristicTextBox">
@@ -221,7 +198,6 @@
                                 placeholder="備註" />*@
                         </h3>
                     </div>
-
                     <div class="col-sm-2"></div>
 
                     @*....................col-sm-r2........2.............................*@
@@ -232,6 +208,7 @@
                                 class="btn btn-success">
                             <span class="glyphicon glyphicon-ok"></span> 確定
                         </button>
+                        <input type="hidden" id="MemberId" value="@ViewData["MemberId"]" />
                         <button type="button"
                                 id="cancelButton"
                                 class="btn btn-default"
@@ -372,7 +349,6 @@
                 //    readURL(this);
                 //});
 
-
                 //載入County
                 function selectCountry() {
                     $("#lostPlace2").empty();
@@ -388,7 +364,6 @@
                             }
                             $("#lostPlace1").append(sRows);
 
-                            //alert(data[0]);
                             //$("#debug").text(JSON.stringify(data));
                         },
                         error: function (error) {
@@ -398,10 +373,9 @@
 
                 }
 
-
                 //載入Area,含code
                 function selectArea() {
-                    //btnClean();
+
                     $.ajax({
                         url: "/Street/Area",
                         type: "POST",
@@ -413,9 +387,7 @@
                             $("#lostPlace2").empty();
                             $.each(data, function (index, obj) {
                                 var sRows = "";
-
-                                sRows += "<option value='" + obj.mailcode + "'>" + obj.country + "</option>"
-
+                                sRows += "<option value='" + obj.mailcode + "'>" + obj.country + "</option>";
                                 $("#lostPlace2").append(sRows);
 
                             })
@@ -431,7 +403,7 @@
 
                 //載入Road
                 function selectRoad() {
-                    //btnClean();
+
                     $.ajax({
                         url: "/Street/Road",
                         type: "POST",
@@ -443,11 +415,8 @@
                             $("#lostPlace3").empty();
                             $.each(data, function (index, obj) {
                                 var sRows = "";
-
-                                sRows += "<option value='" + obj.road + "'>" + obj.road + "</option>"
-
+                                sRows += "<option value='" + obj.road + "'>" + obj.road + "</option>";
                                 $("#lostPlace3").append(sRows);
-
                             })
 
                             //alert(JSON.stringify(data));
@@ -494,14 +463,8 @@
                         $("#lostPlace3").removeClass("file_hidden");
                         setTimeout("selectRoad()", 200);
                         setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3").val())', 500);
-
-                        //alert(sp2);
                     }
                 });
-
-                function refreshNewsUI() {
-                    //$("#accordion").empty();
-                }
 
                 function loadAndRefreshUI() {
 
@@ -558,48 +521,41 @@
                     setCookie("findPetBtn", currentIndex, 1);
                     $("#acc_header").empty();
                     $("#acc_header").append('<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-s"></span>'+'新增');
-                    alert(currentIndex);
 
                     $("#petphoto").empty();
                     $("#showImg").empty();
                     $("#petphoto").attr('src', '');
                     $("#petPhotoTextBox").val("");
-
                     $("#characteristicTextBox").val("");
-
                     $("#lostDateTextBox").val("");
                     $("#lostPlaceTextBox").val("");
                     $("#contactManTextBox").val("");
                     $("#contactTelTextBox").val("");
-
                 })
 
+                //取消:導頁
                 $("#cancelButton").click(function () {
                     window.location.href = 'MemberFindPet';
                 })
 
                 //確認(編輯/新增)
-
                 $("#okButton").click(function () {
 
                     if (getCookie("findPetBtn") >= 0) { // edit
-                    //    //newsList[currentIndex].title = $("#titleTextBox").val();
-                    //    //newsList[currentIndex].ymd = $("#ymdTextBox").val();
-                    //    //refreshNewsUI();
+
                         alert("test_updateData:(" + $("#lostPlace2 option:selected").text() + "," + $("#lostPlace3").val() + ")");
                         var updateData = {
 
                             PetId: getCookie("findPetBtn"),
 
                             PetPhoto: $("#petPhotoTextBox").val(),
-                            CreatorId: getCookie("uid"),
+                            CreatorId: debug.CreatorId,
                             Species: $('input[name=Species]:checked').val(),
                             Size: $('input[name=Size]:checked').val(),
                             Age: $('input[name=Age]:checked').val(),
                             HairColor: $("#hairColorTextBox option:selected").text(),
                             Sex: $('input[name=Sex]:checked').val(),
                             Characteristic: $("#characteristicTextBox").val(),
-
 
                             LostDate: $("#lostDateTextBox").val(),
                             LostPlace1: $("#lostPlace1").val(),
@@ -622,13 +578,10 @@
                             url: '/api/FindPets/' + getCookie("findPetBtn"),
                             type: 'PUT',
                             data: JSON.stringify(updateData),
-                            //dataType:'JSON',
-                            //data: updateData,
                             contentType: "application/json;charset=utf-8",
 
                             //function無執行(error)
                             success: function () {
-                                //loadAndRefreshUI();
                                 //alert("edit Done");
                                 window.location.href = 'MemberFindPet';
                             },
@@ -637,11 +590,7 @@
                             }
                         });
 
-                        alert("end_edit");
-
-                    //    //$("#findPetModal").modal("hide");
-                    //    //showToast("Information", "Edit Index = " + currentIndex);
-
+                        //alert("end_edit");
                     }
 
                     else {
@@ -652,7 +601,7 @@
                         var newItem = {
 
                             PetPhoto: $("#petPhotoTextBox").val(),
-                            CreatorId: getCookie("uid"),
+                            CreatorId: $("#MemberId").val(),
                             Species: $('input[name=Species]:checked').val(),
                             Size: $('input[name=Size]:checked').val(),
                             Age: $('input[name=Age]:checked').val(),
@@ -686,7 +635,6 @@
 
                             //function無執行(error)
                             success: function (data) {
-                                //refreshNewsUI()
                                 //console.log("new1");
                                 //alert("success new");
                                 window.location.href = 'MemberFindPet';
@@ -697,7 +645,7 @@
                             }
                         });
 
-                        alert("already_new");
+                        //alert("already_new");
 
                     }
                 })

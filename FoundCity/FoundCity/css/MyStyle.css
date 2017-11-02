@@ -179,7 +179,7 @@
     height: 630px;
 }
 
-/*loading效果 10/30 尚未使用*/
+member_profile/*loading效果 10/30 尚未使用*/
 .glyphicon-refresh-animate {
     -animation: spin .7s infinite linear;
     -webkit-animation: spin2 .7s infinite linear;

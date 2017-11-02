@@ -196,6 +196,7 @@
     <Compile Include="Controllers\FindPetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\PetController.cs" />
     <Compile Include="Controllers\RadarController.cs" />
     <Compile Include="Controllers\StreetController.cs" />
