@@ -186,15 +186,17 @@ namespace FoundCity.Controllers {
             return View();
         }
         #endregion
-        #region 測試
+        #region 測試會員Id加密 OK
         public ActionResult test() {
             var MemberLoginId = string.Empty;
+            var HashMemberLoginId = string.Empty;
             /*判斷是否經過登入驗證*/
             if (ModelState.IsValid) {
                 /*取得會員Id 提供新增資料使用*/
                  MemberLoginId = memberService.GetMemberId(User.Identity.Name);
+                HashMemberLoginId = memberService.GetHashMemberId(User.Identity.Name);
             }
-            return Content("result: " + MemberLoginId);
+            return Content("result1: " + MemberLoginId + " " + "result2:" + HashMemberLoginId);
         }
         #endregion
     }

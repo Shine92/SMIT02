@@ -201,4 +201,3 @@ D:\Github\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.resources.dll
 D:\Github\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.WebHost.resources.dll
 D:\Github\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.dll
 D:\Github\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.pdb
-D:\Github\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csprojResolveAssemblyReference.cache
