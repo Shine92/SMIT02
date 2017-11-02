@@ -164,21 +164,66 @@ namespace FoundCity.Models {
             }
         }
         #endregion
-        #region 取得會員Id OK
+        #region 取得Hash會員Id OK
         /*傳入User.Identity.Name 取得會員Id*/
-        public string GetMemberId(string UserName) {
-            /*設定初值為空字串*/
-            var MemberId = string.Empty;
+        public string GetHashMemberId(string UserName) {
+            /*宣告會員Id為空字串*/
+            var memberId = string.Empty;
+            /*宣告回傳值為空字串*/
+            var HashMemberIdResult = string.Empty;
             /*取得會員資料*/
             var query = from o in db.Members
                         where o.Account.Equals(UserName)
                         select o;
             /*得到會員Id*/
             foreach (var item in query) {
-                MemberId = Convert.ToString(item.Id);
-            } 
-            /*回傳會員Id*/
-            return MemberId;
+                memberId = Convert.ToString(item.Id);
+            }
+            /*將會員Id經過SHA1加密*/
+            HashMemberIdResult = HashMemberId(memberId);
+            /*回傳加密後的會員Id*/
+            return HashMemberIdResult;
+            
+        }
+        #endregion
+        #region 會員Id Hash OK
+        public string HashMemberId(string MemberId) {
+            /*宣告初值*/
+            string hasResult = string.Empty;
+            /*宣告Hash時所添加的無意義雜湊值*/
+            string hashKey = "HuAnGShA0M1nGl992O326";
+            /*把密碼和無意義雜湊值結合*/
+            string hashAndUserName = string.Concat(MemberId, hashKey);
+            /*宣告SHA1物件*/
+            SHA1CryptoServiceProvider sha1Hasher = new SHA1CryptoServiceProvider();
+            /*取得密碼轉成byte資料*/
+            byte[] passwordData = Encoding.Default.GetBytes(hashAndUserName);
+            /*取得Hash後的byte資料*/
+            byte[] HashData = sha1Hasher.ComputeHash(passwordData);
+            /*將Hash過的byte資料轉成string*/
+            for (int i = 0; i < HashData.Length; i++) {
+                hasResult += HashData[i].ToString("x2");
+            }
+            /*回傳Hash過的會員Id 提供jQuery使用*/
+            return hasResult;
+
+        }
+        #endregion
+        #region 取得會員Id OK
+        public string GetMemberId(string UserName) {
+            /*宣告會員Id為空字串*/
+            var memberId = string.Empty;
+            /*宣告回傳值為空字串*/
+            var HashMemberIdResult = string.Empty;
+            /*取得會員資料*/
+            var query = from o in db.Members
+                        where o.Account.Equals(UserName)
+                        select o;
+            /*得到會員Id*/
+            foreach (var item in query) {
+                memberId = Convert.ToString(item.Id);
+            }
+            return memberId;
         }
         #endregion
     }
