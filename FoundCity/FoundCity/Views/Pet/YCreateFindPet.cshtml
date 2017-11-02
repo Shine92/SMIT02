@@ -232,6 +232,7 @@
                                 class="btn btn-success">
                             <span class="glyphicon glyphicon-ok"></span> 確定
                         </button>
+                        <input type="hidden" id="MemberId" value="@ViewData["MemberId"]"/>
                         <button type="button"
                                 id="cancelButton"
                                 class="btn btn-default"
@@ -652,7 +653,7 @@
                         var newItem = {
 
                             PetPhoto: $("#petPhotoTextBox").val(),
-                            CreatorId: getCookie("uid"),
+                            CreatorId: $("#MemberId").val(),
                             Species: $('input[name=Species]:checked').val(),
                             Size: $('input[name=Size]:checked').val(),
                             Age: $('input[name=Age]:checked').val(),
