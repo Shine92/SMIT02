@@ -263,7 +263,7 @@
   color:#555;
   font-family: Microsoft JhengHei;
   font-weight: bold;
-  font-size:50px;
+  font-size:70px;
   padding-top:30vh;
   height:700px;
   overflow:hidden;
@@ -279,17 +279,17 @@
 }
 
 #rPrompt div:first-of-type {
-  animation: showup 5s infinite;
+  animation: showup 7s infinite;
 }
 
 #rPrompt div:last-of-type {
   width:0px;
-  animation: reveal 5s infinite;
+  animation: reveal 7s infinite;
 }
 
 #rPrompt div:last-of-type span {
   margin-left:-355px;
-  animation: slidein 5s infinite;
+  animation: slidein 7s infinite;
 }
 
 @keyframes showup {
@@ -309,7 +309,7 @@
 @keyframes reveal {
     0% {opacity:0;width:0px;}
     20% {opacity:1;width:0px;}
-    30% {width:500px;}
+    30% {width:650px;}
     80% {opacity:1;}
-    100% {opacity:0;width:500px;}
+    100% {opacity:0;width:650px;}
 }

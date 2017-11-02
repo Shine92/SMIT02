@@ -31,27 +31,26 @@ function rDetect() {
         // HTML5 定位抓取
         navigator.geolocation.getCurrentPosition(function (position) {
             mapServiceProvider(position.coords.latitude, position.coords.longitude);
-            console.log(position.coords.latitude + "|" + position.coords.longitude);
         },
-        function (error) {
-            switch (error.code) {
-                case error.TIMEOUT:
-                    enterAddress('很抱歉，連線逾時，');
-                    break;
+            function (error) {
+                switch (error.code) {
+                    case error.TIMEOUT:
+                        enterAddress('很抱歉，連線逾時，');
+                        break;
 
-                case error.POSITION_UNAVAILABLE:
-                    enterAddress('無法取得您的位置，');
-                    break;
-                    XMLDocument
-                case error.PERMISSION_DENIED: // 拒絕
-                    enterAddress('由於您封鎖我們取得您位置的權限，');
-                    break;
+                    case error.POSITION_UNAVAILABLE:
+                        enterAddress('無法取得您的位置，');
+                        break;
+                        XMLDocument
+                    case error.PERMISSION_DENIED: // 拒絕
+                        enterAddress('由於您封鎖我們取得您位置的權限，');
+                        break;
 
-                case error.UNKNOWN_ERROR:
-                    enterAddress('因為發生不明的錯誤，');
-                    break;
-            }
-        });
+                    case error.UNKNOWN_ERROR:
+                        enterAddress('因為發生不明的錯誤，');
+                        break;
+                }
+            });
     } else { // 不支援 HTML5 定位
         // 若支援 Google Gears
         if (window.google && google.gears) {
@@ -92,11 +91,16 @@ function enterAddress(msg) {
     else
         rP = prompt("請手動輸入地址");
 
-
-    if (rP != null && rP.trim.length != 0) {
-        initLatlng(rP);
+    if (rP != null) {
+        if (rP.trim().length != 0) {
+            initLatlng(rP);
+        } else {
+            enterAddress("地址不得為空白");
+        }
     } else {
-
+        if (confirm("台中市南屯區公益路二段51號")) {
+            initLatlng("台中市南屯區公益路二段51號");
+        }
     }
 }
 
@@ -112,12 +116,8 @@ function initLatlng(userAddress) {
             initMAP(myLatlng);
         }
         else {
-            if (prompt("定位失敗,請重新搜尋地址", userAddress)) {
+            if (prompt("定位失敗,請重新搜尋地址", userAddress))
                 initLatlng(userAddress);
-            }
-            else {
-                enterAddress();
-            }
         }
     });
 }
@@ -264,6 +264,9 @@ function initRange() {
             }, rangeCallBack);
             break
 
+        default:
+            break;
+
     }
 
 }
@@ -297,7 +300,7 @@ function Schedule(aryRow, data, num, maxNum) {
     elem.style.width = '1%';
     $("#rRatio").html("0");
 
-    var myDetail = setInterval(initDetail, 200);
+    var myDetail = setInterval(initDetail, 500);
 
     function initDetail() {
         if (num < maxNum) {
@@ -356,8 +359,8 @@ function Schedule(aryRow, data, num, maxNum) {
             $("#rScheduleBar").hide();
             $('#rResult_Content').empty();
 
-            aryRow = aryRow.sort(function (x,y) {
-                return x.dist > y.dist ? 1: -1;
+            aryRow = aryRow.sort(function (x, y) {
+                return x.dist > y.dist ? 1 : -1;
             });
 
             $.each(aryRow, function (index, vul) {
@@ -399,39 +402,39 @@ function rResultView(aryRow) {
             $('<article>').addClass('timeline-entry').append(
                 $('<div>').addClass('timeline-entry-inner').append(
                     $('<div>').addClass('timeline-icon ' + statusIconColor).append(
-                            $('<i>').addClass('entypo-feather')),
-                            $('<div>').addClass('timeline-label').on("click", function (e) {
+                        $('<i>').addClass('entypo-feather')),
+                    $('<div>').addClass('timeline-label').on("click", function (e) {
 
-                                setMapOnAll(null);
+                        setMapOnAll(null);
 
-                                var markerA = new google.maps.Marker({
-                                    position: rLatlng,
-                                    icon: '../images/Radar_Home.png'
-                                });
-                                rMarkers.push(markerA);
-                                markerA.setMap(rMap);
+                        var markerA = new google.maps.Marker({
+                            position: rLatlng,
+                            icon: '../images/Radar_Home.png'
+                        });
+                        rMarkers.push(markerA);
+                        markerA.setMap(rMap);
 
-                                var markerB = new google.maps.Marker({
-                                    position: new google.maps.LatLng(aryRow["lat"], aryRow["lng"]),
-                                    animation: google.maps.Animation.BOUNCE
-                                });
+                        var markerB = new google.maps.Marker({
+                            position: new google.maps.LatLng(aryRow["lat"], aryRow["lng"]),
+                            animation: google.maps.Animation.BOUNCE
+                        });
 
-                                rMarkers.push(markerB);
-                                markerB.setMap(rMap);
+                        rMarkers.push(markerB);
+                        markerB.setMap(rMap);
 
-                                $("#rRange").html(aryRow["dist"]);
+                        $("#rRange").html(aryRow["dist"]);
 
-                            }).append(
-                                $('<article>').addClass(statusTitleColor).append(
-                                     $('<div>').addClass('panel-heading').append(
-                                         $('<a>').addClass('rResult_Content_Title').html(aryRow["name"] + "<br>")),
-                                      $('<div>').addClass('panel-body').append(
-                                         $('<font>').addClass('rResult_Content_Text').html(statusText + "<br>")),
-                                      $('<div>').addClass('panel-footer').append(
-                                        $('<font>').addClass('rResult_Content_Text').html("電話：" + ((aryRow["tel"] != null) ? aryRow["tel"] : "店家未提供電話") + "<br>")),
-                                      $('<div>').addClass('panel-body').append(
-                                         $('<font>').addClass('rResult_Content_Text').html("地址：" + aryRow["address"] + "<br>"))
-                            ))))));
+                    }).append(
+                        $('<article>').addClass(statusTitleColor).append(
+                            $('<div>').addClass('panel-heading').append(
+                                $('<a>').addClass('rResult_Content_Title').html(aryRow["name"] + "<br>")),
+                            $('<div>').addClass('panel-body').append(
+                                $('<font>').addClass('rResult_Content_Text').html(statusText + "<br>")),
+                            $('<div>').addClass('panel-footer').append(
+                                $('<font>').addClass('rResult_Content_Text').html("電話：" + ((aryRow["tel"] != null) ? aryRow["tel"] : "店家未提供電話") + "<br>")),
+                            $('<div>').addClass('panel-body').append(
+                                $('<font>').addClass('rResult_Content_Text').html("地址：" + aryRow["address"] + "<br>"))
+                        ))))));
 }
 
 function viewMap(aryRow) {
@@ -508,3 +511,6 @@ function rClaim() {
 
 }
 
+function rEnter() {
+    enterAddress();
+}

@@ -27,15 +27,23 @@
         <div class="title_line"></div>
 
         <h5>
-            <small><b>站內資料</b></small>
+            <small><b>站內資訊</b></small>
         </h5>
         <ul class="sidebar-nav nav">
-            <li><a>尋寵啟示</a></li>
-            <li><a>拾獲通報</a></li>
-            <li><a>認養資訊</a></li>
+            <li onclick="rFind()"><a>尋寵啟示</a></li>
+            <li onclick="rPick()"><a>拾獲通報</a></li>
+            <li onclick="rClaim()"><a>認養資訊</a></li>
         </ul>
 
         <div class="title_line"></div>
+
+        <h5>
+            <small><b>其他功能</b></small>
+        </h5>
+        <ul class="sidebar-nav nav">
+            <li onclick="rEnter()"><a>手動搜尋</a></li>
+        </ul>
+
     </div>
 
     <div id="line"></div>
@@ -43,7 +51,7 @@
     <div id="rPrompt">
         <div>左邊！</div>
         <div>
-            <span>可選擇您要搜尋的項目</span>
+            <span>點選您要搜尋的項目</span>
         </div>
     </div>
 
