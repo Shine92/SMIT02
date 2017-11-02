@@ -5,7 +5,7 @@
 }
 
 <script src="~/js/mycookie.js"></script>
-<link rel="stylesheet" href="~/css/MyStyle.css">
+@*<link rel="stylesheet" href="~/css/MyStyle.css">*@
 <style type="text/css">
     .selection_hidden {
         display: none;
@@ -14,8 +14,12 @@
 <div id="page">
     <div id="memberTab" class="container">
         <ul class="nav nav-tabs">
-            <li class="" id="addFindPetButton"><a href="~/Pet/YCreateFindPet">新增</a></li>
-            <li class="" id="linkMemberFindPetButton"><a href="~/Pet/MemberFindPet">我的發佈</a></li>
+
+            @*登入成功才顯示*@
+            @if (ViewData["LoginCheckResult"].ToString() == "true") {
+                <li class="selection_hidden" id="addFindPetButton"><a href="~/Pet/YCreateFindPet">新增</a></li>
+                <li class="selection_hidden" id="linkMemberFindPetButton"><a href="~/Pet/MemberFindPet">我的發佈</a></li>
+            }
             <li class="" id="picks"><a href="#">搜尋</a></li>
 
         </ul>
@@ -182,7 +186,7 @@
 
     @*.......................debug.........................*@
     <div id="debug"></div>
-
+    <input type="hidden" id="LoginCheck" value="@ViewData["LoginCheckResult"]" />
 </div>
 <script>
 
@@ -342,42 +346,44 @@
                                 //alert(count);
                             })
 
-                            //FindPet首頁載入function2:petPhoto_click(要加權限)
+                            //FindPet首頁載入function2:petPhoto_click(要加權限,暫用ViewData代替)
                             $(".petPhoto").on("click", function (e) {
-                                //var iIndex = $(this).parent().parent().index();
-                                var iIndex = $(this).closest("div").index();
-                                //alert(iIndex);
+                                //登入成功才會有反應(顯示)
+                                if ($("#LoginCheck").val()=="true") {
+                                    //var iIndex = $(this).parent().parent().index();
+                                    var iIndex = $(this).closest("div").index();
+                                    //alert(iIndex);
 
-                                var sRowsImg = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='50%' height='40%' style='margin-left:25%;'>"
-                                $("#showImg2").empty();
-                                $("#showImg2").append(sRowsImg);
+                                    var sRowsImg = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='50%' height='40%' style='margin-left:25%;'>"
+                                    $("#showImg2").empty();
+                                    $("#showImg2").append(sRowsImg);
 
-                                var sRowsFindPet =
-                                    "<div class='col-sm-12'></div>"
-                                    + "<div class='col-sm-2'></div>"
-                                    + "<div class='col-sm-3'>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>物種:" + debug[iIndex].Species + "</h4>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>體型:" + debug[iIndex].Size + "</h4>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>性別:" + debug[iIndex].Sex + "</h4>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>年紀:" + debug[iIndex].Age + "</h4>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>毛色:" + debug[iIndex].HairColor + "</h4>"
-                                    + "</div>"
-                                    + "<div class='col-sm-7'>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-time'></span>走失日期:" + debug[iIndex].LostDate + "</h4>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-map-marker'></span>走失地點:" + debug[iIndex].LostPlace1 + debug[iIndex].LostPlace2 + debug[iIndex].LostPlace3 + "</h4>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-user'></span>聯絡人:" + debug[iIndex].ContactMan + "</h4>"
-                                    + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人性別:" + debug[iIndex].ContactSex + "</h4>"
-                                    + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人電話:" + debug[iIndex].ContactTel + "</h4>"
-                                    + "</div>"
-                                    + "<div class='col-sm-7'>&nbsp;</div>"
-                                    + "<div class='col-sm-2'></div>"
-                                    + "<div class='col-sm-6'>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-bullhorn'></span>備註:" + debug[iIndex].Characteristic + "</h4>"
-                                    + "</div>"
-                                $("#showImg2").append(sRowsFindPet);
+                                    var sRowsFindPet =
+                                        "<div class='col-sm-12'></div>"
+                                        + "<div class='col-sm-2'></div>"
+                                        + "<div class='col-sm-3'>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>物種:" + debug[iIndex].Species + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>體型:" + debug[iIndex].Size + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>性別:" + debug[iIndex].Sex + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>年紀:" + debug[iIndex].Age + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>毛色:" + debug[iIndex].HairColor + "</h4>"
+                                        + "</div>"
+                                        + "<div class='col-sm-7'>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-time'></span>走失日期:" + debug[iIndex].LostDate + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-map-marker'></span>走失地點:" + debug[iIndex].LostPlace1 + debug[iIndex].LostPlace2 + debug[iIndex].LostPlace3 + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-user'></span>聯絡人:" + debug[iIndex].ContactMan + "</h4>"
+                                        + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人性別:" + debug[iIndex].ContactSex + "</h4>"
+                                        + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人電話:" + debug[iIndex].ContactTel + "</h4>"
+                                        + "</div>"
+                                        + "<div class='col-sm-7'>&nbsp;</div>"
+                                        + "<div class='col-sm-2'></div>"
+                                        + "<div class='col-sm-6'>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-bullhorn'></span>備註:" + debug[iIndex].Characteristic + "</h4>"
+                                        + "</div>"
+                                    $("#showImg2").append(sRowsFindPet);
 
-                                $("#findPetModal2").modal({ backdrop: "static" });
-
+                                    $("#findPetModal2").modal({ backdrop: "static" });
+                                }
                             })
 
                         },
@@ -442,42 +448,45 @@
 
                             })
 
-                            //搜尋get後function2:petPhoto_click(要加權限)
+                            //搜尋get後function2:petPhoto_click(要加權限,暫用ViewData代替)
                             $(".petPhoto").on("click", function (e) {
-                                //var iIndex = $(this).parent().parent().index();
+                                //登入成功才顯示
+                                if ($("#LoginCheck").val() == "true") {
+                                    //var iIndex = $(this).parent().parent().index();
 
-                                var iIndex = $(this).closest("div").index();
+                                    var iIndex = $(this).closest("div").index();
+                                    //alert(iIndex);
+                                    var sRowsImg = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='50%' height='40%' style='margin-left:25%;'>"
+                                    $("#showImg2").empty();
+                                    $("#showImg2").append(sRowsImg);
 
-                                var sRowsImg = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='50%' height='40%' style='margin-left:25%;'>"
-                                $("#showImg2").empty();
-                                $("#showImg2").append(sRowsImg);
+                                    var sRowsFindPet =
+                                        "<div class='col-sm-12'></div>"
+                                        + "<div class='col-sm-2'></div>"
+                                        + "<div class='col-sm-3'>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>物種:" + debug[iIndex].Species + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>體型:" + debug[iIndex].Size + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>性別:" + debug[iIndex].Sex + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>年紀:" + debug[iIndex].Age + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>毛色:" + debug[iIndex].HairColor + "</h4>"
+                                        + "</div>"
+                                        + "<div class='col-sm-7'>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-time'></span>走失日期:" + debug[iIndex].LostDate + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-map-marker'></span>走失地點:" + debug[iIndex].LostPlace1 + debug[iIndex].LostPlace2 + debug[iIndex].LostPlace3 + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-user'></span>聯絡人:" + debug[iIndex].ContactMan + "</h4>"
+                                        + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人性別:" + debug[iIndex].ContactSex + "</h4>"
+                                        + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人電話:" + debug[iIndex].ContactTel + "</h4>"
+                                        + "</div>"
 
-                                var sRowsFindPet =
-                                    "<div class='col-sm-12'></div>"
-                                    + "<div class='col-sm-2'></div>"
-                                    + "<div class='col-sm-3'>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>物種:" + debug[iIndex].Species + "</h4>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>體型:" + debug[iIndex].Size + "</h4>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>性別:" + debug[iIndex].Sex + "</h4>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>年紀:" + debug[iIndex].Age + "</h4>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>毛色:" + debug[iIndex].HairColor + "</h4>"
-                                    + "</div>"
-                                    + "<div class='col-sm-7'>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-time'></span>走失日期:" + debug[iIndex].LostDate + "</h4>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-map-marker'></span>走失地點:" + debug[iIndex].LostPlace1 + debug[iIndex].LostPlace2 + debug[iIndex].LostPlace3 + "</h4>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-user'></span>聯絡人:" + debug[iIndex].ContactMan + "</h4>"
-                                    + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人性別:" + debug[iIndex].ContactSex + "</h4>"
-                                    + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人電話:" + debug[iIndex].ContactTel + "</h4>"
-                                    + "</div>"
+                                        + "<div class='col-sm-7'>&nbsp;</div>"
+                                        + "<div class='col-sm-2'></div>"
+                                        + "<div class='col-sm-6'>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-bullhorn'></span>備註:" + debug[iIndex].Characteristic + "</h4>"
+                                        + "</div>"
+                                    $("#showImg2").append(sRowsFindPet);
 
-                                    + "<div class='col-sm-7'>&nbsp;</div>"
-                                    + "<div class='col-sm-2'></div>"
-                                    + "<div class='col-sm-6'>"
-                                    + "<h4>" + "<span class='glyphicon glyphicon-bullhorn'></span>備註:" + debug[iIndex].Characteristic + "</h4>"
-                                    + "</div>"
-                                $("#showImg2").append(sRowsFindPet);
-
-                                $("#findPetModal2").modal({ backdrop: "static" });
+                                    $("#findPetModal2").modal({ backdrop: "static" });
+                                }
                             })
 
                         },
