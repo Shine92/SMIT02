@@ -164,5 +164,22 @@ namespace FoundCity.Models {
             }
         }
         #endregion
+        #region 取得會員Id OK
+        /*傳入User.Identity.Name 取得會員Id*/
+        public string GetMemberId(string UserName) {
+            /*設定初值為空字串*/
+            var MemberId = string.Empty;
+            /*取得會員資料*/
+            var query = from o in db.Members
+                        where o.Account.Equals(UserName)
+                        select o;
+            /*得到會員Id*/
+            foreach (var item in query) {
+                MemberId = Convert.ToString(item.Id);
+            } 
+            /*回傳會員Id*/
+            return MemberId;
+        }
+        #endregion
     }
 }

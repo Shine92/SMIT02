@@ -74,9 +74,10 @@ namespace FoundCity.Controllers {
                     /*瀏覽器關閉後即登出*/
                     Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, enTicket));
                 }
-                return Content("登入成功!" + FormsAuthentication.FormsCookieName);
-                //return RedirectToAction("Index","Home");
-            }else {
+                /*simon 11/2 09:22 測試使用*/
+                //return Content("登入成功!" + FormsAuthentication.FormsCookieName);
+                return RedirectToAction("Index", "Home");
+            } else {
                 ModelState.AddModelError("LoginError", ValidateStr);
                 return View(loginMember);
             }
@@ -183,6 +184,17 @@ namespace FoundCity.Controllers {
                 Session["ChangeState"] = memberService.ChangePassword(User.Identity.Name, ChangeData.Password, ChangeData.NewPassword);
             }
             return View();
+        }
+        #endregion
+        #region 測試
+        public ActionResult test() {
+            var MemberLoginId = string.Empty;
+            /*判斷是否經過登入驗證*/
+            if (ModelState.IsValid) {
+                /*取得會員Id 提供新增資料使用*/
+                 MemberLoginId = memberService.GetMemberId(User.Identity.Name);
+            }
+            return Content("result: " + MemberLoginId);
         }
         #endregion
     }
