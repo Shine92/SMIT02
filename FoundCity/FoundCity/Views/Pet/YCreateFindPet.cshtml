@@ -16,10 +16,14 @@
 
 <link rel="stylesheet" href="~/css/MyStyle.css">
 
+
+
 @*.................測試用function..................................*@
 <div><button id="testbtn">testbtn</button><button id="testbtn2">testbtn2</button></div>
 <div id="debug"></div>
 @*.................................................................*@
+
+
 
 @*...................main..........................*@
 <div class="container">
@@ -43,8 +47,8 @@
             <h4 id="acc_header">@((Request.Cookies["findPetBtn"].Value == "-1") ? "新增" : "修改")</h4>
             <div>
                 <p>
-                    @*<span class="pull-right"><img src='../image/p1.jpg' id='petphoto' class='img-thumbnail petphoto' alt='cinque terre' width='360' height='540'></span>*@
-                    @*<div class="col-sm-9">test</div>*@
+                    @*....................col-sm-r2........1.............................*@
+
                     <div class="col-sm-2 pull-right">
                         <img id='petphoto' class='img-thumbnail petphoto' alt='' width='120' height='180'>
                         <h3 style="font-size:medium">
@@ -62,32 +66,10 @@
                         </h3>
                     </div>
 
-                    @*<div class="col-sm-3"></div>*@
-
-                    @*<div class="col-sm-5">
-                            <h3>
-                                <label for="petPhotoTextBox">
-                                    <span class="glyphicon glyphicon-eye-close"></span>
-                                    上傳圖片
-                                </label>
-
-                                <label id="petPhotoLabel">
-                                    上傳圖片
-                                </label>
-
-                                <input type="hidden"
-                                       id="petPhotoTextBox"
-                                       class="form-control"
-                                       placeholder="請輸入檔名" />
-                                <input type="file" id="PetPhoto" name="PetPhoto" class="form-control" />
-
-                            </h3>
-                        </div>*@
+                    @*....................col-sm-5+5+(r2)........1.............................*@
 
                     <div class="col-sm-5">
-                        @*<div class="col-sm-5">*@
                         <h3>
-
                             <label for="speciesTextBox">
                                 <span class="glyphicon glyphicon-record"></span>
                                 物種:
@@ -96,15 +78,9 @@
                             <input type="radio" name="Species" value="狗" checked> 狗
                             <input type="radio" name="Species" value="貓"> 貓
                             <input type="radio" name="Species" value="其他"> 其他
-
                         </h3>
-                        @*</div>*@
 
-                        @*<div class="col-sm-2"></div>*@
-
-                        @*<div class="col-sm-5">*@
                         <h3>
-
                             <label for="sizeTextBox">
                                 <span class="glyphicon glyphicon-record"></span>
                                 體型:
@@ -113,13 +89,9 @@
                             <input type="radio" name="Size" value="小型" checked> 小型
                             <input type="radio" name="Size" value="中型"> 中型
                             <input type="radio" name="Size" value="大型"> 大型
-
                         </h3>
-                        @*</div>*@
 
-                        @*<div class="col-sm-5">*@
                         <h3>
-
                             <label for="sexTextBox">
                                 <span class="glyphicon glyphicon-record"></span>
                                 性別:
@@ -128,13 +100,9 @@
                             <input type="radio" name="Sex" value="公" checked> 公
                             <input type="radio" name="Sex" value="母"> 母
                             <input type="radio" name="Sex" value="未知"> 未知
-
                         </h3>
-                        @*</div>*@
 
-                        @*<div class="col-sm-5">*@
                         <h3>
-
                             <label for="ageTextBox">
                                 <span class="glyphicon glyphicon-record"></span>
                                 年紀:
@@ -142,13 +110,9 @@
 
                             <input type="radio" name="Age" value="成年" checked> 成年
                             <input type="radio" name="Age" value="幼年"> 幼年
-
                         </h3>
-                        @*</div>*@
 
-                        @*<div class="col-sm-5">*@
                         <h3>
-
                             <label for="hairColorTextBox">
                                 <span class="glyphicon glyphicon-record"></span>
                                 毛色:
@@ -162,27 +126,10 @@
                                 <option value="虎斑">虎斑</option>
                                 <option value="其他">其他</option>
                             </select>
-
                         </h3>
-                        @*</div>*@
-
-                        @*<div class="col-sm-5">*@
-                        @*<h3>
-                                <label for="characteristicTextBox">
-                                    <span class="glyphicon glyphicon-bullhorn"></span>
-                                    備註
-                                </label>
-                                <input type="text"
-                                       id="characteristicTextBox"
-                                       class="form-control"
-                                       placeholder="備註" />
-                            </h3>*@
-                        @*</div>*@
-
                     </div>
-                    <div class="col-sm-5">
 
-                        @*<div class="col-sm-5">*@
+                    <div class="col-sm-5">
                         <h3>
                             <label for="lostDateTextBox">
                                 <span class="glyphicon glyphicon-time"></span>
@@ -194,9 +141,7 @@
                                    class="form-control"
                                    placeholder="yyyy-mm-dd " />
                         </h3>
-                        @*</div>*@
 
-                        @*<div class="col-sm-5">*@
                         <h3>
                             <label for="lostPlaceTextBox">
                                 <span class="glyphicon glyphicon-map-marker"></span>
@@ -210,19 +155,17 @@
                             </select>
                             <select class="file_hidden" id="lostPlace3" name="LostPlace3">
                                 <option value="road1">road1</option>
-                                <option value="road2">road2</option>
-                                <option value="road3">road3</option>
                             </select>
                             <input type="text"
                                    id="lostPlaceTextBox"
                                    class="form-control"
                                    placeholder="走失地點" />
                         </h3>
-                        @*</div>*@
                     </div>
 
+                    @*....................col-sm-5+5+2............2.........................*@
+
                     <div class="col-sm-5">
-                        @*<div class="col-sm-5">*@
                         <h3 style="color:rebeccapurple">
                             <label for="contactManTextBox">
                                 <span class="glyphicon glyphicon-user"></span>
@@ -237,11 +180,8 @@
                                        class="form-control"
                                        placeholder="聯絡人" />
                             </h3>
-                            @*</div>*@
 
-                            @*<div class="col-sm-5">*@
                             <h3>
-
                                 <label for="contactSexTextBox">
                                     @*<span class="glyphicon glyphicon-time"></span>*@
                                     性別:
@@ -249,11 +189,8 @@
 
                                 <input type="radio" name="ContactSex" value="男" checked> 男
                                 <input type="radio" name="ContactSex" value="女"> 女
-
                             </h3>
-                            @*</div>*@
 
-                            @*<div class="col-sm-5">*@
                             <h3>
                                 <label for="contactTelTextBox">
                                     @*<span class="glyphicon glyphicon-time"></span>*@
@@ -265,12 +202,10 @@
                                        class="form-control"
                                        placeholder="xx-xxxxxxx" />
                             </h3>
-                            @*</div>*@
                         </div>
                     </div>
 
                     <div class="col-sm-5">
-                        @*<div class="col-sm-5">*@
                         <h3>
                             <label for="characteristicTextBox">
                                 <span class="glyphicon glyphicon-bullhorn"></span>
@@ -285,15 +220,12 @@
                                 class="form-control"
                                 placeholder="備註" />*@
                         </h3>
-                        @*</div>*@
-
                     </div>
-
 
                     <div class="col-sm-2"></div>
 
-                    @*<div class="col-sm-5"></div>*@
-                    @*<div class="pull-right col-sm-9"></div>*@
+                    @*....................col-sm-r2........2.............................*@
+
                     <div class="pull-right col-sm-2">
                         <button type="submit"
                                 id="okButton"
@@ -306,24 +238,10 @@
                                 data-dismiss="modal">
                             <span class="glyphicon glyphicon-remove"></span> 取消
                         </button>
-
-                        @*<a href="MemberFindPet" class="btn btn-default" role="button"><span class="glyphicon glyphicon-remove"></span>取消</a>*@
                     </div>
+
                 </p>
             </div>
-
-            @*<h4>section 1</h4>
-                <div>
-                    <p>
-                        <span class="pull-right"><img src='../image/p1.jpg' id='petphoto' class='img-thumbnail petphoto' alt='cinque terre' width='360' height='540'></span>
-
-                        <div><h3>1</h3></div>
-                        <div><h3>1</h3></div>
-                        <div><h3>1</h3></div>
-
-                    </p>
-                </div>*@
-
         </div>
     </form>
 </div>
@@ -336,7 +254,7 @@
 <script>
     $("#lostDateTextBox").datepicker({ dateFormat: "yy-mm-dd" });
 
-    //.................測試用function..................................
+    //.................測試用function....up..............................
     $("#testbtn").click(function () {
 
         //alert(debug.LostPlace2);
@@ -368,6 +286,8 @@
 
     })
 
+    //................測試用function.....down...........................
+
     //已get Country,(選Country),(get Area,選Area),(get Road,選Road);暫時用setTimeout,再研究改jquery callback
     function getCAR() {
         // Q. fail:debug.LostPlace2應傳給$("#lostPlace2")的text,無法改(只能用val?)
@@ -389,7 +309,6 @@
 
         $("#debug").text($("#lostPlace3 option:selected").val() + $("#lostPlace3 option:selected").text());
     }
-    //.................................................................
 
                 $(function () {
                     //alert(getCookie("findPetBtn"));
@@ -425,11 +344,6 @@
 
                     });
 
-                    //第幾個PetId
-                    //alert(getCookie("findPetBtn"));
-
-                    //comMemberBtn("新", '');
-                    //comMemberBtn("新增");
                 })
 
                 //今天日期yyyy-mm-dd
@@ -439,22 +353,6 @@
                     var todayformat = today.toISOString().slice(0, 10);
                     return todayformat;
                 }
-
-                //組合memeber專區 button, 在LayoutMember的 ul 有加 id="memberTab_ul
-                //function comMemberBtn(btn, btn_url) {
-                //    var $li = $("<li id='addFindPetButton'></li>");
-                //    $li.addClass("pull-right");
-                //    $li.append('<a href='+btn_url+'>'+btn+'</a>');
-                //    $li.appendTo("#memberTab_ul");
-                //}
-                //function comMemberBtn(btn) {
-                //    var $li = $("<li></li>");
-                //    $li.addClass("pull-right");
-                //    $li.append('<a>' + btn + '</a>');
-                //    $li.appendTo("#memberTab_ul");
-                //}
-
-
 
                 //預覽
                 function readURL(input) {
@@ -581,7 +479,7 @@
                     $("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3").val());
                 });
 
-                //待看
+                //for edit: 使第三欄出現
                 var sp2 = 0;
                 $("#lostPlace2").click(function () {
                     //if (getCookie("findPetBtn") >= 0) {
@@ -635,20 +533,13 @@
                             $("#lostDateTextBox").val(data.LostDate);
 
 
-                            //來不及get
+                            //來不及get,移到$(function () {})一開始就區分new/edit,(edit就做get^3,+get給值)
                             //$('#lostPlace1 option[value="' + data.LostPlace1 + '"]').prop('selected', true);
                             //$('#lostPlace2 option[value="' + '831' + '"]').prop('selected', true);
                             //$('#lostPlace3 option[value="' + data.LostPlace3 + '"]').prop('selected', true);
 
-                            //setTimeout(setp1(), 2000);
-                            //selectArea();
-                            //setTimeout(setp2(), 5000);
-                            //selectRoad();
-
-
-
                             $("#lostPlaceTextBox").val(data.LostPlace1 + data.LostPlace2 + data.LostPlace3);
-                            //$("#lostPlaceTextBox").val($("#lostPlace1").val()+$("#lostPlace2").val() + $("#lostPlace3").val());
+
                             $('input[name=ContactSex][value="' + data.ContactSex + '"]').prop('checked', true);
                             $("#contactManTextBox").val(data.ContactMan);
                             $("#contactTelTextBox").val(data.ContactTel);
@@ -659,20 +550,6 @@
                     });
 
                 }
-
-                //編輯
-                //$(".editItem").click(function () {
-                //    // var iIndex = $(this).parent().parent().index();
-                //    alert("test");
-                //    //var iIndex = $(this).closest("img").index();
-                //    //currentIndex = iIndex;
-                //    //$("#petPhotoTextBox").val(findPetList[iIndex].PetPhoto);
-                //    //$("#lostDateTextBox").val(findPetList[iIndex].LostDate);
-                //    //$("#lostPlaceTextBox").val(findPetList[iIndex].LostPlace);
-
-                //    $("#findPetModal").modal({ backdrop: "static" });
-
-                //})
 
                 //新增
                 $("#addFindPetButton").click(function () {

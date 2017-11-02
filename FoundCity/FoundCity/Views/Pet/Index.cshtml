@@ -29,44 +29,10 @@
                     <h4>Detail</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="petPhotoTextBox2">
-                                <span class="glyphicon glyphicon-eye-close"></span>
-                                寵物圖片
-                            </label>
-
-                            <label id="petPhotoTextBox2">
-                                test
-                            </label>
-                            <div id="showImg2"></div>
-                            @*<input type="file" name="imageName" class="form-control" />*@
-                        </div>
-
-                        <div class="form-group">
-                            <label for="lostDateTextBox2">
-                                <span class="glyphicon glyphicon-time"></span>
-                                走失日期
-                            </label>
-                            <label id="lostDateTextBox2">
-                                test
-                            </label>
-
-                        </div>
-
-                        <div class="form-group">
-                            <label for="lostPlaceTextBox2">
-                                <span class="glyphicon glyphicon-bullhorn"></span>
-                                走失地點
-                            </label>
-                            <label id="lostPlaceTextBox2">
-                                test
-                            </label>
-
-                        </div>
-
-                    </form>
+                    <div id="showImg2"></div>
+                    <div id="showFindPet2" class='row'></div>
                 </div>
+
                 <div class="modal-footer">
                     <div class="pull-right">
                         <button type="button"
@@ -196,23 +162,12 @@
                     </label><br>
                     <select class="" id="lostPlace1" name="LostPlace1">
                         <option value="all1">全部</option>
-                        <option value="台北市">台北市</option>
-                        <option value="台中市">台中市</option>
-                        <option value="彰化縣">彰化縣</option>
-                        <option value="台南市">台南市</option>
-                        <option value="高雄市">高雄市</option>
-                        <option value="其他">其他</option>
                     </select>
                     <select class="" id="lostPlace2" name="LostPlace2">
                         <option value="all2">全部</option>
-                        <option value="city1">city1</option>
-                        <option value="city2">city2</option>
-                        <option value="city3">city3</option>
                     </select>
                     <select class="" id="lostPlace3" name="LostPlace3">
-                        <option value="road1">road1</option>
-                        <option value="road2">road2</option>
-                        <option value="road3">road3</option>
+                        <option value="all3">全部</option>
                     </select>
                     <input type="hidden"
                            id="lostPlaceTextBoxS"
@@ -264,6 +219,12 @@
 <script>
                 $(function () {
 
+
+
+                    selectCountry();
+                    //setTimeout(selectArea, 400);
+                    //setTimeout(selectRoad, 500);
+
                     loadAndRefreshUI();
 
                     //$("#debug").text("OK");
@@ -279,6 +240,110 @@
                     })
 
                 })
+
+                //載入County
+                function selectCountry() {
+
+                    $.ajax({
+                        url: "/Street/County",
+                        type: "Get",
+                        dataType: "json",
+                        success: function (data) {
+                            $("#lostPlace1").empty();
+                            var sRows = '<option value="all1">全部</option>';
+                            for (i = 0; i < data.length; i++) {
+                                sRows += "<option value='" + data[i] + "'>" + data[i] + "</option>"
+                            }
+                            $("#lostPlace1").append(sRows);
+
+                            //alert(data[0]);
+                            //$("#debug").text(JSON.stringify(data));
+                        },
+                        error: function (error) {
+                            document.write(error.responseText);
+                        }
+                    });
+
+                }
+
+
+                //載入Area,含code
+                function selectArea() {
+                    //btnClean();
+                    $.ajax({
+                        url: "/Street/Area",
+                        type: "POST",
+                        data: {
+                            city: $("#lostPlace1 option:selected").val()
+                            //city: "台中市"
+                        },
+                        success: function (data) {
+                            $("#lostPlace2").empty();
+                            var sRows = '<option value="all2">全部</option>';
+                            $("#lostPlace2").append(sRows);
+                            $.each(data, function (index, obj) {
+
+                                sRows = "<option value='" + obj.mailcode + "'>" + obj.country + "</option>"
+
+                                $("#lostPlace2").append(sRows);
+
+                            })
+
+                            //alert(JSON.stringify(data));
+                        },
+                        error: function (error) {
+                            document.write(error.responseText);
+                        }
+
+                    });
+                }
+
+                //載入Road
+                function selectRoad() {
+                    //btnClean();
+                    $.ajax({
+                        url: "/Street/Road",
+                        type: "POST",
+                        data: {
+                            code: $("#lostPlace2 option:selected").val()
+                            //code: "100"
+                        },
+                        success: function (data) {
+                            $("#lostPlace3").empty();
+                            var sRows = '<option value="all3">全部</option>';
+                            $("#lostPlace3").append(sRows);
+                            $.each(data, function (index, obj) {
+
+                                sRows = "<option value='" + obj.road + "'>" + obj.road + "</option>"
+
+                                $("#lostPlace3").append(sRows);
+
+                            })
+
+                            //alert(JSON.stringify(data));
+                        },
+                        error: function (error) {
+                            document.write(error.responseText);
+                        }
+
+                    });
+                }
+
+                $("#lostPlace1").change(function () {
+                    $("#lostPlace3").removeClass("file_hidden");
+                    selectArea();
+                    //setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3").val())', 500);
+                    setTimeout(selectRoad,200);
+                });
+
+                $("#lostPlace2").change(function () {
+                    selectRoad();
+                    //setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3").val())', 500);
+                });
+
+                $("#lostPlace3").change(function () {
+                    //$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3").val());
+                });
 
                 function refreshNewsUI() {
 
@@ -343,52 +408,50 @@
 
                             })
 
-                            //$.each(data, function (index, obj) {
-                            //    count += 1;
-                            //    //alert(obj.LostDate)
-                            //    //var newsText1 = obj.LostDate + "\r\n [" + obj.LostPlace + "]";
-                            //    var tRows1 = "&nbsp;" + obj.LostDate ;
-                            //    var tRows2 = "&nbsp;" + obj.LostPlace;
-                            //    //var sRows = "<img src='../image/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='100%' height='80%'>"
-                            //    var sRows = "<img src='../image/" + obj.PetPhoto + "' id='petPhoto' class='petPhoto' alt='Cinque Terre' width='100%' height='400'>"
-
-                            //    var $div = $("<div></div>")
-                            //                //.text(newsText1)
-                            //                .addClass("col-sm-3");
-
-                            //    //alert(sRows);
-                            //    //$div.prepend('<span class="pull-right"><button class="btn btn-info btn-xs editItem"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>&nbsp;<button class="btn btn-danger btn-xs deleteItem"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></span>');
-
-                            //    $div.append(sRows);
-                            //    $div.append(tRows1);
-                            //    $div.append("<div></div>");
-                            //    $div.append(tRows2);
-                            //    $div.append("<div>&nbsp;</div>");
-                            //    $div.appendTo("#findPetList");
-                            //    //$("#debug").append($div);
-                            //    //$("#debug").html(sRows);
-                            //    //alert(count);
-
-                            //})
 
                             $(".petPhoto").on("click", function (e) {
                                 //var iIndex = $(this).parent().parent().index();
-
                                 var iIndex = $(this).closest("div").index();
-                                tempIndex = -1;
-
                                 //alert(iIndex);
-                                var sRows = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='100%' height='80%'>"
 
+
+                                var sRowsImg = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='50%' height='40%' style='margin-left:25%;'>"
                                 $("#showImg2").empty();
-                                $("#showImg2").append(sRows)
+                                $("#showImg2").append(sRowsImg);
+
+                                var sRowsFindPet =
+                                    "<div class='col-sm-12'></div>"
+                                    + "<div class='col-sm-2'></div>"
+                                    + "<div class='col-sm-3'>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>物種:" + debug[iIndex].Species + "</h4>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>體型:" + debug[iIndex].Size + "</h4>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>性別:" + debug[iIndex].Sex + "</h4>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>年紀:" + debug[iIndex].Age + "</h4>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>毛色:" + debug[iIndex].HairColor + "</h4>"
+                                    + "</div>"
+                                    + "<div class='col-sm-7'>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-time'></span>走失日期:" + debug[iIndex].LostDate + "</h4>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-map-marker'></span>走失地點:" + debug[iIndex].LostPlace1 + debug[iIndex].LostPlace2 + debug[iIndex].LostPlace3 + "</h4>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-user'></span>聯絡人:" + debug[iIndex].ContactMan + "</h4>"
+                                    + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人性別:" + debug[iIndex].ContactSex + "</h4>"
+                                    + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人電話:" + debug[iIndex].ContactTel + "</h4>"
+                                    + "</div>"
+
+                                    + "<div class='col-sm-7'>&nbsp;</div>"
+                                    + "<div class='col-sm-2'></div>"
+                                    + "<div class='col-sm-6'>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-bullhorn'></span>備註:" + debug[iIndex].Characteristic + "</h4>"
+                                    + "</div>"
+                                $("#showImg2").append(sRowsFindPet);
+
+                                $("#findPetModal2").modal({ backdrop: "static" });
 
                                 //$("#petPhotoTextBox2").empty();
                                 //$("#petPhotoTextBox2").append(debug[iIndex].PetPhoto);
-                                $("#petPhotoTextBox2").text(debug[iIndex].PetPhoto);
-                                $("#lostDateTextBox2").text(debug[iIndex].LostDate);
-                                $("#lostPlaceTextBox2").text(debug[iIndex].LostPlace1 + debug[iIndex].LostPlace2 + debug[iIndex].LostPlace3);
-                                $("#findPetModal2").modal({ backdrop: "static" });
+                                //$("#petPhotoTextBox2").text(debug[iIndex].PetPhoto);
+                                //$("#lostDateTextBox2").text(debug[iIndex].LostDate);
+                                //$("#lostPlaceTextBox2").text(debug[iIndex].LostPlace1 + debug[iIndex].LostPlace2 + debug[iIndex].LostPlace3);
+
                             })
 
 
@@ -401,7 +464,7 @@
                 }
 
 
-                //搜尋確認BUTTON
+                //搜尋確認BUTTON(petPhoto_click要改)
                 $("#okButtonS").click(function () {
                     //$("#findPetList").empty();
                     $("#findAnimalList").empty();
@@ -413,7 +476,10 @@
                             + '&size=' + $('input[name=Size]:checked').val()
                             + '&sex=' + $('input[name=Sex]:checked').val()
                             + '&hairColor=' + $("#hairColorTextBox option:selected").val()
-                            + '&age=' + $('input[name=Age]:checked').val(),
+                            + '&age=' + $('input[name=Age]:checked').val()
+                            + '&lostPlace1=' + $("#lostPlace1 option:selected").val()
+                            + '&lostPlace2=' + $("#lostPlace2 option:selected").text()
+                            + '&lostPlace3=' + $("#lostPlace3 option:selected").val(),
                         dataType: "json",
                         success: function (data) {
                             debug = data;
@@ -454,19 +520,36 @@
                                 //var iIndex = $(this).parent().parent().index();
 
                                 var iIndex = $(this).closest("div").index();
-                                tempIndex = -1;
 
-                                //alert(iIndex);
-                                var sRows = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='100%' height='80%'>"
-
+                                var sRowsImg = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='50%' height='40%' style='margin-left:25%;'>"
                                 $("#showImg2").empty();
-                                $("#showImg2").append(sRows)
+                                $("#showImg2").append(sRowsImg);
 
-                                //$("#petPhotoTextBox2").empty();
-                                //$("#petPhotoTextBox2").append(debug[iIndex].PetPhoto);
-                                $("#petPhotoTextBox2").text(debug[iIndex].PetPhoto);
-                                $("#lostDateTextBox2").text(debug[iIndex].LostDate);
-                                $("#lostPlaceTextBox2").text(debug[iIndex].LostPlace1 + debug[iIndex].LostPlace2 + debug[iIndex].LostPlace3);
+                                var sRowsFindPet =
+                                    "<div class='col-sm-12'></div>"
+                                    + "<div class='col-sm-2'></div>"
+                                    + "<div class='col-sm-3'>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>物種:" + debug[iIndex].Species + "</h4>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>體型:" + debug[iIndex].Size + "</h4>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>性別:" + debug[iIndex].Sex + "</h4>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>年紀:" + debug[iIndex].Age + "</h4>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-record'></span>毛色:" + debug[iIndex].HairColor + "</h4>"
+                                    + "</div>"
+                                    + "<div class='col-sm-7'>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-time'></span>走失日期:" + debug[iIndex].LostDate + "</h4>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-map-marker'></span>走失地點:" + debug[iIndex].LostPlace1 + debug[iIndex].LostPlace2 + debug[iIndex].LostPlace3 + "</h4>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-user'></span>聯絡人:" + debug[iIndex].ContactMan + "</h4>"
+                                    + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人性別:" + debug[iIndex].ContactSex + "</h4>"
+                                    + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人電話:" + debug[iIndex].ContactTel + "</h4>"
+                                    + "</div>"
+
+                                    + "<div class='col-sm-7'>&nbsp;</div>"
+                                    + "<div class='col-sm-2'></div>"
+                                    + "<div class='col-sm-6'>"
+                                    + "<h4>" + "<span class='glyphicon glyphicon-bullhorn'></span>備註:" + debug[iIndex].Characteristic + "</h4>"
+                                    + "</div>"
+                                $("#showImg2").append(sRowsFindPet);
+
                                 $("#findPetModal2").modal({ backdrop: "static" });
                             })
 
@@ -539,10 +622,10 @@
 
 
                 $("#okButton2").click(function () {
-                    if (tempIndex == -1) {
-                        alert("detail");
+                    //if (tempIndex == -1) {
+                        //alert("detail");
                         $("#findPetModal2").modal("hide");
-                    }
+                    //}
                 })
 
 </script>

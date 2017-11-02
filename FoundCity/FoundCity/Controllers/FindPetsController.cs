@@ -16,6 +16,30 @@ namespace FoundCity.Controllers
     {
         private NewPetEntities db = new NewPetEntities();
 
+        public List<FindPet> GetFindPets(string species, string size, string sex, string age, string hairColor, string lostPlace1, string lostPlace2, string lostPlace3) {
+            //List<FindPet> products = new List<FindPet>();
+
+            var query = from o in db.FindPets
+                        orderby o.PetId descending
+                        //where o.Species == species && (o.Size == size && (o.Sex == sex && (o.Age == age && o.HairColor == hairColor)))
+                        where ((species == "all") ? true : o.Species == species)
+                        && ((size == "all") ? true : o.Size == size)
+                        && ((sex == "all") ? true : o.Sex == sex)
+                        && ((age == "all") ? (true) : (o.Age == age))
+                        && ((hairColor == "all") ? (true) : (o.HairColor == hairColor))
+                        && ((lostPlace1 == "all1") ? (true) : (o.LostPlace1 == lostPlace1))
+                        && ((lostPlace2 == "全部") ? (true) : (o.LostPlace2 == lostPlace2))
+                        && ((lostPlace3 == "all3") ? (true) : (o.LostPlace3 == lostPlace3))
+                        select o;
+
+            var viewData = query.ToList();
+            return viewData;
+
+
+        }
+
+
+        //不含區域搜尋
         //http://localhost:51664/api/FindPets?species=貓&size=中型&sex=母&hairColor=白色&age=成年
         public List<FindPet> GetFindPets(string species, string size, string sex, string age, string hairColor) {
             //List<FindPet> products = new List<FindPet>();
