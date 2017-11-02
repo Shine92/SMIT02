@@ -1,14 +1,9 @@
-﻿var rZoom = 18;
-var rMarkers = [];
-var rAddress;
+﻿var rMarkers = [];
 var rMap;
 var rLatlng;
-
 var searchType;
 
-$(document).read(function () {
-    rScrollRule();
-});
+window.onload = rScrollRule;
 
 //----------------------------------------------------------------------------------------------
 
@@ -36,14 +31,24 @@ function rDetect() {
         // HTML5 定位抓取
         navigator.geolocation.getCurrentPosition(function (position) {
             mapServiceProvider(position.coords.latitude, position.coords.longitude);
+            console.log(position.coords.latitude + "|" + position.coords.longitude);
         },
         function (error) {
             switch (error.code) {
-                case error.PERMISSION_DENIED: // 拒絕
-                    rFailDetect('定位失敗1');
+                case error.TIMEOUT:
+                    enterAddress('很抱歉，連線逾時，');
                     break;
-                default:
-                    rFailDetect('定位失敗2');
+
+                case error.POSITION_UNAVAILABLE:
+                    enterAddress('無法取得您的位置，');
+                    break;
+                    XMLDocument
+                case error.PERMISSION_DENIED: // 拒絕
+                    enterAddress('由於您封鎖我們取得您位置的權限，');
+                    break;
+
+                case error.UNKNOWN_ERROR:
+                    enterAddress('因為發生不明的錯誤，');
                     break;
             }
         });
@@ -55,34 +60,43 @@ function rDetect() {
                 var geo = google.gears.factory.create('beta.geolocation');
                 geo.getCurrentPosition(successCallback, errorCallback, { enableHighAccuracy: true, gearsRequestAddress: true });
             } catch (e) {
-                rFailDetect('定位失敗3');
+                enterAddress('無法取得您的位置！');
             }
         } else {
-            rFailDetect('定位失敗4');
+            enterAddress('由於您封鎖我們取得您位置的權限！');
         }
     }
 }
 
-function rFailDetect(msg) {
-    alert(msg);
-    var rC = confirm("是否手動輸入地址");
-    if (rC) {
-        initAddress();
-    } else {
-
-    }
+function mapServiceProvider(latitude, longitude) {
+    var myLatlng = new google.maps.LatLng(latitude, longitude);
+    initMAP(myLatlng);
 }
 
-function initAddress() {
-    var rP = prompt("請輸入地址");
+// 成功取得 Gears 定位
+function successCallback(p) {
+    mapServiceProvider(p.latitude, p.longitude);
+}
+
+// 取得 Gears 定位發生錯誤
+function errorCallback(err) {
+    //var msg = 'Error retrieving your location: ' + err.message;
+    //alert(msg);
+}
+
+function enterAddress(msg) {
+    var rP;
+
+    if (msg != null)
+        rP = prompt(msg + "\n" + "請您手動輸入地址");
+    else
+        rP = prompt("請手動輸入地址");
+
+
     if (rP != null && rP.trim.length != 0) {
         initLatlng(rP);
     } else {
-        if (confirm("將使用預設位置：台中市南屯區公益路二段51號")) {
-            initLatlng("台中市南屯區公益路二段51號");
-        } else {
-            initAddress();
-        }
+
     }
 }
 
@@ -96,14 +110,13 @@ function initLatlng(userAddress) {
             var rLng = results[0].geometry.location.lng();
             var myLatlng = new google.maps.LatLng(rLat, rLng);
             initMAP(myLatlng);
-            rAddress = userAddress;
         }
         else {
-            if (prompt("搜尋失敗,請在試一次", userAddress)) {
-                rConversionLatLng(userAddress);
+            if (prompt("定位失敗,請重新搜尋地址", userAddress)) {
+                initLatlng(userAddress);
             }
             else {
-                initAddress();
+                enterAddress();
             }
         }
     });
@@ -111,11 +124,15 @@ function initLatlng(userAddress) {
 
 function initMAP(myLatlng) {
 
+    $("#rRange").html("0");
+    $("#rMap_Body").show();
+    $("#rPrompt").hide();
+
     var mapDiv = document.getElementById("rMap-Canvas");
 
     var mapProp = {
         center: myLatlng,
-        zoom: rZoom,
+        zoom: 18,
         disableDefaultUI: true,
         gestureHandling: 'none',
         styles: [
@@ -200,64 +217,87 @@ function initMAP(myLatlng) {
         ]
     };
 
-    var map = new google.maps.Map(mapDiv, mapProp);
+    rMap = new google.maps.Map(mapDiv, mapProp);
 
-    rMap = map;
     rLatlng = myLatlng;
 
-    intiMarker(map, myLatlng);
-    initRange(map, myLatlng);
+    intiMarker();
+    initRange();
 }
 
-function intiMarker(myMap, myLatlng) {
+function intiMarker() {
     var mainMK = new google.maps.Marker({
-        position: myLatlng,
+        position: rLatlng,
         animation: google.maps.Animation.BOUNCE,
         icon: "../images/Radar_Home.png",
     });
     rMarkers.push(mainMK);
-    mainMK.setMap(myMap);
+    mainMK.setMap(rMap);
 }
 
-function initRange(myMap, myLatlng) {
+function initRange() {
 
-    var service = new google.maps.places.PlacesService(myMap);
+    var service = new google.maps.places.PlacesService(rMap);
 
-    var request = {
-        location: myLatlng,
-        rankBy: google.maps.places.RankBy.DISTANCE,
-        type: [searchType]
-    };
+    switch (searchType) {
 
-    service.nearbySearch(request, function (data, status) {
-        switch (status) {
-            case google.maps.places.PlacesServiceStatus.OK:
-                var placeID = new Array();
-                $.each(data, function (index, vul) {
-                    placeID[index] = vul.place_id;
-                });
-                var aryRow = [];
-                Schedule(myMap, aryRow, placeID, 0, data.length);
-                break;
-            default:
-                break;
-        }
-    });
+        case "Hospital":
+            service.nearbySearch({
+                location: rLatlng,
+                rankBy: google.maps.places.RankBy.DISTANCE,
+                type: ["veterinary_care"]
+            }, rangeCallBack);
+            break
+
+        case "Store":
+            service.nearbySearch({
+                location: rLatlng,
+                rankBy: google.maps.places.RankBy.DISTANCE,
+                type: ["pet_store"]
+            }, rangeCallBack);
+            break
+
+        case "Hostel":
+            service.textSearch({
+                location: rLatlng,
+                query: '寵物旅館'
+            }, rangeCallBack);
+            break
+
+    }
 
 }
 
-function Schedule(myMap, aryRow, data, num, maxNum) {
+function rangeCallBack(data, status) {
+    switch (status) {
+        case google.maps.places.PlacesServiceStatus.OK:
+            var placeID = new Array();
+            $.each(data, function (index, vul) {
+                placeID[index] = vul.place_id;
+            });
+            var aryRow = [];
+            Schedule(aryRow, placeID, 0, data.length);
+            break;
+        default:
+            break;
+    }
+}
+
+function Schedule(aryRow, data, num, maxNum) {
 
     $("#rResult_Table").hide();
     $("#rScheduleBar").show();
 
-    var service = new google.maps.places.PlacesService(myMap);
+    var service = new google.maps.places.PlacesService(rMap);
     var directionsService = new google.maps.DirectionsService();
 
     var elem = document.getElementById("myBar");
     var sWidth = 100 / maxNum;
 
-    var myDetail = setInterval(initDetail, 100);
+    elem.style.width = '1%';
+    $("#rRatio").html("0");
+
+    var myDetail = setInterval(initDetail, 200);
 
     function initDetail() {
         if (num < maxNum) {
@@ -270,7 +310,7 @@ function Schedule(myMap, aryRow, data, num, maxNum) {
                         var isNow = ((place["opening_hours"]) != null ? ((place["opening_hours"]["open_now"]) ? "1" : "0") : "2");
 
                         directionsService.route({
-                            origin: rAddress,
+                            origin: rLatlng,
                             destination: place.formatted_address,
                             travelMode: 'WALKING',
                         }, function (response, status) {
@@ -287,9 +327,18 @@ function Schedule(myMap, aryRow, data, num, maxNum) {
                                         lng: place.geometry.location.lng(),
                                         dist: dist
                                     };
-                                    num++;
-                                    elem.style.width = sWidth * num + '%';
-                                    $("#rRatio").html(sWidth * num);
+
+                                    if (num != 0) {
+                                        if (aryRow[num]["name"] != aryRow[num - 1]["name"]) {
+                                            num++;
+                                            elem.style.width = sWidth * num + '%';
+                                            $("#rRatio").html(sWidth * num);
+                                        } else {
+                                            aryRow[num].length = 0;
+                                        }
+                                    } else {
+                                        num++;
+                                    }
                                     break
                             }
                         });
@@ -302,13 +351,20 @@ function Schedule(myMap, aryRow, data, num, maxNum) {
             });
         } else {
             clearInterval(myDetail);
+            $("#rResult_Table").show();
+            $("#rResult_Table").scrollTop(0);
+            $("#rScheduleBar").hide();
+            $('#rResult_Content').empty();
+
+            aryRow = aryRow.sort(function (x,y) {
+                return x.dist > y.dist ? 1: -1;
+            });
+
             $.each(aryRow, function (index, vul) {
                 rResultView(vul);
             });
             rEnd();
             viewMap(aryRow);
-            $("#rResult_Table").show();
-            $("#rScheduleBar").hide();
         }
     }
 
@@ -378,7 +434,7 @@ function rResultView(aryRow) {
                             ))))));
 }
 
-function viewMap(aryRow){
+function viewMap(aryRow) {
     var bounds = new google.maps.LatLngBounds();
 
     bounds.extend(rLatlng);
@@ -426,16 +482,18 @@ function setMapOnAll(map) {
 }
 
 function rHospital() {
-    searchType = "veterinary_care";
+    searchType = "Hospital";
     rDetect();
 }
 
 function rStore() {
-
+    searchType = "Store";
+    rDetect();
 }
 
 function rHostel() {
-
+    searchType = "Hostel";
+    rDetect();
 }
 
 function rFind() {

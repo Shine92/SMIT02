@@ -215,6 +215,7 @@
 
 .rBody {
     background-color: #e6e6e6;
+    margin-bottom:0px;
 }
 
 .rRadar_font {
@@ -229,6 +230,7 @@
     margin-top: 10px;
     margin-left: 10px;
     margin-bottom: 10px;
+    display: none;
 }
 
 #rMap-Canvas {
@@ -248,12 +250,12 @@
 
 #rSidebar {
     float: left;
-    height: 760px;
-    width: 11%;
+    height: 700px;
+    width: 10%;
 }
 
     #rSidebar h5 {
-        padding-left: 13px;
+        padding-left: 18px;
         padding-top: 20px;
         font-size: 18px;
         font-family: Microsoft JhengHei;
@@ -274,11 +276,13 @@
         font-family: Microsoft JhengHei;
         font-weight: bold;
         font-size: 20px;
+        text-align: center;
     }
 
         #rSidebar ul li a {
             color: black;
             display: block;
+            padding-left: 0px;
         }
 
             #rSidebar ul li a img {
@@ -295,17 +299,16 @@
 
 #line {
     float: left;
-    height: 760px;
+    height: 700px;
     width: 2px;
     background-color: white;
 }
 
 #rResult {
     float: left;
-    width: 35%;
-    margin-top: 10px;
+    width: 38%;
     margin-left: 10px;
-    margin-right: 10px;
+    /*margin-right: 10px;*/
 }
 
 #rResult_Content {
@@ -325,16 +328,15 @@
 }
 
 #rResult_Table {
-    height: 750px;
+    height: 660px;
     margin-top: 10px;
-    margin-bottom: 20px;
     overflow: scroll;
     overflow-x: hidden;
     display: none;
 }
 
 .rOaerror {
-    margin-top: 10px;
+    margin-top: 18px;
     padding: 10px;
     font-size: 18px;
     border: 1px solid #eee;
