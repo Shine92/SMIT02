@@ -232,7 +232,7 @@
                                 class="btn btn-success">
                             <span class="glyphicon glyphicon-ok"></span> 確定
                         </button>
-                        <input type="hidden" id="MemberId" value="@ViewData["MemberId"]"/>
+                        <input type="hidden" id="MemberId" value="@ViewData["MemberId"]" />
                         <button type="button"
                                 id="cancelButton"
                                 class="btn btn-default"
@@ -373,7 +373,6 @@
                 //    readURL(this);
                 //});
 
-
                 //載入County
                 function selectCountry() {
                     $("#lostPlace2").empty();
@@ -389,7 +388,6 @@
                             }
                             $("#lostPlace1").append(sRows);
 
-                            //alert(data[0]);
                             //$("#debug").text(JSON.stringify(data));
                         },
                         error: function (error) {
@@ -399,10 +397,9 @@
 
                 }
 
-
                 //載入Area,含code
                 function selectArea() {
-                    //btnClean();
+
                     $.ajax({
                         url: "/Street/Area",
                         type: "POST",
@@ -414,9 +411,7 @@
                             $("#lostPlace2").empty();
                             $.each(data, function (index, obj) {
                                 var sRows = "";
-
-                                sRows += "<option value='" + obj.mailcode + "'>" + obj.country + "</option>"
-
+                                sRows += "<option value='" + obj.mailcode + "'>" + obj.country + "</option>";
                                 $("#lostPlace2").append(sRows);
 
                             })
@@ -432,7 +427,7 @@
 
                 //載入Road
                 function selectRoad() {
-                    //btnClean();
+
                     $.ajax({
                         url: "/Street/Road",
                         type: "POST",
@@ -444,11 +439,8 @@
                             $("#lostPlace3").empty();
                             $.each(data, function (index, obj) {
                                 var sRows = "";
-
-                                sRows += "<option value='" + obj.road + "'>" + obj.road + "</option>"
-
+                                sRows += "<option value='" + obj.road + "'>" + obj.road + "</option>";
                                 $("#lostPlace3").append(sRows);
-
                             })
 
                             //alert(JSON.stringify(data));
@@ -559,48 +551,41 @@
                     setCookie("findPetBtn", currentIndex, 1);
                     $("#acc_header").empty();
                     $("#acc_header").append('<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-s"></span>'+'新增');
-                    alert(currentIndex);
 
                     $("#petphoto").empty();
                     $("#showImg").empty();
                     $("#petphoto").attr('src', '');
                     $("#petPhotoTextBox").val("");
-
                     $("#characteristicTextBox").val("");
-
                     $("#lostDateTextBox").val("");
                     $("#lostPlaceTextBox").val("");
                     $("#contactManTextBox").val("");
                     $("#contactTelTextBox").val("");
-
                 })
 
+                //取消:導頁
                 $("#cancelButton").click(function () {
                     window.location.href = 'MemberFindPet';
                 })
 
                 //確認(編輯/新增)
-
                 $("#okButton").click(function () {
 
                     if (getCookie("findPetBtn") >= 0) { // edit
-                    //    //newsList[currentIndex].title = $("#titleTextBox").val();
-                    //    //newsList[currentIndex].ymd = $("#ymdTextBox").val();
-                    //    //refreshNewsUI();
+
                         alert("test_updateData:(" + $("#lostPlace2 option:selected").text() + "," + $("#lostPlace3").val() + ")");
                         var updateData = {
 
                             PetId: getCookie("findPetBtn"),
 
                             PetPhoto: $("#petPhotoTextBox").val(),
-                            CreatorId: getCookie("uid"),
+                            CreatorId: debug.CreatorId,
                             Species: $('input[name=Species]:checked').val(),
                             Size: $('input[name=Size]:checked').val(),
                             Age: $('input[name=Age]:checked').val(),
                             HairColor: $("#hairColorTextBox option:selected").text(),
                             Sex: $('input[name=Sex]:checked').val(),
                             Characteristic: $("#characteristicTextBox").val(),
-
 
                             LostDate: $("#lostDateTextBox").val(),
                             LostPlace1: $("#lostPlace1").val(),
@@ -623,8 +608,6 @@
                             url: '/api/FindPets/' + getCookie("findPetBtn"),
                             type: 'PUT',
                             data: JSON.stringify(updateData),
-                            //dataType:'JSON',
-                            //data: updateData,
                             contentType: "application/json;charset=utf-8",
 
                             //function無執行(error)
@@ -639,10 +622,6 @@
                         });
 
                         alert("end_edit");
-
-                    //    //$("#findPetModal").modal("hide");
-                    //    //showToast("Information", "Edit Index = " + currentIndex);
-
                     }
 
                     else {
