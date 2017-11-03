@@ -193,13 +193,16 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\FindMomsController.cs" />
     <Compile Include="Controllers\FindPetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\PetController.cs" />
+    <Compile Include="Controllers\PetMomController.cs" />
     <Compile Include="Controllers\RadarController.cs" />
     <Compile Include="Controllers\StreetController.cs" />
+    <Compile Include="Controllers\YMemberFindMomController.cs" />
     <Compile Include="Controllers\YMemberFindPetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -280,6 +283,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Address\" />
+    <Folder Include="Views\PetMom\" />
     <Folder Include="Views\Street\" />
   </ItemGroup>
   <ItemGroup>
