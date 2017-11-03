@@ -223,3 +223,46 @@ $(document).ready(function () {
 /*********************************************************************************/
 /* Yako js                                                                   */
 /*********************************************************************************/
+
+$(document).ready(function () {
+
+    /*驗證手機聯絡電話格式(for聯絡人)*/
+    $("input[name='cTelephone']").blur(function () {
+        var checkUserTelephome = new RegExp("^[09]{2}[0-9]{8}$");
+        var data = $.trim($("#contactTelTextBox").val());
+        var result = checkUserTelephome.test(data);
+        if (!result) {
+            $("input[name='cTelephone']").select();
+            $("#cinfo h3 #cinfoMsg").addClass("coninfored");
+            $("#cinfo h3 #cinfoMsg").text("電話:輸入格式不符");
+            console.log("result:" + result);
+        } else {
+            $("#cinfoMsg").text("電話:");
+            $("#cinfo h3 #cinfoMsg").removeClass("coninfored");
+            cheackResult = 0;
+            console.log("cheackResult:" + cheackResult);
+        }
+    });
+
+    /*驗證日期格式(for聯絡人)*/
+    $("input[name='YDateTextBox']").blur(function () {
+        var checkUserTelephome = new RegExp("^((19|20)[0-9]{2}[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01]))*$");
+        var data = $.trim($("#lostDateTextBox").val());
+        var result = checkUserTelephome.test(data);
+        if (!result) {
+            $("input[name='YDateTextBox']").select();
+            $("#findinfo h3 #datainfoMsg").addClass("coninfored");
+            $("#findinfo h3 #datainfoMsg").text("日期:格式不符");
+            console.log("result:" + result);
+        } else {
+            $("#datainfoMsg").text('走失日期:');
+            $("#datainfoMsg").prepend('<span class="glyphicon glyphicon-time"></span>');
+            $("#findinfo h3 #datainfoMsg").removeClass("coninfored");
+            cheackResult = 0;
+            console.log("cheackResult:" + cheackResult);
+        }
+    });
+
+
+
+})
