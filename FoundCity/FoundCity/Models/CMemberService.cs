@@ -5,6 +5,7 @@ using System.Web;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
+using FoundCity.ViewModels;
 namespace FoundCity.Models {
     public class CMemberService {
 
@@ -148,17 +149,17 @@ namespace FoundCity.Models {
         #endregion
         #region 變更密碼
         public string ChangePassword(string UserName,string Password,string NewPassword) {
-            /*找出登入者資料*/
-            Member findMember = (from o in db.Members
-                        where o.Account.Equals(UserName)
-                        select o).Single();
+            /*目前登入者的會員Id*/
+            var LoginMemberId = Convert.ToInt32(GetMemberId(UserName));
+            /*得到會員資料*/
+            Member LoginMember = db.Members.Find(LoginMemberId);
             /*檢查使用者的舊密碼是否與資料庫密碼吻合*/
-            if (CheckPassword(findMember, Password)) {
+            if (CheckPassword(LoginMember, Password)) {
                 /*若吻合就將密碼變更為新密碼,並且加密*/
-                findMember.Password = HasPassword(NewPassword);
+                LoginMember.Password = HasPassword(NewPassword);
                 /*儲存資料庫變更*/
                 db.SaveChanges();
-                return "密碼修改成功！";
+                return "密碼修改成功,下次登入請使用新密碼！";
             } else {
                 return "舊密碼輸入錯誤！";
             }
@@ -224,6 +225,32 @@ namespace FoundCity.Models {
                 memberId = Convert.ToString(item.Id);
             }
             return memberId;
+        }
+        #endregion
+        #region 取得會員基本資料 OK
+        public List<MemberBasicViewModel> GetBasicMemberData(int MemberId) {
+            var query = from o in db.Members
+                        where o.Id.Equals(MemberId)
+                        select new MemberBasicViewModel {
+                            UserFirstName = o.UserFirstName,
+                            UserLastName = o.UserLastName,
+                            UserGender = o.UserGender,
+                            Telephone = o.Telephone };
+            return query.ToList();
+        }
+        #endregion
+        #region 修改會員資料
+        public string ChangeMemberBasicData(string UserName,MemberBasicViewModel ChangeData) {
+            /*目前登入者的會員Id*/
+            var LoginMemberId = Convert.ToInt32(GetMemberId(UserName));
+            /*得到會員資料*/
+            Member LoginMember = db.Members.Find(LoginMemberId);
+            LoginMember.UserFirstName = ChangeData.UserFirstName;
+            LoginMember.UserLastName = ChangeData.UserLastName;
+            LoginMember.UserGender = ChangeData.UserGender;
+            LoginMember.Telephone = ChangeData.Telephone;
+            db.SaveChanges();
+            return "會員基本資料修改完成！";
         }
         #endregion
     }

@@ -238,6 +238,7 @@
       <DependentUpon>NewPetModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\MemberBasicViewModel.cs" />
     <Compile Include="ViewModels\MemberChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\MemberLoginViewModel.cs" />
   </ItemGroup>
@@ -256,7 +257,6 @@
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Member\Index.cshtml" />
     <Content Include="Views\Member\Basic.cshtml" />
-    <Content Include="Views\Member\Modify.cshtml" />
     <Content Include="Views\Member\Register.cshtml" />
     <Content Include="Views\Member\Forget.cshtml" />
     <Content Include="Views\Radar\Index.cshtml" />

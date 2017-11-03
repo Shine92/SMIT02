@@ -98,6 +98,8 @@ $(document).ready(function () {
         
         if(confirmPwd != pwd){
             $("#info #infoMsg").text("確認密碼錯誤,請重新輸入");
+        } else {
+            $("#info #infoMsg").text("");
         }
     });
     /*確認資料是否都有填寫 否則不能建立帳號*/
@@ -143,12 +145,74 @@ $(document).ready(function () {
         } else {
             return true;
         }
-
+        /*如果勾選記住我 傳出true*/
         if ($("#LoginRemeber").is(':checked')) {
             $("#LoginRemeberResult").attr("value", "true");
         } else if($("#LoginRemeber").not(':checked')) {
             $("#LoginRemeberResult").attr("value", "false");
        }
+    });
+
+    /*ChangePasswordPage*/
+    /*變更密碼選擇取消則跳出對話框提醒*/
+    $("#ChangePageBtn #ChangePwdCancelBtn").click(function () {
+        var confirmMessage = confirm("取消變更?");
+        if (confirmMessage == true) {
+            window.location.href = "/Member/Index";
+        } else {
+            return false;
+        };
+    });
+    /*確認新密碼是否符合規則*/
+    $(".ChangePageBtn #NewPassword").blur(function () {
+        var checkUserNewPwd = new RegExp("^(?=.*\\w)(?=.*[a-z])(?=.*[A-Z]).{6,12}$");
+        var data = $.trim($("#NewPassword").val());
+        var result = checkUserNewPwd.test(data);
+        if (!result) {
+            $("#info #infoMsg").text("密碼輸入格式不符");
+            console.log("result:" + result);
+        } else {
+            $("#info #infoMsg").text("");
+            cheackResult = 0;
+            console.log("cheackResult:" + cheackResult);
+        }
+    });
+    /*確認密碼是否正確*/
+    $("#CheckNewPassword").keyup(function () {
+        var pwd = $("#NewPassword").val();
+        var checkNewPwd = $("#CheckNewPassword").val();
+
+        if (checkNewPwd != pwd) {
+            $("#info #infoMsg").text("確認密碼錯誤,請重新輸入");
+            $('#ChangePwdOkBtn').attr('disabled', true);
+        } else {
+            /*若密碼正確 1秒後即更改元素值*/
+            setTimeout(function () {
+                $("#info #infoMsg").text("");
+                $('#ChangePwdOkBtn').attr('disabled', false);
+            },1000);
+            
+        }
+    });
+    /*確認資料是否都有填寫 否則不能變更密碼*/
+    $("#ChangePwdOkBtn").click(function () {
+        var password = $.trim($("#Password").val());
+        var newPassword = $.trim($("#NewPassword").val());
+        var checkNewPwd = $.trim($("#CheckNewPassword").val());
+
+        if(password == null || password == ""){
+            alert("請輸入舊密碼");
+            return false;
+        }else if(newPassword == null || newPassword == ""){
+            alert("請輸入新密碼");
+            return false;
+        } else if (checkNewPwd == null || checkNewPwd == "") {
+            alert("請確認新密碼");
+            return false;
+        } else {
+            $(window).unbind('beforeunload');
+            return true;
+        }
     });
 });
 

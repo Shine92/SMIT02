@@ -10,10 +10,11 @@ using System.Web.Security;
 namespace FoundCity.Controllers {
     public class MemberController : Controller {
         MemberLoginViewModel LoginData = new MemberLoginViewModel();
+        MemberBasicViewModel BasicData = new MemberBasicViewModel();
         Member MemberData = new Member();
         CMemberService memberService = new CMemberService();
         CMailService mailService = new CMailService();
-        #region 會員中心首頁
+        #region 會員中心首頁 OK
         // GET: Member
         [Authorize]
         public ActionResult Index() {
@@ -21,16 +22,22 @@ namespace FoundCity.Controllers {
         }
         #endregion
         #region 基本資料
+        [Authorize]
         public ActionResult Basic() {
-            return View();
+            /*取得會員資料*/
+            var BasicData = memberService.GetBasicMemberData(Convert.ToInt32(memberService.GetMemberId(User.Identity.Name)));
+            return View(BasicData);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Basic(MemberBasicViewModel ChangeBasicData) {
+            /*取得會員資料*/
+            ViewData["ChangeState"] = memberService.ChangeMemberBasicData(User.Identity.Name, ChangeBasicData);
+            return Content(ViewData["ChangeState"].ToString());
         }
         #endregion
-        #region 變更密碼
-        public ActionResult Modify() {
-            return View();
-        }
-        #endregion
-        #region 會員登入
+        #region 會員登入 OK
         public ActionResult Login() {
             /*判斷使用者是否已經登入*/
             if(User.Identity.IsAuthenticated){
@@ -83,7 +90,7 @@ namespace FoundCity.Controllers {
             }
         }
         #endregion
-        #region 會員登出
+        #region 會員登出 OK
         /*設定Action需登入才能使用*/
         [Authorize]
         public ActionResult Logout() {
@@ -91,7 +98,7 @@ namespace FoundCity.Controllers {
             return RedirectToAction("Login", "Member");
         }
         #endregion
-        #region 會員註冊
+        #region 會員註冊 OK
         public ActionResult Register() {
             /*1026 09:07 註解測試*/
             //if (User.Identity.IsAuthenticated) {
@@ -158,18 +165,18 @@ namespace FoundCity.Controllers {
             return View();
         }
         #endregion
-        #region 接收驗證信連結傳進來的
+        #region 接收驗證信連結傳進來的 OK 但View尚未修改
         public ActionResult EmailValidate(string UserName,string AuthCode) {
            TempData["EmailValidate"] = memberService.EmailVlidate(UserName, AuthCode);
             return View();
         }
         #endregion
-        #region 註冊成功
+        #region 註冊成功 OK
         public ActionResult RegisterResult() {
             return View();
         }
         #endregion
-        #region 變更密碼
+        #region 變更密碼 OK
         /*[Authorize] 只有登入才能瀏覽的頁面*/
         [Authorize]
         public ActionResult ChangePassword() {
@@ -179,9 +186,10 @@ namespace FoundCity.Controllers {
         [Authorize]
         [HttpPost]
         public ActionResult ChangePassword(MemberChangePasswordViewModel ChangeData) {
+            /*如果資料驗證過*/
             if (ModelState.IsValid) {
                 /*傳回變更密碼的狀態*/
-                Session["ChangeState"] = memberService.ChangePassword(User.Identity.Name, ChangeData.Password, ChangeData.NewPassword);
+                ViewData["ChangeState"] = memberService.ChangePassword(User.Identity.Name, ChangeData.Password, ChangeData.NewPassword);
             }
             return View();
         }
