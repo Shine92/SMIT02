@@ -16,9 +16,13 @@ namespace FoundCity.Controllers
     {
         private NewPetEntities db = new NewPetEntities();
 
+        //一個月前的時間
+        string dueDate = DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd");
+
         public List<FindPet> GetFindPets(string species, string size, string sex, string age, string hairColor, string lostPlace1, string lostPlace2, string lostPlace3) {
             //List<FindPet> products = new List<FindPet>();
 
+            //只顯示一個月內的資料,且狀態:未凍結 (dueDate:1個月前)
             var query = from o in db.FindPets
                         orderby o.PetId descending
                         //where o.Species == species && (o.Size == size && (o.Sex == sex && (o.Age == age && o.HairColor == hairColor)))
@@ -29,7 +33,9 @@ namespace FoundCity.Controllers
                         && ((hairColor == "all") ? (true) : (o.HairColor == hairColor))
                         && ((lostPlace1 == "all1") ? (true) : (o.LostPlace1 == lostPlace1))
                         && ((lostPlace2 == "全部") ? (true) : (o.LostPlace2 == lostPlace2))
-                        && ((lostPlace3 == "all3") ? (true) : (o.LostPlace3 == lostPlace3))
+                        && ((lostPlace3 == "全部") ? (true) : (o.LostPlace3 == lostPlace3))
+                        && (o.State == 1)
+                        && (string.Compare(dueDate, o.CreateDate) < 0)
                         select o;
 
             var viewData = query.ToList();
@@ -43,6 +49,7 @@ namespace FoundCity.Controllers
         //http://localhost:51664/api/FindPets?species=貓&size=中型&sex=母&hairColor=白色&age=成年
         public List<FindPet> GetFindPets(string species, string size, string sex, string age, string hairColor) {
             //List<FindPet> products = new List<FindPet>();
+            //只顯示一個月內的資料,且狀態:未凍結 (dueDate:1個月前)
 
             var query = from o in db.FindPets
                         orderby o.PetId descending
@@ -52,6 +59,8 @@ namespace FoundCity.Controllers
                         && ((sex == "all") ? true : o.Sex == sex)
                         && ((age == "all") ? (true) : (o.Age == age))
                         && ((hairColor == "all") ? (true) : (o.HairColor == hairColor))
+                        && (o.State == 1)
+                        && (string.Compare(dueDate, o.CreateDate) < 0)
                         select o;
 
             var viewData = query.ToList();
@@ -80,8 +89,10 @@ namespace FoundCity.Controllers
         //    return db.FindPets;
         //}
         public List<FindPet> GetFindPets() {
+            //只顯示一個月內的資料,且狀態:未凍結 (dueDate:1個月前)
             var query = from o in db.FindPets
                         orderby o.PetId descending
+                        where (o.State == 1) && (string.Compare(dueDate, o.CreateDate) < 0)
                         select o;
 
             var viewData = query.ToList();

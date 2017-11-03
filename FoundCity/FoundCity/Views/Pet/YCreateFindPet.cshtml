@@ -15,7 +15,11 @@
 <script type="text/javascript" src="~/js/mycookie.js"></script>
 
 <link rel="stylesheet" href="~/css/MyStyle.css">
-
+<style type="text/css">
+    .coninfored {
+        color: red;
+    }
+</style>
 
 
 @*.................測試用function..................................*@
@@ -111,15 +115,16 @@
                             </select>
                         </h3>
                     </div>
-                    <div class="col-sm-5">
+                    <div id="findinfo" class="col-sm-5">
                         <h3>
-                            <label for="lostDateTextBox">
+                            <label id="datainfoMsg" for="lostDateTextBox">
                                 <span class="glyphicon glyphicon-time"></span>
                                 走失日期
                             </label>
 
                             <input type="text"
                                    id="lostDateTextBox"
+                                   name="YDateTextBox"
                                    class="form-control"
                                    placeholder="yyyy-mm-dd " />
                         </h3>
@@ -153,7 +158,7 @@
                                 聯絡人
                             </label>
                         </h3>
-                        <div style="margin-left:30%;">
+                        <div id="cinfo" style="margin-left:30%;">
                             <h3>
                                 <input type="text"
                                        id="contactManTextBox"
@@ -170,15 +175,16 @@
                                 <input type="radio" name="ContactSex" value="女"> 女
                             </h3>
                             <h3>
-                                <label for="contactTelTextBox">
+                                <label id="cinfoMsg" for="contactTelTextBox">
                                     @*<span class="glyphicon glyphicon-time"></span>*@
                                     電話:
                                 </label>
 
                                 <input type="text"
                                        id="contactTelTextBox"
+                                       name="cTelephone"
                                        class="form-control"
-                                       placeholder="xx-xxxxxxx" />
+                                       placeholder="xxxxxxxxxx" />
                             </h3>
                         </div>
                     </div>
@@ -240,10 +246,9 @@
         $("#debug").text($("#lostPlace2").val());
         $("#lostPlace1").val(debug.LostPlace1);
         selectArea();
-        //setTimeout('$("#lostPlace2").val("802");', 200);
         setTimeout('$("#lostPlace2").val("802");', 200);
         setTimeout(selectRoad, 200);
-        setTimeout('$("#lostPlace3").val(debug.LostPlace3);', 500);
+        //setTimeout('$("#lostPlace3").val(debug.LostPlace3);', 500);
 
     })
 
@@ -415,7 +420,7 @@
                             $("#lostPlace3").empty();
                             $.each(data, function (index, obj) {
                                 var sRows = "";
-                                sRows += "<option value='" + obj.road + "'>" + obj.road + "</option>";
+                                sRows += "<option value='" + obj.id + "'>" + obj.road + "</option>";
                                 $("#lostPlace3").append(sRows);
                             })
 
@@ -435,17 +440,17 @@
                     $("#lostPlace3").removeClass("file_hidden");
                     selectArea();
                     setTimeout("selectRoad()", 200);
-                    setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3").val())', 500);
+                    setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3 option:selected").text())', 500);
                     //selectRoad();
                 });
 
                 $("#lostPlace2").change(function () {
                     selectRoad();
-                    setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3").val())', 500);
+                    setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3 option:selected").text())', 500);
                 });
 
                 $("#lostPlace3").change(function () {
-                    $("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3").val());
+                    $("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3 option:selected").text());
                 });
 
                 //for edit: 使第三欄出現
@@ -462,7 +467,7 @@
                         selectArea();
                         $("#lostPlace3").removeClass("file_hidden");
                         setTimeout("selectRoad()", 200);
-                        setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3").val())', 500);
+                        setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3 option:selected").text())', 500);
                     }
                 });
 
@@ -543,7 +548,7 @@
 
                     if (getCookie("findPetBtn") >= 0) { // edit
 
-                        alert("test_updateData:(" + $("#lostPlace2 option:selected").text() + "," + $("#lostPlace3").val() + ")");
+                        //alert("test_updateData:(" + $("#lostPlace2 option:selected").text() + "," + $("#lostPlace3 option:selected").text() + ")");
                         var updateData = {
 
                             PetId: getCookie("findPetBtn"),
@@ -560,7 +565,7 @@
                             LostDate: $("#lostDateTextBox").val(),
                             LostPlace1: $("#lostPlace1").val(),
                             LostPlace2: $("#lostPlace2 option:selected").text(),
-                            LostPlace3: $("#lostPlace3").val(),
+                            LostPlace3: $("#lostPlace3 option:selected").text(),
                             ContactSex: $('input[name=ContactSex]:checked').val(),
                             ContactMan: $("#contactManTextBox").val(),
                             ContactTel: $("#contactTelTextBox").val(),
@@ -571,7 +576,7 @@
                         };
 
                     //    alert(debug[currentIndex].PetID);
-                        alert(JSON.stringify(updateData));
+                        //alert(JSON.stringify(updateData));
                     //    //alert(data);
 
                         $.ajax({
@@ -613,7 +618,7 @@
                             LostDate: $("#lostDateTextBox").val(),
                             LostPlace1: $("#lostPlace1").val(),
                             LostPlace2: $("#lostPlace2 option:selected").text(),
-                            LostPlace3: $("#lostPlace3").val(),
+                            LostPlace3: $("#lostPlace3 option:selected").text(),
                             ContactSex: $('input[name=ContactSex]:checked').val(),
                             ContactMan: $("#contactManTextBox").val(),
                             ContactTel: $("#contactTelTextBox").val(),
@@ -621,7 +626,7 @@
                             //先亂設
 
                             CreateDate: mydate(),
-                            PlaceId: $("#lostPlace2").val(),
+                            PlaceId: $("#lostPlace3").val(),
                             State: 1
 
                         };
