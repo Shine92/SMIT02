@@ -184,7 +184,7 @@
     height: 630px;
 }
 
-member_profile/*loading效果 10/30 尚未使用*/
+member_profile /*loading效果 10/30 尚未使用*/
 .glyphicon-refresh-animate {
     -animation: spin .7s infinite linear;
     -webkit-animation: spin2 .7s infinite linear;
@@ -220,7 +220,7 @@ member_profile/*loading效果 10/30 尚未使用*/
 
 .rBody {
     background-color: #e6e6e6;
-    margin-bottom:0px;
+    margin-bottom: 0px;
 }
 
 .rRadar_font {
@@ -289,11 +289,6 @@ member_profile/*loading效果 10/30 尚未使用*/
             display: block;
             padding-left: 0px;
         }
-
-            #rSidebar ul li a img {
-                width: 20px;
-                height: auto;
-            }
 
     #rSidebar li a:hover,
     #rSidebar li.active {

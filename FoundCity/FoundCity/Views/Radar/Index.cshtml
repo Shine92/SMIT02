@@ -41,8 +41,14 @@
             <small><b>其他功能</b></small>
         </h5>
         <ul class="sidebar-nav nav">
-            <li onclick="rEnter()"><a>手動搜尋</a></li>
-        </ul>
+            <li>
+                <div class="btn-group" id="searchMode" data-toggle="buttons">
+                    <label class="btn btn-default btn-on-2 btn-lg" onclick="rAutoMode()"><input type="radio" name="searchType" value="1" checked="checked">自動搜尋</label>
+                    <label class="btn btn-default btn-off-2 btn-lg" onclick="rEnterMode()"><input type="radio" name="searchType" value="0">手動搜尋</label>
+                </div>
+            </li>
+
+         </ul>
 
     </div>
 

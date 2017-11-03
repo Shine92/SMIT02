@@ -51,7 +51,7 @@ $(document).ready(function () {
         var checkUserLastName = new RegExp("^\\D{1,10}$");
         var data = $.trim($("#UserLastName").val());
         var result = checkUserLastName.test(data);
-        if(!result){
+        if (!result) {
             $("input[name='UserLastName']").select();
             $("#info #infoMsg").text("名字輸入格式不符");
             console.log("result:" + result);
@@ -95,8 +95,8 @@ $(document).ready(function () {
     $("#ConfirmPwd").blur(function () {
         var pwd = $("#UserPwd").val();
         var confirmPwd = $("#ConfirmPwd").val();
-        
-        if(confirmPwd != pwd){
+
+        if (confirmPwd != pwd) {
             $("#info #infoMsg").text("確認密碼錯誤,請重新輸入");
         } else {
             $("#info #infoMsg").text("");
@@ -136,10 +136,10 @@ $(document).ready(function () {
     $("#LoginBtn").click(function () {
         var loginAccount = $.trim($("#LoginAccount").val());
         var loginPassword = $.trim($("#LoginPassword").val());
-        if(loginAccount == null || loginAccount == ""){
+        if (loginAccount == null || loginAccount == "") {
             alert("登入錯誤:請輸入帳號");
             return false;
-        }else if (loginPassword == null || loginPassword == ""){
+        } else if (loginPassword == null || loginPassword == "") {
             alert("登入錯誤:請輸入密碼");
             return false;
         } else {
@@ -148,9 +148,9 @@ $(document).ready(function () {
         /*如果勾選記住我 傳出true*/
         if ($("#LoginRemeber").is(':checked')) {
             $("#LoginRemeberResult").attr("value", "true");
-        } else if($("#LoginRemeber").not(':checked')) {
+        } else if ($("#LoginRemeber").not(':checked')) {
             $("#LoginRemeberResult").attr("value", "false");
-       }
+        }
     });
 
     /*ChangePasswordPage*/
@@ -219,6 +219,84 @@ $(document).ready(function () {
 /*********************************************************************************/
 /* Rey js                                                                   */
 /*********************************************************************************/
+
+
+$(document).ready(function () {
+    menu();
+    memberMenu();
+});
+
+function menu() {
+    $("#menu a").each(function (index, element) {
+        if (element.href == location.href) {
+            $('#menu  li:eq(' + index + ')').addClass("current_page_item");
+        }
+    });
+}
+
+function memberMenu() {
+    if (getCookie("FoundCity2017") != "") {
+        $("#memberLoginbtn").hide();
+        $("#memberLogoutbtn").show();
+        $("#memberCenter").show();
+    } else {
+        $("#memberLoginbtn").show();
+        $("#memberLogoutbtn").hide();
+        $("#memberCenter").hide();
+    }
+}
+
+function initHome() {
+    $.ajax({
+        url: "/Home/Data",
+        type: "Post",
+        success: function (data) {
+
+            $.each(data.Pet, function (index, vul) {
+                var viewID = "viewPet";
+                viewHome(viewID, vul);
+            });
+
+            $.each(data.Mom, function (index, vul) {
+                var viewID = "viewMom";
+                viewHome(viewID, vul);
+            });
+        },
+        error: function (error) {
+
+        }
+    });
+}
+
+function viewHome(viewID, data) {
+
+    var viewTime;
+    var viewSite;
+
+    switch (viewID) {
+        case "viewPet":
+            viewTime = "遺失時間：" + data.LostDate;
+            viewSite = "遺失地點：" + data.LostPlace1 + data.LostPlace2 + data.LostPlace3;
+            break;
+        case "viewMom":
+            console.log(data.FindDate);
+            viewTime = "拾獲時間：" + data.FindDate;
+            viewSite = "拾獲地點：" + data.FindPlace1 + data.FindPlace2 + data.FindPlace3;
+            break;
+    }
+
+    $('#' + viewID).append(
+        $('<div>').addClass('col-xs-3 col-sm-3 col-md-3 col-lg-3').append(
+             $('<div>').addClass('panel panel-default').append(
+                 $('<div>').addClass('panel-body').append(
+                     $('<a>').attr('href', '#').append(
+                         $('<img>').attr('src', '../images/' + data.PetPhoto).attr('alt', 'Image'))),
+                 $('<div>').addClass('panel-footer').append(
+                     $('<div>').addClass('panelFooterTitle').text(viewTime),
+                     $('<div>').addClass('panelFooterPrice').text(viewSite))
+        )));
+}
+
 
 /*********************************************************************************/
 /* Yako js                                                                   */
