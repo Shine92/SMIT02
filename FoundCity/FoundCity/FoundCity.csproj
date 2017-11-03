@@ -212,6 +212,7 @@
     <Compile Include="Models\FindPet.cs">
       <DependentUpon>NewPetModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\Member.cs">
       <DependentUpon>NewPetModel.tt</DependentUpon>
     </Compile>

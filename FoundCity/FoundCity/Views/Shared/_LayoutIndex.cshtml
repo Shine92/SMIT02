@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="~/js/mycookie.js"></script>
     <link rel="stylesheet" href="~/css/Default.css" />
     <script src="~/js/Default.js"></script>
     <link rel="stylesheet" href="~/css/MyStyle.css" />
@@ -27,14 +28,14 @@
         <div id="menu-wrapper">
             <div id="menu" class="container-full">
                 <ul>
-                    <li class="current_page_item"><a href="/Home/Index">首頁</a></li>
+                    <li><a href="/Home/Index">首頁</a></li>
                     <li><a href="/Pet/Index">尋寵啟示</a></li>
                     <li><a href="#">拾獲通報</a></li>
                     <li><a href="#">認養資訊</a></li>
                     <li><a href="/Radar/Index">雷達搜尋</a></li>
-                    <li class="item_right"><a href="/Member/Logout">會員登出</a></li>
-                    <li class="item_right"><a href="/Member/Login">會員登入</a></li>
-                    <li class="item_right"><a href="/Member/Index">會員中心</a></li>
+                    <li id="memberLogoutbtn" class="item_right"  style="display:none"><a href="/Member/Logout">會員登出</a></li>
+                    <li id="memberLoginbtn" class="item_right"  style="display:none"><a href="/Member/Login">會員登入</a></li>
+                    <li id="memberCenter" class="item_right"  style="display:none"><a href="/Member/Index">會員中心</a></li>
                 </ul>
             </div>
             <!-- end #menu -->

@@ -258,58 +258,120 @@
 
 
 #rPrompt {
-  text-align:center;
-  background:linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
-  color:#555;
-  font-family: Microsoft JhengHei;
-  font-weight: bold;
-  font-size:70px;
-  padding-top:30vh;
-  height:700px;
-  overflow:hidden;
-  -webkit-backface-visibility: hidden;
-  /*-webkit-perspective: 1000;*/
-  -webkit-transform: translate3d(0,0,0);
+    text-align: center;
+    background: linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
+    color: #555;
+    font-family: Microsoft JhengHei;
+    font-weight: bold;
+    font-size: 70px;
+    padding-top: 30vh;
+    height: 700px;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    /*-webkit-perspective: 1000;*/
+    -webkit-transform: translate3d(0,0,0);
 }
 
-#rPrompt div {
-  display:inline-block;
-  overflow:hidden;
-  white-space:nowrap;
-}
+    #rPrompt div {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+    }
 
-#rPrompt div:first-of-type {
-  animation: showup 7s infinite;
-}
+        #rPrompt div:first-of-type {
+            animation: showup 7s infinite;
+        }
 
-#rPrompt div:last-of-type {
-  width:0px;
-  animation: reveal 7s infinite;
-}
+        #rPrompt div:last-of-type {
+            width: 0px;
+            animation: reveal 7s infinite;
+        }
 
-#rPrompt div:last-of-type span {
-  margin-left:-355px;
-  animation: slidein 7s infinite;
-}
+            #rPrompt div:last-of-type span {
+                margin-left: -355px;
+                animation: slidein 7s infinite;
+            }
 
 @keyframes showup {
-    0% {opacity:0;}
-    20% {opacity:1;}
-    80% {opacity:1;}
-    100% {opacity:0;}
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes slidein {
-    0% { margin-left:-800px; }
-    20% { margin-left:-800px; }
-    35% { margin-left:0px; }
-    100% { margin-left:0px; }
+    0% {
+        margin-left: -800px;
+    }
+
+    20% {
+        margin-left: -800px;
+    }
+
+    35% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: 0px;
+    }
 }
 
 @keyframes reveal {
-    0% {opacity:0;width:0px;}
-    20% {opacity:1;width:0px;}
-    30% {width:650px;}
-    80% {opacity:1;}
-    100% {opacity:0;width:650px;}
+    0% {
+        opacity: 0;
+        width: 0px;
+    }
+
+    20% {
+        opacity: 1;
+        width: 0px;
+    }
+
+    30% {
+        width: 650px;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        width: 650px;
+    }
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------*/
+
+.btn-default.btn-on-2.active {
+    background-color: #00D590;
+    color: white;
+}
+
+.btn-default.btn-off-2.active {
+    background-color: #A7A7A7;
+    color: white;
+}
+
+#searchMode label {
+    font-family: Microsoft JhengHei;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#searchMode {
+    width:70%;
 }

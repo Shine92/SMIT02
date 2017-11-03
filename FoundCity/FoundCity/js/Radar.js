@@ -2,11 +2,16 @@
 var rMap;
 var rLatlng;
 var searchType;
+var isMode;
 
-window.onload = rScrollRule;
+$(document).ready(function () {
+    rScrollRule();
+    rSearchMode();
+});
 
 //----------------------------------------------------------------------------------------------
 
+// 設定捲動時不影響外部卷軸
 function rScrollRule() {
     $('#rResult_Table').bind('mousewheel DOMMouseScroll', function (e) {
         var scrollTo = null;
@@ -25,6 +30,45 @@ function rScrollRule() {
     });
 }
 
+// 判斷搜尋模式 ( 0：自動 1：手動 )
+function rSearchMode() {
+    var arr = document.getElementsByName("searchType");
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i].checked) {
+            $('#searchMode  label:eq(' + i + ')').addClass("active");
+            initMode(i);
+        }
+    }
+}
+
+// 定義搜尋模式
+function initMode(index) {
+    switch(index){
+        case 0:
+            isMode = "自動";
+            break;
+        case 1:
+            isMode = "手動";
+            break;
+    }
+}
+
+// 開始搜尋
+function startSearch() {
+    switch(isMode){
+        case "自動":
+            rDetect();
+            break;
+        case "手動":
+            enterAddress();
+            break;
+        default:
+            enterAddress();
+            break;
+    }
+}
+
+// 自動抓取使用者位置
 function rDetect() {
     // 瀏覽器支援 HTML5 定位方法
     if (navigator.geolocation) {
@@ -67,22 +111,7 @@ function rDetect() {
     }
 }
 
-function mapServiceProvider(latitude, longitude) {
-    var myLatlng = new google.maps.LatLng(latitude, longitude);
-    initMAP(myLatlng);
-}
-
-// 成功取得 Gears 定位
-function successCallback(p) {
-    mapServiceProvider(p.latitude, p.longitude);
-}
-
-// 取得 Gears 定位發生錯誤
-function errorCallback(err) {
-    //var msg = 'Error retrieving your location: ' + err.message;
-    //alert(msg);
-}
-
+// 手動輸入使用者地址
 function enterAddress(msg) {
     var rP;
 
@@ -104,6 +133,7 @@ function enterAddress(msg) {
     }
 }
 
+// 使用者地址轉換成經緯度
 function initLatlng(userAddress) {
 
     var geocoder = new google.maps.Geocoder();
@@ -122,6 +152,7 @@ function initLatlng(userAddress) {
     });
 }
 
+// 生成地圖
 function initMAP(myLatlng) {
 
     $("#rRange").html("0");
@@ -225,6 +256,7 @@ function initMAP(myLatlng) {
     initRange();
 }
 
+// 生成Marker
 function intiMarker() {
     var mainMK = new google.maps.Marker({
         position: rLatlng,
@@ -235,6 +267,7 @@ function intiMarker() {
     mainMK.setMap(rMap);
 }
 
+// 判斷搜尋的類型
 function initRange() {
 
     var service = new google.maps.places.PlacesService(rMap);
@@ -271,6 +304,7 @@ function initRange() {
 
 }
 
+// 雷達搜尋
 function rangeCallBack(data, status) {
     switch (status) {
         case google.maps.places.PlacesServiceStatus.OK:
@@ -286,6 +320,7 @@ function rangeCallBack(data, status) {
     }
 }
 
+// 雷達搜尋結束，將結果編輯成陣列
 function Schedule(aryRow, data, num, maxNum) {
 
     $("#rResult_Table").hide();
@@ -373,6 +408,7 @@ function Schedule(aryRow, data, num, maxNum) {
 
 }
 
+// 雷達陣列完成，生成畫面
 function rResultView(aryRow) {
 
     var statusIconColor;
@@ -437,6 +473,7 @@ function rResultView(aryRow) {
                         ))))));
 }
 
+// 重新生成地圖
 function viewMap(aryRow) {
     var bounds = new google.maps.LatLngBounds();
 
@@ -451,6 +488,7 @@ function viewMap(aryRow) {
     viewRange(aryRow[aryRow.length - 1].dist);
 }
 
+// 生成雷達範圍畫面
 function viewRange(Dist) {
     var mRange = new google.maps.Circle({
         center: rLatlng,
@@ -464,8 +502,7 @@ function viewRange(Dist) {
     mRange.setMap(rMap);
 }
 
-//----------------------------------------------------------------------------------------------
-
+// 生成雷達結束畫面
 function rEnd() {
     $('#rResult_Content').append(
         $('<article>').addClass('timeline-entry begin').append(
@@ -478,39 +515,73 @@ function rEnd() {
     );
 }
 
+//----------------------------------------------------------------------------------------------
+
+// 成功取得 HTML5 定位
+function mapServiceProvider(latitude, longitude) {
+    var myLatlng = new google.maps.LatLng(latitude, longitude);
+    initMAP(myLatlng);
+}
+
+// 成功取得 Gears 定位
+function successCallback(p) {
+    mapServiceProvider(p.latitude, p.longitude);
+}
+
+// 取得 Gears 定位發生錯誤
+function errorCallback(err) {
+    //var msg = 'Error retrieving your location: ' + err.message;
+    //alert(msg);
+}
+
+// 清除所有Marker
 function setMapOnAll(map) {
     for (var i = 0; i < rMarkers.length; i++) {
         rMarkers[i].setMap(map);
     }
 }
 
+//----------------------------------------------------------------------------------------------
+
+// 動物醫院
 function rHospital() {
     searchType = "Hospital";
-    rDetect();
+    startSearch();
 }
 
+// 動物商店
 function rStore() {
     searchType = "Store";
-    rDetect();
+    startSearch();
 }
 
+// 動物旅館
 function rHostel() {
     searchType = "Hostel";
-    rDetect();
+    startSearch();
 }
 
+// 尋寵啟示
 function rFind() {
 
 }
 
+// 拾獲寵物
 function rPick() {
 
 }
 
+// 認養資訊
 function rClaim() {
 
 }
 
-function rEnter() {
-    enterAddress();
+// 自動搜尋
+function rAutoMode() {
+    initMode(0);
+}
+
+// 手動搜尋
+function rEnterMode() {
+    initMode(1);
 }
