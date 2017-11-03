@@ -342,8 +342,8 @@
                             $.each(data, function (index, obj) {
                                 //alert(count);
                                 count += 1;
-                                //var Rows1 = "<img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo'>";
-                                var Rows1 = '<a><img src="../images/' + obj.PetPhoto + '" class="" style="" alt="Image"></a>';
+                                var Rows1 = "<a id='petPhoto'><img src='../images/" + obj.PetPhoto + "'  class='petPhoto' alt='Pet Photo'></a>";
+                                //var Rows1 = '<a><img src="../images/' + obj.PetPhoto + '" id="petPhoto" class="" style="" alt="Image"></a>';
                                 var Rows21 = '遺失時間：' + obj.LostDate ;
                                 var Rows22 = '遺失地點：' +obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3 ;
 
@@ -398,9 +398,9 @@
                             $(".petPhoto").on("click", function (e) {
                                 //登入成功才會有反應(顯示)
                                 if ($("#LoginCheck").val()=="true") {
-                                    //var iIndex = $(this).parent().parent().index();
-                                    var iIndex = $(this).closest("div").index();
-                                    //alert(iIndex);
+                                    var iIndex = $(this).parent().parent().parent().parent().index();
+                                    //var iIndex = $(this).closest("div").index();
+                                    alert(iIndex);
 
                                     var sRowsImg = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo' width='50%' height='40%' style='margin-left:25%;'>"
                                     $("#showImg2").empty();
@@ -481,8 +481,8 @@
                             $.each(data, function (index, obj) {
                                 //alert(count);
                                 count += 1;
-                                //var Rows1 = "<img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo'>";
-                                var Rows1 = '<a><img src="../images/' + obj.PetPhoto + '" class="" style="" alt="Image"></a>';
+                                var Rows1 = "<a id='petPhoto'><img src='../images/" + obj.PetPhoto + "'  class='petPhoto' alt='Pet Photo'></a>";
+                                //var Rows1 = '<a><img src="../images/' + obj.PetPhoto + '" id="petPhoto" class="" style="" alt="Image"></a>';
                                 var Rows21 = '遺失時間：' + obj.LostDate;
                                 var Rows22 = '遺失地點：' + obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3;
 
@@ -515,9 +515,9 @@
                             $(".petPhoto").on("click", function (e) {
                                 //登入成功才顯示
                                 if ($("#LoginCheck").val() == "true") {
-                                    //var iIndex = $(this).parent().parent().index();
 
-                                    var iIndex = $(this).closest("div").index();
+                                    var iIndex = $(this).parent().parent().parent().parent().index();
+                                    //var iIndex = $(this).closest("div").index();
                                     //alert(iIndex);
                                     var sRowsImg = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo' width='50%' height='40%' style='margin-left:25%;'>"
                                     $("#showImg2").empty();
