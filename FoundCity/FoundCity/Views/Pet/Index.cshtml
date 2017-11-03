@@ -180,7 +180,19 @@
         <div class="thirds clearfix" id="findAnimalList">
 
         </div>
+        
+        <div class="row section_items" id="findPetList">
+            @*<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
+                <div class="panel panel-default">
 
+                    <div class="panel-body"><a href="#"><img src="~/images/pic01.jpg" class="" style="" alt="Image"></a></div>
+                    <div class="panel-footer">
+                        <div class="panelFooterTitle">遺失時間：2017-10-11</div>
+                        <div class="panelFooterPrice">遺失地點：台中市西屯區</div>
+                    </div>
+                </div>
+            </div>*@
+        </div>
     </div>
 
 
@@ -199,7 +211,7 @@
 
                     loadAndRefreshUI();     //FindPet首頁載入empty,get
 
-                    setCookie("uid", 3, 1); //假設會員權限
+                    //setCookie("uid", 3, 1); //假設會員權限
 
                 })
 
@@ -275,7 +287,7 @@
                             $("#lostPlace3").append(sRows);
                             $.each(data, function (index, obj) {
 
-                                sRows = "<option value='" + obj.road + "'>" + obj.road + "</option>"
+                                sRows = "<option value='" + obj.id + "'>" + obj.road + "</option>"
 
                                 $("#lostPlace3").append(sRows);
 
@@ -294,19 +306,19 @@
                 $("#lostPlace1").change(function () {
                     $("#lostPlace3").removeClass("file_hidden");
                     selectArea();
-                    //setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3").val())', 500);
+                    //setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3 option:selected").text())', 500);
                     setTimeout(selectRoad,200);
                 });
 
                 //改變lostPlace2觸動3
                 $("#lostPlace2").change(function () {
                     selectRoad();
-                    //setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3").val())', 500);
+                    //setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3 option:selected").text())', 500);
                 });
 
                 //改變lostPlace3,(目前無內容)
                 $("#lostPlace3").change(function () {
-                    //$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3").val());
+                    //$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3 option:selected").text());
                 });
 
 
@@ -324,27 +336,63 @@
                             debug = data;
                             //alert(data);
                             var count = 0;
-
+                            
                             //FindPet首頁載入function1:append
+                            $("#findPetList").empty();
                             $.each(data, function (index, obj) {
-                                count += 1;
-
-                                var tRows1 = "<h3>&nbsp;" + obj.LostDate + "</h3>";
-                                var tRows2 = "<p>&nbsp;[" + obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3 + "]</p>";
-                                var sRows = "<img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo'>"
-
-                                var $div = $("<div></div>")
-                                            .addClass((count % 4 == 0) ? "one-third-last" : "")
-                                            .addClass((count % 3 == 0) ? "test3last" : "test3")
-                                            .addClass((count % 2 == 0) ? "one-third even mobile-collapse" : "one-third odd mobile-collapse");
-
-                                $div.append(sRows);
-                                $div.append(tRows1);
-                                $div.append(tRows2);
-                                $div.appendTo("#findAnimalList");
-
                                 //alert(count);
+                                count += 1;
+                                //var Rows1 = "<img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo'>";
+                                var Rows1 = '<a><img src="../images/' + obj.PetPhoto + '" class="" style="" alt="Image"></a>';
+                                var Rows21 = '遺失時間：' + obj.LostDate ;
+                                var Rows22 = '遺失地點：' +obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3 ;
+
+                                var $div00 = $("<div></div>").addClass("col-xs-3 col-sm-3 col-md-3 col-lg-3");
+                                var $div0 = $("<div></div>").addClass("panel panel-default");
+                                var $div1 = $("<div></div>").addClass("panel-body");
+                                $div1.append(Rows1);
+                                //alert(count);
+
+                                //........................
+                                var $div2 = $("<div></div>").addClass("panel-footer-detail");
+
+                                var $div21 = $("<div></div>").addClass("panelFooterTitle");
+                                $div21.append(Rows21);
+                                
+                                var $div22 = $("<div></div>").addClass("panelFooterPrice");
+                                $div22.append(Rows22);
+                                
+                                $div21.appendTo($div2);  
+                                $div22.appendTo($div2);
+                                //.............................
+                                $div1.appendTo($div0);
+                                $div2.appendTo($div0);
+                                $div0.appendTo($div00);
+                                $div00.appendTo("#findPetList");
+                                
                             })
+
+                            //FindPet首頁載入function1:append......放棄版1
+                            //$.each(data, function (index, obj) {
+                            //    count += 1;
+
+                            //    var tRows1 = "<div><h4>遺失日期:" + obj.LostDate + "</h4><p style='margin-left:10%';>[" + obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3 + "]</p></div>";
+                            //    //var tRows2 = "<p style='margin-left:10%';>[" + obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3 + "]</p>";
+                            //    var sRows = "<div><img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo'></div>"
+
+                            //    var $div = $("<div></div>")
+                            //                .addClass((count % 4 == 0) ? "one-third-last" : "")
+                            //                .addClass((count % 3 == 0) ? "test3last" : "test3")
+                            //                .addClass((count % 2 == 0) ? "one-third even mobile-collapse" : "one-third odd mobile-collapse");
+
+                            //    $div.append(tRows1);
+                            //    //$div.append(tRows2);
+                            //    $div.append(sRows);
+                                
+                            //    $div.appendTo("#findAnimalList");
+
+                            //    //alert(count);
+                            //})
 
                             //FindPet首頁載入function2:petPhoto_click(要加權限,暫用ViewData代替)
                             $(".petPhoto").on("click", function (e) {
@@ -354,7 +402,7 @@
                                     var iIndex = $(this).closest("div").index();
                                     //alert(iIndex);
 
-                                    var sRowsImg = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='50%' height='40%' style='margin-left:25%;'>"
+                                    var sRowsImg = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo' width='50%' height='40%' style='margin-left:25%;'>"
                                     $("#showImg2").empty();
                                     $("#showImg2").append(sRowsImg);
 
@@ -422,30 +470,45 @@
                             + '&age=' + $('input[name=Age]:checked').val()
                             + '&lostPlace1=' + $("#lostPlace1 option:selected").val()
                             + '&lostPlace2=' + $("#lostPlace2 option:selected").text()
-                            + '&lostPlace3=' + $("#lostPlace3 option:selected").val(),
+                            + '&lostPlace3=' + $("#lostPlace3 option:selected").text(),
                         dataType: "json",
                         success: function (data) {
                             debug = data;
                             var count = 0;
 
                             //搜尋get後function1:append
+                            $("#findPetList").empty();
                             $.each(data, function (index, obj) {
+                                //alert(count);
                                 count += 1;
-                                var tRows1 = "<h3>&nbsp;" + obj.LostDate + "</h3>";
-                                var tRows2 = "<p>&nbsp;[" + obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3 +"]</p>";
-                                var sRows = "<img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre'>"
+                                //var Rows1 = "<img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo'>";
+                                var Rows1 = '<a><img src="../images/' + obj.PetPhoto + '" class="" style="" alt="Image"></a>';
+                                var Rows21 = '遺失時間：' + obj.LostDate;
+                                var Rows22 = '遺失地點：' + obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3;
 
-                                var $div = $("<div></div>")
-                                            //.text(newsText1)
-                                            .addClass((count % 4 == 0) ? "one-third-last" : "")
-                                            .addClass((count % 3 == 0) ? "test3last" : "test3")
-                                            .addClass((count % 2 == 0) ? "one-third even mobile-collapse" : "one-third odd mobile-collapse");
+                                var $div00 = $("<div></div>").addClass("col-xs-3 col-sm-3 col-md-3 col-lg-3");
+                                var $div0 = $("<div></div>").addClass("panel panel-default");
+                                var $div1 = $("<div></div>").addClass("panel-body");
+                                $div1.append(Rows1);
+                                //alert(count);
 
-                                $div.append(sRows);
-                                $div.append(tRows1);
-                                $div.append(tRows2);
-                                $div.appendTo("#findAnimalList");
+                                //........................
+                                var $div2 = $("<div></div>").addClass("panel-footer-detail");
 
+                                var $div21 = $("<div></div>").addClass("panelFooterTitle");
+                                $div21.append(Rows21);
+
+                                var $div22 = $("<div></div>").addClass("panelFooterPrice");
+                                $div22.append(Rows22);
+
+                                $div21.appendTo($div2);
+                                $div22.appendTo($div2);
+                                //.............................
+                                $div1.appendTo($div0);
+                                $div2.appendTo($div0);
+                                $div0.appendTo($div00);
+                                $div00.appendTo("#findPetList");
+                               
                             })
 
                             //搜尋get後function2:petPhoto_click(要加權限,暫用ViewData代替)
@@ -456,7 +519,7 @@
 
                                     var iIndex = $(this).closest("div").index();
                                     //alert(iIndex);
-                                    var sRowsImg = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Cinque Terre' width='50%' height='40%' style='margin-left:25%;'>"
+                                    var sRowsImg = "<img src='../images/" + debug[iIndex].PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo' width='50%' height='40%' style='margin-left:25%;'>"
                                     $("#showImg2").empty();
                                     $("#showImg2").append(sRowsImg);
 
