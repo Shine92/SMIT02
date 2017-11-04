@@ -50,6 +50,9 @@ function initMode(index) {
         case 1:
             isMode = "手動";
             break;
+        case 2:
+            isMode = "預設";
+            break;
     }
 }
 
@@ -61,6 +64,11 @@ function startSearch() {
             break;
         case "手動":
             enterAddress();
+            break;
+        case "預設":
+            if (confirm("台中市南屯區公益路二段51號")) {
+                initLatlng("台中市南屯區公益路二段51號");
+            }
             break;
         default:
             enterAddress();
@@ -127,9 +135,7 @@ function enterAddress(msg) {
             enterAddress("地址不得為空白");
         }
     } else {
-        if (confirm("台中市南屯區公益路二段51號")) {
-            initLatlng("台中市南屯區公益路二段51號");
-        }
+        
     }
 }
 
@@ -584,4 +590,8 @@ function rAutoMode() {
 // 手動搜尋
 function rEnterMode() {
     initMode(1);
+}
+
+function rDefaultMode() {
+    initMode(2);
 }
