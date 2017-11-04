@@ -249,7 +249,7 @@ function memberMenu() {
 function initHome() {
     $.ajax({
         url: "/Home/Data",
-        type: "Post",
+        type: "Get",
         success: function (data) {
 
             $.each(data.Pet, function (index, vul) {
@@ -279,7 +279,6 @@ function viewHome(viewID, data) {
             viewSite = "遺失地點：" + data.LostPlace1 + data.LostPlace2 + data.LostPlace3;
             break;
         case "viewMom":
-            console.log(data.FindDate);
             viewTime = "拾獲時間：" + data.FindDate;
             viewSite = "拾獲地點：" + data.FindPlace1 + data.FindPlace2 + data.FindPlace3;
             break;

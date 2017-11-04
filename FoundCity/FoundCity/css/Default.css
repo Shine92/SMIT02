@@ -37,16 +37,14 @@ a:hover {
 	text-decoration: none;
 }
 
-a img {
-	border: none;
-    /*max-height: 400px;
-    min-height: 400px;
-    object-fit: contain;*/
-    max-height:200px;
-    min-height: 200px;
-    object-fit: cover;
-    width: 100%;
-}
+    a img {
+        border: none;
+        max-height: 385px;
+        min-height: 385px;
+        object-fit: cover;
+        object-position: 50% top;
+        width: 100%;
+    }
 
 	.image
 	{

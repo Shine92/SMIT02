@@ -14,10 +14,10 @@ namespace FoundCity.Controllers {
             return View();
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Data() {
             var data = homeModel.Data();
-            return Json(data);
+            return Json(data,JsonRequestBehavior.AllowGet);
         }
 
     }
