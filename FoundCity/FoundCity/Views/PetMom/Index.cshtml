@@ -1,6 +1,6 @@
-﻿@*搜尋缺地圖*@
+﻿
 @{
-    ViewBag.Title = "FindPet";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 }
 
@@ -16,16 +16,17 @@
         <ul class="nav nav-tabs">
 
             @*登入成功才顯示*@
-            @if (ViewData["LoginCheckResult"].ToString() == "true") {
-                <li class="selection_hidden" id="addFindPetButton"><a href="~/Pet/YCreateFindPet">新增</a></li>
-                <li class="selection_hidden" id="linkMemberFindPetButton"><a href="~/Pet/MemberFindPet">我的發佈</a></li>
+            @if (ViewData["LoginCheckResult"].ToString() == "true")
+            {
+                <li class="selection_hidden" id="addFindMomButton"><a href="~/Pet/YCreateFindMom">新增</a></li>
+                <li class="selection_hidden" id="linkMemberFindMomButton"><a href="~/PetMom/MemberFindMom">我的發佈</a></li>
             }
             <li class="" id="picks"><a href="#">搜尋</a></li>
 
         </ul>
     </div>
     <!-- 對話盒 (Detail)-->
-    <div id="findPetModal2" class="modal fade" role="dialog">
+    <div id="FindMomModal2" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -35,7 +36,7 @@
                 @*...function loadAndRefreshUI()...ajax_get_append......*@
                 <div class="modal-body">
                     <div id="showImg2"></div>
-                    <div id="showFindPet2" class='row'></div>
+                    <div id="showFindMom2" class='row'></div>
                 </div>
                 @*......................................................*@
                 <div class="modal-footer">
@@ -128,34 +129,34 @@
             </div>
             <div class="col-sm-5">
                 @*<h3>
-                        <label for="lostDateTextBox">
+                        <label for="findDateTextBox">
                               <span class="glyphicon glyphicon-time"></span>
                               走失日期
                         </label>
 
                         <input type="text"
-                              id="lostDateTextBox"
+                              id="findDateTextBox"
                               class="form-control"
                               placeholder="yyyy-mm-dd " />
                     </h3>*@
 
                 @*載入County,Area,Road*@
                 <h3>
-                    <label for="lostPlaceTextBox">
+                    <label for="findPlaceTextBox">
                         <span class="glyphicon glyphicon-map-marker"></span>
                         走失地點
                     </label><br>
-                    <select class="" id="lostPlace1" name="LostPlace1">
+                    <select class="" id="findPlace1" name="FindPlace1">
                         <option value="all1">全部</option>
                     </select>
-                    <select class="" id="lostPlace2" name="LostPlace2">
+                    <select class="" id="findPlace2" name="FindPlace2">
                         <option value="all2">全部</option>
                     </select>
-                    <select class="" id="lostPlace3" name="LostPlace3">
+                    <select class="" id="findPlace3" name="FindPlace3">
                         <option value="all3">全部</option>
                     </select>
                     <input type="hidden"
-                           id="lostPlaceTextBoxS"
+                           id="findPlaceTextBoxS"
                            class="form-control"
                            placeholder="走失地點" />
                 </h3>
@@ -176,22 +177,22 @@
             </div>
         </div>
 
-        @*主頁內容(get_FindPet)*@
+        @*主頁內容(get_FindMom)*@
         <div class="thirds clearfix" id="findAnimalList">
 
         </div>
-        
-        <div class="row section_items" id="findPetList">
-            @*<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
-                <div class="panel panel-default">
 
-                    <div class="panel-body"><a href="#"><img src="~/images/pic01.jpg" class="" style="" alt="Image"></a></div>
-                    <div class="panel-footer">
-                        <div class="panelFooterTitle">遺失時間：2017-10-11</div>
-                        <div class="panelFooterPrice">遺失地點：台中市西屯區</div>
+        <div class="row section_items" id="findMomList">
+            @*<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
+                    <div class="panel panel-default">
+
+                        <div class="panel-body"><a href="#"><img src="~/images/pic01.jpg" class="" style="" alt="Image"></a></div>
+                        <div class="panel-footer">
+                            <div class="panelFooterTitle">拾獲時間：2017-10-11</div>
+                            <div class="panelFooterPrice">拾獲地點：台中市西屯區</div>
+                        </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
         </div>
     </div>
 
@@ -209,7 +210,7 @@
                     //setTimeout(selectArea, 400);
                     //setTimeout(selectRoad, 500);
 
-                    loadAndRefreshUI();     //FindPet首頁載入empty,get
+                    loadAndRefreshUI();     //FindMom首頁載入empty,get
 
                     //setCookie("uid", 3, 1); //假設會員權限
 
@@ -223,12 +224,12 @@
                         type: "Get",
                         dataType: "json",
                         success: function (data) {
-                            $("#lostPlace1").empty();
+                            $("#findPlace1").empty();
                             var sRows = '<option value="all1">全部</option>';
                             for (i = 0; i < data.length; i++) {
                                 sRows += "<option value='" + data[i] + "'>" + data[i] + "</option>"
                             }
-                            $("#lostPlace1").append(sRows);
+                            $("#findPlace1").append(sRows);
 
                             //alert(data[0]);
                             //$("#debug").text(JSON.stringify(data));
@@ -247,18 +248,18 @@
                         url: "/Street/Area",
                         type: "POST",
                         data: {
-                            city: $("#lostPlace1 option:selected").val()
+                            city: $("#findPlace1 option:selected").val()
                             //city: "台中市"
                         },
                         success: function (data) {
-                            $("#lostPlace2").empty();
+                            $("#findPlace2").empty();
                             var sRows = '<option value="all2">全部</option>';
-                            $("#lostPlace2").append(sRows);
+                            $("#findPlace2").append(sRows);
                             $.each(data, function (index, obj) {
 
                                 sRows = "<option value='" + obj.mailcode + "'>" + obj.country + "</option>"
 
-                                $("#lostPlace2").append(sRows);
+                                $("#findPlace2").append(sRows);
 
                             })
 
@@ -278,18 +279,18 @@
                         url: "/Street/Road",
                         type: "POST",
                         data: {
-                            code: $("#lostPlace2 option:selected").val()
+                            code: $("#findPlace2 option:selected").val()
                             //code: "100"
                         },
                         success: function (data) {
-                            $("#lostPlace3").empty();
+                            $("#findPlace3").empty();
                             var sRows = '<option value="all3">全部</option>';
-                            $("#lostPlace3").append(sRows);
+                            $("#findPlace3").append(sRows);
                             $.each(data, function (index, obj) {
 
                                 sRows = "<option value='" + obj.id + "'>" + obj.road + "</option>"
 
-                                $("#lostPlace3").append(sRows);
+                                $("#findPlace3").append(sRows);
 
                             })
 
@@ -302,50 +303,50 @@
                     });
                 }
 
-                //改變lostPlace1觸動2.3
-                $("#lostPlace1").change(function () {
-                    $("#lostPlace3").removeClass("file_hidden");
+                //改變FindPlace1觸動2.3
+                $("#findPlace1").change(function () {
+                    $("#findPlace3").removeClass("file_hidden");
                     selectArea();
-                    //setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3 option:selected").text())', 500);
+                    //setTimeout('$("#findPlaceTextBox").val($("#findPlace1").val() + $("#findPlace2 option:selected").text() + $("#findPlace3 option:selected").text())', 500);
                     setTimeout(selectRoad,200);
                 });
 
-                //改變lostPlace2觸動3
-                $("#lostPlace2").change(function () {
+                //改變FindPlace2觸動3
+                $("#findPlace2").change(function () {
                     selectRoad();
-                    //setTimeout('$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3 option:selected").text())', 500);
+                    //setTimeout('$("#findPlaceTextBox").val($("#findPlace1").val() + $("#findPlace2 option:selected").text() + $("#findPlace3 option:selected").text())', 500);
                 });
 
-                //改變lostPlace3,(目前無內容)
-                $("#lostPlace3").change(function () {
-                    //$("#lostPlaceTextBox").val($("#lostPlace1").val() + $("#lostPlace2 option:selected").text() + $("#lostPlace3 option:selected").text());
+                //改變FindPlace3,(目前無內容)
+                $("#findPlace3").change(function () {
+                    //$("#findPlaceTextBox").val($("#findPlace1").val() + $("#findPlace2 option:selected").text() + $("#findPlace3 option:selected").text());
                 });
 
 
-                //FindPet首頁載入empty,get
+                //FindMom首頁載入empty,get
                 function loadAndRefreshUI() {
 
                     $("#findAnimalList").empty();
 
-                    //FindPet首頁載入get
+                    //FindMom首頁載入get
                     $.ajax({
                         type: "get",
-                        url: '/api/FindPets',
+                        url: '/api/FindMoms',
                         dataType: "json",
                         success: function (data) {
                             debug = data;
                             //alert(data);
                             var count = 0;
-                            
-                            //FindPet首頁載入function1:append
-                            $("#findPetList").empty();
+
+                            //FindMom首頁載入function1:append
+                            $("#findMomList").empty();
                             $.each(data, function (index, obj) {
                                 //alert(count);
                                 count += 1;
                                 var Rows1 = "<a id='petPhoto'><img src='../images/" + obj.PetPhoto + "'  class='petPhoto' alt='Pet Photo'></a>";
                                 //var Rows1 = '<a><img src="../images/' + obj.PetPhoto + '" id="petPhoto" class="" style="" alt="Image"></a>';
-                                var Rows21 = '遺失時間：' + obj.LostDate ;
-                                var Rows22 = '遺失地點：' +obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3 ;
+                                var Rows21 = '拾獲時間：' + obj.FindDate;
+                                var Rows22 = '拾獲地點：' + obj.FindPlace1 + obj.FindPlace2 + obj.FindPlace3;
 
                                 var $div00 = $("<div></div>").addClass("col-xs-3 col-sm-3 col-md-3 col-lg-3");
                                 var $div0 = $("<div></div>").addClass("panel panel-default");
@@ -358,26 +359,26 @@
 
                                 var $div21 = $("<div></div>").addClass("panelFooterTitle");
                                 $div21.append(Rows21);
-                                
+
                                 var $div22 = $("<div></div>").addClass("panelFooterPrice");
                                 $div22.append(Rows22);
-                                
-                                $div21.appendTo($div2);  
+
+                                $div21.appendTo($div2);
                                 $div22.appendTo($div2);
                                 //.............................
                                 $div1.appendTo($div0);
                                 $div2.appendTo($div0);
                                 $div0.appendTo($div00);
-                                $div00.appendTo("#findPetList");
-                                
+                                $div00.appendTo("#findMomList");
+
                             })
 
-                            //FindPet首頁載入function1:append......放棄版1
+                            //FindMom首頁載入function1:append......放棄版1
                             //$.each(data, function (index, obj) {
                             //    count += 1;
 
-                            //    var tRows1 = "<div><h4>遺失日期:" + obj.LostDate + "</h4><p style='margin-left:10%';>[" + obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3 + "]</p></div>";
-                            //    //var tRows2 = "<p style='margin-left:10%';>[" + obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3 + "]</p>";
+                            //    var tRows1 = "<div><h4>拾獲日期:" + obj.FindDate + "</h4><p style='margin-left:10%';>[" + obj.FindPlace1 + obj.FindPlace2 + obj.FindPlace3 + "]</p></div>";
+                            //    //var tRows2 = "<p style='margin-left:10%';>[" + obj.FindPlace1 + obj.FindPlace2 + obj.FindPlace3 + "]</p>";
                             //    var sRows = "<div><img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo'></div>"
 
                             //    var $div = $("<div></div>")
@@ -388,13 +389,13 @@
                             //    $div.append(tRows1);
                             //    //$div.append(tRows2);
                             //    $div.append(sRows);
-                                
+
                             //    $div.appendTo("#findAnimalList");
 
                             //    //alert(count);
                             //})
 
-                            //FindPet首頁載入function2:petPhoto_click(要加權限,暫用ViewData代替)
+                            //FindMom首頁載入function2:petPhoto_click(要加權限,暫用ViewData代替)
                             $(".petPhoto").on("click", function (e) {
                                 //登入成功才會有反應(顯示)
                                 if ($("#LoginCheck").val()=="true") {
@@ -406,7 +407,7 @@
                                     $("#showImg2").empty();
                                     $("#showImg2").append(sRowsImg);
 
-                                    var sRowsFindPet =
+                                    var sRowsFindMom =
                                         "<div class='col-sm-12'></div>"
                                         + "<div class='col-sm-2'></div>"
                                         + "<div class='col-sm-3'>"
@@ -417,8 +418,8 @@
                                         + "<h4>" + "<span class='glyphicon glyphicon-record'></span>毛色:" + debug[iIndex].HairColor + "</h4>"
                                         + "</div>"
                                         + "<div class='col-sm-7'>"
-                                        + "<h4>" + "<span class='glyphicon glyphicon-time'></span>走失日期:" + debug[iIndex].LostDate + "</h4>"
-                                        + "<h4>" + "<span class='glyphicon glyphicon-map-marker'></span>走失地點:" + debug[iIndex].LostPlace1 + debug[iIndex].LostPlace2 + debug[iIndex].LostPlace3 + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-time'></span>走失日期:" + debug[iIndex].FindDate + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-map-marker'></span>走失地點:" + debug[iIndex].FindPlace1 + debug[iIndex].FindPlace2 + debug[iIndex].FindPlace3 + "</h4>"
                                         + "<h4>" + "<span class='glyphicon glyphicon-user'></span>聯絡人:" + debug[iIndex].ContactMan + "</h4>"
                                         + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人性別:" + debug[iIndex].ContactSex + "</h4>"
                                         + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人電話:" + debug[iIndex].ContactTel + "</h4>"
@@ -428,9 +429,9 @@
                                         + "<div class='col-sm-6'>"
                                         + "<h4>" + "<span class='glyphicon glyphicon-bullhorn'></span>備註:" + debug[iIndex].Characteristic + "</h4>"
                                         + "</div>"
-                                    $("#showImg2").append(sRowsFindPet);
+                                    $("#showImg2").append(sRowsFindMom);
 
-                                    $("#findPetModal2").modal({ backdrop: "static" });
+                                    $("#FindMomModal2").modal({ backdrop: "static" });
                                 }
                             })
 
@@ -459,32 +460,32 @@
                     $("#findAnimalList").empty();
 
                     //搜尋get
-                    //http://localhost:51664/api/FindPets?species=貓&size=中型&sex=母&hairColor=白色&age=成年&lostPlace1=新竹市&lostPlace2=北區&lostPlace3=大同路
+                    //http://localhost:51664/api/FindMoms?species=貓&size=中型&sex=母&hairColor=白色&age=成年&findPlace1=新竹市&findPlace2=北區&findPlace3=大同路
                     $.ajax({
                         type: "get",
-                        url: '/api/FindPets?'
+                        url: '/api/FindMoms?'
                             + 'species=' + $('input[name=Species]:checked').val()
                             + '&size=' + $('input[name=Size]:checked').val()
                             + '&sex=' + $('input[name=Sex]:checked').val()
                             + '&hairColor=' + $("#hairColorTextBox option:selected").val()
                             + '&age=' + $('input[name=Age]:checked').val()
-                            + '&lostPlace1=' + $("#lostPlace1 option:selected").val()
-                            + '&lostPlace2=' + $("#lostPlace2 option:selected").text()
-                            + '&lostPlace3=' + $("#lostPlace3 option:selected").text(),
+                            + '&findPlace1=' + $("#findPlace1 option:selected").val()
+                            + '&findPlace2=' + $("#findPlace2 option:selected").text()
+                            + '&findPlace3=' + $("#findPlace3 option:selected").text(),
                         dataType: "json",
                         success: function (data) {
                             debug = data;
                             var count = 0;
 
                             //搜尋get後function1:append
-                            $("#findPetList").empty();
+                            $("#findMomList").empty();
                             $.each(data, function (index, obj) {
                                 //alert(count);
                                 count += 1;
                                 var Rows1 = "<a id='petPhoto'><img src='../images/" + obj.PetPhoto + "'  class='petPhoto' alt='Pet Photo'></a>";
                                 //var Rows1 = '<a><img src="../images/' + obj.PetPhoto + '" id="petPhoto" class="" style="" alt="Image"></a>';
-                                var Rows21 = '遺失時間：' + obj.LostDate;
-                                var Rows22 = '遺失地點：' + obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3;
+                                var Rows21 = '拾獲時間：' + obj.FindDate;
+                                var Rows22 = '拾獲地點：' + obj.FindPlace1 + obj.FindPlace2 + obj.FindPlace3;
 
                                 var $div00 = $("<div></div>").addClass("col-xs-3 col-sm-3 col-md-3 col-lg-3");
                                 var $div0 = $("<div></div>").addClass("panel panel-default");
@@ -507,8 +508,8 @@
                                 $div1.appendTo($div0);
                                 $div2.appendTo($div0);
                                 $div0.appendTo($div00);
-                                $div00.appendTo("#findPetList");
-                               
+                                $div00.appendTo("#findMomList");
+
                             })
 
                             //搜尋get後function2:petPhoto_click(要加權限,暫用ViewData代替)
@@ -523,7 +524,7 @@
                                     $("#showImg2").empty();
                                     $("#showImg2").append(sRowsImg);
 
-                                    var sRowsFindPet =
+                                    var sRowsFindMom =
                                         "<div class='col-sm-12'></div>"
                                         + "<div class='col-sm-2'></div>"
                                         + "<div class='col-sm-3'>"
@@ -534,8 +535,8 @@
                                         + "<h4>" + "<span class='glyphicon glyphicon-record'></span>毛色:" + debug[iIndex].HairColor + "</h4>"
                                         + "</div>"
                                         + "<div class='col-sm-7'>"
-                                        + "<h4>" + "<span class='glyphicon glyphicon-time'></span>走失日期:" + debug[iIndex].LostDate + "</h4>"
-                                        + "<h4>" + "<span class='glyphicon glyphicon-map-marker'></span>走失地點:" + debug[iIndex].LostPlace1 + debug[iIndex].LostPlace2 + debug[iIndex].LostPlace3 + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-time'></span>走失日期:" + debug[iIndex].FindDate + "</h4>"
+                                        + "<h4>" + "<span class='glyphicon glyphicon-map-marker'></span>走失地點:" + debug[iIndex].FindPlace1 + debug[iIndex].FindPlace2 + debug[iIndex].FindPlace3 + "</h4>"
                                         + "<h4>" + "<span class='glyphicon glyphicon-user'></span>聯絡人:" + debug[iIndex].ContactMan + "</h4>"
                                         + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人性別:" + debug[iIndex].ContactSex + "</h4>"
                                         + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人電話:" + debug[iIndex].ContactTel + "</h4>"
@@ -546,9 +547,9 @@
                                         + "<div class='col-sm-6'>"
                                         + "<h4>" + "<span class='glyphicon glyphicon-bullhorn'></span>備註:" + debug[iIndex].Characteristic + "</h4>"
                                         + "</div>"
-                                    $("#showImg2").append(sRowsFindPet);
+                                    $("#showImg2").append(sRowsFindMom);
 
-                                    $("#findPetModal2").modal({ backdrop: "static" });
+                                    $("#FindMomModal2").modal({ backdrop: "static" });
                                 }
                             })
 
@@ -562,16 +563,17 @@
 
 
                 //新增
-                $("#addFindPetButton").click(function () {
+                $("#addFindMomButton").click(function () {
                     currentIndex = -1;
-                    setCookie("findPetBtn", currentIndex, 1);
-                    window.location.href = 'YCreateFindPet';
+                    setCookie("FindMomBtn", currentIndex, 1);
+                    window.location.href = 'YCreateFindMom';
 
                 })
 
                 //顯示Detail後的okButton
                 $("#okButton2").click(function () {
-                        $("#findPetModal2").modal("hide");
+                        $("#FindMomModal2").modal("hide");
                 })
 
 </script>
+

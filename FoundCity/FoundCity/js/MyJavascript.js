@@ -324,17 +324,56 @@ $(document).ready(function () {
     });
 
     /*驗證日期格式(for聯絡人)*/
+    //$("input[name='YDateTextBox']").blur(function () {
+    //    var checkUserTelephome = new RegExp("^((19|20)[0-9]{2}[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01]))*$");
+    //    var data = $.trim($("#lostDateTextBox").val());
+    //    var result = checkUserTelephome.test(data);
+    //    if (!result) {
+    //        $("input[name='YDateTextBox']").select();
+    //        $("#findinfo h3 #datainfoMsg").addClass("coninfored");
+    //        $("#findinfo h3 #datainfoMsg").text("日期:格式不符");
+    //        console.log("result:" + result);
+    //    } else {
+    //        $("#datainfoMsg").text('走失日期:');
+    //        $("#datainfoMsg").prepend('<span class="glyphicon glyphicon-time"></span>');
+    //        $("#findinfo h3 #datainfoMsg").removeClass("coninfored");
+    //        cheackResult = 0;
+    //        console.log("cheackResult:" + cheackResult);
+    //    }
+    //});
+
+})
+
+//區分兩個view的js
+//目前僅做日期格式判斷
+function viewCreatePet(viewID) {
+
+    var viewLabelText;
+
+    switch (viewID) {
+        case "lost":
+            viewLabelText = "走失時間："
+            break;
+        case "find":
+            //console.log(data.FindDate);
+            viewLabelText = "拾獲時間："
+            break;
+    }
+
+    //alert(viewID);
+
+    /*驗證日期格式(for聯絡人)*/
     $("input[name='YDateTextBox']").blur(function () {
-        var checkUserTelephome = new RegExp("^((19|20)[0-9]{2}[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01]))*$");
-        var data = $.trim($("#lostDateTextBox").val());
-        var result = checkUserTelephome.test(data);
+        var checkDate = new RegExp("^((19|20)[0-9]{2}[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01]))*$");
+        var data = $.trim($("#" + viewID + "DateTextBox").val());
+        var result = checkDate.test(data);
         if (!result) {
             $("input[name='YDateTextBox']").select();
             $("#findinfo h3 #datainfoMsg").addClass("coninfored");
             $("#findinfo h3 #datainfoMsg").text("日期:格式不符");
             console.log("result:" + result);
         } else {
-            $("#datainfoMsg").text('走失日期:');
+            $("#datainfoMsg").text(viewLabelText);
             $("#datainfoMsg").prepend('<span class="glyphicon glyphicon-time"></span>');
             $("#findinfo h3 #datainfoMsg").removeClass("coninfored");
             cheackResult = 0;
@@ -342,6 +381,4 @@ $(document).ready(function () {
         }
     });
 
-
-
-})
+}

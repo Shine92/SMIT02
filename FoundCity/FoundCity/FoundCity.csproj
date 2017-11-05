@@ -273,6 +273,9 @@
     <Content Include="Views\Member\Login.cshtml" />
     <Content Include="Views\Member\SystemManager.cshtml" />
     <Content Include="Views\Member\ChangePassword.cshtml" />
+    <Content Include="Views\PetMom\Index.cshtml" />
+    <Content Include="Views\PetMom\MemberFindMom.cshtml" />
+    <Content Include="Views\PetMom\YCreateFindMom.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -283,7 +286,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Address\" />
-    <Folder Include="Views\PetMom\" />
     <Folder Include="Views\Street\" />
   </ItemGroup>
   <ItemGroup>
