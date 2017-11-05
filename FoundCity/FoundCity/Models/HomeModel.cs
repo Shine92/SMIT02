@@ -12,11 +12,11 @@ namespace FoundCity.Models {
         public HomeJson Data() {
 
             var queryPet = from e in db.FindPets
-                           orderby e.CreateDate descending
+                           orderby e.PetId descending
                            select e;
 
             var queryMom = from e in db.FindMoms
-                           orderby e.CreateDate descending
+                           orderby e.PetId descending
                            select e;
 
             var queryPetA = queryPet.ToList().Take(4).ToList();

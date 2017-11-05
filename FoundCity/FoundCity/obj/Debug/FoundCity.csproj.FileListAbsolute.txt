@@ -198,7 +198,6 @@ E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Mvc.
 E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Net.Http.Formatting.resources.dll
 E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.resources.dll
 E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.WebHost.resources.dll
-E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csprojResolveAssemblyReference.cache
 E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csproj.CoreCompileInputs.cache
 E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.dll
 E:\04. Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.pdb

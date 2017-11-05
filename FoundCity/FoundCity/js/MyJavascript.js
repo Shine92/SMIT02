@@ -252,6 +252,8 @@ function initHome() {
         type: "Get",
         success: function (data) {
 
+            console.log(JSON.stringify(data));
+
             $.each(data.Pet, function (index, vul) {
                 var viewID = "viewPet";
                 viewHome(viewID, vul);
