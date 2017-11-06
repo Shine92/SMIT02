@@ -117,7 +117,7 @@
     padding: 5em 0em 5em 0em;
     height: auto;
     background: #e6e6e6;
-    height: 450px;
+    height: 650px;
 }
 
 .container .member_Register {
@@ -182,7 +182,7 @@
     padding: 5em 0em 5em 0em;
     height: auto;
     background: #e6e6e6;
-    height: 450px;
+    height: 650px;
 }
 
 .container .email_Validate {
@@ -199,7 +199,7 @@
     padding: 5em 0em 5em 0em;
     height: auto;
     background: #e6e6e6;
-    height: 450px;
+    height: 650px;
 }
 
 .member_RegisterPage {
@@ -226,7 +226,16 @@
     padding: 0em 0em 5em 0em;
     height: auto;
     background: #e6e6e6;
-    height: 350px;
+    height: 650px;
+}
+
+.member_BasicPage{
+    position: relative;
+    overflow: hidden;
+    padding: 0em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+    height: 650px;
 }
 
 member_profile /*loading效果 10/30 尚未使用*/
