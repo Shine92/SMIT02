@@ -10,6 +10,7 @@
     .selection_hidden {
         display: none;
     }
+    
 </style>
 <div id="page">
     <div id="memberTab" class="container">
@@ -203,7 +204,7 @@
 
                 //初始載入
                 $(function () {
-
+                    $('#selection').addClass('selection_hidden');
                     selectCountry();
                     //setTimeout(selectArea, 400);
                     //setTimeout(selectRoad, 500);
@@ -444,11 +445,13 @@
                 //(開始搜尋)Button
                 $("#picks").click(function () {
                     $('#selection').removeClass('selection_hidden');
+                    //$('#picks').addClass('titlered');
                 })
 
                 //搜尋取消Button
                 $("#cancelButtonS").click(function () {
                     $('#selection').addClass('selection_hidden');
+                    //$('#picks').removeClass('titlered');
                     loadAndRefreshUI();
                 })
 
