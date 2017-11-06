@@ -19,19 +19,16 @@
     .coninfored {
         color: red;
     }
-    .ui-accordion .ui-accordion-content {
-        overflow: visible;
-        padding-bottom:100px;
-        /*margin-bottom: 100px;*/
-        height: 400px;
-    }
 
+    .panel_down {
+        margin-top: 20px;
+    }
 </style>
 
 
 @*.................測試用function..................................*@
 @*<div><button id="testbtn">testbtn</button><button id="testbtn2">testbtn2</button></div>
-<div id="debug"></div>*@
+    <div id="debug"></div>*@
 @*.................................................................*@
 
 
@@ -42,31 +39,31 @@
     <div><button type="button" id="addFindPetButton" class="btn btn-default">新增</button></div>
 
     <form method="post" action="" enctype="multipart/form-data">
-        <div id="accordion">
-            <h4 id="acc_header">@((Request.Cookies["findPetBtn"].Value == "-1") ? "新增" : "修改")</h4>
-            <div>
+        <div class="panel panel-default panel_down">
+            <div class="panel-heading" id="acc_header">@((Request.Cookies["findPetBtn"].Value == "-1") ? "新增" : "修改")</div>
+            <div class="panel-body">
                 <p>
-                    @*....................col-sm-r2........1.............................*@
-
-                    <div class="col-sm-2 pull-right">
-                        <img id='petphoto' class='img-thumbnail petphoto' alt='' width='120' height='180'>
+                    @*....................col-sm-r4........1.............................*@
+                    <div class="col-sm-4 pull-right">
                         <h3 style="font-size:medium">
                             <label for="PetPhoto">
-                                &nbsp;<span class="glyphicon glyphicon-paperclip"></span>
-                                上傳圖片<input type="file" id="PetPhoto" name="PetPhoto" class="form-control file_hidden" />
+                                @*&nbsp;<span class="glyphicon glyphicon-paperclip"></span>
+                                    上傳圖片*@
+                                <input type="file" id="PetPhoto" name="PetPhoto" class="" />
                             </label>
 
                             <input type="hidden"
                                    id="petPhotoTextBox"
-                                   class="form-control"
+                                   class=""
                                    @*value="@TempData["PetPhoto"]"*@
                                    placeholder="請輸入檔名" />
                         </h3>
+                        <img id='petphoto' class='img-thumbnail petphoto' alt='' width='300' height='450'>
                     </div>
 
-                    @*....................col-sm-5+5+(r2)........1.............................*@
+                    @*....................col-sm-8+(r4)........1.............................*@
 
-                    <div class="col-sm-5">
+                    <div class="col-sm-8">
                         <h3>
                             <label for="speciesTextBox">
                                 <span class="glyphicon glyphicon-record"></span>
@@ -122,7 +119,7 @@
                             </select>
                         </h3>
                     </div>
-                    <div id="findinfo" class="col-sm-5">
+                    <div id="findinfo" class="col-sm-8">
                         <h3>
                             <label id="datainfoMsg" for="lostDateTextBox">
                                 <span class="glyphicon glyphicon-time"></span>
@@ -132,14 +129,17 @@
                             <input type="text"
                                    id="lostDateTextBox"
                                    name="YDateTextBox"
-                                   class="form-control"
+                                   class=""
                                    placeholder="yyyy-mm-dd " />
                         </h3>
+                    </div>
+                    @*....................col-sm-8+(r4)........1.............................*@
+                    <div class="col-sm-8">
                         <h3>
                             <label for="lostPlaceTextBox">
                                 <span class="glyphicon glyphicon-map-marker"></span>
                                 走失地點
-                            </label><br>
+                            </label>
                             <select class="" id="lostPlace1" name="LostPlace1">
                                 <option value="台北市">台北市</option>
                             </select>
@@ -149,34 +149,37 @@
                             <select class="file_hidden" id="lostPlace3" name="LostPlace3">
                                 <option value="road1">road1</option>
                             </select>
-                            <input type="text"
+                            <input type="hidden"
                                    id="lostPlaceTextBox"
-                                   class="form-control"
+                                   class=""
                                    placeholder="走失地點" />
                         </h3>
                     </div>
 
-                    @*....................col-sm-5+5+2............2.........................*@
+                    @*....................col-sm-8+(r4)........1.............................*@
 
-                    <div class="col-sm-5">
+                    <div class="col-sm-8">
                         <h3 style="color:rebeccapurple">
                             <label for="contactManTextBox">
                                 <span class="glyphicon glyphicon-user"></span>
                                 聯絡人
                             </label>
                         </h3>
-                        <div id="cinfo" style="margin-left:30%;">
+                        <div id="cinfo">
                             <h3>
+                                <label for="contactManTextBox">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;姓名:
+                                </label>
                                 <input type="text"
                                        id="contactManTextBox"
-                                       class="form-control"
+                                       class=""
                                        placeholder="聯絡人" />
                             </h3>
                             <h3>
                                 <label for="contactSexTextBox">
                                     @*<span class="glyphicon glyphicon-time"></span>*@
-                                    性別:
-                                </label><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;性別:
+                                </label>
 
                                 <input type="radio" name="ContactSex" value="男" checked> 男
                                 <input type="radio" name="ContactSex" value="女"> 女
@@ -184,18 +187,18 @@
                             <h3>
                                 <label id="cinfoMsg" for="contactTelTextBox">
                                     @*<span class="glyphicon glyphicon-time"></span>*@
-                                    電話:
+                                    &nbsp;&nbsp;&nbsp;&nbsp;電話:
                                 </label>
 
                                 <input type="text"
                                        id="contactTelTextBox"
                                        name="cTelephone"
-                                       class="form-control"
+                                       class=""
                                        placeholder="請輸入電話" />
                             </h3>
                         </div>
                     </div>
-                    <div class="col-sm-5">
+                    <div class="col-sm-12">
                         <h3>
                             <label for="characteristicTextBox">
                                 <span class="glyphicon glyphicon-bullhorn"></span>
@@ -211,11 +214,10 @@
                                 placeholder="備註" />*@
                         </h3>
                     </div>
-                    <div class="col-sm-2"></div>
 
                     @*....................col-sm-r2........2.............................*@
 
-                    <div class="pull-right col-sm-2">
+                    <div class="pull-right">
                         <button type="submit"
                                 id="okButton"
                                 class="btn btn-success">
@@ -314,6 +316,7 @@
                         selectArea();
                         selectCountry();
                         $("#lostPlace3").removeClass("file_hidden");
+                        $("#petphoto").addClass("file_hidden");
                     }
 
                     if (getCookie("findPetBtn") >= 0) {
@@ -327,6 +330,7 @@
 
 
                     $('input[type="file"]').change(function (e) {
+                        $("#petphoto").removeClass("file_hidden");
                         var fileName = e.target.files[0].name;
                         $("#petPhotoTextBox").val(fileName);
                         $("#petPhotoLabel").text(fileName);
@@ -535,7 +539,7 @@
                     currentIndex = -1;
                     setCookie("findPetBtn", currentIndex, 1);
                     $("#acc_header").empty();
-                    $("#acc_header").append('<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-s"></span>'+'新增');
+                    $("#acc_header").append('新增');
 
                     $("#petphoto").empty();
                     $("#showImg").empty();
