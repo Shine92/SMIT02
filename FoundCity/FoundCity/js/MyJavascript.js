@@ -214,6 +214,28 @@ $(document).ready(function () {
             return true;
         }
     });
+
+    $("#MemberChangeBiscEditBtn").click(function () {
+        $("#UserFisrName").attr('disabled', false);
+        $("#UserLastName").attr('disabled', false);
+        $("input[name='UserGender']").attr('disabled', false);
+        $("#Telephone").attr('disabled', false);
+
+        $("#MemberChangeBiscEditBtn").remove();
+        $("#Member_BasicChangeBtn").removeClass("col-sm-offset-10 col-sm-2");
+        $("#Member_BasicChangeBtn").addClass("col-sm-offset-9 col-sm-3");
+        $("#Member_BasicChangeBtn").append("<input type='button' id='MemberChangeBiscCancelBtn' class='btn btn-default' value='取消'/>");
+        $("#Member_BasicChangeBtn").append("<input type='submit' id='MemberChangeBiscSaveBtn' class='btn btn-default' value='儲存'/>");
+    });
+    /*因為append所以需要用on綁定事件*/
+    $(document).on("click", "#MemberChangeBiscCancelBtn", function () {
+        var confirmMessage = confirm("取消變更?");
+        if (confirmMessage == true) {
+            window.location.href = "/Member/Index";
+        } else {
+            return false;
+        };
+    });
 });
 
 /*********************************************************************************/
