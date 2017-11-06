@@ -10,6 +10,7 @@
     .selection_hidden {
         display: none;
     }
+    
 </style>
 <div id="page">
     <div id="memberTab" class="container">
@@ -181,8 +182,9 @@
 
         </div>
         
-        <div class="row section_items" id="findPetList">
-            @*<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
+    </div>
+    <div class="row section_items" id="findPetList">
+        @*<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
                 <div class="panel panel-default">
 
                     <div class="panel-body"><a href="#"><img src="~/images/pic01.jpg" class="" style="" alt="Image"></a></div>
@@ -192,9 +194,7 @@
                     </div>
                 </div>
             </div>*@
-        </div>
     </div>
-
 
     @*.......................debug.........................*@
     <div id="debug"></div>
@@ -204,7 +204,7 @@
 
                 //初始載入
                 $(function () {
-
+                    $('#selection').addClass('selection_hidden');
                     selectCountry();
                     //setTimeout(selectArea, 400);
                     //setTimeout(selectRoad, 500);
@@ -354,7 +354,7 @@
                                 //alert(count);
 
                                 //........................
-                                var $div2 = $("<div></div>").addClass("panel-footer-detail");
+                                var $div2 = $("<div></div>").addClass("panel-footer");
 
                                 var $div21 = $("<div></div>").addClass("panelFooterTitle");
                                 $div21.append(Rows21);
@@ -445,11 +445,13 @@
                 //(開始搜尋)Button
                 $("#picks").click(function () {
                     $('#selection').removeClass('selection_hidden');
+                    //$('#picks').addClass('titlered');
                 })
 
                 //搜尋取消Button
                 $("#cancelButtonS").click(function () {
                     $('#selection').addClass('selection_hidden');
+                    //$('#picks').removeClass('titlered');
                     loadAndRefreshUI();
                 })
 
@@ -493,7 +495,7 @@
                                 //alert(count);
 
                                 //........................
-                                var $div2 = $("<div></div>").addClass("panel-footer-detail");
+                                var $div2 = $("<div></div>").addClass("panel-footer");
 
                                 var $div21 = $("<div></div>").addClass("panelFooterTitle");
                                 $div21.append(Rows21);

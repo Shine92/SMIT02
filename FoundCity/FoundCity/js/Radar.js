@@ -695,7 +695,7 @@ function foundClick(obj) {
         + "<h4>" + "<span class='glyphicon glyphicon-bullhorn'></span>備註:" + obj.Characteristic + "</h4>"
         + "</div>"
     $("#showImg2").append(sRowsFindPet);
-    $("#findPetModal2").modal({  });
+    $("#findPetModal2").modal({});
 }
 
 function foundMap(aryRow) {
@@ -824,7 +824,15 @@ function LatlngToAddress(myLatlng) {
                         Area: strArea
                     },
                     success: function (data) {
-                        foundData(data);
+
+                        if (data.length != 0) {
+                            foundData(data);
+                        } else {
+                            $("#rMap_Body").hide();
+                            $("#rResult_Table").hide();
+                            $("#rPrompt").show()
+                            alert("目前周遭沒有資訊！");
+                        }
                     },
                     error: function (error) {
                         $("#rMap_Body").hide();
