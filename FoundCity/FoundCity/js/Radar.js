@@ -3,6 +3,8 @@ var rMap;
 var rLatlng;
 var searchType;
 var isMode;
+var isCustom;
+var isFoundType;
 
 $(document).ready(function () {
     rScrollRule();
@@ -43,7 +45,7 @@ function rSearchMode() {
 
 // 定義搜尋模式
 function initMode(index) {
-    switch(index){
+    switch (index) {
         case 0:
             isMode = "自動";
             break;
@@ -58,7 +60,7 @@ function initMode(index) {
 
 // 開始搜尋
 function startSearch() {
-    switch(isMode){
+    switch (isMode) {
         case "自動":
             rDetect();
             break;
@@ -135,7 +137,7 @@ function enterAddress(msg) {
             enterAddress("地址不得為空白");
         }
     } else {
-        
+
     }
 }
 
@@ -259,7 +261,17 @@ function initMAP(myLatlng) {
     rLatlng = myLatlng;
 
     intiMarker();
-    initRange();
+
+    switch (isCustom) {
+        case 0:
+            initRange();
+            break;
+        case 1:
+            LatlngToAddress(myLatlng);
+            break;
+        default:
+            break;
+    }
 }
 
 // 生成Marker
@@ -521,6 +533,198 @@ function rEnd() {
     );
 }
 
+function foundData(obj) {
+
+    var geocoder = new google.maps.Geocoder();
+    var directionsService = new google.maps.DirectionsService();
+
+    var aryRow = [];
+
+    var num = 0;
+
+    $("#rResult_Table").hide();
+    $("#rScheduleBar").show();
+
+    var elem = document.getElementById("myBar");
+    var sWidth = 100 / obj.length;
+
+    elem.style.width = '1%';
+    $("#rRatio").html("0");
+
+    var myDetail = setInterval(initDetail, 500);
+
+
+    function initDetail() {
+
+        if (num < obj.length) {
+            geocoder.geocode({ 'address': obj[num]["LostPlace1"] + obj[num]["LostPlace2"] + obj[num]["LostPlace3"] }, function (results, status) {
+                switch (status) {
+                    case google.maps.GeocoderStatus.OK:
+                        var rLat = results[0].geometry.location.lat();
+                        var rLng = results[0].geometry.location.lng();
+                        var myLatlng = new google.maps.LatLng(rLat, rLng);
+                        directionsService.route({
+                            origin: rLatlng,
+                            destination: obj[num]["LostPlace1"] + obj[num]["LostPlace2"] + obj[num]["LostPlace3"],
+                            travelMode: 'WALKING',
+                        }, function (response, status) {
+                            switch (status) {
+                                case google.maps.DirectionsStatus.OK:
+                                    var dist = response.routes[0].legs[0].distance.value;
+                                    aryRow[num] = {
+                                        lat: rLat,
+                                        lng: rLng,
+                                        dist: dist
+                                    };
+                                    num++;
+                                    elem.style.width = sWidth * num + '%';
+                                    $("#rRatio").html(sWidth * num);
+                                    break
+                            }
+                        });
+                        break;
+                }
+            });
+        } else {
+            clearInterval(myDetail);
+
+            $("#rResult_Table").show();
+            $("#rResult_Table").scrollTop(0);
+            $("#rScheduleBar").hide();
+            $('#rResult_Content').empty();
+
+            aryRow = aryRow.sort(function (x, y) {
+                return x.dist > y.dist ? 1 : -1;
+            });
+
+            $.each(aryRow, function (index, vul) {
+                foundView(obj[index], vul, index);
+            });
+
+            foundMap(aryRow);
+
+            rEnd();
+        }
+    }
+}
+
+function foundView(obj, aryRow, num) {
+
+    var strTime;
+    var strPlace;
+
+    switch (isFoundType) {
+        case 0:
+            strTime = "遺失時間：" + obj.LostDate + "<br>";
+            strPlace = "遺失地點：" + obj["LostPlace1"] + obj["LostPlace2"] + obj["LostPlace3"] + "<br>";
+            break;
+        case 1:
+            strTime = "遺失時間：" + obj["FindDate"] + "<br>";
+            strPlace = "遺失地點：" + obj["FindPlace1"] + obj["FindPlace2"] + obj["FindPlace3"] + "<br>";
+            break;
+    }
+
+    $('#rResult_Content').append(
+      $('<li>').append(
+          $('<article>').addClass('timeline-entry').append(
+              $('<div>').addClass('timeline-entry-inner').append(
+                  $('<div>').addClass('timeline-icon').append(
+                      $('<i>').addClass('entypo-feather')),
+                  $('<div>').addClass('timeline-label').on("click", function (e) {
+
+                      setMapOnAll(null);
+
+                      var markerA = new google.maps.Marker({
+                          position: rLatlng,
+                          icon: '../images/Radar_Home.png'
+                      });
+                      rMarkers.push(markerA);
+                      markerA.setMap(rMap);
+
+                      var markerB = new google.maps.Marker({
+                          position: new google.maps.LatLng(aryRow["lat"], aryRow["lng"]),
+                          animation: google.maps.Animation.BOUNCE
+                      });
+
+                      rMarkers.push(markerB);
+                      markerB.setMap(rMap);
+
+                      foundClick(obj);
+
+                      $("#rRange").html(aryRow["dist"]);
+
+                  }).append(
+                      $('<article>').addClass("").append(
+                          $('<div>').addClass('panel-heading').append(
+                              $('<a>').addClass('rResult_Content_Title').append(
+                                   $('<img>').addClass('rResult_img').attr('src', '../images/' + obj.PetPhoto).attr('onerror', 'this.src="../images/imgFail.png"')),
+                          $('<div>').addClass('panel-body').append(
+                              $('<font>').addClass('rResult_Content_Text').html("")),
+                          $('<div>').addClass('panel-footer').append(
+                              $('<font>').addClass('rResult_Content_Text').html(strTime)),
+                          $('<div>').addClass('panel-footer').append(
+                              $('<font>').addClass('rResult_Content_Text').html(strPlace))
+                      )))))));
+}
+
+function foundClick(obj) {
+    var sRowsImg = "<img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo' width='50%' height='40%' style='margin-left:25%;'" + "onerror=" + "this.src='../images/imgFail.png'" + ">"
+    $("#showImg2").empty();
+    $("#showImg2").append(sRowsImg);
+
+    var sRowsFindPet =
+        "<div class='col-sm-12'></div>"
+        + "<div class='col-sm-2'></div>"
+        + "<div class='col-sm-3'>"
+        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>物種:" + obj.Species + "</h4>"
+        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>體型:" + obj.Size + "</h4>"
+        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>性別:" + obj.Sex + "</h4>"
+        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>年紀:" + obj.Age + "</h4>"
+        + "<h4>" + "<span class='glyphicon glyphicon-record'></span>毛色:" + obj.HairColor + "</h4>"
+        + "</div>"
+        + "<div class='col-sm-7'>"
+        + "<h4>" + "<span class='glyphicon glyphicon-time'></span>走失日期:" + obj.LostDate + "</h4>"
+        + "<h4>" + "<span class='glyphicon glyphicon-map-marker'></span>走失地點:" + obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3 + "</h4>"
+        + "<h4>" + "<span class='glyphicon glyphicon-user'></span>聯絡人:" + obj.ContactMan + "</h4>"
+        + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人性別:" + obj.ContactSex + "</h4>"
+        + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人電話:" + obj.ContactTel + "</h4>"
+        + "</div>"
+        + "<div class='col-sm-7'>&nbsp;</div>"
+        + "<div class='col-sm-2'></div>"
+        + "<div class='col-sm-6'>"
+        + "<h4>" + "<span class='glyphicon glyphicon-bullhorn'></span>備註:" + obj.Characteristic + "</h4>"
+        + "</div>"
+    $("#showImg2").append(sRowsFindPet);
+    $("#findPetModal2").modal({  });
+}
+
+function foundMap(aryRow) {
+    var bounds = new google.maps.LatLngBounds();
+
+    bounds.extend(rLatlng);
+
+    $.each(aryRow, function (index, vul) {
+        bounds.extend(new google.maps.LatLng(vul["lat"], vul["lng"]));
+    });
+    rMap.setCenter(bounds.getCenter());
+    rMap.fitBounds(bounds);
+
+    viewRange(aryRow[aryRow.length - 1].dist);
+}
+
+function foundRadar(Dist) {
+    var mRange = new google.maps.Circle({
+        center: rLatlng,
+        radius: Dist,
+        strokeColor: "#33FF33",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#33FF33",
+        fillOpacity: 0.2
+    });
+    mRange.setMap(rMap);
+}
+
 //----------------------------------------------------------------------------------------------
 
 // 成功取得 HTML5 定位
@@ -547,39 +751,136 @@ function setMapOnAll(map) {
     }
 }
 
+function LatlngToAddress(myLatlng) {
+    var geocoder = new google.maps.Geocoder();
+
+    // 傳入 latLng 資訊至 geocoder.geocode
+    geocoder.geocode({ 'latLng': myLatlng }, function (results, status) {
+
+        switch (status) {
+            case google.maps.GeocoderStatus.OK:
+
+                var address = results[0]["formatted_address"];
+
+                var intA;
+
+                if (address.indexOf("灣") != -1) {
+                    intA = address.indexOf("灣") + 1;
+                }
+
+                var strCity;
+                var iCity;
+
+                if (address.indexOf("市") != -1) {
+                    iCity = address.indexOf("市") + 1;
+                } else if (address.indexOf("縣") != -1) {
+                    iCity = address.indexOf("縣") + 1;
+                } else {
+                    iCity = 0;
+                }
+
+                strCity = address.substring(intA, iCity);
+
+
+                var addressB = address.substring(iCity);
+                var strArea;
+                var iArea;
+
+                if (addressB.indexOf("市") != -1) {
+                    iArea = addressB.indexOf("市") + 1;
+                } else if (addressB.indexOf("鄉") != -1) {
+                    iArea = addressB.indexOf("鄉") + 1;
+                } else if (addressB.indexOf("鎮") != -1) {
+                    iArea = addressB.indexOf("鎮") + 1;
+                } else if (addressB.indexOf("區") != -1) {
+                    iArea = addressB.indexOf("區") + 1;
+                } else {
+                    iArea = 0;
+                }
+
+                strArea = address.substr(iCity, iArea);
+
+                var strRoad = address.substr((iCity + iArea));
+
+                var strUrl;
+
+                switch (isFoundType) {
+                    case 0:
+                        strUrl = "/Radar/getPet";
+                        break;
+                    case 1:
+                        strUrl = "/Radar/getMom";
+                        break;
+                    default:
+                        strUrl = "/Radar/getPet";
+                        break;
+                }
+
+                $.ajax({
+                    url: strUrl,
+                    type: "POST",
+                    data: {
+                        City: strCity,
+                        Area: strArea
+                    },
+                    success: function (data) {
+                        foundData(data);
+                    },
+                    error: function (error) {
+                        $("#rMap_Body").hide();
+                        $("#rResult_Table").hide();
+                        $("#rPrompt").show()
+                        alert("目前周遭沒有資訊！");
+                    }
+                });
+
+                break;
+            default:
+                break;
+        }
+    });
+}
+
 //----------------------------------------------------------------------------------------------
 
 // 動物醫院
 function rHospital() {
     searchType = "Hospital";
+    isCustom = 0;
     startSearch();
 }
 
 // 動物商店
 function rStore() {
     searchType = "Store";
+    isCustom = 0;
     startSearch();
 }
 
 // 動物旅館
 function rHostel() {
     searchType = "Hostel";
+    isCustom = 0;
     startSearch();
 }
 
 // 尋寵啟示
 function rFind() {
-
+    isCustom = 1;
+    isFoundType = 0;
+    startSearch();
 }
 
 // 拾獲寵物
 function rPick() {
-
+    isCustom = 1;
+    isFoundType = 1;
+    startSearch();
 }
 
 // 認養資訊
 function rClaim() {
-
+    isCustom = 1;
 }
 
 // 自動搜尋

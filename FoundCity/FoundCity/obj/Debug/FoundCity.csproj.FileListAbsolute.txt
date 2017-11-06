@@ -337,3 +337,4 @@ F:\002017程式設計\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.Web
 F:\002017程式設計\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csprojResolveAssemblyReference.cache
 F:\002017程式設計\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.dll
 F:\002017程式設計\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.pdb
+D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csprojResolveAssemblyReference.cache
