@@ -65,3 +65,4 @@ D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.res
 D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\bin\zh-Hant\System.Web.Http.WebHost.resources.dll
 D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.dll
 D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.pdb
+D:\Environment\GitHub\SMIT02\FoundCity\FoundCity\obj\Debug\FoundCity.csprojResolveAssemblyReference.cache
