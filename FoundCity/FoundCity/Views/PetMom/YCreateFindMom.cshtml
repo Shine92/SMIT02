@@ -23,8 +23,8 @@
 
 
 @*.................測試用function..................................*@
-<div><button id="testbtn">testbtn</button><button id="testbtn2">testbtn2</button></div>
-<div id="debug"></div>
+@*<div><button id="testbtn">testbtn</button><button id="testbtn2">testbtn2</button></div>
+<div id="debug"></div>*@
 @*.................................................................*@
 
 
@@ -238,35 +238,35 @@
     $("#findDateTextBox").datepicker({ dateFormat: "yy-mm-dd" });
 
     //.................測試用function....up..............................
-    $("#testbtn").click(function () {
+    //$("#testbtn").click(function () {
 
-        //alert(debug.FindPlace2);
-
-
-        $("#debug").text($("#findPlace2").val());
-        $("#findPlace1").val(debug.FindPlace1);
-        selectArea();
-        setTimeout('$("#findPlace2").val("802");', 200);
-        setTimeout(selectRoad, 200);
-        //setTimeout('$("#findPlace3").val(debug.FindPlace3);', 500);
-
-    })
-
-    $("#testbtn2").click(function () {
+    //    //alert(debug.FindPlace2);
 
 
-        $("#findPlace1").val(debug.FindPlace1);
-        $("#findPlace2").empty();
-        var sRows2 = "<option>" + debug.FindPlace2 + "</option>"
-        $("#findPlace2").append(sRows2);
+    //    $("#debug").text($("#findPlace2").val());
+    //    $("#findPlace1").val(debug.FindPlace1);
+    //    selectArea();
+    //    setTimeout('$("#findPlace2").val("802");', 200);
+    //    setTimeout(selectRoad, 200);
+    //    //setTimeout('$("#findPlace3").val(debug.FindPlace3);', 500);
 
-        $("#findPlace3").empty();
-        var sRows3 = "<option value='" + debug.FindPlace3 + "'>" + debug.FindPlace3 + "</option>"
-        $("#findPlace3").append(sRows3);
+    //})
 
-        $("#debug").text($("#findPlace3 option:selected").val() + $("#findPlace3 option:selected").text());
+    //$("#testbtn2").click(function () {
 
-    })
+
+    //    $("#findPlace1").val(debug.FindPlace1);
+    //    $("#findPlace2").empty();
+    //    var sRows2 = "<option>" + debug.FindPlace2 + "</option>"
+    //    $("#findPlace2").append(sRows2);
+
+    //    $("#findPlace3").empty();
+    //    var sRows3 = "<option value='" + debug.FindPlace3 + "'>" + debug.FindPlace3 + "</option>"
+    //    $("#findPlace3").append(sRows3);
+
+    //    $("#debug").text($("#findPlace3 option:selected").val() + $("#findPlace3 option:selected").text());
+
+    //})
 
     //................測試用function.....down...........................
 
