@@ -6,10 +6,11 @@ body {
 	margin: 0px;
 	padding: 0px;
 	background: #e6e6e6;
-	font-family: 'Muli', sans-serif;
+    font-family: Microsoft JhengHei;
 	font-size: 12pt;
 	font-weight: 300;
 	color: #363636;
+    font-weight: bold;
 }
 
 
@@ -208,7 +209,7 @@ hr {
 /** WRAPPER */
 
 #wrapper {
-	background: #FFFFFF url(images/bg01.png) repeat;
+	
 }
 
 #footer-wrapper
@@ -274,6 +275,7 @@ hr {
 	{
 		letter-spacing: 0.10em;
 		color: #FFF;
+        font-size: 18px;
 	}
 	
 	#logo a 
@@ -314,10 +316,10 @@ hr {
 
 #menu ul {
 	margin: 0;
-	padding: 6px 0px 0px 0px;
+	padding: 6px 18px 0px 18px;
 	list-style: none;
 	line-height: normal;
-	text-align: center;
+	
 }
 
 #menu li {
@@ -327,9 +329,9 @@ hr {
 #menu a {
 	display: block;
 	letter-spacing: 1px;
-	padding: 20px 40px;
+	padding: 17px 40px;
 	text-decoration: none;
-	text-align: center;
+	text-align: left;
 	text-transform: uppercase;
 	font-size: 0.80em;
 	font-weight: 600;
@@ -346,7 +348,7 @@ hr {
 }
 
 #menu li a {
-	font-size:14px;
+	font-size:18px;
 }
 
 #menu .item_right{
@@ -355,7 +357,7 @@ hr {
 
 #menu .item_right a {
 	background: #008066;
-    margin: 0 4px 0 0;
+    margin: 0 4px;
 }
 
 /** PAGE */
@@ -377,8 +379,8 @@ hr {
 	width: 790px;
 }
 #content_title{
-    font-size:20px;
-    padding:16px;
+    font-size:18px;
+    padding:18px;
     text-align: center;
     color:white;
     margin:0 0 0 16px;
@@ -386,6 +388,8 @@ hr {
     height:60px;
     background-color:#4d4d4d;
     box-shadow: 1px 3px 10px #888888;
+    font-weight:600;
+    letter-spacing: 1px;
 }
 
 /*********************************************************************************/

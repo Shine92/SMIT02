@@ -91,4 +91,20 @@
         </div>
     </div>
 </div>
+<script>
+    /*使用者離開頁面前的提示*/
+    var isChange = false;
+    $(function () {
+        $("input").change(function () {
+            isChange = true;
+            $(this).addClass("editing");
+        });
 
+        $(window).bind("beforeunload", function (e) {
+            if (isChange || $(".editing").get().length > 0) {
+                return "您確定要離開這個網頁嗎?";
+            }
+        })
+    });
+
+</script>
