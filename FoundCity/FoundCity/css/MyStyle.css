@@ -56,7 +56,7 @@
 .member_profile {
     width: 600px;
     height: auto;
-    background-color: #eee;
+    background-color: #e5e5e5;
     margin: auto;
     border: 1px solid black;
     padding: 15px;
@@ -116,7 +116,7 @@
     padding: 5em 0em 5em 0em;
     height: auto;
     background: #e6e6e6;
-    height: 650px;
+    height: 450px;
 }
 
 .container .member_Register {
@@ -181,7 +181,51 @@
     padding: 5em 0em 5em 0em;
     height: auto;
     background: #e6e6e6;
-    height: 630px;
+    height: 450px;
+}
+
+.container .email_Validate {
+    width: 600px;
+    height: auto;
+    margin: auto;
+    border: 0px solid black;
+    padding: 0px 0px 0px 0px;
+}
+
+.email_ValidatePage {
+    position: relative;
+    overflow: hidden;
+    padding: 5em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+    height: 450px;
+}
+
+.member_RegisterPage {
+    position: relative;
+    overflow: hidden;
+    padding: 5em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+    height: 650px;
+}
+
+.member_IndexPage{
+    position: relative;
+    overflow: hidden;
+    padding: 5em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+    height: 350px;
+}
+
+.member_ChangePasswordPage{
+    position: relative;
+    overflow: hidden;
+    padding: 0em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+    height: 350px;
 }
 
 member_profile /*loading效果 10/30 尚未使用*/
