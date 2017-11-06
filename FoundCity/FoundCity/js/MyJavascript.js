@@ -158,7 +158,7 @@ $(document).ready(function () {
     $("#ChangePageBtn #ChangePwdCancelBtn").click(function () {
         var confirmMessage = confirm("取消變更?");
         if (confirmMessage == true) {
-            window.location.href = "/Member/Index";
+            window.location.href = "/Member/Basic";
         } else {
             return false;
         };
@@ -231,7 +231,7 @@ $(document).ready(function () {
     $(document).on("click", "#MemberChangeBiscCancelBtn", function () {
         var confirmMessage = confirm("取消變更?");
         if (confirmMessage == true) {
-            window.location.href = "/Member/Index";
+            window.location.href = "/Member/Basic";
         } else {
             return false;
         };
