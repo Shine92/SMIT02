@@ -20,9 +20,9 @@
         color: red;
     }
 
-    .panel_down {
+    /*.panel_down {
         margin-top: 20px;
-    }
+    }*/
 </style>
 
 
@@ -36,7 +36,7 @@
 @*...................main..........................*@
 <div class="container">
     <br />
-    <div><button type="button" id="addFindMomButton" class="btn btn-default">新增</button></div>
+    @*<div><button type="button" id="addFindMomButton" class="btn btn-default">新增</button></div>*@
 
     <form method="post" action="" enctype="multipart/form-data">
         <div class="panel panel-default panel_down">
@@ -570,26 +570,26 @@
                 }
 
                 //新增
-                $("#addFindMomButton").click(function () {
+                //$("#addFindMomButton").click(function () {
 
                     
-                    currentIndex = -1;
-                    setCookie("findMomBtn", currentIndex, 1);
-                    loadAndRefreshUInew();
-                    $("#acc_header").empty();
-                    $("#acc_header").append('新增');
+                //    currentIndex = -1;
+                //    setCookie("findMomBtn", currentIndex, 1);
+                //    loadAndRefreshUInew();
+                //    $("#acc_header").empty();
+                //    $("#acc_header").append('新增');
 
-                    $("#petphoto").empty();
-                    $("#showImg").empty();
-                    $("#petphoto").attr('src', '');
-                    $("#petPhotoTextBox").val("");
-                    $("#characteristicTextBox").val("");
-                    $("#findDateTextBox").val("");
-                    $("#findPlaceTextBox").val("");
-                    //$("#contactManTextBox").val("");
-                    //$("#contactTelTextBox").val("");                    
+                //    $("#petphoto").empty();
+                //    $("#showImg").empty();
+                //    $("#petphoto").attr('src', '');
+                //    $("#petPhotoTextBox").val("");
+                //    $("#characteristicTextBox").val("");
+                //    $("#findDateTextBox").val("");
+                //    $("#findPlaceTextBox").val("");
+                //    //$("#contactManTextBox").val("");
+                //    //$("#contactTelTextBox").val("");                    
                     
-                })
+                //})
 
                 //取消:導頁
                 $("#cancelButton").click(function () {
