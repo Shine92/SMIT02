@@ -40,6 +40,7 @@
 
     <form method="post" action="" enctype="multipart/form-data">
         <div class="panel panel-default panel_down">
+            @*<div class="panel-heading" id="acc_header">@((Request.Cookies["findMomBtn"].Value == "-1") ? "新增" : "修改")</div>*@
             <div class="panel-heading" id="acc_header">@((Request.Cookies["findMomBtn"].Value == "-1") ? "新增" : "修改")</div>
             <div class="panel-body">
                 <p>
@@ -317,6 +318,7 @@
                         selectCountry();
                         $("#findPlace3").removeClass("file_hidden");
                         $("#petphoto").addClass("file_hidden");
+                        loadAndRefreshUInew();
                     }
 
                     if (getCookie("findMomBtn") >= 0) {
@@ -485,6 +487,40 @@
                     }
                 });
 
+                //新增get
+                function loadAndRefreshUInew() {
+
+                    //$("#accordion").empty();
+                    //var temp = getCookie("findPetBtn");
+                    debugger;
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Pet/getMemberData/',
+                        dataType: "json",
+                        data: {
+                            MemberId: $("#MemberId").val()
+                        },
+                        success: function (data) {
+                            debugCon = data;
+                            //console.log(JSON.stringify(data));
+
+                            //alert(data[0].UserFirstName);
+                            //$("#petphoto").attr('src', '../images/' + data.PetPhoto);
+
+                            $('input[name=ContactSex][value="' + ((data[0].UserGender==0)?"女":"男" )+ '"]').prop('checked', true);
+                            $("#contactManTextBox").val(data[0].UserFirstName + data[0].UserLastName);
+                            $("#contactTelTextBox").val(data[0].Telephone);
+                            //alert("OK");
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+
+                }
+
+                //編輯get
                 function loadAndRefreshUI() {
 
                     //$("#accordion").empty();
@@ -536,10 +572,12 @@
                 //新增
                 $("#addFindMomButton").click(function () {
 
+                    
                     currentIndex = -1;
                     setCookie("findMomBtn", currentIndex, 1);
+                    loadAndRefreshUInew();
                     $("#acc_header").empty();
-                    $("#acc_header").append('<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-s"></span>'+'新增');
+                    $("#acc_header").append('新增');
 
                     $("#petphoto").empty();
                     $("#showImg").empty();
@@ -548,8 +586,9 @@
                     $("#characteristicTextBox").val("");
                     $("#findDateTextBox").val("");
                     $("#findPlaceTextBox").val("");
-                    $("#contactManTextBox").val("");
-                    $("#contactTelTextBox").val("");
+                    //$("#contactManTextBox").val("");
+                    //$("#contactTelTextBox").val("");                    
+                    
                 })
 
                 //取消:導頁
