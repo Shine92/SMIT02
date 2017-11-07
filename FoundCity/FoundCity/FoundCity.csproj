@@ -148,7 +148,6 @@
     <Content Include="css\MyStyle.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="images\a0.jpg" />
     <Content Include="images\imgFail.png" />
     <Content Include="images\Radar_Home.png" />
     <Content Include="images\p1.jpg" />

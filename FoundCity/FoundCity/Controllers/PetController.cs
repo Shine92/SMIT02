@@ -51,5 +51,10 @@ namespace FoundCity.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+        public ActionResult getMemberData(int MemberId) {
+            return Json(memberService.GetBasicMemberData(MemberId));
+        }
     }
 }

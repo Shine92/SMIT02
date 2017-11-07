@@ -317,6 +317,7 @@
                         selectCountry();
                         $("#lostPlace3").removeClass("file_hidden");
                         $("#petphoto").addClass("file_hidden");
+                        loadAndRefreshUInew();
                     }
 
                     if (getCookie("findPetBtn") >= 0) {
@@ -485,6 +486,40 @@
                     }
                 });
 
+                //新增get
+                function loadAndRefreshUInew() {
+
+                    //$("#accordion").empty();
+                    //var temp = getCookie("findPetBtn");
+                    debugger;
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Pet/getMemberData/',
+                        dataType: "json",
+                        data: {
+                            MemberId: $("#MemberId").val()
+                        },
+                        success: function (data) {
+                            //debug = data;
+                            //console.log(JSON.stringify(data));
+
+                            //alert(data[0].UserFirstName);
+                            //$("#petphoto").attr('src', '../images/' + data.PetPhoto);
+
+                            $('input[name=ContactSex][value="' + ((data[0].UserGender==0)?"女":"男" )+ '"]').prop('checked', true);
+                            $("#contactManTextBox").val(data[0].UserFirstName + data[0].UserLastName);
+                            $("#contactTelTextBox").val(data[0].Telephone);
+                            //alert("OK");
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+
+                }
+
+                //編輯get
                 function loadAndRefreshUI() {
 
                     //$("#accordion").empty();
@@ -538,6 +573,7 @@
 
                     currentIndex = -1;
                     setCookie("findPetBtn", currentIndex, 1);
+                    loadAndRefreshUInew();
                     $("#acc_header").empty();
                     $("#acc_header").append('新增');
 
@@ -548,8 +584,8 @@
                     $("#characteristicTextBox").val("");
                     $("#lostDateTextBox").val("");
                     $("#lostPlaceTextBox").val("");
-                    $("#contactManTextBox").val("");
-                    $("#contactTelTextBox").val("");
+                    //$("#contactManTextBox").val("");
+                    //$("#contactTelTextBox").val("");
                 })
 
                 //取消:導頁
