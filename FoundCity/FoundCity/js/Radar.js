@@ -553,11 +553,22 @@ function foundData(obj) {
 
     var myDetail = setInterval(initDetail, 500);
 
-
     function initDetail() {
 
         if (num < obj.length) {
-            geocoder.geocode({ 'address': obj[num]["LostPlace1"] + obj[num]["LostPlace2"] + obj[num]["LostPlace3"] }, function (results, status) {
+
+            var strPlace;
+
+            switch (isFoundType) {
+                case 0:
+                    strPlace = obj[num]["LostPlace1"] + obj[num]["LostPlace2"] + obj[num]["LostPlace3"];
+                    break;
+                case 1:
+                    strPlace = obj[num]["FindPlace1"] + obj[num]["FindPlace2"] + obj[num]["FindPlace3"];
+                    break;
+            }
+
+            geocoder.geocode({ 'address': strPlace }, function (results, status) {
                 switch (status) {
                     case google.maps.GeocoderStatus.OK:
                         var rLat = results[0].geometry.location.lat();
@@ -565,7 +576,7 @@ function foundData(obj) {
                         var myLatlng = new google.maps.LatLng(rLat, rLng);
                         directionsService.route({
                             origin: rLatlng,
-                            destination: obj[num]["LostPlace1"] + obj[num]["LostPlace2"] + obj[num]["LostPlace3"],
+                            destination: strPlace,
                             travelMode: 'WALKING',
                         }, function (response, status) {
                             switch (status) {
@@ -577,8 +588,14 @@ function foundData(obj) {
                                         dist: dist
                                     };
                                     num++;
-                                    elem.style.width = sWidth * num + '%';
-                                    $("#rRatio").html(sWidth * num);
+                                    if (num < obj.length) {
+                                        elem.style.width = Math.floor(sWidth * num) + '%';
+                                        $("#rRatio").html(Math.floor(sWidth * num));
+                                    }else{
+                                        elem.style.width = '100%';
+                                        $("#rRatio").html(100);
+                                    }
+                                    
                                     break
                             }
                         });
@@ -668,6 +685,21 @@ function foundView(obj, aryRow, num) {
 }
 
 function foundClick(obj) {
+
+    var strTime;
+    var strPlace;
+
+    switch (isFoundType) {
+        case 0:
+            strTime = "遺失時間：" + obj.LostDate + "<br>";
+            strPlace = "遺失地點：" + obj["LostPlace1"] + obj["LostPlace2"] + obj["LostPlace3"] + "<br>";
+            break;
+        case 1:
+            strTime = "遺失時間：" + obj["FindDate"] + "<br>";
+            strPlace = "遺失地點：" + obj["FindPlace1"] + obj["FindPlace2"] + obj["FindPlace3"] + "<br>";
+            break;
+    }
+
     var sRowsImg = "<img src='../images/" + obj.PetPhoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo' width='50%' height='40%' style='margin-left:25%;'" + "onerror=" + "this.src='../images/imgFail.png'" + ">"
     $("#showImg2").empty();
     $("#showImg2").append(sRowsImg);
@@ -683,8 +715,8 @@ function foundClick(obj) {
         + "<h4>" + "<span class='glyphicon glyphicon-record'></span>毛色:" + obj.HairColor + "</h4>"
         + "</div>"
         + "<div class='col-sm-7'>"
-        + "<h4>" + "<span class='glyphicon glyphicon-time'></span>走失日期:" + obj.LostDate + "</h4>"
-        + "<h4>" + "<span class='glyphicon glyphicon-map-marker'></span>走失地點:" + obj.LostPlace1 + obj.LostPlace2 + obj.LostPlace3 + "</h4>"
+        + "<h4>" + "<span class='glyphicon glyphicon-time'></span>" + strTime + "</h4>"
+        + "<h4>" + "<span class='glyphicon glyphicon-map-marker'></span>" + strPlace + "</h4>"
         + "<h4>" + "<span class='glyphicon glyphicon-user'></span>聯絡人:" + obj.ContactMan + "</h4>"
         + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人性別:" + obj.ContactSex + "</h4>"
         + "<h4>" + "&nbsp;&nbsp;&nbsp;聯絡人電話:" + obj.ContactTel + "</h4>"
@@ -824,7 +856,6 @@ function LatlngToAddress(myLatlng) {
                         Area: strArea
                     },
                     success: function (data) {
-
                         if (data.length != 0) {
                             foundData(data);
                         } else {
@@ -901,6 +932,7 @@ function rEnterMode() {
     initMode(1);
 }
 
+// 預設搜尋
 function rDefaultMode() {
     initMode(2);
 }
