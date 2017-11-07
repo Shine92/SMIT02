@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>寵物Found城市</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="~/js/mycookie.js"></script>
+    <link rel="stylesheet" href="~/css/Default.css" />
+    <script src="~/js/Default.js"></script>
+    <link rel="stylesheet" href="~/css/MyStyle.css" />
+    <script src="~/js/MyJavascript.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <div id="logo">
+                    <h1><a href="/Home/Index">動物Found城市</a></h1>
+                    <p>動物協尋平台</p>
+                </div>
+                <div id="banner"></div>
+            </div>
+        </div>
+        <div id="menu-wrapper">
+            <div id="menu" class="container-full">
+                <ul>
+                    <li><a href="/Home/Index">首頁</a></li>
+                    <li><a href="/Pet/Index">尋寵啟示</a></li>
+                    <li><a href="/PetMom/Index">拾獲通報</a></li>
+                    @*<li><a href="#">認養資訊</a></li>*@
+                    <li><a href="/Radar/Index">雷達搜尋</a></li>
+                    <li id="memberLogoutbtn" class="item_right"  style="display:none"><a href="/Member/Logout">會員登出</a></li>
+                    <li id="memberLoginbtn" class="item_right"  style="display:none"><a href="/Member/Login">會員登入</a></li>
+                    <li id="memberCenter" class="item_right"  style="display:none"><a href="/Member/Basic">會員中心</a></li>
+                </ul>
+            </div>
+            <!-- end #menu -->
+        </div>
+        @RenderBody()
+        <div id="copyright" class="container-full">
+            <p><a href="#">關於我們 | </a><a href="#" rel="nofollow">免責聲明 | </a><a href="#" rel="nofollow">聯絡我們</a></p>
+        </div>
+
+    </div>
+</body>
+</html>

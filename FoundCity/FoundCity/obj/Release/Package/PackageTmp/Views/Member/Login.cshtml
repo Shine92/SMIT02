@@ -1,0 +1,50 @@
+﻿@using FoundCity.ViewModels;
+@model MemberLoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+
+<div id="" class="member_LoginPage">
+    <div class="container">
+        <div class="member_Login">
+            <form class="form-horizontal" action="" method="post">
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="LoginAccount">帳號:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="LoginAccount" placeholder="" name="Account" value="@Model.Account">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="LoginPassword">密碼:</label>
+                    <div class="col-sm-7">
+                        <input type="password" class="form-control" id="LoginPassword" placeholder="" name="Password" value="@Model.Password">
+                    </div>
+                </div>
+                <div id="info" class="col-sm-12">
+                    <p>@Html.ValidationMessage("LoginError")</p>
+                </div>
+                <div class="memberLogin_decoration"></div>
+                <div class="form-group">
+                    <div class="col-sm-7 col-sm-offset-2">
+                        <label class="checkbox-inline"><input type="checkbox" id="LoginRemeber">記住我</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <button type="submit" id="LoginBtn" class="btn btn-success btn-block">登入</button>
+                        <input type="hidden" id="LoginRemeberResult" name="LoginRemeberResult" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-8">
+                        <a href="/Member/Forget">忘記密碼? | </a>
+                        <a href="/Member/Register">註冊</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

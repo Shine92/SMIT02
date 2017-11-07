@@ -1,0 +1,715 @@
+﻿@*post . put function無執行(error)*@
+@using FoundCity.Models;
+@model FindMom
+
+@{
+    ViewBag.Title = "YCreateFindMom";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+@*行事曆.accordion*@
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+
+@*cookies*@
+<script type="text/javascript" src="~/js/mycookie.js"></script>
+
+<link rel="stylesheet" href="~/css/MyStyle.css">
+<style type="text/css">
+    .coninfored {
+        color: red;
+    }
+
+    /*.panel_down {
+        margin-top: 20px;
+    }*/
+</style>
+
+
+@*.................測試用function..................................*@
+@*<div><button id="testbtn">testbtn</button><button id="testbtn2">testbtn2</button></div>
+    <div id="debug"></div>*@
+@*.................................................................*@
+
+
+
+@*...................main..........................*@
+<div class="container">
+    <br />
+    @*<div><button type="button" id="addFindMomButton" class="btn btn-default">新增</button></div>*@
+
+    <form method="post" action="" enctype="multipart/form-data">
+        <div class="panel panel-default panel_down">
+            @*<div class="panel-heading" id="acc_header">@((Request.Cookies["findMomBtn"].Value == "-1") ? "新增" : "修改")</div>*@
+            <div class="panel-heading" id="acc_header">@((Request.Cookies["findMomBtn"].Value == "-1") ? "新增" : "修改")</div>
+            <div class="panel-body">
+                <p>
+                    @*....................col-sm-r4........1.............................*@
+                    <div class="col-sm-4 pull-right">
+                        <h3 style="font-size:medium">
+                            <label for="PetPhoto">
+                                @*&nbsp;<span class="glyphicon glyphicon-paperclip"></span>
+                                    上傳圖片*@
+                                <input type="file" id="PetPhoto" name="PetPhoto" class="" />
+                            </label>
+
+                            <input type="hidden"
+                                   id="petPhotoTextBox"
+                                   class=""
+                                   @*value="@TempData["PetPhoto"]"*@
+                                   placeholder="請輸入檔名" />
+                        </h3>
+                        <img id='petphoto' class='img-thumbnail petphoto' alt='' width='300' height='450'>
+                    </div>
+
+                    @*....................col-sm-8+(r4)........1.............................*@
+
+                    <div class="col-sm-8">
+                        <h3>
+                            <label for="speciesTextBox">
+                                <span class="glyphicon glyphicon-record"></span>
+                                物種:
+                            </label>
+
+                            <input type="radio" name="Species" value="狗" checked> 狗
+                            <input type="radio" name="Species" value="貓"> 貓
+                            <input type="radio" name="Species" value="其他"> 其他
+                        </h3>
+                        <h3>
+                            <label for="sizeTextBox">
+                                <span class="glyphicon glyphicon-record"></span>
+                                體型:
+                            </label>
+
+                            <input type="radio" name="Size" value="小型" checked> 小型
+                            <input type="radio" name="Size" value="中型"> 中型
+                            <input type="radio" name="Size" value="大型"> 大型
+                        </h3>
+                        <h3>
+                            <label for="sexTextBox">
+                                <span class="glyphicon glyphicon-record"></span>
+                                性別:
+                            </label>
+
+                            <input type="radio" name="Sex" value="公" checked> 公
+                            <input type="radio" name="Sex" value="母"> 母
+                            <input type="radio" name="Sex" value="未知"> 未知
+                        </h3>
+                        <h3>
+                            <label for="ageTextBox">
+                                <span class="glyphicon glyphicon-record"></span>
+                                年紀:
+                            </label>
+
+                            <input type="radio" name="Age" value="成年" checked> 成年
+                            <input type="radio" name="Age" value="幼年"> 幼年
+                        </h3>
+                        <h3>
+                            <label for="hairColorTextBox">
+                                <span class="glyphicon glyphicon-record"></span>
+                                毛色:
+                            </label>
+
+                            <select class="" id="hairColorTextBox" name="HairColor">
+                                <option value="白色">白色</option>
+                                <option value="黑色">黑色</option>
+                                <option value="棕色">棕色</option>
+                                <option value="黃色">黃色</option>
+                                <option value="虎斑">虎斑</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </h3>
+                    </div>
+                    <div id="findinfo" class="col-sm-8">
+                        <h3>
+                            <label id="datainfoMsg" for="findDateTextBox">
+                                <span class="glyphicon glyphicon-time"></span>
+                                走失日期
+                            </label>
+
+                            <input type="text"
+                                   id="findDateTextBox"
+                                   name="YDateTextBox"
+                                   class=""
+                                   placeholder="yyyy-mm-dd " />
+                        </h3>
+                    </div>
+                    @*....................col-sm-8+(r4)........1.............................*@
+                    <div class="col-sm-8">
+                        <h3>
+                            <label for="findPlaceTextBox">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                走失地點
+                            </label>
+                            <select class="" id="findPlace1" name="FindPlace1">
+                                <option value="台北市">台北市</option>
+                            </select>
+                            <select class="" id="findPlace2" name="FindPlace2">
+                                <option value="100">中正區</option>
+                            </select>
+                            <select class="file_hidden" id="findPlace3" name="FindPlace3">
+                                <option value="road1">road1</option>
+                            </select>
+                            <input type="hidden"
+                                   id="findPlaceTextBox"
+                                   class=""
+                                   placeholder="走失地點" />
+                        </h3>
+                    </div>
+
+                    @*....................col-sm-8+(r4)........1.............................*@
+
+                    <div class="col-sm-8">
+                        <h3 style="color:rebeccapurple">
+                            <label for="contactManTextBox">
+                                <span class="glyphicon glyphicon-user"></span>
+                                聯絡人
+                            </label>
+                        </h3>
+                        <div id="cinfo">
+                            <h3>
+                                <label for="contactManTextBox">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;姓名:
+                                </label>
+                                <input type="text"
+                                       id="contactManTextBox"
+                                       class=""
+                                       placeholder="聯絡人" />
+                            </h3>
+                            <h3>
+                                <label for="contactSexTextBox">
+                                    @*<span class="glyphicon glyphicon-time"></span>*@
+                                    &nbsp;&nbsp;&nbsp;&nbsp;性別:
+                                </label>
+
+                                <input type="radio" name="ContactSex" value="男" checked> 男
+                                <input type="radio" name="ContactSex" value="女"> 女
+                            </h3>
+                            <h3>
+                                <label id="cinfoMsg" for="contactTelTextBox">
+                                    @*<span class="glyphicon glyphicon-time"></span>*@
+                                    &nbsp;&nbsp;&nbsp;&nbsp;電話:
+                                </label>
+
+                                <input type="text"
+                                       id="contactTelTextBox"
+                                       name="cTelephone"
+                                       class=""
+                                       placeholder="請輸入電話" />
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <h3>
+                            <label for="characteristicTextBox">
+                                <span class="glyphicon glyphicon-bullhorn"></span>
+                                備註
+                            </label>
+                            <textarea cols="50" rows="4"
+                                      id="characteristicTextBox"
+                                      class="form-control"
+                                      placeholder="輸入你想要寫的內容..."></textarea>
+                            @*<input type="text"
+                                id="characteristicTextBox"
+                                class="form-control"
+                                placeholder="備註" />*@
+                        </h3>
+                    </div>
+
+                    @*....................col-sm-r2........2.............................*@
+
+                    <div class="pull-right">
+                        <button type="submit"
+                                id="okButton"
+                                class="btn btn-success">
+                            <span class="glyphicon glyphicon-ok"></span> 確定
+                        </button>
+                        <input type="hidden" id="MemberId" value="@ViewData["MemberId"]" />
+                        <button type="button"
+                                id="cancelButton"
+                                class="btn btn-default"
+                                data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove"></span> 取消
+                        </button>
+                    </div>
+
+                </p>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div data-role="content">
+    <table id="resultTable" data-role="table" data-mode="columntoggle" class="table-stroke"></table>
+</div>
+
+<script>
+    $("#findDateTextBox").datepicker({ dateFormat: "yy-mm-dd" });
+
+    //.................測試用function....up..............................
+    //$("#testbtn").click(function () {
+
+    //    //alert(debug.FindPlace2);
+
+
+    //    $("#debug").text($("#findPlace2").val());
+    //    $("#findPlace1").val(debug.FindPlace1);
+    //    selectArea();
+    //    setTimeout('$("#findPlace2").val("802");', 200);
+    //    setTimeout(selectRoad, 200);
+    //    //setTimeout('$("#findPlace3").val(debug.FindPlace3);', 500);
+
+    //})
+
+    //$("#testbtn2").click(function () {
+
+
+    //    $("#findPlace1").val(debug.FindPlace1);
+    //    $("#findPlace2").empty();
+    //    var sRows2 = "<option>" + debug.FindPlace2 + "</option>"
+    //    $("#findPlace2").append(sRows2);
+
+    //    $("#findPlace3").empty();
+    //    var sRows3 = "<option value='" + debug.FindPlace3 + "'>" + debug.FindPlace3 + "</option>"
+    //    $("#findPlace3").append(sRows3);
+
+    //    $("#debug").text($("#findPlace3 option:selected").val() + $("#findPlace3 option:selected").text());
+
+    //})
+
+    //................測試用function.....down...........................
+
+    //已get Country,(選Country),(get Area,選Area),(get Road,選Road);暫時用setTimeout,再研究改jquery callback
+    function getCAR() {
+        // Q. fail:debug.FindPlace2應傳給$("#findPlace2")的text,無法改(只能用val?)
+        //$("#findPlace1").val(debug.FindPlace1);
+        //selectArea();
+        //setTimeout('$("#findPlace2").val("800");', 200);
+        //setTimeout(selectRoad, 200);
+        //setTimeout('$("#findPlace3").val(debug.FindPlace3);', 500);
+
+        //edit用,直接給值,無選單功能
+        $("#findPlace1").val(debug.FindPlace1);
+        $("#findPlace2").empty();
+        var sRows2 = "<option>" + debug.FindPlace2 + "</option>"
+        $("#findPlace2").append(sRows2);
+
+        $("#findPlace3").empty();
+        var sRows3 = "<option value='" + debug.FindPlace3 + "'>" + debug.FindPlace3 + "</option>"
+        $("#findPlace3").append(sRows3);
+
+        $("#debug").text($("#findPlace3 option:selected").val() + $("#findPlace3 option:selected").text());
+    }
+
+                $(function () {
+                    //僅日期格式判斷
+                    viewCreatePet("find");
+
+                    //alert(getCookie("findMomBtn"));
+
+                    //selectRoad();
+                    //selectArea();
+                    //selectCountry();
+
+                    if (getCookie("findMomBtn") == -1) {
+                        selectRoad();
+                        selectArea();
+                        selectCountry();
+                        $("#findPlace3").removeClass("file_hidden");
+                        $("#petphoto").addClass("file_hidden");
+                        loadAndRefreshUInew();
+                    }
+
+                    if (getCookie("findMomBtn") >= 0) {
+                        selectCountry();
+                        setTimeout(getCAR, 500);
+                        loadAndRefreshUI();
+                    }
+
+                    //$("#debug").text("OK");
+                    $("#accordion").accordion({ header: "h4" });
+
+
+                    $('input[type="file"]').change(function (e) {
+                        $("#petphoto").removeClass("file_hidden");
+                        var fileName = e.target.files[0].name;
+                        $("#petPhotoTextBox").val(fileName);
+                        $("#petPhotoLabel").text(fileName);
+                        //alert('The file "' + fileName + '" has been selected.');
+                        //預覽
+                        readURL(this);
+
+                    });
+
+                })
+
+                //今天日期yyyy-mm-dd
+                function mydate() {
+                    var today = new Date();
+                    //var todayformat = today.toISOString().substring(0, 10);
+                    var todayformat = today.toISOString().slice(0, 10);
+                    return todayformat;
+                }
+
+                //預覽
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#petphoto').attr('src', e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+
+                    }
+                }
+
+                //$("#imgInp").change(function () {
+                //    readURL(this);
+                //});
+
+                //載入County
+                function selectCountry() {
+                    $("#findPlace2").empty();
+                    $.ajax({
+                        url: "/Street/County",
+                        type: "Get",
+                        dataType: "json",
+                        success: function (data) {
+                            $("#findPlace1").empty();
+                            var sRows = "";
+                            for (i = 0; i < data.length; i++) {
+                                sRows += "<option value='" + data[i] + "'>" + data[i] + "</option>"
+                            }
+                            $("#findPlace1").append(sRows);
+
+                            //$("#debug").text(JSON.stringify(data));
+                        },
+                        error: function (error) {
+                            document.write(error.responseText);
+                        }
+                    });
+
+                }
+
+                //載入Area,含code
+                function selectArea() {
+
+                    $.ajax({
+                        url: "/Street/Area",
+                        type: "POST",
+                        data: {
+                            city:$("#findPlace1 option:selected").val()
+                            //city: "台中市"
+                        },
+                        success: function (data) {
+                            $("#findPlace2").empty();
+                            $.each(data, function (index, obj) {
+                                var sRows = "";
+                                sRows += "<option value='" + obj.mailcode + "'>" + obj.country + "</option>";
+                                $("#findPlace2").append(sRows);
+
+                            })
+
+                            //alert(JSON.stringify(data));
+                        },
+                        error: function (error) {
+                            document.write(error.responseText);
+                        }
+
+                    });
+                }
+
+                //載入Road
+                function selectRoad() {
+
+                    $.ajax({
+                        url: "/Street/Road",
+                        type: "POST",
+                        data: {
+                            code: $("#findPlace2 option:selected").val()
+                            //code: "100"
+                        },
+                        success: function (data) {
+                            $("#findPlace3").empty();
+                            $.each(data, function (index, obj) {
+                                var sRows = "";
+                                sRows += "<option value='" + obj.id + "'>" + obj.road + "</option>";
+                                $("#findPlace3").append(sRows);
+                            })
+
+                            //alert(JSON.stringify(data));
+                        },
+                        error: function (error) {
+                            document.write(error.responseText);
+                        }
+
+                    });
+                }
+
+                //$("#findPlace1").click(function () {
+                //    selectCountry();
+                //});
+                $("#findPlace1").change(function () {
+                    $("#findPlace3").removeClass("file_hidden");
+                    selectArea();
+                    setTimeout("selectRoad()", 200);
+                    setTimeout('$("#findPlaceTextBox").val($("#findPlace1").val() + $("#findPlace2 option:selected").text() + $("#findPlace3 option:selected").text())', 500);
+                    //selectRoad();
+                });
+
+                $("#findPlace2").change(function () {
+                    selectRoad();
+                    setTimeout('$("#findPlaceTextBox").val($("#findPlace1").val() + $("#findPlace2 option:selected").text() + $("#findPlace3 option:selected").text())', 500);
+                });
+
+                $("#findPlace3").change(function () {
+                    $("#findPlaceTextBox").val($("#findPlace1").val() + $("#findPlace2 option:selected").text() + $("#findPlace3 option:selected").text());
+                });
+
+                //for edit: 使第三欄出現
+                var sp2 = 0;
+                $("#findPlace2").click(function () {
+                    //if (getCookie("findMomBtn") >= 0) {
+                    //    selectCountry();
+                    //    setTimeout(getCAR, 500);
+                    //    loadAndRefreshUI();
+                    //}
+
+                    if (sp2 == 0) {
+                        sp2++;
+                        selectArea();
+                        $("#findPlace3").removeClass("file_hidden");
+                        setTimeout("selectRoad()", 200);
+                        setTimeout('$("#findPlaceTextBox").val($("#findPlace1").val() + $("#findPlace2 option:selected").text() + $("#findPlace3 option:selected").text())', 500);
+                    }
+                });
+
+                //新增get
+                function loadAndRefreshUInew() {
+
+                    //$("#accordion").empty();
+                    //var temp = getCookie("findPetBtn");
+                    debugger;
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Pet/getMemberData/',
+                        dataType: "json",
+                        data: {
+                            MemberId: $("#MemberId").val()
+                        },
+                        success: function (data) {
+                            debugCon = data;
+                            //console.log(JSON.stringify(data));
+
+                            //alert(data[0].UserFirstName);
+                            //$("#petphoto").attr('src', '../images/' + data.PetPhoto);
+
+                            $('input[name=ContactSex][value="' + ((data[0].UserGender==0)?"女":"男" )+ '"]').prop('checked', true);
+                            $("#contactManTextBox").val(data[0].UserFirstName + data[0].UserLastName);
+                            $("#contactTelTextBox").val(data[0].Telephone);
+                            //alert("OK");
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+
+                }
+
+                //編輯get
+                function loadAndRefreshUI() {
+
+                    //$("#accordion").empty();
+                    //var temp = getCookie("findMomBtn");
+                    debugger;
+
+                    $.ajax({
+                        type: "get",
+                        url: '/api/FindMoms/' + getCookie("findMomBtn"),
+                        //url: '/api/FindMoms/' + temp,
+                        dataType: "json",
+                        success: function (data) {
+                            debug = data;
+
+                            $("#petphoto").attr('src', '../images/' + data.PetPhoto);
+                            $("#petPhotoLabel").text(data.PetPhoto);
+                            $("#petPhotoTextBox").val(data.PetPhoto);
+
+                            $('input[name=Species][value="' + data.Species + '"]').prop('checked', true);
+                            $('input[name=Size][value="' + data.Size + '"]').prop('checked', true);
+                            $('input[name=Age][value="' + data.Age + '"]').prop('checked', true);
+                            $('input[name=Sex][value="' + data.Sex + '"]').prop('checked', true);
+
+                            $("#hairColorTextBox").val(data.HairColor);
+                            $("#characteristicTextBox").val(data.Characteristic);
+
+
+                            $("#findDateTextBox").val(data.FindDate);
+
+
+                            //來不及get,移到$(function () {})一開始就區分new/edit,(edit就做get^3,+get給值)
+                            //$('#findPlace1 option[value="' + data.FindPlace1 + '"]').prop('selected', true);
+                            //$('#findPlace2 option[value="' + '831' + '"]').prop('selected', true);
+                            //$('#findPlace3 option[value="' + data.FindPlace3 + '"]').prop('selected', true);
+
+                            $("#findPlaceTextBox").val(data.FindPlace1 + data.FindPlace2 + data.FindPlace3);
+
+                            $('input[name=ContactSex][value="' + data.ContactSex + '"]').prop('checked', true);
+                            $("#contactManTextBox").val(data.ContactMan);
+                            $("#contactTelTextBox").val(data.ContactTel);
+                        },
+                        error: function () {
+                            //alert("error");
+                        }
+                    });
+
+                }
+
+                //新增
+                //$("#addFindMomButton").click(function () {
+
+                    
+                //    currentIndex = -1;
+                //    setCookie("findMomBtn", currentIndex, 1);
+                //    loadAndRefreshUInew();
+                //    $("#acc_header").empty();
+                //    $("#acc_header").append('新增');
+
+                //    $("#petphoto").empty();
+                //    $("#showImg").empty();
+                //    $("#petphoto").attr('src', '');
+                //    $("#petPhotoTextBox").val("");
+                //    $("#characteristicTextBox").val("");
+                //    $("#findDateTextBox").val("");
+                //    $("#findPlaceTextBox").val("");
+                //    //$("#contactManTextBox").val("");
+                //    //$("#contactTelTextBox").val("");                    
+                    
+                //})
+
+                //取消:導頁
+                $("#cancelButton").click(function () {
+                    window.location.href = 'MemberFindMom';
+                })
+
+                //確認(編輯/新增)
+                $("#okButton").click(function () {
+
+                    if (getCookie("findMomBtn") >= 0) { // edit
+
+                        //alert("test_updateData:(" + $("#findPlace2 option:selected").text() + "," + $("#findPlace3 option:selected").text() + ")");
+                        var updateData = {
+
+                            PetId: getCookie("findMomBtn"),
+
+                            PetPhoto: $("#petPhotoTextBox").val(),
+                            CreatorId: debug.CreatorId,
+                            Species: $('input[name=Species]:checked').val(),
+                            Size: $('input[name=Size]:checked').val(),
+                            Age: $('input[name=Age]:checked').val(),
+                            HairColor: $("#hairColorTextBox option:selected").text(),
+                            Sex: $('input[name=Sex]:checked').val(),
+                            Characteristic: $("#characteristicTextBox").val(),
+
+                            FindDate: $("#findDateTextBox").val(),
+                            FindPlace1: $("#findPlace1").val(),
+                            FindPlace2: $("#findPlace2 option:selected").text(),
+                            FindPlace3: $("#findPlace3 option:selected").text(),
+                            ContactSex: $('input[name=ContactSex]:checked').val(),
+                            ContactMan: $("#contactManTextBox").val(),
+                            ContactTel: $("#contactTelTextBox").val(),
+
+                            CreateDate: debug.CreateDate,
+                            PlaceId: debug.PlaceId,
+                            State: 1
+                        };
+
+                    //    alert(debug[currentIndex].PetID);
+                        //alert(JSON.stringify(updateData));
+                    //    //alert(data);
+
+                        $.ajax({
+                            url: '/api/FindMoms/' + getCookie("findMomBtn"),
+                            type: 'PUT',
+                            data: JSON.stringify(updateData),
+                            contentType: "application/json;charset=utf-8",
+
+                            //function無執行(error)
+                            success: function () {
+                                //alert("edit Done");
+                                window.location.href = 'MemberFindMom';
+                            },
+                            error: function (response) {
+                                //document.write(response.responseText);
+                            }
+                        });
+
+                        //alert("end_edit");
+                    }
+
+                    else {
+                        // new
+                        //alert("new");
+
+
+                        var newItem = {
+
+                            PetPhoto: $("#petPhotoTextBox").val(),
+                            CreatorId: $("#MemberId").val(),
+                            Species: $('input[name=Species]:checked').val(),
+                            Size: $('input[name=Size]:checked').val(),
+                            Age: $('input[name=Age]:checked').val(),
+                            HairColor: $("#hairColorTextBox option:selected").text(),
+                            Sex: $('input[name=Sex]:checked').val(),
+                            Characteristic: $("#characteristicTextBox").val(),
+
+
+                            FindDate: $("#findDateTextBox").val(),
+                            FindPlace1: $("#findPlace1").val(),
+                            FindPlace2: $("#findPlace2 option:selected").text(),
+                            FindPlace3: $("#findPlace3 option:selected").text(),
+                            ContactSex: $('input[name=ContactSex]:checked').val(),
+                            ContactMan: $("#contactManTextBox").val(),
+                            ContactTel: $("#contactTelTextBox").val(),
+
+                            //先亂設
+
+                            CreateDate: mydate(),
+                            PlaceId: $("#findPlace3").val(),
+                            State: 1
+
+                        };
+                        //alert($("#petPhotoTextBox").val());
+
+                        $.ajax({
+                            url: '/api/FindMoms',
+                            type: 'POST',
+                            data: JSON.stringify(newItem),
+                            contentType: "application/json;charset=utf-8",
+
+                            //function無執行(error)
+                            success: function (data) {
+                                //console.log("new1");
+                                //alert("success new");
+
+                                //無作用
+                                //window.location.href = 'MemberFindMom';
+                                window.location.href = 'MemberFindMom';
+                            },
+                            error: function () {
+                                //alert("error error");
+                                //console.log("error");
+                            }
+                        });
+
+                        //alert("already_new");
+
+                    }
+                })
+
+
+</script>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="FoundCity" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\GitHub\\SMIT02\\FoundCity\\FoundCity\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\GitHub\\SMIT02\\FoundCity\\FoundCity\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="NewPetEntities-Web.config Connection String" description="" value="metadata=res://*/Models.NewPetModel.csdl|res://*/Models.NewPetModel.ssdl|res://*/Models.NewPetModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=smit02.database.windows.net;Initial Catalog=NewPet;User ID=User01;Password=P@ssw0rd;MultipleActiveResultSets=True;Application Name=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\GitHub\\SMIT02\\FoundCity\\FoundCity\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='NewPetEntities']/@connectionString" />
+  </parameter>
+</parameters>

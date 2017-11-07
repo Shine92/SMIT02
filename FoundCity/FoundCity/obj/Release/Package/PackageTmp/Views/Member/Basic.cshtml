@@ -1,0 +1,64 @@
+﻿@using FoundCity.ViewModels;
+@model List<MemberBasicViewModel>
+@{
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+<div class="member_BasicPage">
+    <div class="container tab-content">
+        <div id="basic" class="section_memberItems">
+            <div id="" class="member_profile">
+                @foreach (var item in Model) {
+
+                    <form class="form-horizontal" method="post" action="">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="UserFisrName">姓:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="UserFisrName" placeholder="" name="UserFisrName" value="@item.UserFirstName" disabled>
+                            </div>
+                            <div class="col-sm-1 required">
+                                必填
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="UserLastName">名:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="UserLastName" placeholder="" name="UserLastName" value="@item.UserLastName" disabled>
+                            </div>
+                            <div class="col-sm-1 required">
+                                必填
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="">性別:</label>
+                            <div class="col-sm-7">
+                                <label class="radio-inline"><input type="radio" name="UserGender" value="1" @(item.UserGender == "1" ? "checked" : "") disabled>男性</label>
+                                <label class="radio-inline"><input type="radio" name="UserGender" value="0" @(item.UserGender == "0" ? "checked" : "") disabled>女性</label>
+                                <label class="radio-inline"><input type="radio" name="UserGender" value="9" @(item.UserGender == "9" ? "checked" : "") disabled>保留</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="Telephone">連絡電話:</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="Telephone" placeholder="" name="Telephone" value="@item.Telephone" disabled>
+                            </div>
+                            <div class="col-sm-1 required">
+                                必填
+                            </div>
+                        </div>
+                        <div id="info" class="col-sm-7 col-lg-offset-3">
+                            <p></p>
+                        </div>
+                        <div class="member_decoration"></div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-10 col-sm-2" id="Member_BasicChangeBtn">
+                                <input type="button" id="MemberChangeBiscEditBtn" class="btn btn-default" value="編輯" />
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

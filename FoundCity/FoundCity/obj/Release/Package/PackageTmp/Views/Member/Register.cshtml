@@ -1,0 +1,113 @@
+﻿@using FoundCity.Models;
+@model Member
+@{
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+
+<div id="" class="member_RegisterPage">
+    <div class="container">
+        <div class="member_Register">
+            <form class="form-horizontal" method="post" action="">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="UserFirstName">姓:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="UserFirstName" placeholder="林" name="UserFirstName" value="@Model.UserFirstName">
+                    </div>
+                    <div class="col-sm-1 required">
+                        必填
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="UserLastName">名:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="UserLastName" placeholder="志玲" name="UserLastName" value="@Model.UserLastName">
+                    </div>
+                    <div class="col-sm-1 required">
+                        必填
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="">性別:</label>
+                    <div class="col-sm-7">
+                        <label class="radio-inline"><input type="radio" name="UserGender" value="1">男性</label>
+                        <label class="radio-inline"><input type="radio" name="UserGender" value="0">女性</label>
+                        <label class="radio-inline"><input type="radio" name="UserGender" value="9" checked>保留</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="UserTelephome">連絡電話:</label>
+                    <div class="col-sm-7">
+                        <input type="tel" class="form-control" id="UserTelephome" placeholder="0912110991" name="Telephone" value="@Model.Telephone">
+                    </div>
+                    <div class="col-sm-1 required">
+                        必填
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="UserAccount">電子信箱:</label>
+                    <div class="col-sm-7" id="RegisterAccountCol">
+                        <input type="email" class="form-control" id="UserAccount" placeholder="example@gmail.com" name="Account" value="@Model.Account">
+                    </div>
+                    <div class="col-sm-1 required">
+                        必填
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-7">
+                        注意:請使用Gmail,避免無法認證帳號
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="UserPwd">密碼:</label>
+                    <div class="col-sm-7" id="RegisterPasswordCol">
+                        <input type="password" class="form-control" id="UserPwd" placeholder="P@ssw0rd" name="Password">
+                    </div>
+                    <div class="col-sm-1 required">
+                        必填
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-7">
+                        注意:必須包含大小寫英文字母與數字<br />長度為6~12的組合
+                    </div>
+                </div>
+                <div class="form-group">
+                        <label class="control-label col-sm-2" for="ConfirmPwd">確認密碼:</label>
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" id="ConfirmPwd" placeholder="" name="">
+                        </div>
+                        <div class="col-sm-1 required">
+                            必填
+                        </div>
+                    </div>
+                <div id="info" class="col-sm-7 col-lg-offset-3">
+                    <p id="infoMsg"></p>
+                    <p>@TempData["AccountIsExitOrNull"]</p>
+                </div>
+                <div class="memberRegister_decoration"></div>
+                <div class="form-group">
+                    <div class="col-sm-3 col-sm-offset-8">
+                        @*<button type="submit" id="RegisterBtn" class="btn btn-success btn-block" disabled><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>Loading...</button>*@
+                        <button type="submit" id="RegisterBtn" class="btn btn-success btn-block"><span></span>建立</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    /*使用者離開頁面前的提示*/
+    var isChange = false;
+    $(function () {
+        $("input").change(function () {
+            isChange = true;
+            $(this).addClass("editing");
+        });
+
+        $(window).bind("beforeunload", function (e) {
+            if (isChange || $(".editing").get().length > 0) {
+                return "您確定要離開這個網頁嗎?";
+            }
+        })
+    });
+    $("#RegisterBtn").click(function () {
+        $(window).unbind('beforeunload');
+    });
+
+</script>
