@@ -246,6 +246,7 @@
     <Compile Include="ViewModels\MemberBasicViewModel.cs" />
     <Compile Include="ViewModels\MemberChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\MemberLoginViewModel.cs" />
+    <Compile Include="ViewModels\PetViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

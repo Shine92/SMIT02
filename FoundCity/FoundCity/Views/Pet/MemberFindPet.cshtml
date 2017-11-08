@@ -74,6 +74,40 @@
     </div>
 </div>
 <!-- /對話盒 end (刪除)-->
+<!-- 對話盒 (拾獲提示)-->
+<div id="findPetModal3" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4>拾獲提示</h4>
+            </div>
+            @*...function loadAndRefreshUI()...ajax_get_append......*@
+            <div class="modal-body">
+                <h4 style='margin-left:32%;'>可能有你要尋找的寵物</h4>
+                <div id="showImg3"></div>
+                <div id="showFindPet3" class='row'></div>
+            </div>
+            @*......................................................*@
+            <div class="modal-footer">
+                <div class="pull-right">
+                    @*<button type="button"
+                                id="okButton3"
+                                class="btn btn-success">
+                            <span class="glyphicon glyphicon-ok"></span> 確定
+                        </button>*@
+                    <button type="button"
+                            id="cancelButton3"
+                            class="btn btn-default"
+                            data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span>離開
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /對話盒 end (拾獲提示)-->
 @*...................main..........................*@
 
 <div class="container">
@@ -85,9 +119,10 @@
     </div>
 </div>
 
-
+<input type="hidden" id="MemberId" value="@ViewData["MemberId"]" />
 @*.......................debug.........................*@
 <div id="debug"></div>
+
 
 <script>
                 //初始載入
@@ -95,8 +130,48 @@
                     loadAndRefreshUI();
                     //$("#debug").text("OK");
                     $("#accordion").accordion({ header: "h4" });
+                    showtip();
 
                 })
+
+                //MemberFindPet頁面載入(提示拾獲訊息)
+                function showtip() {
+                    $.ajax({
+                        url: "/Pet/isSameData",
+                        type: "POST",
+                        data: {
+                            MemberId: $("#MemberId").val()
+                        },
+                        success: function (data) {
+                            $.each(data, function (index, obj) {
+
+                                var sRowsImg = "<img src='../images/" + obj.mphoto + "' id='petPhoto' class='img-thumbnail petPhoto' alt='Pet Photo' width='50%' height='40%' style='margin-left:25%;'>"
+                                $("#showImg3").empty();
+                                $("#showImg3").append(sRowsImg);
+
+                                var sRowsFindPet =
+                                    "<div class='col-sm-12'></div>"
+                                    //+ "<div class='col-sm-1'></div>"
+
+                                    + "<div>"
+
+                                    + "<h4 style='margin-left:32%;'>" + "<span class='glyphicon glyphicon-user'></span>聯絡人:" + obj.mconName + "</h4>"
+                                    + "<h4 style='margin-left:32%;'>" + "&nbsp;&nbsp;&nbsp;聯絡人性別:" + obj.mconSex + "</h4>"
+                                    + "<h4 style='margin-left:32%;'>" + "&nbsp;&nbsp;&nbsp;聯絡人電話:" + obj.mconTel + "</h4>"
+                                    + "</div>"
+
+                                $("#showImg3").append(sRowsFindPet);
+
+                                $("#findPetModal3").modal({ backdrop: "static" });
+
+                            })
+                            //$("#debug").text(JSON.stringify(data));
+                        },
+                        error: function (error) {
+                            document.write(error.responseText);
+                        }
+                    });
+                }
 
                 //MemberFindPet頁面載入empty,get
                 function loadAndRefreshUI() {
