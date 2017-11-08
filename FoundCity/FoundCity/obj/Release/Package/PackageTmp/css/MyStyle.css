@@ -1,0 +1,558 @@
+﻿/*********************************************************************************/
+/* Simon Style                                                                   */
+/*********************************************************************************/
+#decoration {
+    margin: 3px 0 0 16px;
+    height: 4px;
+    width: 595px;
+    background-color: #8c8c8c;
+}
+
+.section_items {
+    margin: 10px 3px 0 0;
+}
+
+.panel {
+    border-radius: 0px;
+}
+
+.panel-body {
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    color: #eee;
+    cursor: default;
+    background-color: #777;
+    border: 0px solid #dff0d8;
+    border-bottom-color: transparent;
+}
+
+#memberTab .nav-tabs > li > a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 0 0 0 0;
+    color: #f5f5f5;
+    background-color: #555;
+}
+
+    #memberTab .nav-tabs > li > a:hover {
+        background-color: #7b7b7b;
+    }
+
+#memberTab .tab-content {
+    padding: 10px 0;
+    width: 100%;
+    height: auto;
+}
+
+.section_memberItems {
+    background-color: white;
+    width: 100%;
+    height: auto;
+    padding: 15px;
+}
+
+.member_profile {
+    width: 600px;
+    height: auto;
+    background-color: #e5e5e5;
+    margin: auto;
+    border: 1px solid black;
+    padding: 15px;
+}
+
+.panel-footer {
+    font-size: medium;
+    letter-spacing: 1px;
+}
+
+.panel-footer-detail {
+    margin-left: 10%;
+    font-size: x-small;
+}
+
+.form-control {
+    border-radius: 0px;
+}
+
+.btn {
+    border-radius: 0px;
+}
+
+.required {
+    background-color: #a94442;
+    height: 32px;
+    color: white;
+    padding: 5px 0px 0px 9px;
+    font-size: 16px;
+}
+
+.member_decoration {
+    margin: 3px 0 22px 16px;
+    height: 1px;
+    width: 100%;
+    background-color: #8c8c8c;
+}
+
+.container .member_Login {
+    width: 500px;
+    height: auto;
+    background-color: #eee;
+    margin: auto;
+    border: 1px solid black;
+    padding: 30px 0 0 0;
+}
+
+.memberLogin_decoration {
+    height: 1px;
+    width: 100%;
+    background-color: #8c8c8c;
+    margin: 50px 0 0 0;
+}
+
+.member_LoginPage {
+    position: relative;
+    overflow: hidden;
+    padding: 5em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+    height: 650px;
+}
+
+.container .member_Register {
+    width: 600px;
+    height: auto;
+    background-color: #eee;
+    margin: auto;
+    border: 1px solid black;
+    padding: 30px 0px 0px 20px;
+}
+
+.memberRegister_decoration {
+    height: 1px;
+    width: 100%;
+    background-color: #8c8c8c;
+    margin: 0px 0px 10px -11px;
+}
+
+.member_ForgetPage {
+    position: relative;
+    overflow: hidden;
+    padding: 5em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+}
+
+.container .member_forget {
+    width: 600px;
+    height: auto;
+    background-color: #eee;
+    margin: auto;
+    border: 1px solid black;
+    padding: 30px 0px 0px 20px;
+}
+
+.memberForget_decoration {
+    height: 1px;
+    width: 100%;
+    background-color: #8c8c8c;
+    margin: 0px 0px 10px -11px;
+}
+
+.forgetTitle h1 {
+    margin: 0 0 10px 0;
+}
+
+#info p {
+    color: red;
+}
+
+.container .member_RegisterResult {
+    width: 600px;
+    height: auto;
+    margin: auto;
+    border: 0px solid black;
+    padding: 0px 0px 0px 0px;
+}
+
+.member_RegisterResultPage {
+    position: relative;
+    overflow: hidden;
+    padding: 5em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+    height: 650px;
+}
+
+.container .email_Validate {
+    width: 600px;
+    height: auto;
+    margin: auto;
+    border: 0px solid black;
+    padding: 0px 0px 0px 0px;
+}
+
+.email_ValidatePage {
+    position: relative;
+    overflow: hidden;
+    padding: 5em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+    height: 650px;
+}
+
+.member_RegisterPage {
+    position: relative;
+    overflow: hidden;
+    padding: 5em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+    height: 650px;
+}
+
+.member_IndexPage{
+    position: relative;
+    overflow: hidden;
+    padding: 5em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+    height: 350px;
+}
+
+.member_ChangePasswordPage{
+    position: relative;
+    overflow: hidden;
+    padding: 0em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+    height: 650px;
+}
+
+.member_BasicPage{
+    position: relative;
+    overflow: hidden;
+    padding: 0em 0em 5em 0em;
+    height: auto;
+    background: #e6e6e6;
+    height: 650px;
+}
+
+member_profile /*loading效果 10/30 尚未使用*/
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+
+
+/*********************************************************************************/
+/* Rey Style                                                                   */
+/*********************************************************************************/
+
+/*--- 雷達搜尋 -----------------------------------------------------------------------*/
+
+.rBody {
+    background-color: #e6e6e6;
+    margin-bottom: 0px;
+}
+
+.rRadar_font {
+    font-family: Microsoft JhengHei;
+    text-align: center;
+    font-weight: bold;
+}
+
+#rMap_Body {
+    float: left;
+    width: 50%;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    display: none;
+}
+
+#rMap-Canvas {
+    height: 600px;
+}
+
+#rMap_Features {
+    height: 60px;
+    margin-top: 10px;
+}
+
+    #rMap_Features span {
+        font-size: 20px;
+        font-family: Microsoft JhengHei;
+        font-weight: bold;
+    }
+
+#rSidebar {
+    float: left;
+    height: 700px;
+    width: 10%;
+}
+
+    #rSidebar h5 {
+        padding-left: 18px;
+        padding-top: 20px;
+        font-size: 18px;
+        font-family: Microsoft JhengHei;
+        font-weight: bold;
+    }
+
+    #rSidebar .title_line {
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 2px;
+        width: 85%;
+        background-color: white;
+    }
+
+    #rSidebar ul li {
+        line-height: 25px;
+        font-family: Microsoft JhengHei;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+    }
+
+        #rSidebar ul li a {
+            color: black;
+            display: block;
+            padding-left: 0px;
+        }
+
+    #rSidebar li a:hover,
+    #rSidebar li.active {
+        color: #fff;
+        background: #242f3e;
+        text-decoration: none;
+    }
+
+#line {
+    float: left;
+    height: 700px;
+    width: 2px;
+    background-color: white;
+}
+
+#rResult {
+    float: left;
+    width: 38%;
+    margin-left: 10px;
+    /*margin-right: 10px;*/
+}
+
+#rResult_Content {
+    margin-right: 10px;
+}
+
+.rResult_Content_Title {
+    font-family: Microsoft JhengHei;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.rResult_Content_Text {
+    font-family: Microsoft JhengHei;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#rResult_Table {
+    height: 680px;
+    margin-top: 10px;
+    overflow: scroll;
+    overflow-x: hidden;
+    display: none;
+}
+
+.rResult_img {
+    border: none;
+    max-height: 400px;
+    object-fit: contain;
+    object-position: 50% top;
+    width: 100%;
+}
+
+.rOaerror {
+    margin-top: 18px;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+}
+
+.rWarning {
+    border-left-color: #f0ad4e;
+    background-color: rgba(240, 173, 78, 0.1);
+}
+
+    .rWarning strong {
+        color: #d9534f;
+        font-size: 25px;
+    }
+
+#rScheduleBar {
+    margin-top: 25%;
+    display: none;
+}
+
+    #rScheduleBar .rRadar_font {
+        font-size: 25px;
+    }
+
+#myProgress {
+    width: 100%;
+    height: 30px;
+    position: relative;
+    background-color: #ddd;
+}
+
+#myBar {
+    background-color: #4CAF50;
+    width: 10px;
+    height: 30px;
+    position: absolute;
+}
+
+#rRatio {
+    font-family: Microsoft JhengHei;
+    text-align: center;
+    font-weight: bold;
+}
+
+/*------------------------------------------------------------------------------*/
+
+/*********************************************************************************/
+/* Yako Style                                                                   */
+/*********************************************************************************/
+
+.file_hidden {
+    visibility: hidden;
+}
+
+/*...pet index.......*/
+
+#findAnimalList img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 0 10px 0;
+}
+
+
+/* Thirds */
+div.thirds {
+    padding-bottom: 50px;
+}
+
+div.one-third {
+    /*width: 30%;*/
+    width: 22%;
+    float: left;
+    /*margin-right: 5%;*/
+    margin-right: 4%;
+}
+
+div.one-third-last {
+    margin: 0;
+}
+
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+@media screen and (max-width: 1000px) {
+
+    div.one-third {
+        width: 30%;
+        float: left;
+        margin-right: 5%;
+    }
+
+    div.test3 {
+        width: 30%;
+        float: left;
+        margin-right: 5%;
+    }
+
+    div.test3last {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    div.one-third {
+        width: 47.5%;
+        float: left;
+        margin-right: 5%;
+    }
+
+    div.odd {
+        width: 47.5%;
+        float: left;
+        margin-right: 5%;
+    }
+
+    div.even {
+        margin: 0;
+    }
+
+    /*div.nav ul li {
+		width: 25%;
+		border-bottom: 1px solid #bababa;
+	}*/
+
+}
+
+
+@media screen and (max-width: 500px) {
+
+    div.mobile-collapse {
+        width: 100%;
+        float: none;
+        margin-right: 0;
+    }
+
+    /*.hide-mobile {
+		display: none;
+	}*/
+
+    /*div.nav ul li {
+		width: 50%;
+		font-size: 85%;
+	}*/
+
+}

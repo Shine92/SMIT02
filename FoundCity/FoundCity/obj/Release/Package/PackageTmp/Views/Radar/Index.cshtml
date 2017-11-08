@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@*---------------------------------------------------------------------------------------------------------------------------------------------*@
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIPxo-7dK6bdUUEiJ6ERWknbOgcRF8eMs&libraries=places"></script>
+<script type="text/javascript" src="http://code.google.com/apis/gears/gears_init.js"></script>
+<script src="~/js/Radar.js"></script>
+
+<link rel="stylesheet" href="~/css/forRadar.css" />
+
+@*---------------------------------------------------------------------------------------------------------------------------------------------*@
+
+<div class="rBody">
+
+    <div id="rSidebar">
+        <h5>
+            <small><b>尋找機構</b></small>
+        </h5>
+        <ul class="sidebar-nav nav">
+            <li onclick="rHospital()"><a>動物醫院</a></li>
+            <li onclick="rStore()"><a>動物商店</a></li>
+            <li onclick="rHostel()"><a>動物旅館</a></li>
+        </ul>
+
+        <div class="title_line"></div>
+
+        <h5>
+            <small><b>站內資訊</b></small>
+        </h5>
+        <ul class="sidebar-nav nav">
+            <li onclick="rFind()"><a>尋寵啟示</a></li>
+            <li onclick="rPick()"><a>拾獲通報</a></li>
+            @*<li onclick="rClaim()"><a>認養資訊</a></li>*@
+        </ul>
+
+        <div class="title_line"></div>
+
+        <h5>
+            <small><b>其他功能</b></small>
+        </h5>
+        <ul class="sidebar-nav nav">
+            <li>
+                <div class="btn-group" id="searchMode" data-toggle="buttons">
+                    <label class="btn btn-default btn-on-2 btn-lg" onclick="rAutoMode()"><input type="radio" name="searchType" value="1" checked="checked">自動搜尋</label>
+                    <label class="btn btn-default btn-off-2 btn-lg" onclick="rEnterMode()"><input type="radio" name="searchType" value="0">手動搜尋</label>
+                    <label class="btn btn-default btn-off-2 btn-lg" onclick="rDefaultMode()"><input type="radio" name="searchType" value="2">預設地址</label>
+                </div>
+            </li>
+
+         </ul>
+
+    </div>
+
+    <div id="line"></div>
+
+    <!-- 對話盒 (Detail)-->
+    <div id="findPetModal2" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>詳細內容</h4>
+                </div>
+                @*...function loadAndRefreshUI()...ajax_get_append......*@
+                <div class="modal-body">
+                    <div id="showImg2"></div>
+                    <div id="showFindPet2" class='row'></div>
+                </div>
+                @*......................................................*@
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <button type="button"
+                                id="okButton2"
+                                class="btn btn-success"
+                                 data-dismiss="modal">
+                            <span class="glyphicon glyphicon-ok"></span> 了解
+                        </button>
+                        @*<button type="button"
+                                id="cancelButton2"
+                                class="btn btn-default"
+                                data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove"></span> 取消
+                        </button>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /對話盒 end (Detail)-->
+
+    <div id="rPrompt">
+        <div>左邊！</div>
+        <div>
+            <span>點選您要搜尋的項目</span>
+        </div>
+    </div>
+
+    <div id="rMap_Body">
+
+        <div id="rMap-Canvas"></div>
+
+        <div class="rOaerror rWarning rRadar_font"> 這間店離您有 <strong id="rRange"> 0 </strong> 公尺 </div>
+
+    </div>
+
+    <div id="rResult">
+
+        <div id="rResult_Table">
+            <ul id="rResult_Content" class="nav nav-pills nav-stacked timeline-centered"></ul>
+        </div>
+
+        <div id="rScheduleBar">
+            <p class="rRadar_font"> 搜尋中，請稍後。(  <span id="rRatio"> 0</span>% ) </p>
+            <div id="myProgress">
+                <div id="myBar"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="clear:both;"></div>
+
+
+</div>

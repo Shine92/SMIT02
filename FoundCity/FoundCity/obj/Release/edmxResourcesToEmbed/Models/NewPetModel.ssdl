@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NewPetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="FindMom">
+    <Key>
+      <PropertyRef Name="PetId" />
+    </Key>
+    <Property Name="PetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreatorId" Type="int" Nullable="false" />
+    <Property Name="PetPhoto" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Species" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Size" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Age" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="HairColor" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Sex" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Characteristic" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="FindDate" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="FindPlace1" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="FindPlace2" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="FindPlace3" Type="nvarchar" MaxLength="20" />
+    <Property Name="PlaceId" Type="int" />
+    <Property Name="State" Type="int" Nullable="false" />
+    <Property Name="ContactMan" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ContactSex" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ContactTel" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FindPet">
+    <Key>
+      <PropertyRef Name="PetId" />
+    </Key>
+    <Property Name="PetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreatorId" Type="int" Nullable="false" />
+    <Property Name="PetPhoto" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Species" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Size" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Age" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="HairColor" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Sex" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Characteristic" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="LostDate" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="LostPlace1" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="LostPlace2" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="LostPlace3" Type="nvarchar" MaxLength="20" />
+    <Property Name="PlaceId" Type="int" />
+    <Property Name="State" Type="int" Nullable="false" />
+    <Property Name="ContactMan" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ContactSex" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ContactTel" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Members">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserFirstName" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="UserLastName" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="UserGender" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Account" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Telephone" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="AuthCode" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="IsAdmin" Type="bit" Nullable="false" />
+    <Property Name="UserStatus" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Street">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="mailcode" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="city" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="country" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="road" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityContainer Name="NewPetModelStoreContainer">
+    <EntitySet Name="FindMom" EntityType="Self.FindMom" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FindPet" EntityType="Self.FindPet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Street" EntityType="Self.Street" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
