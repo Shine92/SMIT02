@@ -1,0 +1,50 @@
+use NewPet
+go
+
+DROP TABLE FindMom 
+
+create table FindMom 
+(
+  PetId int identity not null primary key,
+  CreatorId int not null,
+  PetPhoto varchar(20) not null,
+  Species nvarchar(10) check(Species='狗' or Species='貓' or Species='其他') not null,
+  Size nvarchar(10) check(Size='小型' or Size='中型' or Size='大型') not null,
+  Age nvarchar(10) check(Age='成年' or Age='幼年') not null,
+  HairColor nvarchar(10) check(Haircolor='白色' or Haircolor='黑色' or Haircolor='棕色' or Haircolor='黃色' or Haircolor='虎斑' or Haircolor='其他') not null,
+  Sex nvarchar(10) check(Sex='公' or Sex='母' or Sex='未知') not null,
+  Characteristic nvarchar(50),
+  CreateDate varchar(10) not null,  
+  FindDate varchar(10) not null,
+  FindPlace1 nvarchar(20) not null,
+  FindPlace2 nvarchar(20) not null,
+  FindPlace3 nvarchar(20),
+  PlaceId int,
+  State int check(State=0 or State=1) not null,
+  ContactMan nvarchar(20) not null,
+  ContactSex nvarchar(10) check(ContactSex='男' or ContactSex='女') not null,
+  ContactTel varchar(10) not null,
+  
+
+)
+go
+
+insert into FindMom values ( 1,'p1.jpg', '狗', '大型', '成年' , '黑色', '公', null, '2017-11-11','2017-11-11','台北市','內湖區','行善路',1 ,1 ,'黃先生', '男', '02-7654321')
+insert into FindMom values ( 2,'p2.jpg', '狗', '中型', '成年' , '黃色', '公', null, '2017-11-13','2017-11-13','台中市','西區','大墩路',2 ,1 ,'蔡先生', '男', '04-7654321')
+insert into FindMom values ( 3,'p3.jpg', '貓', '中型', '成年' , '白色', '母', null, '2017-11-14','2017-11-14','高雄市','苓雅區','苓雅二路',3 ,1 ,'柯小姐', '女', '07-7654321')
+go
+
+select * from FindMom 
+go
+
+--...............................................
+
+insert into FindMom values ( '狗', '無','黑色.小型犬','2017-11-11','2017-11-11','台北市內湖區行善路','黃先生','02-7654321','huang2@yahoo.com.tw','無','t1.jpg')
+insert into FindMom values ( '狗', '拉布拉多','黃色','2017-11-13','2017-11-13','台中市西區大墩路','蔡先生','04-7654321','tsai2@yahoo.com.tw','未知','t2.jpg')
+insert into FindMom values ( '貓', '波斯貓','白色.怕生','2017-11-15','2017-11-15','高雄市苓雅區苓雅二路','柯小姐','07-7654321','ko2@yahoo.com.tw','未知','t3.jpg')
+go
+
+select * from FindMom
+go
+
+

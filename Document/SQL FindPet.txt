@@ -1,0 +1,87 @@
+use FindPet
+go
+
+DROP TABLE FindPet
+
+create table FindPet
+(
+  PetId int identity not null primary key,
+  CreatorId int not null,
+  PetPhoto varchar(20) not null,
+  Species nvarchar(10) check(Species='狗' or Species='貓' or Species='其他') not null,
+  Size nvarchar(10) check(Size='小型' or Size='中型' or Size='大型') not null,
+  Age nvarchar(10) check(Age='成年' or Age='幼年') not null,
+  HairColor nvarchar(10) check(Haircolor='白色' or Haircolor='黑色' or Haircolor='棕色' or Haircolor='黃色' or Haircolor='虎斑' or Haircolor='其他') not null,
+  Sex nvarchar(10) check(Sex='公' or Sex='母' or Sex='未知') not null,
+  Characteristic nvarchar(50),
+  CreateDate varchar(10) not null,  
+  LostDate varchar(10) not null,
+  LostPlace1 nvarchar(20) not null,
+  LostPlace2 nvarchar(20) not null,
+  LostPlace3 nvarchar(20),
+  PlaceId int,
+  State int check(State=0 or State=1) not null,
+  ContactMan nvarchar(20) not null,
+  ContactSex nvarchar(10) check(ContactSex='男' or ContactSex='女') not null,
+  ContactTel varchar(10) not null,
+  
+)
+go
+
+insert into FindPet values ( 1,'p1.jpg', '狗', '大型', '成年' , '黑色', '公', 'test1', '2017-11-10','2017-11-10','台北市','內湖區','舊宗路',1 ,1 ,'黃先生', '男', '0911234567')
+insert into FindPet values ( 2,'p2.jpg', '狗', '中型', '成年' , '黃色', '公', 'test2', '2017-11-12','2017-11-12','台中市','西區','公益路',2 ,1 ,'蔡先生', '男', '0922345678')
+insert into FindPet values ( 3,'p3.jpg', '貓', '中型', '成年' , '白色', '母', 'test3', '2017-11-14','2017-11-14','高雄市','苓雅區','自強三路',3 ,1 ,'柯小姐', '女', '0933456789')
+insert into FindPet values ( 3,'p1.jpg', '狗', '大型', '幼年' , '黑色', '公', 'test4', '2017-11-10','2017-11-10','台北市','內湖區','舊宗路',1 ,1 ,'黃先生', '男', '0944567890')
+go
+
+select * from FindPet
+go
+
+
+http://www.twgreatdaily.com/imgs/image/57/5752636.jpg
+http://farm2.static.flickr.com/1314/1467959775_6e59937fbd_o.jpg
+http://www.catswallpapers.net/wallpapers/cute-asian-semi-longhair-photo.jpg
+
+
+.............................................
+
+伺服器名稱:smit02.database.windows.net
+登入:smit02
+密碼:FoundPet02
+
+現有資料庫:pet
+現有資料表:Member
+
+
+
+TRUNCATE table FindPet
+..............................................................
+
+
+use LabDB_1116
+go
+create table FindPet
+(
+  PetID int identity not null primary key,
+  --Species nvarchar(10) check(Species='狗' or Species='貓' or Species='其它') not null,
+  --Variety nvarchar(30),
+  --Characteristic nvarchar(50),
+  --CreateDate varchar(10) not null,  
+  LostDate varchar(10) not null,
+  LostPlace nvarchar(50) not null,
+  --ContactMan nvarchar(10),
+  --ContactTel varchar(10) not null,
+  --ContactEmail varchar(30) not null,
+  PetPhoto varchar(20) not null
+
+)
+go
+
+insert into FindPet values ( '2017-11-10','台北市內湖區舊宗路','p1.jpg')
+insert into FindPet values ( '2017-11-12','台中市西區公益路','p2.jpg')
+insert into FindPet values ( '2017-11-14','高雄市苓雅區自強三路','p3.jpg')
+go
+
+select * from FindPet
+go
+
